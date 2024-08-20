@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Presentation.LoginUser">
+
+    <ImageView
+        android:id="@+id/imageViewLoginUserBackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_05"
+        android:layout_marginTop="@dimen/spacing_06"
+        android:contentDescription="@string/back"
+        android:src="@drawable/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewLoginUserBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="19dp"
+        android:text="@string/back_strong"
+        android:textSize="@dimen/spacing_06"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imageViewLoginUserBackButton"/>
+
+    <!-- Logo -->
+    <ImageView
+        android:id="@+id/logoImageView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewLoginUserBackButton" />
+
+    <!-- Texto "Incluses" -->
+    <ImageView
+        android:id="@+id/imageViewLoginUserNameIncluses"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/incluses_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/logoImageView" />
+
+    <!-- Campo de CPF ou CNPJ -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/cpfCnpjInputLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_05"
+        android:layout_marginTop="@dimen/spacing_07"
+        android:layout_marginEnd="@dimen/spacing_05"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageViewLoginUserNameIncluses"
+        app:layout_constraintWidth_default="spread"
+        app:layout_constraintWidth_min="0dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/cpfCnpjEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="CPF ou CNPJ"
+            android:paddingStart="@dimen/spacing_05"
+            android:paddingEnd="@dimen/spacing_05" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Campo de senha -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/passwordInputLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_05"
+        android:layout_marginTop="@dimen/spacing_05"
+        android:layout_marginEnd="@dimen/spacing_05"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cpfCnpjInputLayout"
+        app:layout_constraintWidth_default="spread"
+        app:layout_constraintWidth_min="0dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/passwordEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Senha"
+            android:inputType="textPassword"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Esqueci minha senha -->
+    <TextView
+        android:id="@+id/forgotPasswordTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_05"
+        android:layout_marginTop="8dp"
+        android:text="@string/forgotPassword"
+        android:textColor="@color/light_blue"
+        android:textSize="@dimen/spacing_04"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/passwordInputLayout" />
+
+    <!-- Botão Continuar -->
+    <Button
+        android:id="@+id/continueButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_05"
+        android:layout_marginTop="@dimen/spacing_07"
+        android:layout_marginEnd="@dimen/spacing_05"
+        android:background="@drawable/style_primary_button"
+        android:text="Continuar"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/forgotPasswordTextView"
+        app:layout_constraintWidth_default="spread"
+        app:layout_constraintWidth_min="0dp" />
+
+    <!-- Divisor "OU" -->
+    <TextView
+        android:id="@+id/orTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_02"
+        android:text="OU"
+        android:textColor="@color/gray"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/continueButton" />
+
+    <!-- Botão Entrar com Google -->
+    <LinearLayout
+        android:id="@+id/googleLoginButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_05"
+        android:layout_marginStart="@dimen/spacing_05"
+        android:layout_marginEnd="@dimen/spacing_05"
+        android:gravity="center"
+        android:background="@drawable/style_terciary_button"
+        android:orientation="horizontal"
+        android:padding="@dimen/spacing_03"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/orTextView">
+
+        <!-- Ícone do Google -->
+        <ImageView
+            android:id="@+id/googleIcon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/google" />
+
+        <!-- Texto do botão -->
+        <TextView
+            android:id="@+id/googleLoginText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Entrar com o Google"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+    </LinearLayout>
+    <!-- Botão Entrar com Facebook -->
+    <LinearLayout
+        android:id="@+id/facebookLoginButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_05"
+        android:layout_marginStart="@dimen/spacing_05"
+        android:layout_marginEnd="@dimen/spacing_05"
+        android:gravity="center"
+        android:background="@drawable/style_terciary_button"
+        android:orientation="horizontal"
+        android:padding="@dimen/spacing_03"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/googleLoginButton">
+
+        <!-- Ícone do Facebook -->
+        <ImageView
+            android:id="@+id/facebookIcon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/facebook" />
+
+        <!-- Texto do botão -->
+        <TextView
+            android:id="@+id/facebookLoginText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Entrar com o Facebook"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <!-- Texto "Não possui uma conta?" -->
+    <TextView
+        android:id="@+id/noAccountTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Não possui uma conta?"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/facebookLoginButton" />
+
+    <!-- Texto "Cadastre-se" -->
+    <TextView
+        android:id="@+id/registerTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cadastre-se"
+        android:textColor="@color/light_blue"
+        android:textSize="@dimen/spacing_05"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/noAccountTextView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

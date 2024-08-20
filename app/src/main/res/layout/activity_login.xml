@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Presentation.Login">
+
+    <ImageView
+        android:id="@+id/imageViewLoginUserLogo"
+        android:layout_width="250dp"
+        android:layout_height="255dp"
+        android:layout_marginTop="140dp"
+        android:src="@drawable/logo"
+        app:layout_constraintBottom_toTopOf="@+id/imageViewLoginNameIncluses"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageViewLoginNameIncluses"
+        android:layout_width="300dp"
+        android:layout_height="92dp"
+        android:layout_marginTop="@dimen/spacing_07"
+        android:src="@drawable/incluses_name"
+        app:layout_constraintBottom_toTopOf="@+id/buttonLoginUser"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewLoginUserLogo" />
+
+    <Button
+        android:id="@+id/buttonLoginUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_10"
+        android:background="@drawable/style_primary_button"
+        android:text="@string/login"
+        android:textSize="@dimen/spacing_04"
+        android:textColor="@color/white"
+        android:paddingStart="@dimen/spacing_16"
+        android:paddingEnd="@dimen/spacing_16"
+        app:layout_constraintBottom_toTopOf="@+id/buttonRegisterLogin"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewLoginNameIncluses"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/buttonRegisterLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="130dp"
+        android:layout_marginTop="@dimen/spacing_03"
+        android:background="@drawable/style_secondary_button"
+        android:text="@string/register"
+        android:textSize="@dimen/spacing_04"
+        android:textColor="@color/dark_blue"
+        android:paddingStart="@dimen/spacing_11"
+        android:paddingEnd="@dimen/spacing_11"
+        app:layout_constraintTop_toBottomOf="@+id/buttonLoginUser"
+        app:layout_constraintBottom_toTopOf="@+id/textViewTermsOfUseLogin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewTermsOfUseLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/termsOfUse"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textViewTermsOfUseLoginII"
+        app:layout_constraintTop_toBottomOf="@+id/buttonRegisterLogin" />
+
+    <TextView
+        android:id="@+id/textViewTermsOfUseLoginII"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_10"
+        android:text="@string/termsOfUseII"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTermsOfUseLogin" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

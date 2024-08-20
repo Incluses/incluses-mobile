@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="spacing_01">2dp</dimen>
+    <dimen name="spacing_02">4dp</dimen>
+    <dimen name="spacing_03">8dp</dimen>
+    <dimen name="spacing_04">12dp</dimen>
+    <dimen name="spacing_05">16dp</dimen>
+    <dimen name="spacing_06">20dp</dimen>
+    <dimen name="spacing_07">24dp</dimen>
+    <dimen name="spacing_08">30dp</dimen>
+    <dimen name="spacing_09">32dp</dimen>
+    <dimen name="spacing_10">36dp</dimen>
+    <dimen name="spacing_11">40dp</dimen>
+    <dimen name="spacing_12">44dp</dimen>
+    <dimen name="spacing_13">50dp</dimen>
+    <dimen name="spacing_14">52dp</dimen>
+    <dimen name="spacing_15">54dp</dimen>
+    <dimen name="spacing_16">56dp</dimen>
+    <dimen name="spacing_17">58dp</dimen>
+</resources>

@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Incluses</string>
+    <string name="login">Login</string>
+    <string name="register">Cadastrar</string>
+    <string name="termsOfUse">Ao continuar, você concorda com a</string>
+    <string name="termsOfUseII">Política de privacidade e Termos de uso.</string>
+    <string name="back">Voltar</string>
+    <string name="back_strong"><b>Voltar</b></string>
+    <string name="forgotPassword"><u>Esqueci a senha</u></string>
+</resources>
