@@ -6,29 +6,33 @@ import androidx.appcompat.app.AppCompatDelegate;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
+import project.interdisciplinary.inclusesapp.R;
 import project.interdisciplinary.inclusesapp.databinding.ActivityLoginUserBinding;
+import project.interdisciplinary.inclusesapp.databinding.ActivityTypeRegistrationBinding;
 
-public class LoginUser extends AppCompatActivity {
+public class TypeRegistration extends AppCompatActivity {
 
-    private ActivityLoginUserBinding binding;
-
+    private ActivityTypeRegistrationBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Force Theme to Light Mode
+        setContentView(R.layout.activity_type_registration);
+
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-        binding = ActivityLoginUserBinding.inflate(getLayoutInflater());
+        binding = ActivityTypeRegistrationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.registerTextView.setOnClickListener(new View.OnClickListener() {
+        binding.voltarlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginUser.this, TypeRegistration.class);
-                startActivity(intent);
+                Intent intentVoltar = new Intent(TypeRegistration.this, LoginUser.class);
+                startActivity(intentVoltar);
             }
         });
+
 
     }
 }
