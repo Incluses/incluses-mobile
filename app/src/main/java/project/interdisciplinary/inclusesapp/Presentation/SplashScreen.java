@@ -1,6 +1,7 @@
 package project.interdisciplinary.inclusesapp.Presentation;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +19,10 @@ public class SplashScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Force Theme to Light Mode
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
 
         binding = ActivitySplashScreenBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -39,6 +44,5 @@ public class SplashScreen extends AppCompatActivity {
     private void navigateToLoginScreen() {
         Intent intent = new Intent(SplashScreen.this, Login.class);
         startActivity(intent);
-        finish();
     }
 }

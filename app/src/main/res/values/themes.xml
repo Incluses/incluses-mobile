@@ -1,9 +1,24 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.InclusesApp" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Base.Theme.InclusesApp" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
+
+    <style name="style_primary_button" parent="Widget.Material3.Button">
+        <item name="android:paddingLeft">@dimen/spacing_06</item>
+        <item name="android:paddingRight">@dimen/spacing_06</item>
+        <item name="android:textSize">@dimen/text_size_button_spacing</item>
+    </style>
+
+    <style name="style_secondary_button" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:paddingLeft">@dimen/spacing_06</item>
+        <item name="android:paddingRight">@dimen/spacing_06</item>
+        <item name="android:textSize">@dimen/text_size_button_spacing</item>
+        <item name="strokeColor">@color/dark_blue</item>
+        <item name="strokeWidth">@dimen/spacing_01</item>
+    </style>
+
 
     <style name="Theme.InclusesApp" parent="Base.Theme.InclusesApp" />
 </resources>
