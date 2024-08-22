@@ -46,20 +46,20 @@
 
     <Button
         android:id="@+id/buttonRegisterLogin"
+        style="@style/style_secondary_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="130dp"
         android:layout_marginTop="@dimen/spacing_03"
-        android:background="@drawable/style_secondary_button"
-        android:text="@string/register"
-        android:textSize="@dimen/spacing_04"
-        android:textColor="@color/dark_blue"
+        android:layout_marginBottom="130dp"
         android:paddingStart="@dimen/spacing_11"
         android:paddingEnd="@dimen/spacing_11"
-        app:layout_constraintTop_toBottomOf="@+id/buttonLoginUser"
+        android:text="@string/register"
+        android:textColor="@color/dark_blue"
+        android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/textViewTermsOfUseLogin"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonLoginUser" />
 
     <TextView
         android:id="@+id/textViewTermsOfUseLogin"

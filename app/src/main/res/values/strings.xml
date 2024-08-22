@@ -7,4 +7,6 @@
     <string name="back">Voltar</string>
     <string name="back_strong"><b>Voltar</b></string>
     <string name="forgotPassword"><u>Esqueci a senha</u></string>
+    <string name="password">Senha</string>
+    <string name="numRegister">CPF ou CNPJ</string>
 </resources>

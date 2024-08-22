@@ -24,8 +24,8 @@
         android:layout_marginTop="19dp"
         android:text="@string/back_strong"
         android:textSize="@dimen/spacing_06"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/imageViewLoginUserBackButton"/>
+        app:layout_constraintStart_toEndOf="@id/imageViewLoginUserBackButton"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Logo -->
     <ImageView
@@ -52,46 +52,56 @@
     <!-- Campo de CPF ou CNPJ -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/cpfCnpjInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_05"
         android:layout_marginTop="@dimen/spacing_07"
         android:layout_marginEnd="@dimen/spacing_05"
+        android:hint="@string/numRegister"
+        app:boxStrokeErrorColor="@color/red_error"
+        app:boxStrokeWidth="@dimen/spacing_01"
+        app:counterEnabled="true"
+        app:counterMaxLength="14"
+        app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imageViewLoginUserNameIncluses"
         app:layout_constraintWidth_default="spread"
-        app:layout_constraintWidth_min="0dp">
+        app:startIconDrawable="@drawable/ic_doc">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/cpfCnpjEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="CPF ou CNPJ"
+            android:inputType="number"
             android:paddingStart="@dimen/spacing_05"
-            android:paddingEnd="@dimen/spacing_05" />
+            android:paddingEnd="@dimen/spacing_05" /> <!-- Definindo o tipo de entrada como número -->
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Campo de senha -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/passwordInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_05"
         android:layout_marginTop="@dimen/spacing_05"
         android:layout_marginEnd="@dimen/spacing_05"
+        android:hint="@string/password"
+        app:boxStrokeErrorColor="@color/red_error"
+        app:boxStrokeWidth="@dimen/spacing_01"
+        app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cpfCnpjInputLayout"
-        app:layout_constraintWidth_default="spread"
-        app:layout_constraintWidth_min="0dp">
+        app:startIconDrawable="@drawable/block">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/passwordEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Senha"
             android:inputType="textPassword"
             android:paddingStart="16dp"
             android:paddingEnd="16dp" />
@@ -146,13 +156,13 @@
         android:id="@+id/googleLoginButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_05"
         android:layout_marginStart="@dimen/spacing_05"
+        android:layout_marginTop="@dimen/spacing_05"
         android:layout_marginEnd="@dimen/spacing_05"
-        android:gravity="center"
         android:background="@drawable/style_terciary_button"
+        android:gravity="center"
         android:orientation="horizontal"
-        android:padding="@dimen/spacing_03"
+        android:padding="@dimen/spacing_04"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/orTextView">
@@ -179,13 +189,13 @@
         android:id="@+id/facebookLoginButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_05"
         android:layout_marginStart="@dimen/spacing_05"
+        android:layout_marginTop="@dimen/spacing_05"
         android:layout_marginEnd="@dimen/spacing_05"
-        android:gravity="center"
         android:background="@drawable/style_terciary_button"
+        android:gravity="center"
         android:orientation="horizontal"
-        android:padding="@dimen/spacing_03"
+        android:padding="@dimen/spacing_04"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/googleLoginButton">

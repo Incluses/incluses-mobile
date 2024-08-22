@@ -15,7 +15,7 @@
         <activity
             android:name=".Presentation.LoginUser"
             android:exported="false"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Presentation.Login"
             android:exported="false"
