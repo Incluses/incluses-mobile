@@ -33,8 +33,13 @@ public class Login extends AppCompatActivity {
         binding.buttonRegisterLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+<<<<<<< HEAD
                 Intent intent2 = new Intent(Login.this,TypeRegistration.class);
                 startActivity(intent2);
+=======
+                Intent intent = new Intent(Login.this, RegisterUserActivity.class);
+                startActivity(intent);
+>>>>>>> 4dba14c15a9ba5a9cb58b040435277a132d3cc78
             }
         });
 

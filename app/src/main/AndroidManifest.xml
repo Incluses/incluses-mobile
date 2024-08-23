@@ -13,15 +13,21 @@
         android:theme="@style/Theme.InclusesApp"
         tools:targetApi="31">
         <activity
+<<<<<<< HEAD
             android:name=".Presentation.UserPerfil"
             android:exported="false" />
         <activity
             android:name=".Presentation.TypeRegistration"
             android:exported="false" />
+=======
+            android:name=".Presentation.RegisterUserActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+>>>>>>> 4dba14c15a9ba5a9cb58b040435277a132d3cc78
         <activity
             android:name=".Presentation.LoginUser"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Presentation.Login"
             android:exported="false"

@@ -9,6 +9,8 @@
         <item name="android:paddingLeft">@dimen/spacing_06</item>
         <item name="android:paddingRight">@dimen/spacing_06</item>
         <item name="android:textSize">@dimen/text_size_button_spacing</item>
+        <item name="android:buttonCornerRadius">@dimen/spacing_06</item>
+        <item name="backgroundTint">@color/dark_blue</item>
     </style>
 
     <style name="style_secondary_button" parent="Widget.Material3.Button.OutlinedButton">
@@ -19,6 +21,12 @@
         <item name="strokeWidth">@dimen/spacing_01</item>
     </style>
 
+    <style name="style_input" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusBottomEnd">@dimen/spacing_06</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/spacing_06</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/spacing_06</item>
+        <item name="boxCornerRadiusTopStart">@dimen/spacing_06</item>
+    </style>
 
     <style name="Theme.InclusesApp" parent="Base.Theme.InclusesApp" />
 </resources>
