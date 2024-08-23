@@ -52,7 +52,7 @@
     <!-- Campo de CPF ou CNPJ -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/cpfCnpjInputLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        style="@style/style_input"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_05"
@@ -83,7 +83,7 @@
     <!-- Campo de senha -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/passwordInputLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        style="@style/style_input"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_05"
@@ -129,7 +129,7 @@
         android:layout_marginStart="@dimen/spacing_05"
         android:layout_marginTop="@dimen/spacing_07"
         android:layout_marginEnd="@dimen/spacing_05"
-        android:background="@drawable/style_primary_button"
+        style="@style/style_primary_button"
         android:text="Continuar"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
