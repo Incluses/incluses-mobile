@@ -7,15 +7,14 @@ import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
 import project.interdisciplinary.inclusesapp.R;
 import project.interdisciplinary.inclusesapp.databinding.ActivityLoginUserBinding;
+import project.interdisciplinary.inclusesapp.databinding.ActivityRegisterUserBinding;
 
-public class LoginUser extends AppCompatActivity {
+public class RegisterUserActivity extends AppCompatActivity {
 
-    private ActivityLoginUserBinding binding;
-
+    private ActivityRegisterUserBinding binding;
     private ActivityResultLauncher<Intent> resultLauncher;
 
     @Override
@@ -24,7 +23,7 @@ public class LoginUser extends AppCompatActivity {
         // Force Theme to Light Mode
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-        binding = ActivityLoginUserBinding.inflate(getLayoutInflater());
+        binding = ActivityRegisterUserBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         // Activity Result
@@ -36,24 +35,16 @@ public class LoginUser extends AppCompatActivity {
         //button back
         binding.imageViewLoginUserBackButton.setOnClickListener(
                 v -> {
-                    Intent intent = new Intent(LoginUser.this, Login.class);
+                    Intent intent = new Intent(RegisterUserActivity.this, Login.class);
                     resultLauncher.launch(intent);
                 }
         );
 
         binding.textViewLoginUserBack.setOnClickListener(
                 v -> {
-                    Intent intent = new Intent(LoginUser.this, Login.class);
+                    Intent intent = new Intent(RegisterUserActivity.this, Login.class);
                     resultLauncher.launch(intent);
                 }
         );
-
-        binding.registerTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginUser.this, RegisterUserActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 }

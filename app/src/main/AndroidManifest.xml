@@ -13,9 +13,13 @@
         android:theme="@style/Theme.InclusesApp"
         tools:targetApi="31">
         <activity
+            android:name=".Presentation.RegisterUserActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".Presentation.LoginUser"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Presentation.Login"
             android:exported="false"

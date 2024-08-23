@@ -27,7 +27,7 @@
         app:layout_constraintStart_toEndOf="@id/imageViewLoginUserBackButton"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Logo -->
+    <!-- Soon -->
     <ImageView
         android:id="@+id/logoImageView"
         android:layout_width="100dp"
@@ -38,7 +38,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageViewLoginUserBackButton" />
 
-    <!-- Texto "Incluses" -->
+    <!-- Text "Incluses" -->
     <ImageView
         android:id="@+id/imageViewLoginUserNameIncluses"
         android:layout_width="300dp"
@@ -49,7 +49,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/logoImageView" />
 
-    <!-- Campo de CPF ou CNPJ -->
+    <!-- field of CPF -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/cpfCnpjInputLayout"
         style="@style/style_input"
@@ -62,7 +62,7 @@
         app:boxStrokeErrorColor="@color/red_error"
         app:boxStrokeWidth="@dimen/spacing_01"
         app:counterEnabled="true"
-        app:counterMaxLength="14"
+        app:counterMaxLength="11"
         app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -80,7 +80,7 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Campo de senha -->
+    <!-- field of password -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/passwordInputLayout"
         style="@style/style_input"
@@ -121,7 +121,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/passwordInputLayout" />
 
-    <!-- Botão Continuar -->
+    <!-- Button Continue -->
     <Button
         android:id="@+id/continueButton"
         android:layout_width="0dp"
@@ -138,7 +138,7 @@
         app:layout_constraintWidth_default="spread"
         app:layout_constraintWidth_min="0dp" />
 
-    <!-- Divisor "OU" -->
+    <!-- Divider "OU" -->
     <TextView
         android:id="@+id/orTextView"
         android:layout_width="wrap_content"
@@ -151,7 +151,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/continueButton" />
 
-    <!-- Botão Entrar com Google -->
+    <!-- Button Enter with Google -->
     <LinearLayout
         android:id="@+id/googleLoginButton"
         android:layout_width="0dp"
@@ -167,7 +167,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/orTextView">
 
-        <!-- Ícone do Google -->
+        <!-- Icon of google -->
         <ImageView
             android:id="@+id/googleIcon"
             android:layout_width="24dp"
@@ -175,7 +175,7 @@
             android:layout_marginEnd="8dp"
             android:src="@drawable/google" />
 
-        <!-- Texto do botão -->
+        <!-- Text of button -->
         <TextView
             android:id="@+id/googleLoginText"
             android:layout_width="wrap_content"
@@ -184,7 +184,7 @@
             android:textColor="@android:color/black"
             android:textSize="16sp" />
     </LinearLayout>
-    <!-- Botão Entrar com Facebook -->
+    <!-- Button Enter with Facebook -->
     <LinearLayout
         android:id="@+id/facebookLoginButton"
         android:layout_width="0dp"
@@ -200,7 +200,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/googleLoginButton">
 
-        <!-- Ícone do Facebook -->
+        <!-- Icon of facebook -->
         <ImageView
             android:id="@+id/facebookIcon"
             android:layout_width="24dp"
@@ -208,7 +208,7 @@
             android:layout_marginEnd="8dp"
             android:src="@drawable/facebook" />
 
-        <!-- Texto do botão -->
+        <!-- Text do button -->
         <TextView
             android:id="@+id/facebookLoginText"
             android:layout_width="wrap_content"
@@ -218,7 +218,7 @@
             android:textSize="16sp" />
     </LinearLayout>
 
-    <!-- Texto "Não possui uma conta?" -->
+    <!-- Text "Não possui uma conta?" -->
     <TextView
         android:id="@+id/noAccountTextView"
         android:layout_width="wrap_content"
@@ -230,7 +230,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/facebookLoginButton" />
 
-    <!-- Texto "Cadastre-se" -->
+    <!-- Text "Cadastre-se" -->
     <TextView
         android:id="@+id/registerTextView"
         android:layout_width="wrap_content"
