@@ -25,6 +25,7 @@
     <string name="passwordHelperText">A senha deve possuir no mínimo 8 caracteres!</string>
     <string name="passwordConfirmedHelperText">Confirme sua senha!</string>
     <string name="continueText">Continuar</string>
+    <string name="skipText">Pular</string>
     <string name="dateBorn">Selecione sua data de nascimento</string>
     <string name="error_underage">Você deve ter mais de 18 anos para se registrar.</string>
 </resources>

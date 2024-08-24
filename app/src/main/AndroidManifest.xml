@@ -13,9 +13,13 @@
         android:theme="@style/Theme.InclusesApp"
         tools:targetApi="31">
         <activity
-            android:name=".Presentation.RegisterUser2"
+            android:name=".Presentation.JobsOfInterest"
             android:exported="false"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Presentation.RegisterUser2"
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Presentation.RegisterUserActivity"
             android:exported="false"
@@ -34,6 +38,7 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

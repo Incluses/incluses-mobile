@@ -121,6 +121,14 @@ public class RegisterUser2 extends AppCompatActivity {
             }
         });
 
+        //continue button
+        binding.continueButton.setOnClickListener(
+                v -> {
+                    Intent intent = new Intent(RegisterUser2.this, JobsOfInterest.class);
+                    startActivity(intent);
+                }
+        );
+
         //enter button
         binding.enterTextView.setOnClickListener(
                 v -> {
