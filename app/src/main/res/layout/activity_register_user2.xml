@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Presentation.RegisterUserActivity">
+    tools:context=".Presentation.RegisterUser2">
 
     <ImageView
         android:id="@+id/imageViewLoginUserBackButton"
@@ -55,37 +55,33 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_09"
         android:text="@string/createAccount"
-        android:textStyle="bold"
         android:textColor="@color/black"
         android:textSize="@dimen/text_size_button_spacing"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imageViewLoginUserNameIncluses" />
 
 
-
-
-    <!-- field of email -->
+    <!-- field of name -->
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/emailInputLayout"
+        android:id="@+id/nameInputLayout"
         style="@style/style_input"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_05"
         android:layout_marginTop="@dimen/spacing_05"
         android:layout_marginEnd="@dimen/spacing_05"
-        android:hint="@string/email"
+        android:hint="@string/name"
         app:boxStrokeErrorColor="@color/red_error"
         app:boxStrokeWidth="@dimen/spacing_01"
-        app:endIconMode="custom"
-        app:suffixText="@string/email_complete"
+        app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewCreateAccount"
-        app:endIconDrawable="@drawable/ic_email">
+        app:layout_constraintTop_toBottomOf="@id/textViewCreateAccount">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/emailEditText"
+            android:id="@+id/nameEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
@@ -94,88 +90,117 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-<!--    field of phone number -->
+    <!--    field of name social -->
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/phoneNumberInputLayout"
+        android:id="@+id/nameSocialInputLayout"
         style="@style/style_input"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_05"
         android:layout_marginTop="@dimen/spacing_05"
         android:layout_marginEnd="@dimen/spacing_05"
-        android:hint="@string/phone_number"
+        android:hint="@string/nameSocial"
+        app:boxStrokeErrorColor="@color/red_error"
+        app:boxStrokeWidth="@dimen/spacing_01"
+        app:hintTextColor="@color/gray"
+        app:endIconMode="clear_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nameInputLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/nameSocialEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <!--    field of pronoun-->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/pronounInputLayout"
+        style="@style/style_input"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_05"
+        android:layout_marginTop="@dimen/spacing_05"
+        android:layout_marginEnd="@dimen/spacing_05"
+        android:hint="@string/pronoun"
+        app:boxStrokeErrorColor="@color/red_error"
+        app:boxStrokeWidth="@dimen/spacing_01"
+        app:hintTextColor="@color/gray"
+        app:endIconMode="clear_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nameSocialInputLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/prounounEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- field of date -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/dateBornInputLayout"
+        style="@style/style_input"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_05"
+        android:layout_marginTop="@dimen/spacing_05"
+        android:layout_marginEnd="@dimen/spacing_05"
+        android:hint="@string/dateBorn"
         app:boxStrokeErrorColor="@color/red_error"
         app:boxStrokeWidth="@dimen/spacing_01"
         app:endIconMode="custom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/emailInputLayout"
-        app:endIconDrawable="@drawable/ic_phone">
+        app:layout_constraintTop_toBottomOf="@id/pronounInputLayout"
+        app:endIconDrawable="@drawable/ic_calendar">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/phoneEditText"
+            android:id="@+id/dateBornEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="phone"
+            android:focusable="false"
+            android:clickable="true"
             android:paddingStart="16dp"
             android:paddingEnd="16dp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
-
-    <!-- field of password -->
+    <!-- field of CPF -->
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/passwordInputLayout"
+        android:id="@+id/numRegisterInputLayout"
         style="@style/style_input"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_05"
         android:layout_marginTop="@dimen/spacing_05"
         android:layout_marginEnd="@dimen/spacing_05"
-        android:hint="@string/password"
-        app:helperText="@string/passwordHelperText"
+        android:hint="@string/numRegisterHint"
         app:boxStrokeErrorColor="@color/red_error"
         app:boxStrokeWidth="@dimen/spacing_01"
-        app:endIconMode="password_toggle"
+        app:endIconMode="custom"
+        app:counterEnabled="true"
+        app:counterMaxLength="14"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/phoneNumberInputLayout"
-        app:startIconDrawable="@drawable/block">
+        app:layout_constraintTop_toBottomOf="@id/dateBornInputLayout"
+        app:endIconDrawable="@drawable/ic_doc">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/passwordEditText"
+            android:id="@+id/numRegisterEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <!-- field of password -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/passwordConfirmedInputLayout"
-        style="@style/style_input"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_05"
-        android:layout_marginTop="@dimen/spacing_05"
-        android:layout_marginEnd="@dimen/spacing_05"
-        android:hint="@string/passwordConfirmed"
-        app:helperText="@string/passwordConfirmedHelperText"
-        app:boxStrokeErrorColor="@color/red_error"
-        app:boxStrokeWidth="@dimen/spacing_01"
-        app:endIconMode="password_toggle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/passwordInputLayout"
-        app:startIconDrawable="@drawable/block">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/passwordConfirmedEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
+            android:inputType="number"
             android:paddingStart="16dp"
             android:paddingEnd="16dp" />
 
@@ -183,18 +208,18 @@
 
     <!-- Button Continue -->
     <Button
-        android:id="@+id/continueButtonRegister"
+        android:id="@+id/continueButton"
+        style="@style/style_primary_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_05"
         android:layout_marginTop="@dimen/spacing_07"
         android:layout_marginEnd="@dimen/spacing_05"
-        style="@style/style_primary_button"
         android:text="@string/continueText"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/passwordConfirmedInputLayout"
+        app:layout_constraintTop_toBottomOf="@id/numRegisterInputLayout"
         app:layout_constraintWidth_default="spread"
         app:layout_constraintWidth_min="0dp" />
 
@@ -209,7 +234,7 @@
         android:textSize="@dimen/text_size_button_spacing"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/continueButtonRegister" />
+        app:layout_constraintTop_toBottomOf="@id/continueButton" />
 
     <!-- Text "Entrar" -->
     <TextView
