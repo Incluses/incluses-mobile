@@ -51,7 +51,7 @@
 
     <!-- field of CPF -->
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/cpfCnpjInputLayout"
+        android:id="@+id/cpfInputLayout"
         style="@style/style_input"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
         app:boxStrokeErrorColor="@color/red_error"
         app:boxStrokeWidth="@dimen/spacing_01"
         app:counterEnabled="true"
-        app:counterMaxLength="11"
+        app:counterMaxLength="14"
         app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -71,7 +71,7 @@
         app:startIconDrawable="@drawable/ic_doc">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/cpfCnpjEditText"
+            android:id="@+id/cpfEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
@@ -95,7 +95,7 @@
         app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cpfCnpjInputLayout"
+        app:layout_constraintTop_toBottomOf="@id/cpfInputLayout"
         app:startIconDrawable="@drawable/block">
 
         <com.google.android.material.textfield.TextInputEditText

@@ -12,13 +12,20 @@
     <string name="passwordConfirmed">Confirmar Senha</string>
     <string name="password">Senha</string>
     <string name="numRegister">CPF</string>
+    <string name="numRegisterHint">Digite seu CPF</string>
     <string name="notAccount">Não possui uma conta?</string>
     <string name="hadAccount">Já possui uma conta?</string>
     <string name="createAccount">Crie sua conta no Incluses</string>
     <string name="email">Digite seu e-mail</string>
+    <string name="name">Digite seu nome</string>
+    <string name="nameSocial">Nome Social (opcional)</string>
+    <string name="pronoun">Digite seu pronome</string>
     <string name="phone_number">Digite seu número</string>
     <string name="email_complete">.com</string>
     <string name="passwordHelperText">A senha deve possuir no mínimo 8 caracteres!</string>
     <string name="passwordConfirmedHelperText">Confirme sua senha!</string>
     <string name="continueText">Continuar</string>
+    <string name="skipText">Pular</string>
+    <string name="dateBorn">Selecione sua data de nascimento</string>
+    <string name="error_underage">Você deve ter mais de 18 anos para se registrar.</string>
 </resources>

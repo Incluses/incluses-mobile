@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Presentation.JobsOfInterest">
+
+    <!-- Fixed Header Elements -->
+    <ImageView
+        android:id="@+id/imageViewLoginUserBackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_05"
+        android:layout_marginTop="@dimen/spacing_06"
+        android:contentDescription="@string/back"
+        android:src="@drawable/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewLoginUserBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="19dp"
+        android:text="@string/back_strong"
+        android:textSize="@dimen/spacing_06"
+        app:layout_constraintStart_toEndOf="@id/imageViewLoginUserBackButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/skipButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/style_primary_button"
+        android:text="@string/skipText"
+        android:layout_marginStart="@dimen/spacing_05"
+        android:layout_marginTop="@dimen/spacing_04"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewLoginUserBackButton"/>
+
+    <ImageView
+        android:id="@+id/logoImageView"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toEndOf="@id/textViewLoginUserBack"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Scrollable Content -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/spacing_06"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/logoImageView">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/spacing_05"
+            tools:context=".Presentation.JobsOfInterest">
+
+            <!-- Your scrollable content here -->
+            <TextView
+                android:id="@+id/jobsInterestTextView"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_04"
+                android:text="Quais cargos são do seu Interesse?"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_title_spacing"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/jobSegmentTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_07"
+                android:text="Ciência e Análise de Dados"
+                android:textSize="@dimen/text_size_button_spacing"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.076"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/jobsInterestTextView" />
+
+            <Button
+                android:id="@+id/analistJobButton"
+                style="@style/style_job_box_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_05"
+                android:layout_marginTop="@dimen/spacing_02"
+                android:text="Análise de Dados"
+                android:textSize="@dimen/spacing_04"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/jobSegmentTextView" />
+
+            <Button
+                android:id="@+id/engineerDataJobButton"
+                style="@style/style_job_box_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_02"
+                android:layout_marginTop="@dimen/spacing_02"
+                android:text="Engenheiro de Dados"
+                android:textSize="@dimen/spacing_04"
+                app:layout_constraintStart_toEndOf="@id/analistJobButton"
+                app:layout_constraintTop_toBottomOf="@id/jobSegmentTextView" />
+
+            <Button
+                android:id="@+id/cientistJobButton"
+                style="@style/style_job_box_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_05"
+                android:layout_marginTop="@dimen/spacing_02"
+                android:text="Cientista de Dados"
+                android:textSize="@dimen/spacing_04"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/analistJobButton" />
+
+
+            <TextView
+                android:id="@+id/jobSegmentTextView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_03"
+                android:text="Engenharia de Software e TI"
+                android:textSize="@dimen/text_size_button_spacing"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.076"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cientistJobButton" />
+
+            <Button
+                android:id="@+id/ciberSecurityJobButton"
+                style="@style/style_job_box_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_05"
+                android:layout_marginTop="@dimen/spacing_02"
+                android:text="Profissional de Segurança Cibernética"
+                android:textSize="@dimen/spacing_04"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/jobSegmentTextView2" />
+
+            <Button
+                android:id="@+id/designerUxJobButton"
+                style="@style/style_job_box_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_05"
+                android:layout_marginTop="@dimen/spacing_02"
+                android:text="Designer de UX"
+                android:textSize="@dimen/spacing_04"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ciberSecurityJobButton" />
+
+            <Button
+                android:id="@+id/especialistSuportTiJobButton"
+                style="@style/style_job_box_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_02"
+                android:layout_marginTop="@dimen/spacing_02"
+                android:text="Especialista em Suporte de TI"
+                android:textSize="@dimen/spacing_04"
+                app:layout_constraintStart_toEndOf="@id/designerUxJobButton"
+                app:layout_constraintTop_toBottomOf="@id/ciberSecurityJobButton" />
+
+            <Button
+                android:id="@+id/devFrontJobButton"
+                style="@style/style_job_box_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_05"
+                android:layout_marginTop="@dimen/spacing_02"
+                android:text="Desenvolvedor de Front-End"
+                android:textSize="@dimen/spacing_04"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/designerUxJobButton" />
+
+            <Button
+                android:id="@+id/devAppJobButton"
+                style="@style/style_job_box_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_05"
+                android:layout_marginTop="@dimen/spacing_02"
+                android:text="Desenvolvedor de Aplicativos"
+                android:textSize="@dimen/spacing_04"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/devFrontJobButton" />
+
+            <Button
+                android:id="@+id/devBackJobButton"
+                style="@style/style_job_box_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_05"
+                android:layout_marginTop="@dimen/spacing_02"
+                android:text="Desenvolvedor de Back-End"
+                android:textSize="@dimen/spacing_04"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/devAppJobButton" />
+
+            <Button
+                android:id="@+id/engineerDevopsJobButton"
+                style="@style/style_job_box_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_05"
+                android:layout_marginTop="@dimen/spacing_02"
+                android:text="Engenheiro de DevOps"
+                android:textSize="@dimen/spacing_04"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/devBackJobButton" />
+
+            <Button
+                android:id="@+id/devIosJobButton"
+                style="@style/style_job_box_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_05"
+                android:layout_marginTop="@dimen/spacing_02"
+                android:text="Desenvolvedor de iOS"
+                android:textSize="@dimen/spacing_04"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/engineerDevopsJobButton" />
+
+            <Button
+                android:id="@+id/managerProjTiJobButton"
+                style="@style/style_job_box_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_02"
+                android:layout_marginTop="@dimen/spacing_02"
+                android:text="Gerente de Projetos de TI"
+                android:textSize="@dimen/spacing_04"
+                app:layout_constraintStart_toEndOf="@id/engineerDevopsJobButton"
+                app:layout_constraintTop_toBottomOf="@id/devBackJobButton" />
+
+            <Button
+                android:id="@+id/devAndroidJobButton"
+                style="@style/style_job_box_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_05"
+                android:layout_marginTop="@dimen/spacing_02"
+                android:text="Desenvolvedor Android"
+                android:textSize="@dimen/spacing_04"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/devIosJobButton" />
+
+            <Button
+                android:id="@+id/devWarehousesDataJobButton"
+                style="@style/style_job_box_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_05"
+                android:layout_marginTop="@dimen/spacing_02"
+                android:text="Desenvolvedor de Armazéns de Dados"
+                android:textSize="@dimen/spacing_04"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/devAndroidJobButton" />
+
+            <Button
+                android:id="@+id/engineerNetworkJobButton"
+                style="@style/style_job_box_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_05"
+                android:layout_marginTop="@dimen/spacing_02"
+                android:text="Engenheiro de Rede"
+                android:textSize="@dimen/spacing_04"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/devWarehousesDataJobButton" />
+
+            <Button
+                android:id="@+id/architectSolutJobButton"
+                style="@style/style_job_box_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_02"
+                android:layout_marginTop="@dimen/spacing_02"
+                android:text="Arquiteto de Soluções"
+                android:textSize="@dimen/spacing_04"
+                app:layout_constraintStart_toEndOf="@id/engineerNetworkJobButton"
+                app:layout_constraintTop_toBottomOf="@id/devWarehousesDataJobButton" />
+
+            <TextView
+                android:id="@+id/jobSegmentTextView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_03"
+                android:text="Vendas e Marketing"
+                android:textSize="@dimen/text_size_button_spacing"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.076"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/engineerNetworkJobButton" />
+
+            <Button
+                android:id="@+id/merchantDigitalJobButton"
+                style="@style/style_job_box_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_05"
+                android:layout_marginTop="@dimen/spacing_02"
+                android:text="Comerciante Digital"
+                android:textSize="@dimen/spacing_04"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/jobSegmentTextView3" />
+
+            <Button
+                android:id="@+id/especialistOpSellJobButton"
+                style="@style/style_job_box_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_05"
+                android:layout_marginTop="@dimen/spacing_02"
+                android:text="Especialista em Operações de Vendas"
+                android:textSize="@dimen/spacing_04"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/merchantDigitalJobButton" />
+
+            <Button
+                android:id="@+id/analistMarketingJobButton"
+                style="@style/style_job_box_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_05"
+                android:layout_marginTop="@dimen/spacing_02"
+                android:text="Analista de Marketing"
+                android:textSize="@dimen/spacing_04"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/especialistOpSellJobButton" />
+
+            <Button
+                android:id="@+id/representativeDevSellJobButton"
+                style="@style/style_job_box_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_05"
+                android:layout_marginTop="@dimen/spacing_02"
+                android:text="Representante de Desenvolvimento de Vendas"
+                android:textSize="@dimen/spacing_04"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/analistMarketingJobButton" />
+
+            <Button
+                android:id="@+id/representativeSellJobButton"
+                style="@style/style_job_box_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_05"
+                android:layout_marginTop="@dimen/spacing_02"
+                android:text="Representantes de Vendas"
+                android:textSize="@dimen/spacing_04"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/representativeDevSellJobButton" />
+
+            <TextView
+                android:id="@+id/jobSegmentTextView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_03"
+                android:text="Negócios"
+                android:textSize="@dimen/text_size_button_spacing"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.076"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/representativeSellJobButton" />
+
+            <Button
+                android:id="@+id/managerProjJobButton"
+                style="@style/style_job_box_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_05"
+                android:layout_marginTop="@dimen/spacing_02"
+                android:text="Gerente de Projetos"
+                android:textSize="@dimen/spacing_04"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/jobSegmentTextView4" />
+
+            <Button
+                android:id="@+id/accountantJobButton"
+                style="@style/style_job_box_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_02"
+                android:layout_marginTop="@dimen/spacing_02"
+                android:text="Contabilista"
+                android:textSize="@dimen/spacing_04"
+                app:layout_constraintStart_toEndOf="@id/managerProjJobButton"
+                app:layout_constraintTop_toBottomOf="@id/jobSegmentTextView4" />
+
+            <Button
+                android:id="@+id/analistInteligenceAdminJobButton"
+                style="@style/style_job_box_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_05"
+                android:layout_marginTop="@dimen/spacing_02"
+                android:text="Analista de Inteligência Administrativa"
+                android:textSize="@dimen/spacing_04"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/managerProjJobButton" />
+
+            <Button
+                android:id="@+id/especialistResourcesHumansJobButton"
+                style="@style/style_job_box_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_05"
+                android:layout_marginTop="@dimen/spacing_02"
+                android:text="Especialista em recursos humanos"
+                android:textSize="@dimen/spacing_04"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/analistInteligenceAdminJobButton" />
+
+            <Button
+                android:id="@+id/continueButton"
+                style="@style/style_primary_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_04"
+                android:text="@string/continueText"
+                android:textSize="@dimen/text_size_button_main_spacing"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/especialistResourcesHumansJobButton" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
