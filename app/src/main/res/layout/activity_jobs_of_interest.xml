@@ -22,7 +22,7 @@
         android:id="@+id/textViewLoginUserBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="@dimen/spacing_05"
         android:text="@string/back_strong"
         android:textSize="@dimen/spacing_06"
         app:layout_constraintStart_toEndOf="@id/imageViewLoginUserBackButton"
