@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 
 import java.util.Calendar;
@@ -28,6 +30,8 @@ public class RegisterUser2 extends AppCompatActivity {
 
         binding = ActivityRegisterUser2Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        setupAutoComplete();
 
         //button back
         binding.imageViewLoginUserBackButton.setOnClickListener(
@@ -146,5 +150,13 @@ public class RegisterUser2 extends AppCompatActivity {
         }
 
         return age;
+    }
+
+    private void setupAutoComplete() {
+        // Array of states
+        String[] states = getResources().getStringArray(R.array.states_array);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, states);
+        binding.stateAutoCompleteTextView.setAdapter(adapter);
+        binding.stateAutoCompleteTextView.setDropDownHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
     }
 }

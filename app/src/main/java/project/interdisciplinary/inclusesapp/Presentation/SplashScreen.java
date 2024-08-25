@@ -23,6 +23,11 @@ public class SplashScreen extends AppCompatActivity {
 
         binding = ActivitySplashScreenBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+//
+//        Glide.with(this)
+//                .asDrawable()
+//                .load(R.drawable.loading_incluses)
+//                .into(binding.imageViewloading);
 
         Glide.with(this)
                 .asDrawable()
