@@ -3,7 +3,7 @@
     <style name="Base.Theme.InclusesApp" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-<!--        <item name="android:fontFamily">@font/my_custom_font</item>-->
+        <item name="android:fontFamily">@font/fonts_style</item>
     </style>
 
     <style name="style_primary_button" parent="Widget.Material3.Button">

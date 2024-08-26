@@ -49,7 +49,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_03"
-        android:layout_marginBottom="130dp"
+        android:layout_marginBottom="10dp"
         android:paddingStart="@dimen/spacing_11"
         android:paddingEnd="@dimen/spacing_11"
         android:text="@string/register"
@@ -64,9 +64,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/termsOfUse"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/textViewTermsOfUseLoginII"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonRegisterLogin" />
 
     <TextView

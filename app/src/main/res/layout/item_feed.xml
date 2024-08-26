@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/perfilImageView"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_marginTop="@dimen/spacing_05"
+        android:background="@drawable/ic_perfil"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.120"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/namePerfilPostTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_05"
+        android:layout_marginStart="@dimen/spacing_04"
+        android:text="Nome"
+        android:textSize="@dimen/spacing_06"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@id/perfilImageView"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/descriptionPerfilPostTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_02"
+        android:layout_marginStart="@dimen/spacing_04"
+        android:text="Descrição"
+        android:textSize="@dimen/spacing_05"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/perfilImageView"
+        app:layout_constraintTop_toBottomOf="@id/namePerfilPostTextView"/>
+
+    <TextView
+        android:id="@+id/timePerfilPostTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_02"
+        android:layout_marginStart="@dimen/spacing_04"
+        android:text="4h atrás"
+        android:textSize="@dimen/spacing_05"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/perfilImageView"
+        app:layout_constraintTop_toBottomOf="@id/descriptionPerfilPostTextView"/>
+
+    <View
+        android:id="@+id/itemDividerPostView"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/gray"
+        android:layout_marginTop="@dimen/spacing_04"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/perfilImageView" />
+
+    <ImageView
+        android:id="@+id/imagePostImageView"
+        android:layout_width="368dp"
+        android:layout_height="200dp"
+        android:background="@drawable/figure1"
+        android:layout_marginTop="@dimen/spacing_03"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/itemDividerPostView" />
+
+    <View
+        android:id="@+id/itemDividerPostView2"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/gray"
+        android:layout_marginTop="@dimen/spacing_04"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imagePostImageView" />
+
+    <ImageButton
+        android:id="@+id/likePostImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_06"
+        android:layout_marginTop="@dimen/spacing_04"
+        android:background="@drawable/like"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/itemDividerPostView2" />
+
+    <ImageButton
+        android:id="@+id/savePostImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_06"
+        android:layout_marginTop="@dimen/spacing_04"
+        android:background="@drawable/ic_save"
+        app:layout_constraintStart_toEndOf="@id/likePostImageButton"
+        app:layout_constraintTop_toBottomOf="@id/itemDividerPostView2" />
+
+    <ImageButton
+        android:id="@+id/comentPostImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_03"
+        android:background="@drawable/chat2"
+        app:layout_constraintStart_toEndOf="@id/savePostImageButton"
+        app:layout_constraintTop_toBottomOf="@id/itemDividerPostView2" />
+
+    <ImageButton
+        android:id="@+id/sendPostImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_04"
+        android:background="@drawable/ic_send"
+        app:layout_constraintStart_toEndOf="@id/comentPostImageButton"
+        app:layout_constraintTop_toBottomOf="@id/itemDividerPostView2" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
