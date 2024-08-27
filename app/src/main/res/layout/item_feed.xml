@@ -46,6 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_02"
         android:layout_marginStart="@dimen/spacing_04"
+        android:layout_marginBottom="@dimen/spacing_02"
         android:text="4h atrás"
         android:textSize="@dimen/spacing_05"
         android:textStyle="bold"
@@ -55,7 +56,7 @@
     <View
         android:id="@+id/itemDividerPostView"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="@dimen/spacing_01"
         android:background="@color/gray"
         android:layout_marginTop="@dimen/spacing_04"
         app:layout_constraintEnd_toEndOf="parent"
@@ -75,7 +76,7 @@
     <View
         android:id="@+id/itemDividerPostView2"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="@dimen/spacing_01"
         android:background="@color/gray"
         android:layout_marginTop="@dimen/spacing_04"
         app:layout_constraintEnd_toEndOf="parent"
@@ -86,39 +87,55 @@
         android:id="@+id/likePostImageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_06"
-        android:layout_marginTop="@dimen/spacing_04"
+        android:layout_marginTop="@dimen/spacing_05"
         android:background="@drawable/like"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/itemDividerPostView2" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/itemDividerPostView2"
+        app:layout_constraintHorizontal_bias="0.1" />
 
     <ImageButton
         android:id="@+id/savePostImageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_06"
-        android:layout_marginTop="@dimen/spacing_04"
+        android:layout_marginTop="@dimen/spacing_05"
         android:background="@drawable/ic_save"
-        app:layout_constraintStart_toEndOf="@id/likePostImageButton"
-        app:layout_constraintTop_toBottomOf="@id/itemDividerPostView2" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/itemDividerPostView2"
+        app:layout_constraintHorizontal_bias="0.35" />
 
     <ImageButton
         android:id="@+id/comentPostImageButton"
-        android:layout_width="wrap_content"
+        android:layout_width="28dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_03"
-        android:background="@drawable/chat2"
-        app:layout_constraintStart_toEndOf="@id/savePostImageButton"
-        app:layout_constraintTop_toBottomOf="@id/itemDividerPostView2" />
+        android:layout_marginTop="@dimen/spacing_05"
+        android:background="@drawable/ic_coment"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/itemDividerPostView2"
+        app:layout_constraintHorizontal_bias="0.62" />
 
     <ImageButton
         android:id="@+id/sendPostImageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_04"
+        android:layout_marginTop="@dimen/spacing_05"
         android:background="@drawable/ic_send"
-        app:layout_constraintStart_toEndOf="@id/comentPostImageButton"
-        app:layout_constraintTop_toBottomOf="@id/itemDividerPostView2" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/itemDividerPostView2"
+        app:layout_constraintHorizontal_bias="0.9" />
+
+    <View
+        android:id="@+id/itemDividerPostView3"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/spacing_01"
+        android:background="@color/gray"
+        android:layout_marginTop="@dimen/spacing_04"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/likePostImageButton" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

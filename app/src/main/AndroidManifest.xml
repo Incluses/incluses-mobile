@@ -13,9 +13,13 @@
         android:theme="@style/Theme.InclusesApp"
         tools:targetApi="31">
         <activity
-            android:name=".Presentation.JobsOfInterest"
+            android:name=".Presentation.UserPerfil"
             android:exported="false"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Presentation.JobsOfInterest"
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Presentation.RegisterUser2"
             android:exported="false"
