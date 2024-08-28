@@ -33,7 +33,7 @@
     <string name="dateBorn">Selecione sua data de nascimento</string>
     <string name="error_underage">Você deve ter mais de 18 anos para se registrar.</string>
 
-<!--    states-->
+    <!--    states-->
     <string-array name="states_array">
         <item>AC - Acre</item>
         <item>AL - Alagoas</item>

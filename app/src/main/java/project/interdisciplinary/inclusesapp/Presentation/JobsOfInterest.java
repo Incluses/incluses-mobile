@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatDelegate;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
-import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 
@@ -40,6 +39,13 @@ public class JobsOfInterest extends AppCompatActivity {
         binding.textViewLoginUserBack.setOnClickListener(
                 v -> {
                     Intent intent = new Intent(JobsOfInterest.this, RegisterUserActivity.class);
+                    startActivity(intent);
+                }
+        );
+
+        binding.skipButton.setOnClickListener(
+                v -> {
+                    Intent intent = new Intent(JobsOfInterest.this, UserPerfil.class);
                     startActivity(intent);
                 }
         );
@@ -78,23 +84,27 @@ public class JobsOfInterest extends AppCompatActivity {
                 R.id.especialistResourcesHumansJobButton
         };
 
-        // Loop for add the listener of click for it button
+        // Loop para adicionar o listener de clique para cada botão
         for (int id : buttonIds) {
             Button button = findViewById(id);
             if (button != null) {
                 button.setOnClickListener(new View.OnClickListener() {
+                    private boolean isSelected = false; // Flag para armazenar o estado do botão
+
                     @Override
                     public void onClick(View view) {
-                        button.setTextColor(getResources().getColor(R.color.white));
-
-                        // Definir a cor do backgroundTint
-                        button.setBackgroundTintList(getResources().getColorStateList(R.color.purple));
-
-                        // Definir a cor do stroke
-                        // Verifique se o fundo do botão é um `MaterialButton`
-
                         MaterialButton materialButton = (MaterialButton) button;
-                        materialButton.setStrokeColor(ColorStateList.valueOf(getResources().getColor(R.color.purple)));
+                        if (isSelected) {
+                            button.setTextColor(getResources().getColor(R.color.black)); // Altere para a cor original
+                            materialButton.setBackgroundTintList(getResources().getColorStateList(R.color.white)); // Altere para a cor de fundo original
+                            materialButton.setStrokeColor(ColorStateList.valueOf(getResources().getColor(R.color.gray))); // Altere para a cor do contorno original
+                        } else {
+                            button.setTextColor(getResources().getColor(R.color.white));
+                            materialButton.setBackgroundTintList(getResources().getColorStateList(R.color.purple));
+                            materialButton.setStrokeColor(ColorStateList.valueOf(getResources().getColor(R.color.purple)));
+                        }
+
+                        isSelected = !isSelected;
                     }
                 });
             }

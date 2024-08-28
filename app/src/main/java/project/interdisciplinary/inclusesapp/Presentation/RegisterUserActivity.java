@@ -45,6 +45,23 @@ public class RegisterUserActivity extends AppCompatActivity {
             }
         });
 
+        // Configure email field
+        binding.emailEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    String emailInput = binding.emailEditText.getText().toString();
+
+                    if (emailInput.contains("@") && !emailInput.endsWith(".com")) {
+                        String newEmail = emailInput + ".com";
+                        binding.emailEditText.setText(newEmail);
+                        binding.emailEditText.setSelection(newEmail.length());
+                    }
+                }
+            }
+        });
+
+
         // Format phone number
         binding.phoneEditText.addTextChangedListener(new TextWatcher() {
             private static final String PHONE_FORMAT = "(##) #####-####";
