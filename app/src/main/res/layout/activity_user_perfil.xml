@@ -62,7 +62,7 @@
                 android:backgroundTint="#FFFFFF">
 
                 <ImageView
-                    android:id="@+id/imageView2"
+                    android:id="@+id/imageViewBackgroundImagePerfil"
                     android:layout_width="440dp"
                     android:layout_height="192dp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -94,7 +94,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/ImageViewPerfilUser" />
 
                 <TextView
-                    android:id="@+id/textView3"
+                    android:id="@+id/textViewJobInformation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_05"
@@ -105,7 +105,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/namePerfiltextView" />
 
                 <TextView
-                    android:id="@+id/textView12"
+                    android:id="@+id/textViewLocationResidence"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_05"
@@ -114,7 +114,7 @@
                     android:text="Osasco, São Paulo, Brasil"
                     app:layout_constraintBottom_toTopOf="@id/itemDividerPerfilView"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView3" />
+                    app:layout_constraintTop_toBottomOf="@+id/textViewJobInformation" />
 
                 <View
                     android:id="@+id/itemDividerPerfilView"
@@ -136,7 +136,7 @@
                 android:backgroundTint="#FFFFFF">
 
                 <TextView
-                    android:id="@+id/textView4"
+                    android:id="@+id/textViewButtonAddExperience"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="96dp"
@@ -146,10 +146,10 @@
                     android:textColor="@color/gray"
                     android:textSize="20dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView7" />
+                    app:layout_constraintTop_toBottomOf="@+id/imageViewEmptyExperience" />
 
                 <ImageView
-                    android:id="@+id/imageView7"
+                    android:id="@+id/imageViewEmptyExperience"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="68dp"
@@ -160,7 +160,7 @@
                     app:srcCompat="@drawable/experience_empty" />
 
                 <TextView
-                    android:id="@+id/textView5"
+                    android:id="@+id/textViewTitleExperience"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
@@ -173,14 +173,14 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView13"
+                    android:id="@+id/textViewSubtitleExperience"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:text="Alguns conhecimentos desse User"
                     android:textSize="12dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView5" />
+                    app:layout_constraintTop_toBottomOf="@+id/textViewTitleExperience" />
 
                 <View
                     android:layout_width="match_parent"
@@ -198,7 +198,7 @@
                 android:background="#FFFFFF">
 
                 <TextView
-                    android:id="@+id/textView11"
+                    android:id="@+id/textViewTitleDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
@@ -211,7 +211,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView9"
+                    android:id="@+id/textViewDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
@@ -220,17 +220,17 @@
                     android:text="Olá! Sou o Renato, tenho 17 anos e sou criador do APP Incluses. Busco aperfeiçoar minhas habilidades em desenvolvimento, e aprender com meus erros, para assim gerar mais resultados positivos em miha carreira."
                     android:textColor="@color/gray"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView11" />
+                    app:layout_constraintTop_toBottomOf="@+id/textViewTitleDescription" />
 
                 <ImageButton
-                    android:id="@+id/imageButton2"
+                    android:id="@+id/imageButtonEditDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:backgroundTint="#FFFFFF"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.942"
-                    app:layout_constraintStart_toEndOf="@+id/textView11"
+                    app:layout_constraintStart_toEndOf="@+id/textViewTitleDescription"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@android:drawable/ic_menu_edit" />
 
@@ -241,7 +241,7 @@
                     android:layout_marginTop="@dimen/spacing_03"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textView9"
+                    app:layout_constraintTop_toBottomOf="@id/textViewDescription"
                     app:layout_constraintBottom_toBottomOf="parent"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -254,7 +254,7 @@
                 android:backgroundTint="#FFFFFF">
 
                 <TextView
-                    android:id="@+id/textView10"
+                    android:id="@+id/textViewTitleCurriculum"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
@@ -267,7 +267,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textViewAddCurriculo"
+                    android:id="@+id/textViewAddCurriculum"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -277,7 +277,7 @@
                     android:textSize="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView10" />
+                    app:layout_constraintTop_toBottomOf="@+id/textViewTitleCurriculum" />
 
                 <ImageView
                     android:id="@+id/imageViewCurriculo"
@@ -286,11 +286,11 @@
                     android:layout_marginTop="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textViewAddCurriculo"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewAddCurriculum"
                     tools:srcCompat="@tools:sample/avatars" />
 
                 <ImageButton
-                    android:id="@+id/imageButtonRemoveImage"
+                    android:id="@+id/imageButtonRemoveImageCurriculum"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="52dp"
