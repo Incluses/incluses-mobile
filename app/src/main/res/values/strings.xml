@@ -32,6 +32,9 @@
     <string name="skipText">Pular</string>
     <string name="dateBorn">Selecione sua data de nascimento</string>
     <string name="error_underage">Você deve ter mais de 18 anos para se registrar.</string>
+    <string name="home">Home</string>
+    <string name="course">Curso</string>
+    <string name="chat">Bate-papo</string>
 
     <!--    states-->
     <string-array name="states_array">
