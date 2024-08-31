@@ -88,5 +88,14 @@ public class LoginUser extends AppCompatActivity {
                 binding.cpfEditText.addTextChangedListener(this);
             }
         });
+
+        binding.continueButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginUser.this, Home.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 }

@@ -14,10 +14,12 @@
         tools:targetApi="31">
         <activity
             android:name=".Presentation.AddExperience"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Presentation.Home"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Presentation.UserPerfil"
             android:exported="false"

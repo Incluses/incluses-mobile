@@ -74,7 +74,7 @@ public class RegisterUser2 extends AppCompatActivity {
 
                                 // Verificar se é menor de 18 anos
                                 if (age < 18) {
-                                    binding.dateBornInputLayout.setError(getString(R.string.error_underage)); // Adicione esta string ao seu strings.xml
+                                    binding.dateBornInputLayout.setError(getString(R.string.error_underage));
                                 } else {
                                     binding.dateBornInputLayout.setError(null); // Limpa o erro
                                 }
@@ -100,7 +100,7 @@ public class RegisterUser2 extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 String input = s.toString();
-                String cleanInput = input.replaceAll("[^\\d]", ""); // Remove todos os caracteres que não são números
+                String cleanInput = input.replaceAll("[^\\d]", "");
 
                 StringBuilder formattedCpf = new StringBuilder();
 
@@ -113,7 +113,7 @@ public class RegisterUser2 extends AppCompatActivity {
                     } else {
                         formattedCpf.append(f);
                         j++;
-                        i--; // Não incrementar índice de entrada quando adicionar o formato
+                        i--;
                     }
                 }
 

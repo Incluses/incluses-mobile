@@ -49,13 +49,20 @@ public class UserPerfil extends AppCompatActivity {
         binding = ActivityUserPerfilBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        //button back
+        binding.imageViewLoginUserBackButton.setOnClickListener(v -> {
+            finish(); //finish() to go back to the previous screen
+        });
+
+        binding.textViewLoginUserBack.setOnClickListener(v -> {
+            finish(); //finish() to go back to the previous screen
+        });
+
 //        Glide.with(this).load(R.drawable.fotorenato).circleCrop().into(binding.ImageViewPerfilUser);
 
         binding.textViewButtonAddExperience.setOnClickListener(v -> {
-            Intent intent2 = new Intent(Intent.ACTION_GET_CONTENT);
-            intent2.setType("*/*");
-            intent2.addCategory(Intent.CATEGORY_OPENABLE);
-            filePickerLauncher.launch(intent2);
+            Intent intent = new Intent(UserPerfil.this, AddExperience.class);
+            startActivity(intent);
         });
 
         binding.imageButtonRemoveImageCurriculum.setOnClickListener(new View.OnClickListener() {

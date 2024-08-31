@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/feedMoreOptionsMenu"
+            android:icon="@drawable/ic_enter"
+            android:title="@string/feed"/>
+
+        <item
+            android:id="@+id/positionsAndSalariesMoreOptionsMenu"
+            android:icon="@drawable/ic_enter"
+            android:title="@string/positionsAndSalaries"/>
+
+        <item
+            android:id="@+id/coursesMoreOptionsMenu"
+            android:icon="@drawable/ic_enter"
+            android:title="@string/courses"/>
+
+        <item
+            android:id="@+id/messagesAndInterviewsMoreOptionsMenu"
+            android:icon="@drawable/ic_enter"
+            android:title="@string/messagesAndIterviews"/>
+
+        <item
+            android:id="@+id/perfilMoreOptionsMenu"
+            android:icon="@drawable/ic_enter"
+            android:title="@string/perfil"/>
+
+        <item
+            android:id="@+id/centerOfHelpMoreOptionsMenu"
+            android:icon="@drawable/ic_enter"
+            android:title="@string/centerOfHelp"/>
+
+        <item
+            android:id="@+id/termsAndPrivacyPolicyMoreOptionsMenu"
+            android:icon="@drawable/ic_enter"
+            android:title="@string/termsAndPrivacyPolicy"/>
+
+        <item
+            android:id="@+id/configurationsMoreOptionsMenu"
+            android:icon="@drawable/ic_enter"
+            android:title="@string/config"/>
+
+        <item
+            android:id="@+id/coursesInitializedMoreOptionsMenu"
+            android:icon="@drawable/ic_enter"
+            android:title="@string/coursesInitialized"/>
+    </group>
+</menu>

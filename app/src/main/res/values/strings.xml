@@ -22,6 +22,7 @@
     <string name="createAccount">Crie sua conta no Incluses</string>
     <string name="email">Digite seu e-mail</string>
     <string name="name">Digite seu nome</string>
+    <string name="search">Buscar</string>
     <string name="nameSocial">Nome Social (opcional)</string>
     <string name="pronoun">Digite seu pronome</string>
     <string name="phone_number">Digite seu número</string>
@@ -34,6 +35,16 @@
     <string name="error_underage">Você deve ter mais de 18 anos para se registrar.</string>
     <string name="home">Home</string>
     <string name="course">Curso</string>
+    <string name="feed">Feed</string>
+    <string name="positionsAndSalaries">Cargos e Salários</string>
+    <string name="courses">Cursos</string>
+    <string name="messagesAndIterviews">Mensagens e Entrevistas</string>
+    <string name="perfil">Perfil</string>
+    <string name="centerOfHelp">Central de Ajuda</string>
+    <string name="termsAndPrivacyPolicy">Termos e Políticas</string>
+    <string name="config">Configurações</string>
+    <string name="coursesInitialized">Cursos Inicializados</string>
+    <string name="jobs">Vagas</string>
     <string name="chat">Bate-papo</string>
 
     <!--    states-->
