@@ -2,10 +2,10 @@
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    tools:context=".Presentation.Home"
-    android:id="@+id/drawer_layout">
+    android:layout_height="match_parent"
+    tools:context=".Presentation.Home">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -87,19 +87,29 @@
             android:name="project.interdisciplinary.inclusesapp.FeedFragment"
             android:layout_width="match_parent"
             android:layout_height="600dp"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/topAppBar"
-            app:navGraph = "@navigation/home_navigation"/>
+            app:navGraph="@navigation/home_navigation" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:background="@drawable/rounded_nav_bar_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fragmentContainerView">
+
+            <View
+                android:id="@+id/animated_bar"
+                android:layout_width="60dp"
+                android:layout_height="4dp"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="@dimen/spacing_07"
+                android:layout_marginBottom="0dp"
+                android:background="@color/purple" />
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/bottom_navigation"

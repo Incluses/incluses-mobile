@@ -1,17 +1,12 @@
 package project.interdisciplinary.inclusesapp.Presentation;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-
-import project.interdisciplinary.inclusesapp.R;
 import project.interdisciplinary.inclusesapp.databinding.ActivityLoginUserBinding;
 
 public class LoginUser extends AppCompatActivity {
