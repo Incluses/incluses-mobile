@@ -46,6 +46,13 @@
     <string name="coursesInitialized">Cursos Inicializados</string>
     <string name="jobs">Vagas</string>
     <string name="chat">Bate-papo</string>
+    <string name="skills">
+        <ul>
+            <br><li>Java</li></br>
+            <br><li>Kotlin</li></br>
+            <li>Android Development</li>
+        </ul>
+    </string>
 
     <!--    states-->
     <string-array name="states_array">
@@ -76,5 +83,6 @@
         <item>SP - São Paulo</item>
         <item>SE - Sergipe</item>
         <item>TO - Tocantins</item>
-    </string-array>
+    </string-array><!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

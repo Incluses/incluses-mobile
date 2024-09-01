@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_04"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/style_background_item_vacancie"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/nameVacancieTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_05"
+        android:layout_marginTop="@dimen/spacing_05"
+        android:layout_marginEnd="@dimen/spacing_05"
+        android:text="Nome da Vaga"
+        android:textSize="@dimen/spacing_06"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.034"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/locationVacancieTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/spacing_05"
+        android:text="São Paulo - SP, à 18km"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nameVacancieTextView"/>
+
+    <TextView
+        android:id="@+id/modeVacancieTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_05"
+        android:layout_marginEnd="@dimen/spacing_05"
+        android:paddingStart="@dimen/spacing_03"
+        android:text="Presencial"
+        android:paddingTop="@dimen/spacing_03"
+        android:paddingBottom="@dimen/spacing_03"
+        android:background="@drawable/style_item_vacancie_mode"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/locationVacancieTextView" />
+
+
+    <TextView
+        android:id="@+id/acessVacancieTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="123 acessos"
+        android:textSize="@dimen/spacing_04"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.075"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/modeVacancieTextView" />
+
+    <Button
+        android:id="@+id/subscribeVacancieButton"
+        android:layout_width="wrap_content"
+        style="@style/style_primary_button"
+        android:paddingStart="@dimen/spacing_17"
+        android:paddingTop="@dimen/spacing_02"
+        android:paddingBottom="@dimen/spacing_02"
+        android:paddingEnd="@dimen/spacing_17"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="36dp"
+        android:layout_marginTop="@dimen/spacing_02"
+        android:text="Inscrever-se"
+        app:layout_constraintTop_toTopOf="@id/modeVacancieTextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
