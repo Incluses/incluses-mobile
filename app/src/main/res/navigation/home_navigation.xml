@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/feedFragment"
-        android:name="project.interdisciplinary.inclusesapp.FeedFragment"
+        android:name="project.interdisciplinary.inclusesapp.Presentation.FeedFragment"
         android:label="fragment_feed"
         tools:layout="@layout/fragment_feed" >
         <action
@@ -23,7 +23,7 @@
     </fragment>
     <fragment
         android:id="@+id/vacanciesFragment"
-        android:name="project.interdisciplinary.inclusesapp.VacanciesFragment"
+        android:name="project.interdisciplinary.inclusesapp.Presentation.VacanciesFragment"
         android:label="fragment_vacancies"
         tools:layout="@layout/fragment_vacancies" >
         <action
@@ -38,7 +38,7 @@
     </fragment>
     <fragment
         android:id="@+id/coursesFragment"
-        android:name="project.interdisciplinary.inclusesapp.CoursesFragment"
+        android:name="project.interdisciplinary.inclusesapp.Presentation.CoursesFragment"
         android:label="fragment_courses"
         tools:layout="@layout/fragment_courses" >
         <action
@@ -53,7 +53,7 @@
     </fragment>
     <fragment
         android:id="@+id/chatFragment"
-        android:name="project.interdisciplinary.inclusesapp.ChatFragment"
+        android:name="project.interdisciplinary.inclusesapp.Presentation.ChatFragment"
         android:label="fragment_chat"
         tools:layout="@layout/fragment_chat" >
         <action
@@ -66,4 +66,9 @@
             android:id="@+id/action_chatFragment_to_coursesFragment"
             app:destination="@id/coursesFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/profileSearchFragment"
+        android:name="project.interdisciplinary.inclusesapp.Presentation.ProfileSearchFragment"
+        android:label="fragment_profile_search"
+        tools:layout="@layout/fragment_profile_search" />
 </navigation>

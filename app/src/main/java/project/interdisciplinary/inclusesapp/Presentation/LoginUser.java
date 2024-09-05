@@ -28,6 +28,7 @@ public class LoginUser extends AppCompatActivity {
                 v -> {
                     Intent intent = new Intent(LoginUser.this, Login.class);
                     startActivity(intent);
+                    finish();
                 }
         );
 
@@ -35,6 +36,7 @@ public class LoginUser extends AppCompatActivity {
                 v -> {
                     Intent intent = new Intent(LoginUser.this, Login.class);
                     startActivity(intent);
+                    finish();
                 }
         );
 
@@ -43,6 +45,7 @@ public class LoginUser extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LoginUser.this, RegisterUserActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -72,14 +75,13 @@ public class LoginUser extends AppCompatActivity {
                     } else {
                         formattedCpf.append(f);
                         j++;
-                        i--; // Não incrementar índice de entrada quando adicionar o formato
+                        i--;
                     }
                 }
 
-                // Remover o listener para evitar loop de chamadas recursivas
                 binding.cpfEditText.removeTextChangedListener(this);
                 binding.cpfEditText.setText(formattedCpf.toString());
-                binding.cpfEditText.setSelection(formattedCpf.length());  // Posiciona o cursor no final do texto
+                binding.cpfEditText.setSelection(formattedCpf.length());
                 binding.cpfEditText.addTextChangedListener(this);
             }
         });

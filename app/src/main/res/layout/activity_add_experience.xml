@@ -88,8 +88,18 @@
             android:paddingEnd="16dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <Switch
+        android:id="@+id/switchConfirmFinsh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="128dp"
+        android:layout_marginTop="@dimen/spacing_07"
+        android:text="Já foi finalizada?"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dateStartExperienceInputLayout" />
+
     <Button
-        android:id="@+id/button"
+        android:id="@+id/cancelButton"
         style="@style/style_job_box_button"
         android:layout_width="240dp"
         android:layout_height="wrap_content"
@@ -111,15 +121,7 @@
         android:gravity="center"
         android:text="Salvar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/cancelButton" />
 
-    <Switch
-        android:id="@+id/switchConfirmFinsh"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="128dp"
-        android:layout_marginTop="@dimen/spacing_07"
-        android:text="Já foi finalizada?"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateStartExperienceInputLayout" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -120,6 +120,12 @@ public class AddExperience extends AppCompatActivity {
             }
         });
 
+        binding.cancelButton.setOnClickListener(
+                v -> {
+                    Intent intent = new Intent(AddExperience.this, UserPerfil.class);
+                    startActivity(intent);
+                    finish();
+                });
     }
 
 }

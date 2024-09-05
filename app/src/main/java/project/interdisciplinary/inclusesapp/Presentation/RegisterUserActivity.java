@@ -27,6 +27,7 @@ public class RegisterUserActivity extends AppCompatActivity {
                 v -> {
                     Intent intent = new Intent(RegisterUserActivity.this, Login.class);
                     startActivity(intent);
+                    finish();
                 }
         );
 
@@ -34,6 +35,7 @@ public class RegisterUserActivity extends AppCompatActivity {
                 v -> {
                     Intent intent = new Intent(RegisterUserActivity.this, Login.class);
                     startActivity(intent);
+                    finish();
                 }
         );
 
@@ -42,6 +44,7 @@ public class RegisterUserActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(RegisterUserActivity.this, RegisterUser2.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -75,7 +78,7 @@ public class RegisterUserActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 String input = s.toString();
-                String cleanInput = input.replaceAll("[^\\d.]", ""); // Remove todos os caracteres que não são números
+                String cleanInput = input.replaceAll("[^\\d.]", "");
 
                 StringBuilder formattedPhone = new StringBuilder();
 
@@ -105,6 +108,7 @@ public class RegisterUserActivity extends AppCompatActivity {
                 v -> {
                     Intent intent = new Intent(RegisterUserActivity.this, LoginUser.class);
                     startActivity(intent);
+                    finish();
                 }
         );
     }

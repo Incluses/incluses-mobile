@@ -33,6 +33,7 @@ public class JobsOfInterest extends AppCompatActivity {
                 v -> {
                     Intent intent = new Intent(JobsOfInterest.this, RegisterUserActivity.class);
                     startActivity(intent);
+                    finish();
                 }
         );
 
@@ -40,6 +41,7 @@ public class JobsOfInterest extends AppCompatActivity {
                 v -> {
                     Intent intent = new Intent(JobsOfInterest.this, RegisterUserActivity.class);
                     startActivity(intent);
+                    finish();
                 }
         );
 
@@ -47,6 +49,7 @@ public class JobsOfInterest extends AppCompatActivity {
                 v -> {
                     Intent intent = new Intent(JobsOfInterest.this, UserPerfil.class);
                     startActivity(intent);
+                    finish();
                 }
         );
 

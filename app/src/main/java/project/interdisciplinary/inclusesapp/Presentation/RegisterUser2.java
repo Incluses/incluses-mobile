@@ -38,6 +38,7 @@ public class RegisterUser2 extends AppCompatActivity {
                 v -> {
                     Intent intent = new Intent(RegisterUser2.this, RegisterUserActivity.class);
                     startActivity(intent);
+                    finish();
                 }
         );
 
@@ -45,6 +46,7 @@ public class RegisterUser2 extends AppCompatActivity {
                 v -> {
                     Intent intent = new Intent(RegisterUser2.this, RegisterUserActivity.class);
                     startActivity(intent);
+                    finish();
                 }
         );
 
@@ -58,7 +60,6 @@ public class RegisterUser2 extends AppCompatActivity {
                 int month = calendar.get(Calendar.MONTH);
                 int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
 
-                // Define o listener diretamente no construtor do DatePickerDialog
                 DatePickerDialog dialog = new DatePickerDialog(
                         RegisterUser2.this, R.style.CustomDatePickerDialog,
                         new DatePickerDialog.OnDateSetListener() {
@@ -67,16 +68,14 @@ public class RegisterUser2 extends AppCompatActivity {
                                 String selectedDate = String.format("%02d/%02d/%04d", dayOfMonth, month + 1, year);
                                 binding.dateBornEditText.setText(selectedDate);
 
-                                // Calcular a idade do usuário
                                 Calendar dob = Calendar.getInstance();
                                 dob.set(year, month, dayOfMonth);
                                 int age = calculateAge(dob);
 
-                                // Verificar se é menor de 18 anos
                                 if (age < 18) {
                                     binding.dateBornInputLayout.setError(getString(R.string.error_underage));
                                 } else {
-                                    binding.dateBornInputLayout.setError(null); // Limpa o erro
+                                    binding.dateBornInputLayout.setError(null);
                                 }
                             }
                         },
@@ -117,10 +116,9 @@ public class RegisterUser2 extends AppCompatActivity {
                     }
                 }
 
-                // Remover o listener para evitar loop de chamadas recursivas
                 binding.numRegisterEditText.removeTextChangedListener(this);
                 binding.numRegisterEditText.setText(formattedCpf.toString());
-                binding.numRegisterEditText.setSelection(formattedCpf.length());  // Posiciona o cursor no final do texto
+                binding.numRegisterEditText.setSelection(formattedCpf.length());
                 binding.numRegisterEditText.addTextChangedListener(this);
             }
         });
@@ -130,6 +128,7 @@ public class RegisterUser2 extends AppCompatActivity {
                 v -> {
                     Intent intent = new Intent(RegisterUser2.this, JobsOfInterest.class);
                     startActivity(intent);
+                    finish();
                 }
         );
 
@@ -138,6 +137,7 @@ public class RegisterUser2 extends AppCompatActivity {
                 v -> {
                     Intent intent = new Intent(RegisterUser2.this, LoginUser.class);
                     startActivity(intent);
+                    finish();
                 }
         );
     }

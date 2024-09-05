@@ -7,23 +7,21 @@ import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Toast;
+
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import project.interdisciplinary.inclusesapp.ChatFragment;
-import project.interdisciplinary.inclusesapp.CoursesFragment;
-import project.interdisciplinary.inclusesapp.FeedFragment;
-import project.interdisciplinary.inclusesapp.Presentation.UserPerfil;
+
 import project.interdisciplinary.inclusesapp.R;
-import project.interdisciplinary.inclusesapp.VacanciesFragment;
-import project.interdisciplinary.inclusesapp.databinding.ActivityHomeBinding;
 
 public class Home extends AppCompatActivity {
 
@@ -82,12 +80,23 @@ public class Home extends AppCompatActivity {
             }
         });
 
+        binding.nameEditText.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    replaceFragment(new ProfileSearchFragment());
+                }
+                return false;
+            }
+        });
+
+
         // Set up the BottomNavigationView to switch fragments
         binding.bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment selectedFragment = null;
-                int selectedIndex = 0; // Índice padrão para o primeiro item
+                int selectedIndex = 0;
 
                 if (item.getItemId() == R.id.itemHome) {
                     selectedFragment = new FeedFragment();
@@ -98,7 +107,7 @@ public class Home extends AppCompatActivity {
                 } else if (item.getItemId() == R.id.itemCourses) {
                     selectedFragment = new CoursesFragment();
                     selectedIndex = 2;
-                }else if (item.getItemId() == R.id.itemChat) {
+                } else if (item.getItemId() == R.id.itemChat) {
                     selectedFragment = new ChatFragment();
                     selectedIndex = 3;
                 }
@@ -130,7 +139,7 @@ public class Home extends AppCompatActivity {
 
         bar.animate()
                 .x(newX)
-                .setDuration(300) // Duração da animação em milissegundos
+                .setDuration(300)
                 .start();
     }
 
