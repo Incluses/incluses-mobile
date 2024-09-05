@@ -84,7 +84,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentContainerView"
-            android:name="project.interdisciplinary.inclusesapp.Presentation.FeedFragment"
+            android:name="project.interdisciplinary.inclusesapp.Presentation.Fragments.FeedFragment"
             android:layout_width="match_parent"
             android:layout_height="600dp"
             app:layout_constraintEnd_toEndOf="parent"

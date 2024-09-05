@@ -1,4 +1,4 @@
-package project.interdisciplinary.inclusesapp.Presentation;
+package project.interdisciplinary.inclusesapp.Presentation.Fragments;
 
 import android.os.Bundle;
 

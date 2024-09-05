@@ -21,12 +21,22 @@ import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import project.interdisciplinary.inclusesapp.Presentation.Fragments.ChatFragment;
+import project.interdisciplinary.inclusesapp.Presentation.Fragments.CoursesFragment;
+import project.interdisciplinary.inclusesapp.Presentation.Fragments.FeedFragment;
+import project.interdisciplinary.inclusesapp.Presentation.Fragments.ProfileSearchFragment;
+import project.interdisciplinary.inclusesapp.Presentation.Fragments.VacanciesFragment;
 import project.interdisciplinary.inclusesapp.R;
+import project.interdisciplinary.inclusesapp.databinding.ActivityHomeBinding;
 
 public class Home extends AppCompatActivity {
 
     private ActivityHomeBinding binding;
     private View rootView;
+    private Fragment getCurrentFragment() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        return fragmentManager.findFragmentById(R.id.fragmentContainerView);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,21 +74,56 @@ public class Home extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
+                Fragment selectedFragment = null;
+                int selectedIndex = 0;
 
                 if (id == R.id.feedMoreOptionsMenu) {
-                    Toast.makeText(Home.this, "Você já está no Feed", Toast.LENGTH_SHORT).show();
+                    if (!(getCurrentFragment() instanceof FeedFragment)) {
+                        selectedFragment = new FeedFragment();
+                        selectedIndex = 0;
+                        updateBottomNavigationSelection(R.id.itemHome);
+                    } else {
+                        Toast.makeText(Home.this, "Você já está no Feed", Toast.LENGTH_SHORT).show();
+                    }
                 } else if (id == R.id.perfilMoreOptionsMenu) {
                     startActivity(new Intent(Home.this, UserPerfil.class));
+                } else if (id == R.id.positionsAndSalariesMoreOptionsMenu) {
+                    if (!(getCurrentFragment() instanceof VacanciesFragment)) {
+                        selectedFragment = new VacanciesFragment();
+                        selectedIndex = 1;
+                        updateBottomNavigationSelection(R.id.itemVacancies);
+                    } else {
+                        Toast.makeText(Home.this, "Você já está em Vagas", Toast.LENGTH_SHORT).show();
+                    }
+                } else if (id == R.id.coursesMoreOptionsMenu) {
+                    if (!(getCurrentFragment() instanceof CoursesFragment)) {
+                        selectedFragment = new CoursesFragment();
+                        selectedIndex = 2;
+                        updateBottomNavigationSelection(R.id.itemCourses); // Sincronize com o BottomNavigation
+                    } else {
+                        Toast.makeText(Home.this, "Você já está em Cursos", Toast.LENGTH_SHORT).show();
+                    }
+                } else if (id == R.id.messagesAndInterviewsMoreOptionsMenu) {
+                    if (!(getCurrentFragment() instanceof ChatFragment)) {
+                        selectedFragment = new ChatFragment();
+                        selectedIndex = 3;
+                        updateBottomNavigationSelection(R.id.itemChat); // Sincronize com o BottomNavigation
+                    } else {
+                        Toast.makeText(Home.this, "Você já está no Bate-papo", Toast.LENGTH_SHORT).show();
+                    }
                 }
 
-                // Clear the selection
-                binding.navView.setCheckedItem(R.id.feedMoreOptionsMenu);
+                if (selectedFragment != null) {
+                    replaceFragment(selectedFragment);
+                    updateNavigationViewSelection(id);
+                    moveBar(selectedIndex);
+                }
 
-                // Close the drawer when the item is clicked
                 binding.drawerLayout.closeDrawer(GravityCompat.END);
                 return true;
             }
         });
+
 
         binding.nameEditText.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -152,6 +197,14 @@ public class Home extends AppCompatActivity {
 
     private void updateNavigationViewSelection(int itemId) {
         Menu menu = binding.navView.getMenu();
+        MenuItem item = menu.findItem(itemId);
+        if (item != null) {
+            item.setChecked(true);
+        }
+    }
+
+    private void updateBottomNavigationSelection(int itemId) {
+        Menu menu = binding.bottomNavigation.getMenu();
         MenuItem item = menu.findItem(itemId);
         if (item != null) {
             item.setChecked(true);
