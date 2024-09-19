@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Presentation.CreateCourseStep2">
+
+    <LinearLayout
+        android:id="@+id/stepsbuttonsCreateMyCourse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/spacing_03"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/stepOneCreateMyCourse2"
+            style="@style/style_step_alternative"
+            android:layout_width="55dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
+            android:text="1"
+            android:textSize="@dimen/spacing_06" />
+
+        <View
+            android:layout_width="70dp"
+            android:layout_height="2dp"
+            android:layout_marginStart="@dimen/spacing_03"
+            android:layout_marginTop="@dimen/spacing_08"
+            android:background="@color/gray" />
+
+        <Button
+            android:id="@+id/stepsTwoCreateMyCourse2"
+            style="@style/style_step"
+            android:layout_width="55dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_03"
+            android:layout_marginEnd="100dp"
+            android:text="2"
+            android:textSize="@dimen/spacing_06" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/informationsCreateMyCourse2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_08"
+        android:text="Dê seu primeiro passo!"
+        android:textColor="@color/dark_blue"
+        android:textSize="@dimen/spacing_06"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/stepsbuttonsCreateMyCourse" />
+
+    <TextView
+        android:id="@+id/descriptionInformationsCreateMyCourse2"
+        android:layout_width="342dp"
+        android:layout_height="67dp"
+        android:layout_marginStart="@dimen/spacing_08"
+        android:layout_marginTop="@dimen/spacing_05"
+        android:text="Esta etapa é muito importante para conduzir o curso de maneira adequada"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/spacing_05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/informationsCreateMyCourse2" />
+
+
+    <LinearLayout
+        android:id="@+id/inputsCreateMyCourse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_05"
+        android:layout_margin="@dimen/spacing_03"
+        android:background="@drawable/style_box_inputs"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/descriptionInformationsCreateMyCourse2">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/titleMyCourseInputLayout"
+            style="@style/style_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_04"
+            android:layout_marginBottom="@dimen/spacing_04"
+            android:hint="Titulo"
+            app:counterMaxLength="200"
+            app:boxStrokeErrorColor="@color/red_error"
+            app:boxStrokeWidth="@dimen/spacing_01"
+            app:endIconMode="clear_text">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/titleMyCourseEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:paddingStart="@dimen/spacing_05"
+                android:paddingEnd="@dimen/spacing_05" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="@drawable/style_box_inputs">
+
+            <TextView
+                android:layout_width="285dp"
+                android:layout_height="34dp"
+                android:text="+ Adicionar material em anexo"
+                android:textSize="@dimen/spacing_06"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="O Arquivo escolhido deve estar no formato PPT ou PDF e ter no máximo 600 MB de tamanho."/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textAuxiliarCreateMyCourse2"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="Se você criar o curso  sem nehuma  informação, essa etapa será pulada."
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/inputsCreateMyCourse"/>
+
+    <Button
+        android:id="@+id/nextCreateMyCourse2Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/style_primary_button"
+        android:text="Avançar"
+        android:layout_marginTop="@dimen/spacing_02"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textAuxiliarCreateMyCourse2"
+        android:textSize="@dimen/spacing_05"
+        android:paddingStart="@dimen/spacing_14"
+        android:paddingEnd="@dimen/spacing_14"/>
+
+    <Button
+        android:id="@+id/cancelCreateMyCourse2Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/style_secondary_button"
+        android:text="Cancelar"
+        android:layout_marginTop="@dimen/spacing_02"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nextCreateMyCourse2Button"
+        android:textSize="@dimen/spacing_05"
+        android:paddingStart="@dimen/spacing_14"
+        android:paddingEnd="@dimen/spacing_14"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

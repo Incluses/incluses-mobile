@@ -13,7 +13,7 @@
         android:id="@+id/itemCourses"
         android:enabled="true"
         android:icon="@drawable/lamp"
-        android:title="@string/course"/>
+        android:title="@string/courses"/>
     <item
         android:id="@+id/itemChat"
         android:enabled="true"

@@ -52,5 +52,25 @@
         <item name="colorAccent">@color/blue</item>
     </style>
 
+    <style name="style_step" parent="Widget.Material3.Button">
+        <item name="android:paddingLeft">@dimen/spacing_04</item>
+        <item name="android:paddingRight">@dimen/spacing_04</item>
+        <item name="android:paddingBottom">@dimen/spacing_04</item>
+        <item name="android:textSize">@dimen/text_size_button_spacing</item>
+        <item name="android:buttonCornerRadius">@dimen/spacing_16</item>
+        <item name="backgroundTint">@color/dark_blue</item>
+    </style>
+
+    <style name="style_step_alternative" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:paddingLeft">@dimen/spacing_04</item>
+        <item name="android:paddingRight">@dimen/spacing_04</item>
+        <item name="android:paddingBottom">@dimen/spacing_04</item>
+        <item name="android:textSize">@dimen/text_size_button_spacing</item>
+        <item name="android:buttonCornerRadius">@dimen/spacing_16</item>
+        <item name="strokeColor">@color/dark_blue</item>
+        <item name="android:textColor">@color/dark_blue</item>
+        <item name="strokeWidth">@dimen/spacing_01</item>
+    </style>
+
     <style name="Theme.InclusesApp" parent="Base.Theme.InclusesApp" />
 </resources>

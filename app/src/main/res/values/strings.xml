@@ -38,7 +38,7 @@
     <string name="feed">Feed</string>
     <string name="positionsAndSalaries">Cargos e Salários</string>
     <string name="courses">Cursos</string>
-    <string name="messagesAndIterviews">Mensagens e Entrevistas</string>
+    <string name="messages">Mensagens</string>
     <string name="perfil">Perfil</string>
     <string name="centerOfHelp">Central de Ajuda</string>
     <string name="termsAndPrivacyPolicy">Termos e Políticas</string>
@@ -47,11 +47,7 @@
     <string name="jobs">Vagas</string>
     <string name="chat">Bate-papo</string>
     <string name="skills">
-        <ul>
-            <br><li>Java</li></br>
-            <br><li>Kotlin</li></br>
-            <li>Android Development</li>
-        </ul>
+        Java; Kotlin; Android Development
     </string>
 
     <!--    states-->

@@ -43,13 +43,13 @@
         app:layout_constraintTop_toBottomOf="@id/namePerfilPostTextView"/>
 
     <TextView
-        android:id="@+id/timePerfilPostTextView"
+        android:id="@+id/dataPerfilPostTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_01"
         android:layout_marginStart="@dimen/spacing_04"
         android:layout_marginBottom="@dimen/spacing_02"
-        android:text="4h atrás"
+        android:text="11/09/2024"
         android:textSize="@dimen/spacing_04"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@id/descriptionPerfilPostTextView"
@@ -63,7 +63,7 @@
         android:layout_marginTop="@dimen/spacing_02"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/timePerfilPostTextView" />
+        app:layout_constraintTop_toBottomOf="@id/dataPerfilPostTextView" />
 
     <ImageView
         android:id="@+id/imagePostImageView"

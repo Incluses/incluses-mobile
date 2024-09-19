@@ -12,7 +12,7 @@
         <item
             android:id="@+id/positionsAndSalariesMoreOptionsMenu"
             android:icon="@drawable/ic_enter"
-            android:title="@string/positionsAndSalaries"/>
+            android:title="@string/jobs"/>
 
         <item
             android:id="@+id/coursesMoreOptionsMenu"
@@ -22,7 +22,7 @@
         <item
             android:id="@+id/messagesAndInterviewsMoreOptionsMenu"
             android:icon="@drawable/ic_enter"
-            android:title="@string/messagesAndIterviews"/>
+            android:title="@string/messages"/>
 
         <item
             android:id="@+id/perfilMoreOptionsMenu"

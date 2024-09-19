@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_04"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/style_background_item_vacancie">
+
+        <TextView
+            android:id="@+id/nameMyCourseTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_05"
+            android:layout_marginTop="@dimen/spacing_05"
+            android:layout_marginEnd="@dimen/spacing_05"
+            android:text="Nome do Curso"
+            android:maxLines="2"
+            android:textAlignment="center"
+            android:textSize="@dimen/spacing_06"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/acessMyCourseTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/spacing_05"
+            android:textSize="@dimen/spacing_05"
+            android:text="Acessos: 69"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/nameMyCourseTextView"/>
+
+        <TextView
+            android:id="@+id/pontuationMyCourseTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/spacing_05"
+            android:textSize="@dimen/spacing_04"
+            android:text="- Avaliação"
+            android:layout_marginTop="@dimen/spacing_01"
+            android:maxLines="3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/acessMyCourseTextView"/>
+
+        <View
+            android:id="@+id/barView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacing_09"
+            android:layout_marginStart="@dimen/spacing_05"
+            android:layout_marginEnd="@dimen/spacing_05"
+            android:layout_marginBottom="@dimen/spacing_03"
+            android:background="@drawable/style_item_vacancie_mode"
+            android:paddingStart="@dimen/spacing_03"
+            android:paddingTop="@dimen/spacing_03"
+            android:paddingBottom="@dimen/spacing_03"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pontuationMyCourseTextView" />
+
+        <TextView
+            android:id="@+id/numberRatingMyCourseTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4.1"
+            android:layout_marginStart="@dimen/spacing_03"
+            app:layout_constraintTop_toBottomOf="@id/acessMyCourseTextView"
+            app:layout_constraintStart_toEndOf="@+id/pontuationMyCourseTextView"
+
+            />
+
+
+        <RatingBar
+            android:id="@+id/courseRatingBar"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginStart="@dimen/spacing_01"
+            android:progressTint="#F6B100"
+            android:rating="4.1"
+            app:layout_constraintStart_toEndOf="@+id/numberRatingMyCourseTextView"
+            app:layout_constraintTop_toBottomOf="@+id/acessMyCourseTextView" />
+
+        <Button
+            android:id="@+id/editMyCourseButton"
+            android:layout_width="wrap_content"
+            style="@style/style_primary_button"
+            android:paddingStart="@dimen/spacing_14"
+            android:paddingTop="@dimen/spacing_02"
+            android:paddingBottom="@dimen/spacing_02"
+            android:paddingEnd="@dimen/spacing_14"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_02"
+            android:text="Detalhes/Editar"
+            app:layout_constraintTop_toTopOf="@id/barView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

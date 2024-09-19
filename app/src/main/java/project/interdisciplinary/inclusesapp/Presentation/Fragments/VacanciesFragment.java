@@ -9,13 +9,18 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import project.interdisciplinary.inclusesapp.R;
+import project.interdisciplinary.inclusesapp.databinding.FragmentChatBinding;
+import project.interdisciplinary.inclusesapp.databinding.FragmentVacanciesBinding;
 
 public class VacanciesFragment extends Fragment {
+
+    private FragmentVacanciesBinding binding;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        binding = FragmentVacanciesBinding.inflate(inflater, container, false);
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_vacancies, container, false);
+        View view = binding.getRoot();
 
         return view;
     }
