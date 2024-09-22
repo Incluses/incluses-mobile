@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_04"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/style_background_item_vacancie">
+
+        <TextView
+            android:id="@+id/nameMyVacancieTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_06"
+            android:layout_marginTop="@dimen/spacing_05"
+            android:text="Técnico em TI"
+            android:textColor="@color/black"
+            android:textSize="@dimen/spacing_06"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnCloseMyVacancie"
+            style="@style/style_tertiary_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_04"
+            android:paddingTop="@dimen/spacing_02"
+            android:paddingBottom="@dimen/spacing_02"
+            android:text="Encerrar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.85"
+            app:layout_constraintStart_toEndOf="@id/nameMyVacancieTextView"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/acessMyVacancieTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/spacing_05"
+            android:textSize="@dimen/spacing_05"
+            android:text="São Paulo-SP, à 33km"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/nameMyVacancieTextView" />
+
+        <TextView
+            android:id="@+id/nameEnterpriseMyVacancieTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_01"
+            android:layout_marginEnd="@dimen/spacing_05"
+            android:maxLines="3"
+            android:text="Empresa confidencial"
+            android:textSize="@dimen/spacing_04"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.174"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/acessMyVacancieTextView" />
+
+        <View
+            android:id="@+id/barView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacing_09"
+            android:layout_marginStart="@dimen/spacing_05"
+            android:layout_marginEnd="@dimen/spacing_05"
+            android:layout_marginBottom="@dimen/spacing_03"
+            android:background="@drawable/style_item_vacancie_mode"
+            android:paddingStart="@dimen/spacing_03"
+            android:paddingTop="@dimen/spacing_03"
+            android:paddingBottom="@dimen/spacing_03"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/nameEnterpriseMyVacancieTextView" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Home Office"
+            app:layout_constraintStart_toStartOf="@id/barView"
+            app:layout_constraintTop_toTopOf="@id/barView"
+            android:layout_marginStart="@dimen/spacing_03"
+            android:layout_marginTop="@dimen/spacing_02" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="54 acessos"
+            app:layout_constraintStart_toStartOf="@id/barView"
+            app:layout_constraintTop_toBottomOf="@id/barView"/>
+
+        <Button
+            android:id="@+id/editMyVacancieButton"
+            style="@style/style_primary_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_02"
+            android:paddingStart="@dimen/spacing_14"
+            android:paddingTop="@dimen/spacing_02"
+            android:paddingEnd="@dimen/spacing_14"
+            android:paddingBottom="@dimen/spacing_02"
+            android:text="Editar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.825"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/barView"
+            app:layout_constraintVertical_bias="0.25" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

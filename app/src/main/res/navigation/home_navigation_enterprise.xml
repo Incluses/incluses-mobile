@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_navigation_enterprise"
+    app:startDestination="@id/feedEnterpriseFragment">
+    <fragment
+        android:id="@+id/feedEnterpriseFragment"
+        android:name="project.interdisciplinary.inclusesapp.Presentation.Enterprise.Fragment.FeedEnterpriseFragment"
+        android:label="fragment_feed_enterprise"
+        tools:layout="@layout/fragment_feed_enterprise" >
+        <action
+            android:id="@+id/action_feedEnterpriseFragment_to_vacanciesEnterpriseFragment"
+            app:destination="@id/vacanciesEnterpriseFragment" />
+        <action
+            android:id="@+id/action_feedEnterpriseFragment_to_chatFragment2"
+            app:destination="@id/chatFragment2" />
+        <action
+            android:id="@+id/action_feedEnterpriseFragment_to_coursesEnterpriseFragment"
+            app:destination="@id/coursesEnterpriseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/vacanciesEnterpriseFragment"
+        android:name="project.interdisciplinary.inclusesapp.Presentation.Enterprise.Fragment.VacanciesEnterpriseFragment"
+        android:label="fragment_vacancies_enterprise"
+        tools:layout="@layout/fragment_vacancies_enterprise" >
+        <action
+            android:id="@+id/action_vacanciesEnterpriseFragment_to_feedFragment2"
+            app:destination="@id/feedEnterpriseFragment" />
+        <action
+            android:id="@+id/action_vacanciesEnterpriseFragment_to_coursesEnterpriseFragment"
+            app:destination="@id/coursesEnterpriseFragment" />
+        <action
+            android:id="@+id/action_vacanciesEnterpriseFragment_to_chatFragment2"
+            app:destination="@id/chatFragment2" />
+        <action
+            android:id="@+id/action_vacanciesEnterpriseFragment_to_createVacancieEnterpriseFragment"
+            app:destination="@id/createVacancieEnterpriseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/coursesEnterpriseFragment"
+        android:name="project.interdisciplinary.inclusesapp.Presentation.Enterprise.Fragment.CoursesEnterpriseFragment"
+        android:label="fragment_courses_enterprise"
+        tools:layout="@layout/fragment_courses_enterprise" >
+        <action
+            android:id="@+id/action_coursesEnterpriseFragment_to_feedFragment2"
+            app:destination="@id/feedEnterpriseFragment" />
+        <action
+            android:id="@+id/action_coursesEnterpriseFragment_to_vacanciesEnterpriseFragment"
+            app:destination="@id/vacanciesEnterpriseFragment" />
+        <action
+            android:id="@+id/action_coursesEnterpriseFragment_to_chatFragment2"
+            app:destination="@id/chatFragment2" />
+        <action
+            android:id="@+id/action_coursesEnterpriseFragment_to_createCourseEnterpriseFragment"
+            app:destination="@id/createCourseEnterpriseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatFragment2"
+        android:name="project.interdisciplinary.inclusesapp.Presentation.Fragments.ChatFragment"
+        android:label="fragment_chat"
+        tools:layout="@layout/fragment_chat" >
+        <action
+            android:id="@+id/action_chatFragment2_to_feedFragment2"
+            app:destination="@id/feedEnterpriseFragment" />
+        <action
+            android:id="@+id/action_chatFragment2_to_coursesEnterpriseFragment"
+            app:destination="@id/coursesEnterpriseFragment" />
+        <action
+            android:id="@+id/action_chatFragment2_to_vacanciesEnterpriseFragment"
+            app:destination="@id/vacanciesEnterpriseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createCourseEnterpriseFragment"
+        android:name="project.interdisciplinary.inclusesapp.Presentation.Enterprise.Fragment.CreateCourseEnterpriseFragment"
+        android:label="fragment_create_course_enterprise"
+        tools:layout="@layout/fragment_create_course_enterprise" >
+        <action
+            android:id="@+id/action_createCourseEnterpriseFragment_to_coursesEnterpriseFragment"
+            app:destination="@id/coursesEnterpriseFragment" />
+        <action
+            android:id="@+id/action_createCourseEnterpriseFragment_to_detailsCourseFragment"
+            app:destination="@id/detailsCourseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createVacancieEnterpriseFragment"
+        android:name="project.interdisciplinary.inclusesapp.Presentation.Enterprise.Fragment.CreateVacancieEnterpriseFragment"
+        android:label="fragment_create_vacancie_enterprise"
+        tools:layout="@layout/fragment_create_vacancie_enterprise" >
+        <action
+            android:id="@+id/action_createVacancieEnterpriseFragment_to_vacanciesEnterpriseFragment"
+            app:destination="@id/vacanciesEnterpriseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsCourseFragment"
+        android:name="project.interdisciplinary.inclusesapp.Presentation.Fragments.DetailsCourseFragment"
+        android:label="fragment_details_course"
+        tools:layout="@layout/fragment_details_course" >
+        <action
+            android:id="@+id/action_detailsCourseFragment_to_createCourseEnterpriseFragment"
+            app:destination="@id/createCourseEnterpriseFragment" />
+    </fragment>
+
+</navigation>

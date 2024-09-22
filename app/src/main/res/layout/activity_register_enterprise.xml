@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Presentation.Enterprise.RegisterEnterprise">
+
+    <ImageView
+        android:id="@+id/imageViewLoginEnterpriseBackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_05"
+        android:layout_marginTop="@dimen/spacing_06"
+        android:contentDescription="@string/back"
+        android:src="@drawable/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewLoginEnterpriseBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_05"
+        android:text="@string/back_strong"
+        android:textSize="@dimen/spacing_06"
+        app:layout_constraintStart_toEndOf="@id/imageViewLoginEnterpriseBackButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Text "Incluses" -->
+    <ImageView
+        android:id="@+id/logoImageView"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toEndOf="@id/textViewLoginEnterpriseBack"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageViewLoginEnterpriseNameIncluses"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/incluses_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/logoImageView" />
+
+    <TextView
+        android:id="@+id/textViewCreateAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_09"
+        android:text="@string/createAccount"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_button_spacing"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageViewLoginEnterpriseNameIncluses" />
+
+    <!-- ScrollView começando aqui -->
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/spacing_05"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewCreateAccount">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/spacing_05">
+
+            <!-- field of name social -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/corporateReasonInputLayout"
+                style="@style/style_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_05"
+                android:hint="@string/corporateReason"
+                app:boxStrokeErrorColor="@color/red_error"
+                app:boxStrokeWidth="@dimen/spacing_01"
+                app:endIconMode="clear_text"
+                app:hintTextColor="@color/gray">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/corporateReasonEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:paddingStart="@dimen/spacing_05"
+                    android:paddingEnd="@dimen/spacing_05" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- field of sector -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/sectorInputLayout"
+                style="@style/style_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_05"
+                android:hint="@string/sector"
+                app:boxStrokeErrorColor="@color/red_error"
+                app:boxStrokeWidth="@dimen/spacing_01"
+                app:endIconMode="clear_text"
+                app:hintTextColor="@color/gray">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/sectorEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:paddingStart="@dimen/spacing_05"
+                    android:paddingEnd="@dimen/spacing_05" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- field of numLoc -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/numLocInputLayout"
+                style="@style/style_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_05"
+                android:hint="Número"
+                app:boxStrokeErrorColor="@color/red_error"
+                app:boxStrokeWidth="@dimen/spacing_01"
+                app:endIconMode="clear_text"
+                app:hintTextColor="@color/gray">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/numLocEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:paddingStart="@dimen/spacing_05"
+                    android:paddingEnd="@dimen/spacing_05" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <!-- Campo para o CEP -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/cepInputLayout"
+                style="@style/style_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_05"
+                android:hint="@string/cepHint"
+                app:boxStrokeErrorColor="@color/red_error"
+                app:boxStrokeWidth="@dimen/spacing_01"
+                app:counterEnabled="true"
+                app:counterMaxLength="9"
+                app:endIconDrawable="@drawable/ic_loc"
+                app:endIconMode="custom">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/cepEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <!-- Button Continue -->
+            <Button
+                android:id="@+id/continueButton"
+                style="@style/style_primary_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_07"
+                android:text="@string/finishRegister"
+                android:textColor="@android:color/white" />
+
+            <!-- Text "Já possui uma conta?" -->
+            <TextView
+                android:id="@+id/noAccountTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/spacing_04"
+                android:text="@string/hadAccount"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_button_spacing" />
+
+            <!-- Text "Entrar" -->
+            <TextView
+                android:id="@+id/enterTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/enter"
+                android:textColor="@color/light_blue"
+                android:textSize="@dimen/spacing_05" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

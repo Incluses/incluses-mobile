@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Incluses</string>
     <string name="login">Login</string>
     <string name="register">Cadastrar</string>
@@ -12,11 +12,12 @@
     <string name="passwordConfirmed">Confirmar Senha</string>
     <string name="password">Senha</string>
     <string name="numRegister">CPF</string>
-    <string name="numRegisterHint">Digite seu CPF</string>
+    <string name="numRegisterHint">Digite seu CPF/CNPJ</string>
+    <string name="cepHint">Digite seu CEP</string>
     <string name="cityHint">Digite o nome da cidade</string>
     <string name="streetHint">Digite o nome da rua</string>
     <string name="addressNumHint">Digite o número do endereço</string>
-    <string name="stateHint">Selecione o estado onde mora</string>
+    <string name="stateHint">Selecione a sua situação</string>
     <string name="notAccount">Não possui uma conta?</string>
     <string name="hadAccount">Já possui uma conta?</string>
     <string name="createAccount">Crie sua conta no Incluses</string>
@@ -24,12 +25,15 @@
     <string name="name">Digite seu nome</string>
     <string name="search">Buscar</string>
     <string name="nameSocial">Nome Social (opcional)</string>
+    <string name="corporateReason">Razão Social</string>
+    <string name="sector">Setor</string>
     <string name="pronoun">Digite seu pronome</string>
     <string name="phone_number">Digite seu número</string>
     <string name="email_complete">.com</string>
     <string name="passwordHelperText">A senha deve possuir no mínimo 8 caracteres!</string>
     <string name="passwordConfirmedHelperText">Confirme sua senha!</string>
     <string name="continueText">Continuar</string>
+    <string name="finishRegister">Finalizar Cadastro</string>
     <string name="skipText">Pular</string>
     <string name="dateBorn">Selecione sua data de nascimento</string>
     <string name="error_underage">Você deve ter mais de 18 anos para se registrar.</string>
@@ -50,35 +54,18 @@
         Java; Kotlin; Android Development
     </string>
 
-    <!--    states-->
+
     <string-array name="states_array">
-        <item>AC - Acre</item>
-        <item>AL - Alagoas</item>
-        <item>AP - Amapá</item>
-        <item>AM - Amazonas</item>
-        <item>BA - Bahia</item>
-        <item>CE - Ceará</item>
-        <item>DF - Distrito Federal</item>
-        <item>ES - Espírito Santo</item>
-        <item>GO - Goiás</item>
-        <item>MA - Maranhão</item>
-        <item>MT - Mato Grosso</item>
-        <item>MS - Mato Grosso do Sul</item>
-        <item>MG - Minas Gerais</item>
-        <item>PA - Pará</item>
-        <item>PB - Paraíba</item>
-        <item>PR - Paraná</item>
-        <item>PE - Pernambuco</item>
-        <item>PI - Piauí</item>
-        <item>RJ - Rio de Janeiro</item>
-        <item>RN - Rio Grande do Norte</item>
-        <item>RS - Rio Grande do Sul</item>
-        <item>RO - Rondônia</item>
-        <item>RR - Roraima</item>
-        <item>SC - Santa Catarina</item>
-        <item>SP - São Paulo</item>
-        <item>SE - Sergipe</item>
-        <item>TO - Tocantins</item>
-    </string-array><!-- TODO: Remove or change this placeholder text -->
+        <item>Desempregado</item>
+        <item>Empregado</item>
+        <item>Estudante</item>
+    </string-array>
+
+    <string-array name="type_vacancie_array">
+        <item>Presencial</item>
+        <item>Home Office</item>
+        <item>Híbrido</item>
+    </string-array>
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

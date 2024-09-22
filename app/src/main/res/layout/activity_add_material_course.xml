@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Presentation.AddMaterialCourse">
+
+    <!-- Parte fixa (fora do ScrollView) -->
+    <TextView
+        android:id="@+id/informationsEditMaterialCourse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_08"
+        android:layout_marginTop="@dimen/spacing_08"
+        android:text="Adicionar Material"
+        android:textColor="@color/dark_blue"
+        android:textSize="@dimen/spacing_06"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/descriptionInformationsEditMaterialCourse"
+        android:layout_width="342dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_08"
+        android:layout_marginTop="@dimen/spacing_05"
+        android:text="Esta parte é muito importante para conduzir seu curso de maneira adequada."
+        android:textColor="@color/gray"
+        android:textSize="@dimen/spacing_05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/informationsEditMaterialCourse" />
+
+    <!-- ScrollView para a parte rolável -->
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/descriptionInformationsEditMaterialCourse"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/spacing_05"
+            android:layout_margin="@dimen/spacing_03">
+
+            <LinearLayout
+                android:id="@+id/inputsEditMaterialCourse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_05"
+                android:background="@drawable/style_box_inputs">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/titleEditMaterialCourseInputLayout"
+                    style="@style/style_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_04"
+                    android:layout_marginBottom="@dimen/spacing_04"
+                    android:hint="Titulo"
+                    app:counterMaxLength="200"
+                    app:boxStrokeErrorColor="@color/red_error"
+                    app:boxStrokeWidth="@dimen/spacing_01"
+                    app:endIconMode="clear_text">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/titleEditMaterialCourseEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:paddingStart="@dimen/spacing_05"
+                        android:paddingEnd="@dimen/spacing_05" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/descriptionEditMaterialCourseInputLayout"
+                    style="@style/style_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_04"
+                    android:hint="Descrição"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="300"
+                    app:boxStrokeErrorColor="@color/red_error"
+                    app:boxStrokeWidth="@dimen/spacing_01"
+                    app:helperText="Descreva a vaga com detalhes!"
+                    app:endIconMode="clear_text"
+                    app:hintTextColor="@color/gray">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/descripitionEditMaterialCourseEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="@dimen/spacing_07"
+                        android:inputType="textMultiLine"
+                        android:scrollbars="vertical"
+                        android:gravity="top"
+                        android:paddingStart="@dimen/spacing_05"
+                        android:paddingEnd="@dimen/spacing_05" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:background="@drawable/style_box_inputs">
+
+                    <TextView
+                        android:layout_width="285dp"
+                        android:layout_height="34dp"
+                        android:text="+ Adicionar material em anexo"
+                        android:textSize="@dimen/spacing_06"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="O Arquivo escolhido deve estar no formato PPT ou PDF e ter no máximo 600 MB de tamanho." />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/nextEditMaterialCourseButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/style_primary_button"
+                android:text="Concluir"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/spacing_05"
+                android:textSize="@dimen/spacing_05"
+                android:paddingStart="@dimen/spacing_16"
+                android:paddingEnd="@dimen/spacing_16"/>
+
+            <Button
+                android:id="@+id/cancelEditMaterialCourseButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/style_secondary_button"
+                android:layout_gravity="center_horizontal"
+                android:text="Cancelar"
+                android:layout_marginTop="@dimen/spacing_02"
+                android:textSize="@dimen/spacing_05"
+                android:paddingStart="@dimen/spacing_14"
+                android:paddingEnd="@dimen/spacing_14"/>
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

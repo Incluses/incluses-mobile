@@ -6,8 +6,6 @@ import androidx.appcompat.app.AppCompatDelegate;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -36,16 +34,12 @@ public class RegisterUser2 extends AppCompatActivity {
         //button back
         binding.imageViewLoginUserBackButton.setOnClickListener(
                 v -> {
-                    Intent intent = new Intent(RegisterUser2.this, RegisterUserActivity.class);
-                    startActivity(intent);
                     finish();
                 }
         );
 
         binding.textViewLoginUserBack.setOnClickListener(
                 v -> {
-                    Intent intent = new Intent(RegisterUser2.this, RegisterUserActivity.class);
-                    startActivity(intent);
                     finish();
                 }
         );
@@ -86,49 +80,11 @@ public class RegisterUser2 extends AppCompatActivity {
             }
         });
 
-        // Format CPF number
-        binding.numRegisterEditText.addTextChangedListener(new TextWatcher() {
-            private static final String CPF_FORMAT = "###.###.###-##";
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {}
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                String input = s.toString();
-                String cleanInput = input.replaceAll("[^\\d]", "");
-
-                StringBuilder formattedCpf = new StringBuilder();
-
-                for (int i = 0, j = 0; i < cleanInput.length() && j < CPF_FORMAT.length(); i++) {
-                    char c = cleanInput.charAt(i);
-                    char f = CPF_FORMAT.charAt(j);
-                    if (f == '#') {
-                        formattedCpf.append(c);
-                        j++;
-                    } else {
-                        formattedCpf.append(f);
-                        j++;
-                        i--;
-                    }
-                }
-
-                binding.numRegisterEditText.removeTextChangedListener(this);
-                binding.numRegisterEditText.setText(formattedCpf.toString());
-                binding.numRegisterEditText.setSelection(formattedCpf.length());
-                binding.numRegisterEditText.addTextChangedListener(this);
-            }
-        });
-
         //continue button
         binding.continueButton.setOnClickListener(
                 v -> {
                     Intent intent = new Intent(RegisterUser2.this, JobsOfInterest.class);
                     startActivity(intent);
-                    finish();
                 }
         );
 
@@ -156,7 +112,7 @@ public class RegisterUser2 extends AppCompatActivity {
         // Array of states
         String[] states = getResources().getStringArray(R.array.states_array);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, states);
-        binding.stateAutoCompleteTextView.setAdapter(adapter);
-        binding.stateAutoCompleteTextView.setDropDownHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+        binding.laborSituationAutoCompleteTextView.setAdapter(adapter);
+        binding.laborSituationAutoCompleteTextView.setDropDownHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
     }
 }

@@ -1,6 +1,7 @@
 package project.interdisciplinary.inclusesapp.Presentation;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.os.Bundle;
 
@@ -14,6 +15,9 @@ public class CreateCourseStep2 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Forçar o modo claro
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
 
         binding = ActivityCreateCourseStep2Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());

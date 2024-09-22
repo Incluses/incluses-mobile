@@ -60,15 +60,18 @@ public class UserPerfil extends AppCompatActivity {
 
 //        Glide.with(this).load(R.drawable.fotorenato).circleCrop().into(binding.ImageViewPerfilUser);
 
-        binding.textViewButtonAddExperience.setOnClickListener(v -> {
-            Intent intent = new Intent(UserPerfil.this, AddExperience.class);
-            startActivity(intent);
-        });
 
         binding.imageButtonRemoveImageCurriculum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 binding.imageViewCurriculo.setImageURI(null);
+            }
+        });
+
+        binding.icConfigImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(UserPerfil.this, ScreenConfigurations.class));
             }
         });
     }

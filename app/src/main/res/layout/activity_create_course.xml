@@ -6,8 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".Presentation.CreateCourseActivity">
 
+    <!-- Primeira parte sem ScrollView -->
     <LinearLayout
-        android:id="@+id/stepsbuttonsCreateMyCourse"
+        android:id="@+id/stepsButtonsCreateMyCourse"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -41,7 +42,6 @@
             android:layout_marginEnd="100dp"
             android:text="2"
             android:textSize="@dimen/spacing_06" />
-
     </LinearLayout>
 
     <TextView
@@ -54,93 +54,104 @@
         android:textColor="@color/dark_blue"
         android:textSize="@dimen/spacing_06"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/stepsbuttonsCreateMyCourse" />
+        app:layout_constraintTop_toBottomOf="@id/stepsButtonsCreateMyCourse" />
 
-
-    <LinearLayout
-        android:id="@+id/inputsCreateMyCourse"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="@dimen/spacing_05"
-        android:layout_margin="@dimen/spacing_03"
-        android:background="@drawable/style_box_inputs"
-        app:layout_constraintEnd_toEndOf="parent"
+    <!-- ScrollView contendo o restante do layout -->
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/spacing_05"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/informationsCreateMyCourse">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/informationsCreateMyCourse"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/nameMyCourseInputLayout"
-            style="@style/style_input"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_04"
-            android:layout_marginBottom="@dimen/spacing_08"
-            android:hint="Nome do Curso"
-            app:counterMaxLength="200"
-            app:boxStrokeErrorColor="@color/red_error"
-            app:boxStrokeWidth="@dimen/spacing_01"
-            app:endIconMode="clear_text">
+            android:orientation="vertical"
+            android:padding="@dimen/spacing_05"
+            android:layout_margin="@dimen/spacing_03">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/nameMyCourseEditText"
+            <LinearLayout
+                android:id="@+id/inputsCreateMyCourse"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                android:paddingStart="@dimen/spacing_05"
-                android:paddingEnd="@dimen/spacing_05" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_05"
+                android:background="@drawable/style_box_inputs">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/descriptionMyCourseInputLayout"
-            style="@style/style_input"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/spacing_04"
-            android:hint="Descrição"
-            app:boxStrokeErrorColor="@color/red_error"
-            app:boxStrokeWidth="@dimen/spacing_01"
-            app:endIconMode="clear_text"
-            app:hintTextColor="@color/gray">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/nameMyCourseInputLayout"
+                    style="@style/style_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_04"
+                    android:layout_marginBottom="@dimen/spacing_08"
+                    android:hint="Nome do Curso"
+                    app:counterMaxLength="200"
+                    app:boxStrokeErrorColor="@color/red_error"
+                    app:boxStrokeWidth="@dimen/spacing_01"
+                    app:endIconMode="clear_text">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/descripitionEditText"
-                android:layout_width="match_parent"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/nameMyCourseEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:paddingStart="@dimen/spacing_05"
+                        android:paddingEnd="@dimen/spacing_05" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/descriptionMyCourseInputLayout"
+                    style="@style/style_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_04"
+                    android:hint="Descrição"
+                    app:boxStrokeErrorColor="@color/red_error"
+                    app:boxStrokeWidth="@dimen/spacing_01"
+                    app:endIconMode="clear_text"
+                    app:hintTextColor="@color/gray">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/descripitionEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="@dimen/spacing_07"
+                        android:inputType="textMultiLine"
+                        android:scrollbars="vertical"
+                        android:gravity="top"
+                        android:paddingStart="@dimen/spacing_05"
+                        android:paddingEnd="@dimen/spacing_05" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <!-- Botões centralizados -->
+            <Button
+                android:id="@+id/nextCreateMyCourseButton"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingBottom="@dimen/spacing_12"
-                android:inputType="text"
-                android:paddingStart="@dimen/spacing_05"
-                android:paddingEnd="@dimen/spacing_05" />
-        </com.google.android.material.textfield.TextInputLayout>
+                style="@style/style_primary_button"
+                android:layout_gravity="center"
+                android:text="Avançar"
+                android:layout_marginTop="@dimen/spacing_08"
+                android:textSize="@dimen/spacing_05"
+                android:paddingStart="@dimen/spacing_14"
+                android:paddingEnd="@dimen/spacing_14" />
 
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/nextCreateMyCourseButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/style_primary_button"
-        android:text="Avançar"
-        android:layout_marginTop="@dimen/spacing_08"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/inputsCreateMyCourse"
-        android:textSize="@dimen/spacing_05"
-        android:paddingStart="@dimen/spacing_14"
-        android:paddingEnd="@dimen/spacing_14"/>
-
-    <Button
-        android:id="@+id/cancelCreateMyCourseButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/style_secondary_button"
-        android:text="Cancelar"
-        android:layout_marginTop="@dimen/spacing_02"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/nextCreateMyCourseButton"
-        android:textSize="@dimen/spacing_05"
-        android:paddingStart="@dimen/spacing_14"
-        android:paddingEnd="@dimen/spacing_14"/>
-
+            <Button
+                android:id="@+id/cancelCreateMyCourseButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/style_secondary_button"
+                android:layout_gravity="center"
+                android:text="Cancelar"
+                android:layout_marginTop="@dimen/spacing_02"
+                android:textSize="@dimen/spacing_05"
+                android:paddingStart="@dimen/spacing_14"
+                android:paddingEnd="@dimen/spacing_14" />
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Presentation.Fragments.DetailsCourseFragment">
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/bodyDetailsCourse"
+                android:layout_width="match_parent"
+                android:layout_height="610dp"
+                android:layout_margin="@dimen/spacing_04"
+                android:background="@drawable/style_box_inputs"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/headerDetailsCourse"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:background="@drawable/box_rounded"
+                    android:padding="@dimen/spacing_03"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/titleCourseDetailsCourse"
+                        android:layout_width="350dp"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="Empreenda na Prática"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/spacing_06"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/accessDetailsCourse"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Acessos:"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/spacing_05"
+                        app:layout_constraintStart_toStartOf="@id/titleCourseDetailsCourse"
+                        app:layout_constraintTop_toBottomOf="@id/titleCourseDetailsCourse" />
+
+                    <TextView
+                        android:id="@+id/numberAccessDetailsCourse"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_03"
+                        android:text="66"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/spacing_05"
+                        app:layout_constraintStart_toEndOf="@id/accessDetailsCourse"
+                        app:layout_constraintTop_toBottomOf="@id/titleCourseDetailsCourse" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_08"
+                        android:text="Avaliação: "
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/spacing_05"
+                        app:layout_constraintStart_toEndOf="@id/numberAccessDetailsCourse"
+                        app:layout_constraintTop_toBottomOf="@id/titleCourseDetailsCourse" />
+
+                    <TextView
+                        android:id="@+id/avaliationDetailsCourse"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_08"
+                        android:text="Avaliação: "
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/spacing_05"
+                        app:layout_constraintStart_toEndOf="@id/numberAccessDetailsCourse"
+                        app:layout_constraintTop_toBottomOf="@id/titleCourseDetailsCourse" />
+
+                    <TextView
+                        android:id="@+id/numberPontuationDetailsCourse"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_02"
+                        android:text="3.6"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/spacing_05"
+                        app:layout_constraintStart_toEndOf="@id/avaliationDetailsCourse"
+                        app:layout_constraintTop_toBottomOf="@id/titleCourseDetailsCourse" />
+
+                    <RatingBar
+                        android:id="@+id/courseDetailsRatingBar"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_02"
+                        android:layout_marginTop="6dp"
+                        android:progressTint="#F6B100"
+                        android:rating="3.6"
+                        app:layout_constraintStart_toEndOf="@id/numberPontuationDetailsCourse"
+                        app:layout_constraintTop_toBottomOf="@id/titleCourseDetailsCourse" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/materialTextDetailsCourse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_07"
+                    android:layout_marginTop="@dimen/spacing_04"
+                    android:text="Materiais:"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/spacing_07"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/headerDetailsCourse" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/listMaterialsRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="385dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/materialTextDetailsCourse"
+                    tools:listitem="@layout/item_course_material" />
+
+                <Button
+                    style="@style/style_secondary_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/spacing_03"
+                    android:text="+ adicionar material"
+                    android:textSize="@dimen/spacing_05"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/listMaterialsRecyclerView" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/textHelperDetailsCourse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Clique para editar os materiais"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/bodyDetailsCourse" />
+
+            <Button
+                android:id="@+id/concludeButtonDetailsCourse"
+                style="@style/style_primary_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/spacing_05"
+                android:paddingStart="75dp"
+                android:paddingEnd="75dp"
+                android:text="Concluir"
+                android:textSize="@dimen/spacing_05"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textHelperDetailsCourse" />
+
+            <Button
+                style="@style/style_secondary_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/spacing_05"
+                android:text="Descartar as alterações"
+                android:textSize="@dimen/spacing_05"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/concludeButtonDetailsCourse" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

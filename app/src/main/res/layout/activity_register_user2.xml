@@ -78,27 +78,7 @@
             android:orientation="vertical"
             android:padding="@dimen/spacing_05">
 
-            <!-- field of name -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/nameInputLayout"
-                style="@style/style_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/spacing_05"
-                android:hint="@string/name"
-                app:boxStrokeErrorColor="@color/red_error"
-                app:boxStrokeWidth="@dimen/spacing_01"
-                app:endIconMode="clear_text">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/nameEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:paddingStart="@dimen/spacing_05"
-                    android:paddingEnd="@dimen/spacing_05" />
-
-            </com.google.android.material.textfield.TextInputLayout>
 
             <!-- field of name social -->
             <com.google.android.material.textfield.TextInputLayout
@@ -146,6 +126,28 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/laborSituationInputLayout"
+                style="@style/style_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_05"
+                android:hint="@string/stateHint"
+                app:boxStrokeErrorColor="@color/red_error"
+                app:boxStrokeWidth="@dimen/spacing_01"
+                app:endIconMode="dropdown_menu">
+
+                <AutoCompleteTextView
+                    android:id="@+id/laborSituationAutoCompleteTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:paddingStart="@dimen/spacing_05"
+                    android:paddingTop="@dimen/spacing_05"
+                    android:paddingEnd="@dimen/spacing_05"
+                    android:paddingBottom="@dimen/spacing_05" />
+            </com.google.android.material.textfield.TextInputLayout>
+
             <!-- field of date -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/dateBornInputLayout"
@@ -169,122 +171,6 @@
                     android:paddingEnd="16dp" />
 
             </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- field of CPF -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/numRegisterInputLayout"
-                style="@style/style_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/spacing_05"
-                android:hint="@string/numRegisterHint"
-                app:boxStrokeErrorColor="@color/red_error"
-                app:boxStrokeWidth="@dimen/spacing_01"
-                app:counterEnabled="true"
-                app:counterMaxLength="14"
-                app:endIconDrawable="@drawable/ic_doc"
-                app:endIconMode="custom">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/numRegisterEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- fields of Loc -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/stateInputLayout"
-                style="@style/style_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/spacing_05"
-                android:hint="@string/stateHint"
-                app:boxStrokeErrorColor="@color/red_error"
-                app:boxStrokeWidth="@dimen/spacing_01"
-                app:endIconDrawable="@drawable/ic_loc"
-                app:endIconMode="dropdown_menu">
-
-                <AutoCompleteTextView
-                    android:id="@+id/stateAutoCompleteTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="none"
-                    android:paddingStart="@dimen/spacing_05"
-                    android:paddingTop="@dimen/spacing_05"
-                    android:paddingEnd="@dimen/spacing_05"
-                    android:paddingBottom="@dimen/spacing_05" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/cityInputLayout"
-                style="@style/style_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/spacing_05"
-                android:hint="@string/cityHint"
-                app:boxStrokeErrorColor="@color/red_error"
-                app:boxStrokeWidth="@dimen/spacing_01"
-                app:endIconDrawable="@drawable/ic_loc"
-                app:endIconMode="custom">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/cityEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:paddingStart="@dimen/spacing_05"
-                    android:paddingEnd="@dimen/spacing_05" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/streetInputLayout"
-                style="@style/style_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/spacing_05"
-                android:hint="@string/streetHint"
-                app:boxStrokeErrorColor="@color/red_error"
-                app:boxStrokeWidth="@dimen/spacing_01"
-                app:endIconDrawable="@drawable/ic_loc"
-                app:endIconMode="custom">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/streetEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:paddingStart="@dimen/spacing_05"
-                    android:paddingEnd="@dimen/spacing_05" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/addressNumberInputLayout"
-                style="@style/style_input"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/spacing_05"
-                android:hint="@string/addressNumHint"
-                app:boxStrokeErrorColor="@color/red_error"
-                app:boxStrokeWidth="@dimen/spacing_01"
-                app:endIconDrawable="@drawable/ic_loc"
-                app:endIconMode="custom">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/addressNumberEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:paddingStart="@dimen/spacing_05"
-                    android:paddingEnd="@dimen/spacing_05" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
 
             <!-- Button Continue -->
             <Button

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Presentation.CourseInitialPage">
+
+    <ImageView
+        android:id="@+id/imageViewLoginUserBackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_05"
+        android:layout_marginTop="@dimen/spacing_06"
+        android:contentDescription="@string/back"
+        android:src="@drawable/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewLoginUserBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_05"
+        android:text="@string/back_strong"
+        android:textSize="@dimen/spacing_06"
+        app:layout_constraintStart_toEndOf="@id/imageViewLoginUserBackButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/titleCourseInitialPage"
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        android:text="Nome do Curso"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/light_blue"
+        android:textSize="@dimen/spacing_08"
+        android:layout_marginStart="@dimen/spacing_07"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewLoginUserBack"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="0dp"
+        android:layout_height="614dp"
+        android:layout_margin="@dimen/spacing_03"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleCourseInitialPage"
+        tools:listitem="@layout/item_classe_course"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

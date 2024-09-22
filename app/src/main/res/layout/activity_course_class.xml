@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Presentation.CourseClass">
+
+    <ImageView
+        android:id="@+id/imageViewLoginUserBackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_05"
+        android:layout_marginTop="@dimen/spacing_06"
+        android:contentDescription="@string/back"
+        android:src="@drawable/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewLoginUserBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_05"
+        android:text="@string/back_strong"
+        android:textSize="@dimen/spacing_06"
+        app:layout_constraintStart_toEndOf="@id/imageViewLoginUserBackButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/titleCourseClass"
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        android:text="Nome do Curso"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/light_blue"
+        android:textSize="@dimen/spacing_08"
+        android:layout_marginStart="@dimen/spacing_07"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewLoginUserBack"/>
+
+    <TextView
+        android:id="@+id/descriptionTitleCourseClass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Descrição do Material"
+        android:textColor="@color/light_blue"
+        android:textSize="@dimen/spacing_07"
+        android:layout_marginTop="@dimen/spacing_08"
+        android:layout_marginStart="@dimen/spacing_07"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleCourseClass"/>
+
+    <TextView
+        android:id="@+id/descriptionCourseClass"
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        android:text="      Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur sapiente eum temporibus, et ipsam excepturi harum repellendus voluptate, laudantium dolor quas cum necessitatibus? Soluta consequatur quibusdam quaerat debitis officiis! Ducimus quam nostrum, assumenda labore dolores neque nesciunt nobis nulla non. Dolores, veritatis eveniet. Sit dolores quam sint blanditiis reprehenderit eligendi!"
+        android:textColor="@color/light_blue"
+        android:textSize="@dimen/spacing_05"
+        android:layout_marginTop="@dimen/spacing_08"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/descriptionTitleCourseClass"/>
+
+
+    <TextView
+        android:id="@+id/attachmentTitleCourseClass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Anexo do Material"
+        android:textColor="@color/light_blue"
+        android:textSize="@dimen/spacing_07"
+        android:layout_marginTop="@dimen/spacing_08"
+        android:layout_marginStart="@dimen/spacing_07"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/descriptionCourseClass"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="@dimen/spacing_03"
+        android:layout_marginStart="@dimen/spacing_04"
+        android:layout_marginEnd="@dimen/spacing_04"
+        android:background="@drawable/style_box_inputs"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/attachmentTitleCourseClass">
+
+        <ImageView
+            android:id="@+id/icPlayCourse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_play"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="@dimen/spacing_08"
+            android:layout_marginStart="@dimen/spacing_08"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nome do Material"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textSize="@dimen/spacing_07"
+            app:layout_constraintStart_toEndOf="@id/icPlayCourse"
+            app:layout_constraintTop_toTopOf="@id/icPlayCourse"
+            android:layout_marginStart="@dimen/spacing_04"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

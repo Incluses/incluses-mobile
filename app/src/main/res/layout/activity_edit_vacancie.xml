@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Presentation.Enterprise.EditVacancie">
+
+    <!-- Primeira parte sem ScrollView -->
+    <TextView
+        android:id="@+id/informationsEditVacancie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_08"
+        android:layout_marginTop="@dimen/spacing_08"
+        android:text="Editar vaga"
+        android:textColor="@color/dark_blue"
+        android:textSize="@dimen/spacing_07"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/logoImageView"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toEndOf="@id/informationsEditVacancie"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/messageIntroductionEditVacancie"
+        android:layout_width="223dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:text="Edite e ajuste sua vaga no Incluses"
+        app:layout_constraintStart_toStartOf="@id/informationsEditVacancie"
+        app:layout_constraintTop_toBottomOf="@id/informationsEditVacancie" />
+
+    <!-- ScrollView contendo o restante do layout -->
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/spacing_05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/messageIntroductionEditVacancie"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/spacing_05"
+            android:layout_marginEnd="@dimen/spacing_03"
+            android:layout_marginStart="@dimen/spacing_03">
+
+            <LinearLayout
+                android:id="@+id/inputsEditVacancie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_05"
+                android:background="@drawable/style_box_inputs">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/nameEditVacancieInputLayout"
+                    style="@style/style_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_04"
+                    android:layout_marginBottom="@dimen/spacing_08"
+                    android:hint="Nome do Cargo"
+                    app:counterMaxLength="200"
+                    app:boxStrokeErrorColor="@color/red_error"
+                    app:boxStrokeWidth="@dimen/spacing_01"
+                    app:endIconMode="clear_text">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/nameEditVacancieEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:paddingStart="@dimen/spacing_05"
+                        android:paddingEnd="@dimen/spacing_05" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/descriptionEditVacancieInputLayout"
+                    style="@style/style_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_04"
+                    android:hint="Descrição"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="300"
+                    app:boxStrokeErrorColor="@color/red_error"
+                    app:boxStrokeWidth="@dimen/spacing_01"
+                    app:helperText="Descreva a vaga com detalhes!"
+                    app:endIconMode="clear_text"
+                    app:hintTextColor="@color/gray">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/descripitionEditVacancieEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="@dimen/spacing_07"
+                        android:inputType="textMultiLine"
+                        android:scrollbars="vertical"
+                        android:gravity="top"
+                        android:paddingStart="@dimen/spacing_05"
+                        android:paddingEnd="@dimen/spacing_05" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/typeEditVacancieInputLayout"
+                    style="@style/style_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_04"
+                    android:hint="Tipo"
+                    app:endIconMode="dropdown_menu"
+                    app:boxStrokeErrorColor="@color/red_error"
+                    app:boxStrokeWidth="@dimen/spacing_01"
+                    app:helperText="Informe o tipo da vaga."
+                    app:hintTextColor="@color/gray">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/typeEditAutoCompleteTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none"
+                        android:paddingStart="@dimen/spacing_05"
+                        android:paddingTop="@dimen/spacing_05"
+                        android:paddingEnd="@dimen/spacing_05"
+                        android:paddingBottom="@dimen/spacing_05" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/nextEditVacancieButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/style_primary_button"
+                android:layout_gravity="center"
+                android:text="Alterar"
+                android:layout_marginTop="@dimen/spacing_08"
+                android:textSize="@dimen/spacing_05"
+                android:paddingStart="@dimen/spacing_14"
+                android:paddingEnd="@dimen/spacing_14"/>
+
+            <Button
+                android:id="@+id/cancelEditVacancieButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/style_secondary_button"
+                android:layout_gravity="center"
+                android:text="Cancelar"
+                android:layout_marginTop="@dimen/spacing_02"
+                android:textSize="@dimen/spacing_05"
+                android:paddingStart="@dimen/spacing_14"
+                android:paddingEnd="@dimen/spacing_14"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

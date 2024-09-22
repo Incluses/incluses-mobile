@@ -51,7 +51,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/style_primary_button"
-        android:text="+Criar curso"
+        android:text="+ Criar curso"
         android:layout_marginTop="@dimen/spacing_03"
         android:paddingTop="@dimen/spacing_02"
         android:paddingBottom="@dimen/spacing_02"

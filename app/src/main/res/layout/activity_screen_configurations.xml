@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Presentation.ScreenConfigurations">
+
+    <View
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:background="@color/dark_blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/icBackConfig"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="@dimen/spacing_05"
+        android:layout_marginTop="26dp"
+        app:layout_constraintEnd_toStartOf="@id/icBackConfig"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/ic_back" />
+
+    <TextView
+        android:id="@+id/textViewConfigBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_05"
+        android:text="@string/back_strong"
+        android:textColor="@color/white"
+        android:textSize="@dimen/spacing_06"
+        app:layout_constraintStart_toEndOf="@id/icBackConfig"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="41dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView">
+
+        <LinearLayout
+            android:id="@+id/notifyConfig"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:orientation="horizontal"
+            android:padding="@dimen/spacing_04">
+
+            <ImageView
+                android:id="@+id/iconNotify"
+                android:layout_width="@dimen/spacing_08"
+                android:layout_height="@dimen/spacing_08"
+                android:layout_weight="1"
+                android:src="@drawable/bell" />
+
+            <TextView
+                android:id="@+id/descritionNotification"
+                android:layout_width="@dimen/spacing_18"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Notificações"
+                android:textColor="@color/black"
+                android:textSize="18dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_enter" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/accountAndPasswordConfig"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:orientation="horizontal"
+            android:padding="@dimen/spacing_04">
+
+            <ImageView
+                android:id="@+id/iconPadlock"
+                android:layout_width="@dimen/spacing_08"
+                android:layout_height="@dimen/spacing_08"
+                android:layout_weight="1"
+                android:src="@drawable/lock" />
+
+            <TextView
+                android:id="@+id/descritionAcconntPassword"
+                android:layout_width="@dimen/spacing_18"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/fonts_style"
+                android:text="Conta e senha"
+                android:textColor="@color/black"
+                android:textSize="18dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_enter" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/exitAccountConfig"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:orientation="horizontal"
+            android:padding="@dimen/spacing_04">
+
+            <ImageView
+                android:id="@+id/iconBack"
+                android:layout_width="@dimen/spacing_08"
+                android:layout_height="@dimen/spacing_08"
+                android:layout_weight="1"
+                android:src="@drawable/exit" />
+
+            <TextView
+                android:id="@+id/descritionExitAccont"
+                android:layout_width="@dimen/spacing_18"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Sair da Conta"
+                android:textColor="@color/black"
+                android:textSize="18dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_enter" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/addAccountConfig"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:orientation="horizontal"
+            android:padding="@dimen/spacing_04">
+
+            <ImageView
+                android:id="@+id/iconUserAdd"
+                android:layout_width="@dimen/spacing_08"
+                android:layout_height="@dimen/spacing_08"
+                android:layout_weight="1"
+                android:src="@drawable/addusermale" />
+
+            <TextView
+                android:id="@+id/descritionAddAccont"
+                android:layout_width="@dimen/spacing_18"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Adicionar Conta"
+                android:textColor="@color/black"
+                android:textSize="18dp" />
+
+            <ImageView
+                android:id="@+id/imageView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_enter" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/helpConfig"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:orientation="horizontal"
+            android:padding="@dimen/spacing_04">
+
+            <ImageView
+                android:id="@+id/iconHelp"
+                android:layout_width="@dimen/spacing_08"
+                android:layout_height="@dimen/spacing_08"
+                android:layout_weight="1"
+                android:src="@drawable/help" />
+
+            <TextView
+                android:id="@+id/descritionHelp"
+                android:layout_width="@dimen/spacing_18"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Ajuda"
+                android:textColor="@color/black"
+                android:textSize="18dp" />
+
+            <ImageView
+                android:id="@+id/imageView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_enter" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/titleConfigScreen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="108dp"
+        android:layout_marginTop="80dp"
+        android:fontFamily="@font/palaquin_bold"
+        android:text="Configurações"
+        android:textColor="@color/white"
+        android:textSize="30dp"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

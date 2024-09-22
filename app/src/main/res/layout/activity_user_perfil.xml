@@ -29,9 +29,9 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/logoImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/icConfigImageView"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:layout_marginTop="@dimen/spacing_05"
         android:src="@drawable/ic_settings"
         app:layout_constraintEnd_toEndOf="parent"
@@ -56,15 +56,15 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="457dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
                 android:background="#FFFFFF"
                 android:backgroundTint="#FFFFFF">
 
                 <ImageView
                     android:id="@+id/imageViewBackgroundImagePerfil"
-                    android:layout_width="440dp"
-                    android:layout_height="192dp"
+                    android:layout_width="0dp"
+                    android:layout_height="190dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
@@ -87,39 +87,41 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_05"
                     android:layout_marginTop="@dimen/spacing_07"
-                    android:text="Renato Barros Filho"
+                    android:text="Nome Social/Nome"
                     android:textColor="@color/black"
                     android:textSize="30dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/ImageViewPerfilUser" />
 
                 <TextView
-                    android:id="@+id/textViewJobInformation"
+                    android:id="@+id/pronounUserProfile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_05"
-                    android:text="Desenvolvedor Mobile | QA engineer"
+                    android:text="Ele/Dele"
                     android:textColor="@color/gray"
                     android:textSize="@dimen/spacing_05"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/namePerfiltextView" />
 
                 <TextView
-                    android:id="@+id/textViewLocationResidence"
+                    android:id="@+id/addBiographyProfile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_05"
-                    android:layout_marginTop="@dimen/spacing_03"
-                    android:layout_marginBottom="@dimen/spacing_03"
-                    android:text="Osasco, São Paulo, Brasil"
+                    android:text="+ Adicionar Biografia"
+                    android:textColor="@color/light_blue"
+                    android:textSize="@dimen/spacing_05"
+                    android:layout_marginBottom="@dimen/spacing_05"
                     app:layout_constraintBottom_toTopOf="@id/itemDividerPerfilView"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textViewJobInformation" />
+                    app:layout_constraintTop_toBottomOf="@id/pronounUserProfile" />
+
 
                 <View
                     android:id="@+id/itemDividerPerfilView"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/spacing_02"
+                    android:layout_height="@dimen/spacing_01"
                     android:background="@color/light_gray"
                     android:layout_marginTop="@dimen/spacing_03"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -128,123 +130,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="347dp"
-                android:layout_marginTop="10dp"
-                android:background="#FFFFFF"
-                android:backgroundTint="#FFFFFF">
 
-                <TextView
-                    android:id="@+id/textViewButtonAddExperience"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="96dp"
-                    android:layout_marginTop="32dp"
-                    android:fontFamily="sans-serif-black"
-                    android:text="+ Adicionar experiência"
-                    android:textColor="@color/gray"
-                    android:textSize="20dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageViewEmptyExperience" />
-
-                <ImageView
-                    android:id="@+id/imageViewEmptyExperience"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="68dp"
-                    android:layout_marginTop="82dp"
-                    android:visibility="visible"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/experience_empty" />
-
-                <TextView
-                    android:id="@+id/textViewTitleExperience"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="32dp"
-                    android:fontFamily="sans-serif-black"
-                    android:text="Experiências"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_title_spacing"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/textViewSubtitleExperience"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:text="Alguns conhecimentos desse User"
-                    android:textSize="12dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textViewTitleExperience" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/spacing_02"
-                    android:background="@color/light_gray"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="#FFFFFF">
-
-                <TextView
-                    android:id="@+id/textViewTitleDescription"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="32dp"
-                    android:fontFamily="sans-serif-black"
-                    android:text="Sobre"
-                    android:textColor="#000000"
-                    android:textSize="20dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/textViewDescription"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginEnd="24dp"
-                    android:layout_marginTop="20dp"
-                    android:text="Olá! Sou o Renato, tenho 17 anos e sou criador do APP Incluses. Busco aperfeiçoar minhas habilidades em desenvolvimento, e aprender com meus erros, para assim gerar mais resultados positivos em miha carreira."
-                    android:textColor="@color/gray"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textViewTitleDescription" />
-
-                <ImageButton
-                    android:id="@+id/imageButtonEditDescription"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:backgroundTint="#FFFFFF"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.942"
-                    app:layout_constraintStart_toEndOf="@+id/textViewTitleDescription"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@android:drawable/ic_menu_edit" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/spacing_02"
-                    android:background="@color/light_gray"
-                    android:layout_marginTop="@dimen/spacing_03"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textViewDescription"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -262,22 +148,33 @@
                     android:fontFamily="sans-serif-black"
                     android:text="Currículo"
                     android:textColor="@color/black"
-                    android:textSize="20dp"
+                    android:textSize="@dimen/spacing_08"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/textViewAddCurriculum"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="sans-serif-black"
-                    android:text="+Adicionar currículo"
-                    android:textColor="@color/gray"
-                    android:textSize="20dp"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/inputCurriculum"
+                    android:layout_width="360dp"
+                    android:layout_height="100dp"
+                    android:layout_marginBottom="@dimen/spacing_07"
+                    android:layout_marginTop="@dimen/spacing_05"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textViewTitleCurriculum" />
+                    app:layout_constraintTop_toBottomOf="@id/textViewTitleCurriculum"
+                    android:background="@drawable/style_box_inputs">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="+ Adicione o anexo do Curriculo"
+                        android:textColor="@color/light_blue"
+                        android:textSize="@dimen/spacing_06"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <ImageView
                     android:id="@+id/imageViewCurriculo"
@@ -286,7 +183,7 @@
                     android:layout_marginTop="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textViewAddCurriculum"
+                    app:layout_constraintTop_toBottomOf="@id/inputCurriculum"
                     tools:srcCompat="@tools:sample/avatars" />
 
                 <ImageButton

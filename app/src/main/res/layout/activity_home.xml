@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/nameInputLayout"
+                    android:id="@+id/searchInputLayout"
                     style="@style/style_input"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -57,19 +57,19 @@
                     android:id="@+id/perfilImageView"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:layout_marginStart="@dimen/spacing_03"
+                    android:layout_marginStart="@dimen/spacing_05"
                     android:layout_marginTop="@dimen/spacing_04"
                     android:src="@drawable/ic_perfil"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/moreImageView"
-                    app:layout_constraintStart_toEndOf="@+id/nameInputLayout"
+                    app:layout_constraintStart_toEndOf="@+id/searchInputLayout"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:id="@+id/moreImageView"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:layout_marginStart="@dimen/spacing_03"
+                    android:layout_marginStart="@dimen/spacing_05"
                     android:layout_marginTop="@dimen/spacing_05"
                     android:layout_marginEnd="@dimen/spacing_03"
                     android:src="@drawable/ic_more_options"

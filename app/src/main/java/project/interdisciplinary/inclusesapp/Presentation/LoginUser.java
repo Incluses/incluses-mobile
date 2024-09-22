@@ -49,43 +49,6 @@ public class LoginUser extends AppCompatActivity {
             }
         });
 
-        // Format CPF number
-        binding.cpfEditText.addTextChangedListener(new TextWatcher() {
-            private static final String CPF_FORMAT = "###.###.###-##";
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {}
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                String input = s.toString();
-                String cleanInput = input.replaceAll("[^\\d]", ""); // Remove todos os caracteres que não são números
-
-                StringBuilder formattedCpf = new StringBuilder();
-
-                for (int i = 0, j = 0; i < cleanInput.length() && j < CPF_FORMAT.length(); i++) {
-                    char c = cleanInput.charAt(i);
-                    char f = CPF_FORMAT.charAt(j);
-                    if (f == '#') {
-                        formattedCpf.append(c);
-                        j++;
-                    } else {
-                        formattedCpf.append(f);
-                        j++;
-                        i--;
-                    }
-                }
-
-                binding.cpfEditText.removeTextChangedListener(this);
-                binding.cpfEditText.setText(formattedCpf.toString());
-                binding.cpfEditText.setSelection(formattedCpf.length());
-                binding.cpfEditText.addTextChangedListener(this);
-            }
-        });
-
         binding.continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

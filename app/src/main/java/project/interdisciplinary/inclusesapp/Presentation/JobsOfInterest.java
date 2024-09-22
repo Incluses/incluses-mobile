@@ -31,23 +31,26 @@ public class JobsOfInterest extends AppCompatActivity {
         // button back
         binding.imageViewLoginUserBackButton.setOnClickListener(
                 v -> {
-                    Intent intent = new Intent(JobsOfInterest.this, RegisterUserActivity.class);
-                    startActivity(intent);
                     finish();
                 }
         );
 
         binding.textViewLoginUserBack.setOnClickListener(
                 v -> {
-                    Intent intent = new Intent(JobsOfInterest.this, RegisterUserActivity.class);
-                    startActivity(intent);
                     finish();
                 }
         );
 
         binding.skipButton.setOnClickListener(
                 v -> {
-                    Intent intent = new Intent(JobsOfInterest.this, UserPerfil.class);
+                    Intent intent = new Intent(JobsOfInterest.this, Home.class);
+                    startActivity(intent);
+                    finish();
+                }
+        );
+
+        binding.continueButton.setOnClickListener(v -> {
+                    Intent intent = new Intent(JobsOfInterest.this, Home.class);
                     startActivity(intent);
                     finish();
                 }

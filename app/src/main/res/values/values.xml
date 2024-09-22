@@ -17,6 +17,7 @@
     <dimen name="spacing_15">54dp</dimen>
     <dimen name="spacing_16">56dp</dimen>
     <dimen name="spacing_17">58dp</dimen>
+    <dimen name="spacing_18">220dp</dimen>
     <dimen name="text_size_button_spacing">14sp</dimen>
     <dimen name="text_size_button_main_spacing">18sp</dimen>
     <dimen name="text_size_title_spacing">24sp</dimen>

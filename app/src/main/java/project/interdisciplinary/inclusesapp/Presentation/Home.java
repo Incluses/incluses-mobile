@@ -33,6 +33,7 @@ public class Home extends AppCompatActivity {
 
     private ActivityHomeBinding binding;
     private View rootView;
+
     private Fragment getCurrentFragment() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         return fragmentManager.findFragmentById(R.id.fragmentContainerView);
@@ -85,8 +86,13 @@ public class Home extends AppCompatActivity {
                     } else {
                         Toast.makeText(Home.this, "Você já está no Feed", Toast.LENGTH_SHORT).show();
                     }
+
                 } else if (id == R.id.perfilMoreOptionsMenu) {
                     startActivity(new Intent(Home.this, UserPerfil.class));
+
+                } else if (id == R.id.configurationsMoreOptionsMenu) {
+                    startActivity(new Intent(Home.this, ScreenConfigurations.class));
+
                 } else if (id == R.id.positionsAndSalariesMoreOptionsMenu) {
                     if (!(getCurrentFragment() instanceof VacanciesFragment)) {
                         selectedFragment = new VacanciesFragment();
@@ -95,6 +101,7 @@ public class Home extends AppCompatActivity {
                     } else {
                         Toast.makeText(Home.this, "Você já está em Vagas", Toast.LENGTH_SHORT).show();
                     }
+
                 } else if (id == R.id.coursesMoreOptionsMenu) {
                     if (!(getCurrentFragment() instanceof CoursesFragment)) {
                         selectedFragment = new CoursesFragment();
@@ -103,6 +110,7 @@ public class Home extends AppCompatActivity {
                     } else {
                         Toast.makeText(Home.this, "Você já está em Cursos", Toast.LENGTH_SHORT).show();
                     }
+
                 } else if (id == R.id.messagesAndInterviewsMoreOptionsMenu) {
                     if (!(getCurrentFragment() instanceof ChatFragment)) {
                         selectedFragment = new ChatFragment();
@@ -225,7 +233,7 @@ public class Home extends AppCompatActivity {
                 } else {
                     // Keyboard is closed
                     binding.nameEditText.clearFocus(); // Clear focus
-                    binding.nameInputLayout.clearFocus(); // Clear focus on TextInputLayout
+                    binding.searchInputLayout.clearFocus(); // Clear focus on TextInputLayout
                 }
             }
         });

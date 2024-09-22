@@ -50,19 +50,17 @@
 
     <!-- field of CPF -->
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/cpfInputLayout"
+        android:id="@+id/emailInputLayout"
         style="@style/style_input"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_05"
         android:layout_marginTop="@dimen/spacing_07"
         android:layout_marginEnd="@dimen/spacing_05"
-        android:hint="@string/numRegister"
+        android:hint="@string/email"
         app:boxStrokeErrorColor="@color/red_error"
         app:boxStrokeWidth="@dimen/spacing_01"
-        app:counterEnabled="true"
-        app:counterMaxLength="14"
-        app:endIconMode="clear_text"
+        app:endIconMode="custom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imageViewLoginUserNameIncluses"
@@ -70,12 +68,12 @@
         app:startIconDrawable="@drawable/ic_doc">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/cpfEditText"
+            android:id="@+id/emailEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="textEmailAddress"
             android:paddingStart="@dimen/spacing_05"
-            android:paddingEnd="@dimen/spacing_05" /> <!-- Definindo o tipo de entrada como número -->
+            android:paddingEnd="@dimen/spacing_05" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -94,7 +92,7 @@
         app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cpfInputLayout"
+        app:layout_constraintTop_toBottomOf="@id/emailInputLayout"
         app:startIconDrawable="@drawable/block">
 
         <com.google.android.material.textfield.TextInputEditText

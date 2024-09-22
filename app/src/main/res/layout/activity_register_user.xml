@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".Presentation.RegisterUserActivity">
 
+    <!-- Topo do layout com imagem de voltar e texto -->
     <ImageView
         android:id="@+id/imageViewLoginUserBackButton"
         android:layout_width="wrap_content"
@@ -27,7 +28,6 @@
         app:layout_constraintStart_toEndOf="@id/imageViewLoginUserBackButton"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Text "Incluses" -->
     <ImageView
         android:id="@+id/logoImageView"
         android:layout_width="80dp"
@@ -55,172 +55,195 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_09"
         android:text="@string/createAccount"
-        android:textStyle="bold"
         android:textColor="@color/black"
         android:textSize="@dimen/text_size_button_spacing"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imageViewLoginUserNameIncluses" />
 
-
-
-
-    <!-- field of email -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/emailInputLayout"
-        style="@style/style_input"
+    <!-- ScrollView começando aqui -->
+    <ScrollView
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_05"
-        android:layout_marginTop="@dimen/spacing_03"
-        android:layout_marginEnd="@dimen/spacing_05"
-        android:hint="@string/email"
-        app:boxStrokeErrorColor="@color/red_error"
-        app:boxStrokeWidth="@dimen/spacing_01"
-        app:endIconMode="custom"
-        app:suffixText="@string/email_complete"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewCreateAccount"
-        app:endIconDrawable="@drawable/ic_email">
+        app:layout_constraintTop_toBottomOf="@id/textViewCreateAccount">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/emailEditText"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp" />
+            android:orientation="vertical"
+            android:padding="@dimen/spacing_05">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <!-- field of name -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/nameInputLayout"
+                style="@style/style_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_05"
+                android:hint="@string/name"
+                app:boxStrokeErrorColor="@color/red_error"
+                app:boxStrokeWidth="@dimen/spacing_01"
+                app:endIconMode="clear_text">
 
-<!--    field of phone number -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/phoneNumberInputLayout"
-        style="@style/style_input"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_05"
-        android:layout_marginTop="@dimen/spacing_03"
-        android:layout_marginEnd="@dimen/spacing_05"
-        android:hint="@string/phone_number"
-        app:boxStrokeErrorColor="@color/red_error"
-        app:boxStrokeWidth="@dimen/spacing_01"
-        app:endIconMode="custom"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/emailInputLayout"
-        app:endIconDrawable="@drawable/ic_phone">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/nameEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:paddingStart="@dimen/spacing_05"
+                    android:paddingEnd="@dimen/spacing_05" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/phoneEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="phone"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <!-- Campos de entrada de dados -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/emailInputLayout"
+                style="@style/style_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_03"
+                android:hint="@string/email"
+                app:boxStrokeErrorColor="@color/red_error"
+                app:boxStrokeWidth="@dimen/spacing_01"
+                app:endIconDrawable="@drawable/ic_email"
+                app:endIconMode="custom">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/emailEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Campo de telefone -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/phoneNumberInputLayout"
+                style="@style/style_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_03"
+                android:hint="@string/phone_number"
+                app:boxStrokeErrorColor="@color/red_error"
+                app:boxStrokeWidth="@dimen/spacing_01"
+                app:endIconDrawable="@drawable/ic_phone"
+                app:endIconMode="custom">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/phoneEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Campo de senha -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/passwordInputLayout"
+                style="@style/style_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_03"
+                android:hint="@string/password"
+                app:boxStrokeErrorColor="@color/red_error"
+                app:boxStrokeWidth="@dimen/spacing_01"
+                app:endIconMode="password_toggle"
+                app:helperText="@string/passwordHelperText"
+                app:startIconDrawable="@drawable/block">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/passwordEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Campo de confirmação de senha -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/passwordConfirmedInputLayout"
+                style="@style/style_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_03"
+                android:hint="@string/passwordConfirmed"
+                app:boxStrokeErrorColor="@color/red_error"
+                app:boxStrokeWidth="@dimen/spacing_01"
+                app:endIconMode="password_toggle"
+                app:helperText="@string/passwordConfirmedHelperText"
+                app:startIconDrawable="@drawable/block">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/passwordConfirmedEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- field of CPF/CNPJ -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/numRegisterInputLayout"
+                style="@style/style_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_05"
+                android:hint="@string/numRegisterHint"
+                app:boxStrokeErrorColor="@color/red_error"
+                app:boxStrokeWidth="@dimen/spacing_01"
+                app:counterEnabled="true"
+                app:counterMaxLength="18"
+                app:endIconDrawable="@drawable/ic_doc"
+                app:endIconMode="custom">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/numRegisterEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
 
-    <!-- field of password -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/passwordInputLayout"
-        style="@style/style_input"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_05"
-        android:layout_marginTop="@dimen/spacing_03"
-        android:layout_marginEnd="@dimen/spacing_05"
-        android:hint="@string/password"
-        app:helperText="@string/passwordHelperText"
-        app:boxStrokeErrorColor="@color/red_error"
-        app:boxStrokeWidth="@dimen/spacing_01"
-        app:endIconMode="password_toggle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/phoneNumberInputLayout"
-        app:startIconDrawable="@drawable/block">
+            <!-- Botão de continuar -->
+            <Button
+                android:id="@+id/continueButtonRegister"
+                style="@style/style_primary_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_05"
+                android:text="@string/continueText"
+                android:textColor="@android:color/white" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/passwordEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp" />
+            <!-- Textos "Já possui uma conta?" e "Entrar" -->
+            <TextView
+                android:id="@+id/noAccountTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/spacing_04"
+                android:text="@string/hadAccount"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_button_spacing" />
 
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <!-- field of password -->
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/passwordConfirmedInputLayout"
-        style="@style/style_input"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_05"
-        android:layout_marginTop="@dimen/spacing_03"
-        android:layout_marginEnd="@dimen/spacing_05"
-        android:hint="@string/passwordConfirmed"
-        app:helperText="@string/passwordConfirmedHelperText"
-        app:boxStrokeErrorColor="@color/red_error"
-        app:boxStrokeWidth="@dimen/spacing_01"
-        app:endIconMode="password_toggle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/passwordInputLayout"
-        app:startIconDrawable="@drawable/block">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/passwordConfirmedEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <!-- Button Continue -->
-    <Button
-        android:id="@+id/continueButtonRegister"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_05"
-        android:layout_marginTop="@dimen/spacing_05"
-        android:layout_marginEnd="@dimen/spacing_05"
-        style="@style/style_primary_button"
-        android:text="@string/continueText"
-        android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/passwordConfirmedInputLayout"
-        app:layout_constraintWidth_default="spread"
-        app:layout_constraintWidth_min="0dp" />
-
-    <!-- Text "Já possui uma conta?" -->
-    <TextView
-        android:id="@+id/noAccountTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_04"
-        android:text="@string/hadAccount"
-        android:textColor="@color/black"
-        android:textSize="@dimen/text_size_button_spacing"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/continueButtonRegister" />
-
-    <!-- Text "Entrar" -->
-    <TextView
-        android:id="@+id/enterTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/enter"
-        android:textColor="@color/light_blue"
-        android:textSize="@dimen/spacing_05"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/noAccountTextView" />
-
+            <TextView
+                android:id="@+id/enterTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/enter"
+                android:textColor="@color/light_blue"
+                android:textSize="@dimen/spacing_05" />
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
