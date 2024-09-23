@@ -8,21 +8,39 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import java.util.Calendar;
+import java.util.List;
+import java.util.Random;
 
 import project.interdisciplinary.inclusesapp.Presentation.JobsOfInterest;
 import project.interdisciplinary.inclusesapp.Presentation.LoginUser;
 import project.interdisciplinary.inclusesapp.Presentation.RegisterUser2;
 import project.interdisciplinary.inclusesapp.Presentation.RegisterUserActivity;
 import project.interdisciplinary.inclusesapp.R;
+import project.interdisciplinary.inclusesapp.data.api.CepApi;
+import project.interdisciplinary.inclusesapp.data.api.OnCepDataReceivedListener;
+import project.interdisciplinary.inclusesapp.data.models.Cep;
 import project.interdisciplinary.inclusesapp.databinding.ActivityRegisterEnterpriseBinding;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RegisterEnterprise extends AppCompatActivity {
 
     private ActivityRegisterEnterpriseBinding binding;
+
+    private Retrofit retrofit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,9 +72,44 @@ public class RegisterEnterprise extends AppCompatActivity {
         //continue button
         binding.continueButton.setOnClickListener(
                 v -> {
-                    Intent intent = new Intent(RegisterEnterprise.this, HomeEnterprise.class);
-                    startActivity(intent);
-                    finish();
+                    String cepInput = binding.cepEditText.getText().toString().trim();
+
+                    // Verificar se o campo do CEP está vazio
+                    if (cepInput.isEmpty()) {
+                        Toast.makeText(RegisterEnterprise.this, "Por favor, insira um CEP.", Toast.LENGTH_SHORT).show();
+                    } else if (cepInput.length() != 9) {
+                        // Verificação simples se o CEP tem o formato esperado (#####-###)
+                        Toast.makeText(RegisterEnterprise.this, "CEP inválido. Insira um CEP válido.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        // Se o CEP está preenchido corretamente, continue
+                        callApiRetrofitCep(new OnCepDataReceivedListener() {
+                            @Override
+                            public void onCepDataReceived(Cep cep) {
+
+                                if (cep != null) {
+                                    if (!Boolean.getBoolean(cep.getErro())) {
+
+                                        // CEP encontrado, navega para HomeEnterprise
+                                        binding.cepInputLayout.setErrorEnabled(false);
+                                        binding.cepInputLayout.setError(null);
+
+                                        // Agora sim, pode navegar
+                                        Intent intent = new Intent(RegisterEnterprise.this, HomeEnterprise.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }else {
+                                        // CEP não encontrado, mostra erro
+                                        binding.cepInputLayout.setErrorEnabled(true);
+                                        binding.cepInputLayout.setError("CEP inválido. Verifique o valor inserido.");
+                                    }
+                                } else {
+                                    // CEP não encontrado, mostra erro
+                                    binding.cepInputLayout.setErrorEnabled(true);
+                                    binding.cepInputLayout.setError("CEP inválido. Verifique o valor inserido.");
+                                }
+                            }
+                        }, cepInput);
+                    }
                 }
         );
 
@@ -106,7 +159,52 @@ public class RegisterEnterprise extends AppCompatActivity {
             }
         });
 
-
-
     }
+
+    private void callApiRetrofitCep(OnCepDataReceivedListener listener, String cep) {
+        // Remove formatação do CEP (tira os hífens e pontos, deixando apenas os números)
+        String cleanCep = cep.replaceAll("[^\\d]", ""); // Remove qualquer caractere que não seja numérico
+
+        String urlApi = "https://viacep.com.br/";
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl(urlApi)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        CepApi api = retrofit.create(CepApi.class);
+        Call<JsonObject> call = api.getCep(cleanCep); // Passa o CEP limpo
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    JsonObject responseBody = response.body();
+                    if(responseBody.has("erro")) {
+                        // Se o CEP não existir, mostrar mensagem de erro
+                        binding.cepInputLayout.setError("CEP inválido. Verifique o valor inserido.");
+                        listener.onCepDataReceived(null);
+                    }
+                    else {
+                        Gson gson = new Gson();
+                        Cep apiResponse = gson.fromJson(responseBody, Cep.class);
+                        listener.onCepDataReceived(apiResponse);
+                    }
+
+                } else if (response.code() == 400) {
+                    // Se o código de resposta for 400, mostrar mensagem de erro no campo de CEP
+                    binding.cepInputLayout.setError("CEP inválido! Verifique o valor inserido.");
+                    listener.onCepDataReceived(null);
+                } else {
+                    listener.onCepDataReceived(null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable throwable) {
+                Log.e("ERRO", throwable.getMessage());
+                listener.onCepDataReceived(null);
+            }
+        });
+    }
+
 }
