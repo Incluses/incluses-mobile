@@ -21,6 +21,8 @@
         android:layout_marginStart="@dimen/spacing_05"
         android:layout_marginTop="@dimen/spacing_05"
         android:layout_marginEnd="@dimen/spacing_05"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:text="Nome da Vaga"
         android:textSize="@dimen/spacing_06"
         android:textColor="@color/black"

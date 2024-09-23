@@ -1,5 +1,6 @@
 package project.interdisciplinary.inclusesapp.Presentation.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import project.interdisciplinary.inclusesapp.Presentation.CreatePost;
 import project.interdisciplinary.inclusesapp.R;
 import project.interdisciplinary.inclusesapp.databinding.FragmentChatBinding;
 import project.interdisciplinary.inclusesapp.databinding.FragmentFeedBinding;
@@ -22,8 +24,13 @@ public class FeedFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = binding.getRoot();
 
-        // find the RecyclerView in the layout
-        RecyclerView recyclerView = view.findViewById(R.id.feedPostsRecyclerView);
+        binding.createPostPostsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CreatePost createPost = new CreatePost();
+                startActivity(new Intent(getActivity(), createPost.getClass()));
+            }
+        });
 
         return view;
     }

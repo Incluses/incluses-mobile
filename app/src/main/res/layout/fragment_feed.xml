@@ -16,4 +16,19 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/item_feed" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/createPostPostsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/spacing_06"
+        android:layout_marginBottom="@dimen/spacing_07"
+        app:backgroundTint="@color/light_purple"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:maxImageSize="35dp"
+        app:srcCompat="@drawable/ic_add"
+        app:tint="@color/white" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -21,6 +21,8 @@
         android:layout_marginTop="@dimen/spacing_05"
         android:layout_marginStart="@dimen/spacing_04"
         android:text="Nome do Perfil"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.01"

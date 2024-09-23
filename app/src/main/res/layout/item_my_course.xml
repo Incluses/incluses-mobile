@@ -24,6 +24,7 @@
             android:layout_marginEnd="@dimen/spacing_05"
             android:text="Nome do Curso"
             android:maxLines="2"
+            android:ellipsize="end"
             android:textAlignment="center"
             android:textSize="@dimen/spacing_06"
             android:textColor="@color/black"

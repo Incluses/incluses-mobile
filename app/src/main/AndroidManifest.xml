@@ -13,26 +13,37 @@
         android:theme="@style/Theme.InclusesApp"
         tools:targetApi="31">
         <activity
+            android:name=".Presentation.CreatePost"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".Presentation.EditAccount"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Presentation.ViewVacancie"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Presentation.ScreenConfigurations"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Presentation.CourseClass"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Presentation.CourseInitialPage"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Presentation.AddMaterialCourse"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Presentation.EditMaterialCourse"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Presentation.Enterprise.EditVacancie"
             android:exported="false"
