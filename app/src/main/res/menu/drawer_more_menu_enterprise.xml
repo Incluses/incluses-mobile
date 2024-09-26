@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/feedMoreOptionsMenuEnterprise"
+            android:icon="@drawable/ic_enter"
+            android:title="@string/feed"/>
+
+        <item
+            android:id="@+id/positionsAndSalariesMoreOptionsMenuEnterprise"
+            android:icon="@drawable/ic_enter"
+            android:title="@string/jobs"/>
+
+        <item
+            android:id="@+id/coursesMoreOptionsMenuEnterprise"
+            android:icon="@drawable/ic_enter"
+            android:title="@string/courses"/>
+
+        <item
+            android:id="@+id/messagesAndInterviewsMoreOptionsMenuEnterprise"
+            android:icon="@drawable/ic_enter"
+            android:title="@string/messages"/>
+
+        <item
+            android:id="@+id/perfilMoreOptionsMenuEnterprise"
+            android:icon="@drawable/ic_enter"
+            android:title="@string/perfil"/>
+
+        <item
+            android:id="@+id/termsAndPrivacyPolicyMoreOptionsMenuEnterprise"
+            android:icon="@drawable/ic_enter"
+            android:title="@string/termsAndPrivacyPolicy"/>
+
+        <item
+            android:id="@+id/configurationsMoreOptionsMenuEnterprise"
+            android:icon="@drawable/ic_enter"
+            android:title="@string/config"/>
+
+    </group>
+</menu>

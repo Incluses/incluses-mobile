@@ -121,7 +121,7 @@ public class HomeEnterprise extends AppCompatActivity {
                 Fragment selectedFragment = null;
                 int selectedIndex = 0;
 
-                if (id == R.id.feedMoreOptionsMenu) {
+                if (id == R.id.feedMoreOptionsMenuEnterprise) {
                     if (!(getCurrentFragment() instanceof FeedEnterpriseFragment)) {
                         selectedFragment = new FeedEnterpriseFragment();
                         selectedIndex = 0;
@@ -130,13 +130,13 @@ public class HomeEnterprise extends AppCompatActivity {
                         Toast.makeText(HomeEnterprise.this, "Você já está no Feed", Toast.LENGTH_SHORT).show();
                     }
 
-                } else if (id == R.id.perfilMoreOptionsMenu) {
+                } else if (id == R.id.perfilMoreOptionsMenuEnterprise) {
                     startActivity(new Intent(HomeEnterprise.this, UserPerfil.class));
 
-                } else if (id == R.id.configurationsMoreOptionsMenu) {
+                } else if (id == R.id.configurationsMoreOptionsMenuEnterprise) {
                     startActivity(new Intent(HomeEnterprise.this, ScreenConfigurations.class));
 
-                } else if (id == R.id.positionsAndSalariesMoreOptionsMenu) {
+                } else if (id == R.id.positionsAndSalariesMoreOptionsMenuEnterprise) {
                     if (!(getCurrentFragment() instanceof VacanciesEnterpriseFragment)) {
                         selectedFragment = new VacanciesEnterpriseFragment();
                         selectedIndex = 1;
@@ -145,7 +145,7 @@ public class HomeEnterprise extends AppCompatActivity {
                         Toast.makeText(HomeEnterprise.this, "Você já está em Vagas", Toast.LENGTH_SHORT).show();
                     }
 
-                } else if (id == R.id.coursesMoreOptionsMenu) {
+                } else if (id == R.id.coursesMoreOptionsMenuEnterprise) {
                     if (!(getCurrentFragment() instanceof CoursesEnterpriseFragment)) {
                         selectedFragment = new CoursesEnterpriseFragment();
                         selectedIndex = 2;
@@ -154,7 +154,7 @@ public class HomeEnterprise extends AppCompatActivity {
                         Toast.makeText(HomeEnterprise.this, "Você já está em Cursos", Toast.LENGTH_SHORT).show();
                     }
 
-                } else if (id == R.id.messagesAndInterviewsMoreOptionsMenu) {
+                } else if (id == R.id.messagesAndInterviewsMoreOptionsMenuEnterprise) {
                     if (!(getCurrentFragment() instanceof ChatFragment)) {
                         selectedFragment = new ChatFragment();
                         selectedIndex = 3;
@@ -162,15 +162,8 @@ public class HomeEnterprise extends AppCompatActivity {
                     } else {
                         Toast.makeText(HomeEnterprise.this, "Você já está no Bate-papo", Toast.LENGTH_SHORT).show();
                     }
-                } else if (id == R.id.coursesInitializedMoreOptionsMenu) {
-                    if (!(getCurrentFragment() instanceof CreateCourseEnterpriseFragment)) {
-                        selectedFragment = new CreateCourseEnterpriseFragment();
-                        selectedIndex = 2;
-                        updateBottomNavigationSelection(R.id.itemCourses); // Sincronize com o BottomNavigation
-                    } else {
-                        Toast.makeText(HomeEnterprise.this, "Você já está em Cursos Inicializados", Toast.LENGTH_SHORT).show();
-                    }
                 }
+
                 if (selectedFragment != null) {
                     replaceFragment(selectedFragment);
                     updateNavigationViewSelection(id);

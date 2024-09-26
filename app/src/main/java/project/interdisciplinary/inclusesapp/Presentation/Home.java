@@ -156,13 +156,7 @@ public class Home extends AppCompatActivity {
                         Toast.makeText(Home.this, "Você já está no Bate-papo", Toast.LENGTH_SHORT).show();
                     }
                 } else if (id == R.id.coursesInitializedMoreOptionsMenu) {
-                    if (!(getCurrentFragment() instanceof CreateCourseFragment)) {
-                        selectedFragment = new CreateCourseFragment();
-                        selectedIndex = 2;
-                        updateBottomNavigationSelection(R.id.itemCourses); // Sincronize com o BottomNavigation
-                    } else {
-                        Toast.makeText(Home.this, "Você já está em Cursos Inicializados", Toast.LENGTH_SHORT).show();
-                    }
+                    startActivity(new Intent(Home.this, CoursesViewed.class));
                 }
 
                 if (selectedFragment != null) {
