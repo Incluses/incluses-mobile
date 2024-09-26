@@ -1,7 +1,13 @@
 package project.interdisciplinary.inclusesapp.Presentation.Enterprise;
 
+import android.Manifest;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Rect;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,9 +16,15 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -21,9 +33,12 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import project.interdisciplinary.inclusesapp.Presentation.EditAccount;
 import project.interdisciplinary.inclusesapp.Presentation.Enterprise.Fragment.CoursesEnterpriseFragment;
+import project.interdisciplinary.inclusesapp.Presentation.Enterprise.Fragment.CreateCourseEnterpriseFragment;
 import project.interdisciplinary.inclusesapp.Presentation.Enterprise.Fragment.FeedEnterpriseFragment;
 import project.interdisciplinary.inclusesapp.Presentation.Enterprise.Fragment.VacanciesEnterpriseFragment;
+import project.interdisciplinary.inclusesapp.Presentation.Home;
 import project.interdisciplinary.inclusesapp.Presentation.ScreenConfigurations;
 import project.interdisciplinary.inclusesapp.Presentation.UserPerfil;
 import project.interdisciplinary.inclusesapp.R;
@@ -34,6 +49,12 @@ public class HomeEnterprise extends AppCompatActivity {
 
     private ActivityHomeEnterpriseBinding binding;
     private View rootView;
+
+    private ActivityResultLauncher<String> notificationPermissionLauncher;
+
+    private String NOTIFICATION_NAME = "Incluses";
+    private String NOTIFICATION_DESC = "Complete seu cadastro! Na tela de Editar Conta!";
+
 
     private Fragment getCurrentFragment() {
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -49,6 +70,26 @@ public class HomeEnterprise extends AppCompatActivity {
         binding = ActivityHomeEnterpriseBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         rootView = binding.getRoot();
+
+
+        // Inicializa o launcher para solicitar a permissão de notificação
+        notificationPermissionLauncher = registerForActivityResult(
+                new ActivityResultContracts.RequestPermission(),
+                isGranted -> {
+                    if (isGranted) {
+                        // Se a permissão foi concedida, enviar a notificação
+                        toNotify();
+                    } else {
+                        // Se a permissão foi negada, mostrar uma mensagem
+                        Toast.makeText(HomeEnterprise.this, "Permissão de notificação negada", Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+
+        // Solicitar permissão de notificação na inicialização
+        requestNotificationPermission();
+
+
 
         setupKeyboardListener();
 
@@ -121,8 +162,15 @@ public class HomeEnterprise extends AppCompatActivity {
                     } else {
                         Toast.makeText(HomeEnterprise.this, "Você já está no Bate-papo", Toast.LENGTH_SHORT).show();
                     }
+                } else if (id == R.id.coursesInitializedMoreOptionsMenu) {
+                    if (!(getCurrentFragment() instanceof CreateCourseEnterpriseFragment)) {
+                        selectedFragment = new CreateCourseEnterpriseFragment();
+                        selectedIndex = 2;
+                        updateBottomNavigationSelection(R.id.itemCourses); // Sincronize com o BottomNavigation
+                    } else {
+                        Toast.makeText(HomeEnterprise.this, "Você já está em Cursos Inicializados", Toast.LENGTH_SHORT).show();
+                    }
                 }
-
                 if (selectedFragment != null) {
                     replaceFragment(selectedFragment);
                     updateNavigationViewSelection(id);
@@ -237,5 +285,58 @@ public class HomeEnterprise extends AppCompatActivity {
                 }
             }
         });
+    }
+
+
+    // Método para solicitar a permissão de notificação
+    public void requestNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            // Verificar se a permissão já foi concedida
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                // Pedir permissão
+                notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS);
+            } else {
+                // Se já tiver permissão, enviar a notificação
+                toNotify();
+            }
+        } else {
+            // Para versões anteriores ao Android 13, não é necessário pedir permissão
+            toNotify();
+        }
+    }
+
+    // Método para enviar a notificação
+    public void toNotify() {
+        // Criar Intent para abrir a Activity EditAccount
+        Intent intent = new Intent(this, EditAccount.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(
+                this, 0, intent, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT
+        );
+
+        // Configurar a notificação
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "canal_id")
+                .setSmallIcon(R.drawable.logo)
+                .setContentTitle(NOTIFICATION_NAME)
+                .setContentText(NOTIFICATION_DESC)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setAutoCancel(true)
+                .setContentIntent(pendingIntent);
+
+        // Configurar o canal de notificação (necessário para Android 8 e superior)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel canal = new NotificationChannel("canal_id", "Canal de notificação", NotificationManager.IMPORTANCE_HIGH);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(canal);
+        }
+
+        // Exibir a notificação
+        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getApplicationContext());
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            // Caso a permissão ainda não tenha sido concedida
+            return;
+        }
+
+        // Mostrar a notificação
+        notificationManagerCompat.notify(1, builder.build());
     }
 }
