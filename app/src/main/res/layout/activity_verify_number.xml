@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Presentation.VerifyNumber">
+
+    <ImageView
+        android:id="@+id/imageViewVerifyNumberBackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_05"
+        android:layout_marginTop="@dimen/spacing_06"
+        android:contentDescription="@string/back"
+        android:src="@drawable/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewVerifyNumberBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_05"
+        android:text="@string/back_strong"
+        android:textSize="@dimen/spacing_06"
+        app:layout_constraintStart_toEndOf="@id/imageViewVerifyNumberBackButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Text "Incluses" -->
+    <ImageView
+        android:id="@+id/logoImageView"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toEndOf="@id/textViewVerifyNumberBack"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageViewSmsIncluses"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="16dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/img_sms"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/logoImageView" />
+
+    <TextView
+        android:id="@+id/titleSmsVerifyNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SMS enviado!"
+        android:textColor="@color/dark_blue"
+        android:textSize="@dimen/spacing_10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageViewSmsIncluses"/>
+
+    <TextView
+        android:id="@+id/subtitleSmsVerifyNumber"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="Vá até sua caixa de entrada e verifique se o código chegou."
+        android:textSize="@dimen/spacing_05"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleSmsVerifyNumber"/>
+
+    <LinearLayout
+        android:id="@+id/inputCodeVerifyNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/subtitleSmsVerifyNumber"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/fieldCode1VerifyNumber"
+            style="@style/style_input"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/fieldCode1VerifyNumberEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textAlignment="center" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/fieldCode2VerifyNumber"
+            style="@style/style_input"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/fieldCode2VerifyNumberEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textAlignment="center" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/fieldCode3VerifyNumber"
+            style="@style/style_input"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/fieldCode3VerifyNumberEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textAlignment="center" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/fieldCode4VerifyNumber"
+            style="@style/style_input"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/fieldCode4VerifyNumberEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textAlignment="center" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/toVerifyButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/style_primary_button"
+        android:text="Verificar"
+        android:paddingStart="80dp"
+        android:paddingEnd="80dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/inputCodeVerifyNumber"/>
+
+    <TextView
+        android:id="@+id/resendCodeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reenviar Código"
+        android:visibility="invisible"
+        android:textColor="@color/light_blue"
+        android:layout_marginTop="@dimen/spacing_05"
+        app:layout_constraintTop_toBottomOf="@id/toVerifyButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

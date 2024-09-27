@@ -37,20 +37,35 @@ public class RegisterUserActivity extends AppCompatActivity {
                 }
         );
 
-        // Botão Continuar - Verificação CPF ou CNPJ
+        // Botão Continuar - Verificação CPF ou CNPJ e Telefone
         binding.continueButtonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Verificar se o telefone foi digitado
+                String phoneInput = binding.phoneEditText.getText().toString();
+                String cleanPhoneInput = phoneInput.replaceAll("[^\\d]", ""); // Remove caracteres não numéricos
+
+                if (cleanPhoneInput.isEmpty() || cleanPhoneInput.length() < 10) {
+                    // Exibe uma mensagem de erro se o telefone for inválido
+                    binding.phoneEditText.setError("Número de telefone inválido");
+                    return;
+                }
+
+                // Verificar CPF/CNPJ
                 String input = binding.numRegisterEditText.getText().toString();
                 String cleanInput = input.replaceAll("[^\\d]", ""); // Remove caracteres não numéricos
 
                 if (cleanInput.length() <= 11) {
                     // CPF - Direciona para tela de Registro de Usuário (User2)
-                    Intent intent = new Intent(RegisterUserActivity.this, RegisterUser2.class);
+                    Intent intent = new Intent(RegisterUserActivity.this, IntroVerifyNumber.class);
+                    intent.putExtra("phone_number", cleanPhoneInput); // Passa o número de telefone
+                    intent.putExtra("user_type", "user");
                     startActivity(intent);
                 } else if (cleanInput.length() == 14) {
                     // CNPJ - Direciona para tela de Registro de Empresa (RegisterEnterprise)
-                    Intent intent = new Intent(RegisterUserActivity.this, RegisterEnterprise.class);
+                    Intent intent = new Intent(RegisterUserActivity.this, IntroVerifyNumber.class);
+                    intent.putExtra("phone_number", cleanPhoneInput); // Passa o número de telefone
+                    intent.putExtra("user_type", "enterprise");
                     startActivity(intent);
                 } else {
                     // Exibe uma mensagem de erro se o documento for inválido
@@ -72,7 +87,7 @@ public class RegisterUserActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 String input = s.toString();
-                String cleanInput = input.replaceAll("[^\\d.]", "");
+                String cleanInput = input.replaceAll("[^\\d]", "");
 
                 StringBuilder formattedPhone = new StringBuilder();
 
