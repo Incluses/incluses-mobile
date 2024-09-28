@@ -3,12 +3,16 @@ package project.interdisciplinary.inclusesapp.Presentation;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 
+import com.google.android.material.textfield.TextInputLayout;
+
 import project.interdisciplinary.inclusesapp.Presentation.Enterprise.RegisterEnterprise;
+import project.interdisciplinary.inclusesapp.R;
 import project.interdisciplinary.inclusesapp.databinding.ActivityRegisterUserBinding;
 
 public class RegisterUserActivity extends AppCompatActivity {
@@ -18,59 +22,51 @@ public class RegisterUserActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Force Theme to Light Mode
+
+        // Forçar o modo claro
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         binding = ActivityRegisterUserBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         // Botão de voltar
-        binding.imageViewLoginUserBackButton.setOnClickListener(
-                v -> {
-                    finish();
-                }
-        );
-
-        binding.textViewLoginUserBack.setOnClickListener(
-                v -> {
-                    finish();
-                }
-        );
+        binding.imageViewLoginUserBackButton.setOnClickListener(v -> finish());
+        binding.textViewLoginUserBack.setOnClickListener(v -> finish());
 
         // Botão Continuar - Verificação CPF ou CNPJ e Telefone
-        binding.continueButtonRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Verificar se o telefone foi digitado
-                String phoneInput = binding.phoneEditText.getText().toString();
-                String cleanPhoneInput = phoneInput.replaceAll("[^\\d]", ""); // Remove caracteres não numéricos
+        binding.continueButtonRegister.setOnClickListener(v -> {
+            // Verificar se o telefone foi digitado
+            String phoneInput = binding.phoneEditText.getText().toString();
+            String cleanPhoneInput = phoneInput.replaceAll("[^\\d]", ""); // Remove caracteres não numéricos
 
-                if (cleanPhoneInput.isEmpty() || cleanPhoneInput.length() < 10) {
-                    // Exibe uma mensagem de erro se o telefone for inválido
-                    binding.phoneEditText.setError("Número de telefone inválido");
-                    return;
-                }
+            if (cleanPhoneInput.isEmpty() || cleanPhoneInput.length() < 10) {
+                // Exibe uma mensagem de erro se o telefone for inválido
+                binding.phoneEditText.setError("Número de telefone inválido", getResources().getDrawable(R.drawable.ic_phone));
+                return;
+            } else {
+                binding.phoneNumberInputLayout.setEndIconMode(TextInputLayout.END_ICON_CUSTOM); // Restaura o ícone de telefone
+                binding.phoneNumberInputLayout.setErrorIconDrawable(null); // Remove o ícone de erro
+            }
 
-                // Verificar CPF/CNPJ
-                String input = binding.numRegisterEditText.getText().toString();
-                String cleanInput = input.replaceAll("[^\\d]", ""); // Remove caracteres não numéricos
+            // Verificar CPF/CNPJ
+            String input = binding.numRegisterEditText.getText().toString();
+            String cleanInput = input.replaceAll("[^\\d]", ""); // Remove caracteres não numéricos
 
-                if (cleanInput.length() <= 11) {
-                    // CPF - Direciona para tela de Registro de Usuário (User2)
-                    Intent intent = new Intent(RegisterUserActivity.this, IntroVerifyNumber.class);
-                    intent.putExtra("phone_number", cleanPhoneInput); // Passa o número de telefone
-                    intent.putExtra("user_type", "user");
-                    startActivity(intent);
-                } else if (cleanInput.length() == 14) {
-                    // CNPJ - Direciona para tela de Registro de Empresa (RegisterEnterprise)
-                    Intent intent = new Intent(RegisterUserActivity.this, IntroVerifyNumber.class);
-                    intent.putExtra("phone_number", cleanPhoneInput); // Passa o número de telefone
-                    intent.putExtra("user_type", "enterprise");
-                    startActivity(intent);
-                } else {
-                    // Exibe uma mensagem de erro se o documento for inválido
-                    binding.numRegisterEditText.setError("CPF ou CNPJ inválido");
-                }
+            if (cleanInput.length() <= 11) {
+                // CPF - Direciona para tela de Registro de Usuário (User2)
+                Intent intent = new Intent(RegisterUserActivity.this, IntroVerifyNumber.class);
+                intent.putExtra("phone_number", cleanPhoneInput); // Passa o número de telefone
+                intent.putExtra("user_type", "user");
+                startActivity(intent);
+            } else if (cleanInput.length() == 14) {
+                // CNPJ - Direciona para tela de Registro de Empresa (RegisterEnterprise)
+                Intent intent = new Intent(RegisterUserActivity.this, IntroVerifyNumber.class);
+                intent.putExtra("phone_number", cleanPhoneInput); // Passa o número de telefone
+                intent.putExtra("user_type", "enterprise");
+                startActivity(intent);
+            } else {
+                // Exibe uma mensagem de erro se o documento for inválido
+                binding.numRegisterEditText.setError("CPF ou CNPJ inválido");
             }
         });
 
