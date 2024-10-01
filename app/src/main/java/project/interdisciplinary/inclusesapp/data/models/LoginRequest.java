@@ -28,4 +28,3 @@ public class LoginRequest {
         this.senha = senha;
     }
 }
-
