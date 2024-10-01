@@ -1,6 +1,5 @@
 package project.interdisciplinary.inclusesapp.data.models;
 
-
 public class LoginRequest {
 
     private String email;
@@ -29,5 +28,3 @@ public class LoginRequest {
         this.senha = senha;
     }
 }
-
-
