@@ -16,7 +16,7 @@
         android:background="@drawable/style_background_item_vacancie">
 
         <TextView
-            android:id="@+id/nameMyCourseTextView"
+            android:id="@+id/nameMyCourseTextViewItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_05"
@@ -42,7 +42,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.2"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/nameMyCourseTextView"/>
+            app:layout_constraintTop_toBottomOf="@id/nameMyCourseTextViewItem"/>
 
         <TextView
             android:id="@+id/pontuationMyCourseTextView"
@@ -87,7 +87,7 @@
 
 
         <RatingBar
-            android:id="@+id/courseRatingBar"
+            android:id="@+id/myCourseRatingBar"
             style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -99,7 +99,7 @@
             app:layout_constraintTop_toBottomOf="@+id/acessMyCourseTextView" />
 
         <Button
-            android:id="@+id/editMyCourseButton"
+            android:id="@+id/editMyCourseButtonItem"
             android:layout_width="wrap_content"
             style="@style/style_primary_button"
             android:paddingStart="@dimen/spacing_14"

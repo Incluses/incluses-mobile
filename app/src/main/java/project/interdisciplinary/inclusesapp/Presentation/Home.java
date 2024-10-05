@@ -52,6 +52,8 @@ public class Home extends AppCompatActivity {
     private String NOTIFICATION_NAME = "Incluses";
     private String NOTIFICATION_DESC = "Complete seu cadastro! Na tela de Editar Conta!";
 
+    private Fragment currentFragment;
+
     private Fragment getCurrentFragment() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         return fragmentManager.findFragmentById(R.id.fragmentContainerView);
@@ -235,6 +237,9 @@ public class Home extends AppCompatActivity {
     }
 
     private void replaceFragment(Fragment fragment) {
+        // Armazena o fragmento atual antes de substituir
+        currentFragment = getCurrentFragment();
+
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragmentContainerView, fragment);
@@ -267,11 +272,20 @@ public class Home extends AppCompatActivity {
                 int keypadHeight = screenHeight - r.bottom;
 
                 if (keypadHeight > screenHeight * 0.15) {
-                    // Keyboard is opened
+                    // O teclado está aberto
                 } else {
-                    // Keyboard is closed
-                    binding.nameEditText.clearFocus(); // Clear focus
-                    binding.searchInputLayout.clearFocus(); // Clear focus on TextInputLayout
+                    // O teclado foi fechado, capturar o texto do EditText
+                    String valorBusca = binding.nameEditText.getText().toString();
+
+                    // Verifica se o fragmento atual é VacanciesFragment e passa o texto
+                    if (currentFragment instanceof VacanciesFragment) {
+                        replaceFragment(new VacanciesFragment(true, valorBusca));
+                    } else if (currentFragment instanceof CoursesFragment) {
+                        replaceFragment(new VacanciesFragment(true, valorBusca));
+                    }
+
+                    binding.nameEditText.clearFocus(); // Remove o foco
+                    binding.searchInputLayout.clearFocus(); // Remove o foco do TextInputLayout
                 }
             }
         });
