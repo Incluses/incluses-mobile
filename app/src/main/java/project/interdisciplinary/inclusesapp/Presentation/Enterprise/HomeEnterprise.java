@@ -97,7 +97,9 @@ public class HomeEnterprise extends AppCompatActivity {
         binding.perfilImageViewEnterprise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(HomeEnterprise.this, UserPerfil.class));
+                Intent intent = new Intent(HomeEnterprise.this, EnterpriseProfileActivity.class);
+                intent.putExtra("user_type", "enterprise");
+                startActivity(intent);
             }
         });
 
