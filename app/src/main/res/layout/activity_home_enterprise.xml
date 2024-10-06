@@ -11,97 +11,54 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/topAppBarEnterprise"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rounded_app_bar_background"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/nameInputLayoutEnterprise"
-                    style="@style/style_input"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_03"
-                    android:layout_marginTop="@dimen/spacing_06"
-                    android:layout_marginBottom="@dimen/spacing_05"
-                    android:hint="@string/search"
-                    app:boxStrokeErrorColor="@color/red_error"
-                    app:boxStrokeWidth="@dimen/spacing_01"
-                    app:endIconMode="clear_text"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/perfilImageViewEnterprise"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_goneMarginBottom="@dimen/spacing_05"
-                    app:startIconDrawable="@drawable/ic_search">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/nameEditTextEnterprise"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="text"
-                        android:paddingTop="@dimen/spacing_03"
-                        android:paddingBottom="@dimen/spacing_03" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <ImageView
-                    android:id="@+id/perfilImageViewEnterprise"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:layout_marginStart="@dimen/spacing_05"
-                    android:layout_marginTop="@dimen/spacing_04"
-                    android:src="@drawable/ic_enterprise"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/moreImageViewEnterprise"
-                    app:layout_constraintStart_toEndOf="@+id/nameInputLayoutEnterprise"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageView
-                    android:id="@+id/moreImageViewEnterprise"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:layout_marginStart="@dimen/spacing_05"
-                    android:layout_marginTop="@dimen/spacing_05"
-                    android:layout_marginEnd="@dimen/spacing_03"
-                    android:src="@drawable/ic_more_options"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/perfilImageViewEnterprise"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </com.google.android.material.appbar.AppBarLayout>
-
+        <!-- FragmentContainerView que vai ficar "por baixo" -->
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentContainerViewEnterprise"
             android:name="project.interdisciplinary.inclusesapp.Presentation.Fragments.FeedFragment"
             android:layout_width="match_parent"
-            android:layout_height="600dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/bottom_nav_bar_enterprise"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/topAppBarEnterprise"
+            app:layout_constraintEnd_toEndOf="parent"
             app:navGraph="@navigation/home_navigation" />
 
+        <!-- Perfil ImageView com elevação para sobrepor o FragmentContainerView -->
+        <ImageView
+            android:id="@+id/perfilImageViewEnterprise"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="@dimen/spacing_09"
+            android:layout_marginEnd="@dimen/spacing_05"
+            android:src="@drawable/ic_enterprise"
+            android:elevation="5dp"
+            app:layout_constraintEnd_toStartOf="@+id/moreImageViewEnterprise"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- More Options ImageView com elevação para sobrepor o FragmentContainerView -->
+        <ImageView
+            android:id="@+id/moreImageViewEnterprise"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="@dimen/spacing_09"
+            android:layout_marginEnd="@dimen/spacing_03"
+            android:src="@drawable/ic_more_options"
+            android:elevation="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- LinearLayout para o BottomNavigation -->
         <LinearLayout
+            android:id="@+id/bottom_nav_bar_enterprise"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:background="@drawable/rounded_nav_bar_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fragmentContainerViewEnterprise">
+            app:layout_constraintStart_toStartOf="parent">
 
+            <!-- Animated Bar -->
             <View
                 android:id="@+id/animated_barEnterprise"
                 android:layout_width="60dp"
@@ -111,6 +68,7 @@
                 android:layout_marginBottom="0dp"
                 android:background="@color/purple" />
 
+            <!-- BottomNavigationView -->
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/bottom_navigationEnterprise"
                 android:layout_width="match_parent"
@@ -118,12 +76,15 @@
                 app:menu="@menu/bottom_navigation_menu" />
 
         </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <!-- Navigation Drawer -->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_viewEnterprise"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="end"
         app:menu="@menu/drawer_more_menu_enterprise" />
+
 </androidx.drawerlayout.widget.DrawerLayout>

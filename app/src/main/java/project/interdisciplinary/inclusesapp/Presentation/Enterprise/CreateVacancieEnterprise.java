@@ -27,6 +27,7 @@ public class CreateVacancieEnterprise extends AppCompatActivity {
 
         setupAutoComplete();
 
+        binding.cancelCreateVacancieButton.setOnClickListener(v -> finish());
 
     }
 

@@ -85,7 +85,7 @@ public class Home extends AppCompatActivity {
         requestNotificationPermission();
 
 
-        setupKeyboardListener();
+//        setupKeyboardListener();
 
         binding.perfilImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,15 +171,15 @@ public class Home extends AppCompatActivity {
         });
 
 
-        binding.nameEditText.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    replaceFragment(new ProfileSearchFragment());
-                }
-                return false;
-            }
-        });
+//        binding.nameEditText.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+//                    replaceFragment(new ProfileSearchFragment());
+//                }
+//                return false;
+//            }
+//        });
 
 
         // Set up the BottomNavigationView to switch fragments
@@ -257,25 +257,25 @@ public class Home extends AppCompatActivity {
         }
     }
 
-    private void setupKeyboardListener() {
-        rootView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                Rect r = new Rect();
-                rootView.getWindowVisibleDisplayFrame(r);
-                int screenHeight = rootView.getRootView().getHeight();
-                int keypadHeight = screenHeight - r.bottom;
-
-                if (keypadHeight > screenHeight * 0.15) {
-                    // Keyboard is opened
-                } else {
-                    // Keyboard is closed
-                    binding.nameEditText.clearFocus(); // Clear focus
-                    binding.searchInputLayout.clearFocus(); // Clear focus on TextInputLayout
-                }
-            }
-        });
-    }
+//    private void setupKeyboardListener() {
+//        rootView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+//            @Override
+//            public void onGlobalLayout() {
+//                Rect r = new Rect();
+//                rootView.getWindowVisibleDisplayFrame(r);
+//                int screenHeight = rootView.getRootView().getHeight();
+//                int keypadHeight = screenHeight - r.bottom;
+//
+//                if (keypadHeight > screenHeight * 0.15) {
+//                    // Keyboard is opened
+//                } else {
+//                    // Keyboard is closed
+//                    binding.nameEditText.clearFocus(); // Clear focus
+//                    binding.searchInputLayout.clearFocus(); // Clear focus on TextInputLayout
+//                }
+//            }
+//        });
+//    }
 
     // Método para solicitar a permissão de notificação
     public void requestNotificationPermission() {
