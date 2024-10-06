@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Presentation.Enterprise.EditAccountEnterpriseActivity">
+
+    <ImageView
+        android:id="@+id/imageViewEnterpriseEditAccountBackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_05"
+        android:layout_marginTop="@dimen/spacing_06"
+        android:contentDescription="@string/back"
+        android:src="@drawable/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewEnterpriseEditAccountBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_05"
+        android:text="@string/back_strong"
+        android:textSize="@dimen/spacing_06"
+        app:layout_constraintStart_toEndOf="@id/imageViewEnterpriseEditAccountBackButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/titleEnterpriseEditAccountTitle"
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_07"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="Editar conta"
+        android:textColor="@color/light_blue"
+        android:textSize="@dimen/spacing_08"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewEnterpriseEditAccountBack" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleEnterpriseEditAccountTitle">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/spacing_05">
+
+            <!-- field of name -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/nameEnterpriseEditAccountInputLayout"
+                style="@style/style_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_05"
+                android:hint="Nome"
+                app:boxStrokeErrorColor="@color/red_error"
+                app:boxStrokeWidth="@dimen/spacing_01"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/nameEnterpriseEditAccountEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:paddingStart="@dimen/spacing_05"
+                    android:paddingEnd="@dimen/spacing_05" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/websiteEnterpriseEditAccountInputLayout"
+                style="@style/style_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_05"
+                android:hint="Website"
+                app:boxStrokeErrorColor="@color/red_error"
+                app:boxStrokeWidth="@dimen/spacing_01"
+                app:endIconMode="clear_text"
+                app:hintTextColor="@color/gray">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/websiteEnterpriseEditAccountEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:paddingStart="@dimen/spacing_05"
+                    android:paddingEnd="@dimen/spacing_05" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/emailEnterpriseEditAccountInputLayout"
+                style="@style/style_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_03"
+                android:hint="@string/email"
+                app:boxStrokeErrorColor="@color/red_error"
+                app:boxStrokeWidth="@dimen/spacing_01"
+                app:endIconDrawable="@drawable/ic_email"
+                app:endIconMode="custom">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/emailEnterpriseEditAccountEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/reasonSocialEnterpriseEditAccountInputLayout"
+                style="@style/style_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_05"
+                android:hint="Razão Social"
+                app:boxStrokeErrorColor="@color/red_error"
+                app:boxStrokeWidth="@dimen/spacing_01"
+                app:endIconMode="clear_text"
+                app:hintTextColor="@color/gray">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/reasonSocialEnterpriseEditAccountEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:paddingStart="@dimen/spacing_05"
+                    android:paddingEnd="@dimen/spacing_05" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/biographyEnterpriseEditAccountInputLayout"
+                style="@style/style_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_05"
+                android:hint="Biografia"
+                app:boxStrokeErrorColor="@color/red_error"
+                app:boxStrokeWidth="@dimen/spacing_01"
+                app:endIconMode="clear_text"
+                app:hintTextColor="@color/gray">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/biographyEnterpriseEditAccountEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:scrollbars="vertical"
+                    android:gravity="top"
+                    android:paddingStart="@dimen/spacing_05"
+                    android:paddingEnd="@dimen/spacing_05" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/passwordEnterpriseEditAccountInputLayout"
+                style="@style/style_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_03"
+                android:hint="@string/password"
+                app:boxStrokeErrorColor="@color/red_error"
+                app:boxStrokeWidth="@dimen/spacing_01"
+                app:endIconMode="password_toggle"
+                app:startIconDrawable="@drawable/block">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/passwordEnterpriseEditAccountEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/cepEnterpriseEditAccountInputLayout"
+                style="@style/style_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_05"
+                android:hint="CEP"
+                app:boxStrokeErrorColor="@color/red_error"
+                app:boxStrokeWidth="@dimen/spacing_01"
+                app:counterEnabled="true"
+                app:counterMaxLength="9"
+                app:endIconDrawable="@drawable/ic_loc"
+                app:endIconMode="custom">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/cepEnterpriseEditAccountEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/numLocEnterpriseEditAccountInputLayout"
+                style="@style/style_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_05"
+                android:hint="Número"
+                app:boxStrokeErrorColor="@color/red_error"
+                app:boxStrokeWidth="@dimen/spacing_01"
+                app:endIconMode="clear_text"
+                app:hintTextColor="@color/gray">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/numLocEnterpriseEditAccountEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:paddingStart="@dimen/spacing_05"
+                    android:paddingEnd="@dimen/spacing_05" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/inputEnterprisePhoto"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginBottom="@dimen/spacing_07"
+                android:layout_marginTop="@dimen/spacing_05"
+                android:background="@drawable/style_box_inputs">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+ Adicionar foto"
+                    android:textColor="@color/dark_blue"
+                    android:textSize="@dimen/spacing_06"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

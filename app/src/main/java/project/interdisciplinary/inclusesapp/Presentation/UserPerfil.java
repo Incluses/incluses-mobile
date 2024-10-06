@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import project.interdisciplinary.inclusesapp.Presentation.Enterprise.EnterpriseProfileActivity;
 import project.interdisciplinary.inclusesapp.databinding.ActivityUserPerfilBinding;
 
 public class UserPerfil extends AppCompatActivity {
@@ -71,8 +72,9 @@ public class UserPerfil extends AppCompatActivity {
         binding.icConfigImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(UserPerfil.this, ScreenConfigurations.class));
-            }
+                Intent intent = new Intent(UserPerfil.this, ScreenConfigurations.class);
+                intent.putExtra("user_type", "user");
+                startActivity(intent);            }
         });
     }
 }

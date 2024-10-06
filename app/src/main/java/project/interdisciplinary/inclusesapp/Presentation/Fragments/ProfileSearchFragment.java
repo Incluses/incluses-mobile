@@ -14,6 +14,16 @@ import project.interdisciplinary.inclusesapp.databinding.FragmentProfileSearchBi
 
 public class ProfileSearchFragment extends Fragment {
 
+    private boolean search = false;
+
+    private String nome;
+
+    public ProfileSearchFragment() {}
+    public ProfileSearchFragment(boolean search, String nome) {
+        this.search = search;
+        this.nome = nome;
+    }
+
     private FragmentProfileSearchBinding binding;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -21,6 +31,12 @@ public class ProfileSearchFragment extends Fragment {
         binding = FragmentProfileSearchBinding.inflate(inflater, container, false);
         // Inflate the layout for this fragment
         View view = binding.getRoot();
+
+        //        //Verificação se é procura do perfil
+//        if (search) {
+//            Lógica para procurar o perfil
+//        }
+
 
         return view;
     }

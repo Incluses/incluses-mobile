@@ -15,6 +15,16 @@ import project.interdisciplinary.inclusesapp.databinding.FragmentCoursesEnterpri
 
 public class CoursesEnterpriseFragment extends Fragment {
 
+    private boolean search = false;
+
+    private String nome = "";
+
+    public CoursesEnterpriseFragment() {}
+    public CoursesEnterpriseFragment(boolean search, String nome) {
+        this.search = search;
+        this.nome = nome;
+    }
+
     private FragmentCoursesEnterpriseBinding binding;
 
     @Override

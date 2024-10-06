@@ -14,6 +14,16 @@ import project.interdisciplinary.inclusesapp.databinding.FragmentVacanciesEnterp
 
 public class VacanciesEnterpriseFragment extends Fragment {
 
+    private boolean search = false;
+
+    private String nome;
+
+    public VacanciesEnterpriseFragment() {}
+    public VacanciesEnterpriseFragment(boolean search, String nome) {
+        this.search = search;
+        this.nome = nome;
+    }
+
     private FragmentVacanciesEnterpriseBinding binding;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

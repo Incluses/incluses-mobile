@@ -33,6 +33,8 @@ import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import project.interdisciplinary.inclusesapp.Presentation.Enterprise.EnterpriseProfileActivity;
+import project.interdisciplinary.inclusesapp.Presentation.Enterprise.HomeEnterprise;
 import project.interdisciplinary.inclusesapp.Presentation.Fragments.ChatFragment;
 import project.interdisciplinary.inclusesapp.Presentation.Fragments.CoursesFragment;
 import project.interdisciplinary.inclusesapp.Presentation.Fragments.CreateCourseFragment;
@@ -51,8 +53,6 @@ public class Home extends AppCompatActivity {
 
     private String NOTIFICATION_NAME = "Incluses";
     private String NOTIFICATION_DESC = "Complete seu cadastro! Na tela de Editar Conta!";
-
-    private Fragment currentFragment;
 
     private Fragment getCurrentFragment() {
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -126,11 +126,13 @@ public class Home extends AppCompatActivity {
                     }
 
                 } else if (id == R.id.perfilMoreOptionsMenu) {
-                    startActivity(new Intent(Home.this, UserPerfil.class));
-
+                    Intent intent = new Intent(Home.this, UserPerfil.class);
+                    intent.putExtra("user_type", "user");
+                    startActivity(intent);
                 } else if (id == R.id.configurationsMoreOptionsMenu) {
-                    startActivity(new Intent(Home.this, ScreenConfigurations.class));
-
+                    Intent intent = new Intent(Home.this, ScreenConfigurations.class);
+                    intent.putExtra("user_type", "user");
+                    startActivity(intent);
                 } else if (id == R.id.positionsAndSalariesMoreOptionsMenu) {
                     if (!(getCurrentFragment() instanceof VacanciesFragment)) {
                         selectedFragment = new VacanciesFragment();
@@ -237,9 +239,6 @@ public class Home extends AppCompatActivity {
     }
 
     private void replaceFragment(Fragment fragment) {
-        // Armazena o fragmento atual antes de substituir
-        currentFragment = getCurrentFragment();
-
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragmentContainerView, fragment);
@@ -272,20 +271,11 @@ public class Home extends AppCompatActivity {
                 int keypadHeight = screenHeight - r.bottom;
 
                 if (keypadHeight > screenHeight * 0.15) {
-                    // O teclado está aberto
+                    // Teclado aberto
                 } else {
-                    // O teclado foi fechado, capturar o texto do EditText
-                    String valorBusca = binding.nameEditText.getText().toString();
-
-                    // Verifica se o fragmento atual é VacanciesFragment e passa o texto
-                    if (currentFragment instanceof VacanciesFragment) {
-                        replaceFragment(new VacanciesFragment(true, valorBusca));
-                    } else if (currentFragment instanceof CoursesFragment) {
-                        replaceFragment(new VacanciesFragment(true, valorBusca));
-                    }
-
-                    binding.nameEditText.clearFocus(); // Remove o foco
-                    binding.searchInputLayout.clearFocus(); // Remove o foco do TextInputLayout
+                    // Teclado fechado
+                    binding.nameEditText.clearFocus(); // Limpar o foco
+                    binding.searchInputLayout.clearFocus(); // Limpar foco no TextInputLayout
                 }
             }
         });

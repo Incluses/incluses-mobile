@@ -131,10 +131,13 @@ public class HomeEnterprise extends AppCompatActivity {
                     }
 
                 } else if (id == R.id.perfilMoreOptionsMenuEnterprise) {
-                    startActivity(new Intent(HomeEnterprise.this, UserPerfil.class));
-
+                    Intent intent = new Intent(HomeEnterprise.this, EnterpriseProfileActivity.class);
+                    intent.putExtra("user_type", "enterprise");
+                    startActivity(intent);
                 } else if (id == R.id.configurationsMoreOptionsMenuEnterprise) {
-                    startActivity(new Intent(HomeEnterprise.this, ScreenConfigurations.class));
+                    Intent intent = new Intent(HomeEnterprise.this, ScreenConfigurations.class);
+                    intent.putExtra("user_type", "enterprise");
+                    startActivity(intent);
 
                 } else if (id == R.id.positionsAndSalariesMoreOptionsMenuEnterprise) {
                     if (!(getCurrentFragment() instanceof VacanciesEnterpriseFragment)) {

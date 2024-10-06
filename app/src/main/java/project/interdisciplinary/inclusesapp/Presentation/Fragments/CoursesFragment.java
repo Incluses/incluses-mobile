@@ -16,9 +16,12 @@ public class CoursesFragment extends Fragment {
 
     private boolean search = false;
 
+    private String nomeCurso;
+
     public CoursesFragment() {}
     public CoursesFragment (boolean search, String nomeCurso) {
         this.search = search;
+        this.nomeCurso = nomeCurso;
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
