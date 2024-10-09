@@ -91,7 +91,7 @@ public class HomeEnterprise extends AppCompatActivity {
 
 
 
-        setupKeyboardListener();
+//        setupKeyboardListener();
 
         // Configuração do clique na imagem de perfil
         binding.perfilImageViewEnterprise.setOnClickListener(new View.OnClickListener() {
@@ -180,16 +180,16 @@ public class HomeEnterprise extends AppCompatActivity {
             }
         });
 
-        // Configuração para o clique no campo de texto
-        binding.nameEditTextEnterprise.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    replaceFragment(new ProfileSearchFragment());
-                }
-                return false;
-            }
-        });
+//        // Configuração para o clique no campo de texto
+//        binding.nameEditTextEnterprise.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+//                    replaceFragment(new ProfileSearchFragment());
+//                }
+//                return false;
+//            }
+//        });
 
         // Configuração do BottomNavigationView para alternar os fragmentos
         binding.bottomNavigationEnterprise.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -265,25 +265,25 @@ public class HomeEnterprise extends AppCompatActivity {
         }
     }
 
-    private void setupKeyboardListener() {
-        rootView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                Rect r = new Rect();
-                rootView.getWindowVisibleDisplayFrame(r);
-                int screenHeight = rootView.getRootView().getHeight();
-                int keypadHeight = screenHeight - r.bottom;
-
-                if (keypadHeight > screenHeight * 0.15) {
-                    // Teclado aberto
-                } else {
-                    // Teclado fechado
-                    binding.nameEditTextEnterprise.clearFocus(); // Limpar o foco
-                    binding.nameInputLayoutEnterprise.clearFocus(); // Limpar foco no TextInputLayout
-                }
-            }
-        });
-    }
+//    private void setupKeyboardListener() {
+//        rootView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+//            @Override
+//            public void onGlobalLayout() {
+//                Rect r = new Rect();
+//                rootView.getWindowVisibleDisplayFrame(r);
+//                int screenHeight = rootView.getRootView().getHeight();
+//                int keypadHeight = screenHeight - r.bottom;
+//
+//                if (keypadHeight > screenHeight * 0.15) {
+//                    // Teclado aberto
+//                } else {
+//                    // Teclado fechado
+//                    binding.nameEditTextEnterprise.clearFocus(); // Limpar o foco
+//                    binding.nameInputLayoutEnterprise.clearFocus(); // Limpar foco no TextInputLayout
+//                }
+//            }
+//        });
+//    }
 
 
     // Método para solicitar a permissão de notificação
