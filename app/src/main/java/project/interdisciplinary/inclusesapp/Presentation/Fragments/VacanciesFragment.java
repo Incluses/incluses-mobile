@@ -15,16 +15,6 @@ import project.interdisciplinary.inclusesapp.databinding.FragmentVacanciesBindin
 
 public class VacanciesFragment extends Fragment {
 
-    private boolean search = false;
-
-    private String nomeVaga;
-
-    public VacanciesFragment() {}
-    public VacanciesFragment(boolean search, String nomeVaga) {
-        this.search = search;
-        this.nomeVaga = nomeVaga;
-    }
-
     private FragmentVacanciesBinding binding;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -32,13 +22,6 @@ public class VacanciesFragment extends Fragment {
         binding = FragmentVacanciesBinding.inflate(inflater, container, false);
         // Inflate the layout for this fragment
         View view = binding.getRoot();
-
-        Log.e("Teste", "Nome: " + nomeVaga);
-
-//        //Verificação se é procura de vaga
-//        if (search) {
-//            Lógica para procurar vaga
-//        }
 
         return view;
     }

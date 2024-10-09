@@ -14,15 +14,6 @@ import project.interdisciplinary.inclusesapp.databinding.FragmentCoursesBinding;
 public class CoursesFragment extends Fragment {
     private FragmentCoursesBinding binding;
 
-    private boolean search = false;
-
-    private String nomeCurso;
-
-    public CoursesFragment() {}
-    public CoursesFragment (boolean search, String nomeCurso) {
-        this.search = search;
-        this.nomeCurso = nomeCurso;
-    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -40,11 +31,6 @@ public class CoursesFragment extends Fragment {
                         .replace(R.id.fragmentContainerView, createCourseFragment).commit();
             }
         });
-
-//        // É uma busca?
-//        if (search){
-//            Lógica para a busca
-//        }
 
         return view;
     }
