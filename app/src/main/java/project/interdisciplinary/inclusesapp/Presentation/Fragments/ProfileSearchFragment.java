@@ -13,8 +13,8 @@ import project.interdisciplinary.inclusesapp.databinding.FragmentChatBinding;
 import project.interdisciplinary.inclusesapp.databinding.FragmentProfileSearchBinding;
 
 public class ProfileSearchFragment extends Fragment {
-
     private FragmentProfileSearchBinding binding;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
-        android:id="@+id/perfilChatImageView"
+        android:id="@+id/perfilPhotoImageView"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:background="@drawable/ic_perfil"
@@ -26,7 +26,7 @@
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.01"
-        app:layout_constraintStart_toEndOf="@+id/perfilChatImageView"
+        app:layout_constraintStart_toEndOf="@+id/perfilPhotoImageView"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -35,11 +35,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_04"
         android:text="Descrição"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:textSize="@dimen/spacing_04"
         app:layout_constraintBottom_toTopOf="@id/itemDividerChatView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.01"
-        app:layout_constraintStart_toEndOf="@+id/perfilChatImageView"
+        app:layout_constraintStart_toEndOf="@+id/perfilPhotoImageView"
         app:layout_constraintTop_toBottomOf="@id/nameProfileSearchTextView"
         app:layout_constraintVertical_bias="0.0" />
 

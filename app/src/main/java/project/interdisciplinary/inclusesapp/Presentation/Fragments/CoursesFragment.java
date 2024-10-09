@@ -17,6 +17,7 @@ public class CoursesFragment extends Fragment {
 
     private View rootView;
     private FragmentCoursesBinding binding;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

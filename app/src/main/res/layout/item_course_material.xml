@@ -18,7 +18,7 @@
         android:layout_marginStart="@dimen/spacing_08"/>
 
     <TextView
-        android:id="@+id/titleMaterialCourse"
+        android:id="@+id/titleMaterialCourseItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ellipsize="end"

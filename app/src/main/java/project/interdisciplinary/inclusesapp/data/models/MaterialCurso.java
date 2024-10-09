@@ -1,8 +1,9 @@
 package project.interdisciplinary.inclusesapp.data.models;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public class MaterialCurso {
+public class MaterialCurso  implements Serializable {
 
     private UUID id;
     private String nome;

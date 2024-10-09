@@ -33,6 +33,8 @@ import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import project.interdisciplinary.inclusesapp.Presentation.Enterprise.EnterpriseProfileActivity;
+import project.interdisciplinary.inclusesapp.Presentation.Enterprise.HomeEnterprise;
 import project.interdisciplinary.inclusesapp.Presentation.Fragments.ChatFragment;
 import project.interdisciplinary.inclusesapp.Presentation.Fragments.CoursesFragment;
 import project.interdisciplinary.inclusesapp.Presentation.Fragments.CreateCourseFragment;
@@ -124,11 +126,13 @@ public class Home extends AppCompatActivity {
                     }
 
                 } else if (id == R.id.perfilMoreOptionsMenu) {
-                    startActivity(new Intent(Home.this, UserPerfil.class));
-
+                    Intent intent = new Intent(Home.this, UserPerfil.class);
+                    intent.putExtra("user_type", "user");
+                    startActivity(intent);
                 } else if (id == R.id.configurationsMoreOptionsMenu) {
-                    startActivity(new Intent(Home.this, ScreenConfigurations.class));
-
+                    Intent intent = new Intent(Home.this, ScreenConfigurations.class);
+                    intent.putExtra("user_type", "user");
+                    startActivity(intent);
                 } else if (id == R.id.positionsAndSalariesMoreOptionsMenu) {
                     if (!(getCurrentFragment() instanceof VacanciesFragment)) {
                         selectedFragment = new VacanciesFragment();
@@ -256,6 +260,7 @@ public class Home extends AppCompatActivity {
             item.setChecked(true);
         }
     }
+
 
 //    private void setupKeyboardListener() {
 //        rootView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {

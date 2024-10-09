@@ -5,6 +5,11 @@
     android:id="@+id/home_navigation_enterprise"
     app:startDestination="@id/feedEnterpriseFragment">
     <fragment
+        android:id="@+id/profileSearchFragment"
+        android:name="project.interdisciplinary.inclusesapp.Presentation.Fragments.ProfileSearchFragment"
+        android:label="fragment_profile_search"
+        tools:layout="@layout/fragment_profile_search" />
+    <fragment
         android:id="@+id/feedEnterpriseFragment"
         android:name="project.interdisciplinary.inclusesapp.Presentation.Enterprise.Fragment.FeedEnterpriseFragment"
         android:label="fragment_feed_enterprise"

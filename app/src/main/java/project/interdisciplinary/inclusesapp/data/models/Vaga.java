@@ -1,8 +1,9 @@
 package project.interdisciplinary.inclusesapp.data.models;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public class Vaga {
+public class Vaga implements Serializable {
 
     private UUID id;
     private String descricao;

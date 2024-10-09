@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Presentation.UserPerfil">
+    tools:context=".Presentation.Enterprise.EnterpriseProfileActivity">
 
     <!-- Fixed Header Elements -->
     <ImageView
-        android:id="@+id/imageViewLoginUserBackButton"
+        android:id="@+id/imageViewEnterpriseProfileBackButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_05"
@@ -19,24 +19,24 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textViewLoginUserBack"
+        android:id="@+id/textViewEnterpriseProfileBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_05"
         android:text="@string/back_strong"
         android:textSize="@dimen/spacing_06"
-        app:layout_constraintStart_toEndOf="@id/imageViewLoginUserBackButton"
+        app:layout_constraintStart_toEndOf="@id/imageViewEnterpriseProfileBackButton"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/icConfigImageView"
+        android:id="@+id/icConfigEnterpriseProfileImageView"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_marginTop="@dimen/spacing_05"
         android:src="@drawable/ic_settings"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.9"
-        app:layout_constraintStart_toEndOf="@id/textViewLoginUserBack"
+        app:layout_constraintStart_toEndOf="@id/textViewEnterpriseProfileBack"
         app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -46,7 +46,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewLoginUserBack">
+        app:layout_constraintTop_toBottomOf="@id/textViewEnterpriseProfileBack">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -62,7 +62,7 @@
                 android:backgroundTint="#FFFFFF">
 
                 <View
-                    android:id="@+id/imageViewBackgroundImagePerfil"
+                    android:id="@+id/imageViewBackgroundEnterpriseProfile"
                     android:layout_width="0dp"
                     android:layout_height="190dp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -72,7 +72,7 @@
                     android:background="@color/light_purple"/>
 
                 <ImageView
-                    android:id="@+id/ImageViewPerfilUser"
+                    android:id="@+id/ImageViewEnterpriseProfile"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_marginStart="@dimen/spacing_08"
@@ -82,30 +82,34 @@
                     tools:srcCompat="@tools:sample/avatars" />
 
                 <TextView
-                    android:id="@+id/namePerfiltextView"
+                    android:id="@+id/nameEnterpriseProfiletextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_05"
                     android:layout_marginTop="@dimen/spacing_07"
-                    android:text="Nome Social/Nome"
+                    android:text="Nome da Empresa"
+                    android:maxLines="1"
+                    android:ellipsize="end"
                     android:textColor="@color/black"
                     android:textSize="30dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/ImageViewPerfilUser" />
+                    app:layout_constraintTop_toBottomOf="@+id/ImageViewEnterpriseProfile" />
 
                 <TextView
-                    android:id="@+id/pronounUserProfile"
+                    android:id="@+id/decriptionEnterpriseProfile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_05"
-                    android:text="Ele/Dele"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:text="Breve Descrição"
                     android:textColor="@color/gray"
                     android:textSize="@dimen/spacing_05"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/namePerfiltextView" />
+                    app:layout_constraintTop_toBottomOf="@+id/nameEnterpriseProfiletextView" />
 
                 <TextView
-                    android:id="@+id/addBiographyProfile"
+                    android:id="@+id/addBiographyEnterpriseProfile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_05"
@@ -113,13 +117,12 @@
                     android:textColor="@color/light_blue"
                     android:textSize="@dimen/spacing_05"
                     android:layout_marginBottom="@dimen/spacing_05"
-                    app:layout_constraintBottom_toTopOf="@id/itemDividerPerfilView"
+                    app:layout_constraintBottom_toTopOf="@id/itemDividerEnterpriseProfileView"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/pronounUserProfile" />
-
+                    app:layout_constraintTop_toBottomOf="@id/decriptionEnterpriseProfile" />
 
                 <View
-                    android:id="@+id/itemDividerPerfilView"
+                    android:id="@+id/itemDividerEnterpriseProfileView"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/spacing_01"
                     android:background="@color/light_gray"
@@ -130,8 +133,6 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -140,66 +141,31 @@
                 android:backgroundTint="#FFFFFF">
 
                 <TextView
-                    android:id="@+id/textViewTitleCurriculum"
+                    android:id="@+id/textViewPosts"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="32dp"
                     android:fontFamily="sans-serif-black"
-                    android:text="Currículo"
+                    android:text="Publicações"
                     android:textColor="@color/black"
                     android:textSize="@dimen/spacing_08"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/inputCurriculum"
-                    android:layout_width="360dp"
-                    android:layout_height="100dp"
-                    android:layout_marginBottom="@dimen/spacing_07"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/myPostsEnterpriseProfileRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:listitem="@layout/item_feed"
                     android:layout_marginTop="@dimen/spacing_05"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textViewTitleCurriculum"
-                    android:background="@drawable/style_box_inputs">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="+ Adicione o anexo do Curriculo"
-                        android:textColor="@color/light_blue"
-                        android:textSize="@dimen/spacing_06"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <ImageView
-                    android:id="@+id/imageViewCurriculo"
-                    android:layout_width="300dp"
-                    android:layout_height="300dp"
-                    android:layout_marginTop="10dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/inputCurriculum"
-                    tools:srcCompat="@tools:sample/avatars" />
-
-                <ImageButton
-                    android:id="@+id/imageButtonRemoveImageCurriculum"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="52dp"
-                    android:layout_marginEnd="16dp"
-                    android:backgroundTint="#FFFFFF"
-                    android:visibility="invisible"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@android:drawable/ic_delete" />
+                    app:layout_constraintTop_toBottomOf="@id/textViewPosts"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
     </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

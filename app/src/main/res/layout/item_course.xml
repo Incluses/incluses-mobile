@@ -16,7 +16,7 @@
         android:background="@drawable/style_background_item_vacancie">
 
         <TextView
-            android:id="@+id/nameCourseTextView"
+            android:id="@+id/nameCourseTextViewItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_05"
@@ -41,7 +41,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.2"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/nameCourseTextView"/>
+            app:layout_constraintTop_toBottomOf="@id/nameCourseTextViewItem"/>
 
         <TextView
             android:id="@+id/skillsTextView"
@@ -73,7 +73,7 @@
             app:layout_constraintTop_toBottomOf="@id/skillsTextView" />
 
         <TextView
-            android:id="@+id/numberRatingTextView"
+            android:id="@+id/numberRatingTextViewItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="4.1"
@@ -91,11 +91,11 @@
             android:layout_marginTop="@dimen/spacing_03"
             android:progressTint="#F6B100"
             android:rating="4.1"
-            app:layout_constraintStart_toEndOf="@+id/numberRatingTextView"
+            app:layout_constraintStart_toEndOf="@+id/numberRatingTextViewItem"
             app:layout_constraintTop_toTopOf="@+id/barView" />
 
         <Button
-            android:id="@+id/subscribeVacancieButton"
+            android:id="@+id/initCourseButton"
             android:layout_width="wrap_content"
             style="@style/style_primary_button"
             android:paddingStart="@dimen/spacing_14"

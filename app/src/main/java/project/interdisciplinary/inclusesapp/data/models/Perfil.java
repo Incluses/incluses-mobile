@@ -1,8 +1,9 @@
 package project.interdisciplinary.inclusesapp.data.models;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public class Perfil {
+public class Perfil implements Serializable {
 
     private UUID id;
     private String nome;
