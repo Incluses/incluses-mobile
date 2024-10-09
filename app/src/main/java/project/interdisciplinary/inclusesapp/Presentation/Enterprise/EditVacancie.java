@@ -26,7 +26,7 @@ public class EditVacancie extends AppCompatActivity {
 
         setupAutoComplete();
 
-
+        binding.cancelEditVacancieButton.setOnClickListener(v -> finish());
     }
 
     private void setupAutoComplete() {
