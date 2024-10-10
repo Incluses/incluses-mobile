@@ -6,18 +6,37 @@ import androidx.appcompat.app.AppCompatDelegate;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
+import android.widget.Toast;
+
+import com.google.android.material.textfield.TextInputLayout;
+import com.google.gson.JsonObject;
 
 import java.util.Calendar;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
+import okhttp3.OkHttpClient;
 import project.interdisciplinary.inclusesapp.R;
+import project.interdisciplinary.inclusesapp.data.dbApi.UsuarioCallback;
+import project.interdisciplinary.inclusesapp.data.dbApi.UsuarioApi;
+import project.interdisciplinary.inclusesapp.data.models.CreateUserRequest;
 import project.interdisciplinary.inclusesapp.databinding.ActivityRegisterUser2Binding;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RegisterUser2 extends AppCompatActivity {
 
+    Date date = null;
+
+    private Retrofit retrofit;
     private ActivityRegisterUser2Binding binding;
 
     @Override
@@ -25,6 +44,9 @@ public class RegisterUser2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         // Force Theme to Light Mode
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
+        Intent actualIntent = getIntent();
+        Bundle infosUser = actualIntent.getExtras();
 
         binding = ActivityRegisterUser2Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -64,16 +86,19 @@ public class RegisterUser2 extends AppCompatActivity {
 
                                 Calendar dob = Calendar.getInstance();
                                 dob.set(year, month, dayOfMonth);
+
                                 int age = calculateAge(dob);
 
                                 if (age < 18) {
                                     binding.dateBornInputLayout.setError(getString(R.string.error_underage));
                                 } else {
                                     binding.dateBornInputLayout.setError(null);
+                                    date = new Date(year,month,dayOfMonth);
                                 }
                             }
                         },
                         year, month, dayOfMonth
+
                 );
 
                 dialog.show();
@@ -83,8 +108,80 @@ public class RegisterUser2 extends AppCompatActivity {
         //continue button
         binding.continueButton.setOnClickListener(
                 v -> {
-                    Intent intent = new Intent(RegisterUser2.this, JobsOfInterest.class);
-                    startActivity(intent);
+                    boolean dateFilled, pronounFilled, situationFilled, socialNameFilled;
+                    // validando data
+                    if(date == null){
+                        dateFilled = false;
+                        binding.dateBornEditText.setError("Selecione sua data de nascimennto",
+                                getResources().getDrawable(R.drawable.ic_calendar));
+                    }
+                    else {
+                        dateFilled = true;
+                        binding.dateBornInputLayout.setEndIconMode(TextInputLayout.END_ICON_CUSTOM); // Restaura o ícone de telefone
+                        binding.dateBornInputLayout.setErrorIconDrawable(null); // Remove o ícone de
+                    }
+
+                    // validando pronome
+                    String inputPronoun = binding.pronounEditText.getText().toString();
+                    if (!inputPronoun.isEmpty()){
+                        pronounFilled = true;
+                    }
+                    else {
+                        pronounFilled = false;
+                    }
+                    // validando situacao
+
+                    String inputSituation = binding.laborSituationAutoCompleteTextView.getText().toString();
+                    if (!inputSituation.isEmpty()){
+                        situationFilled = true;
+                    }
+                    else {
+                        situationFilled = false;
+                    }
+
+                    // validando nome social
+                    String inputSocialName = binding.nameSocialEditText.getText().toString();
+                    if(!inputSituation.isEmpty()){
+                        socialNameFilled = true;
+                    }
+                    else {
+                        socialNameFilled = false;
+                    }
+                    if(dateFilled && pronounFilled && situationFilled){
+                        CreateUserRequest createUserRequest;
+                        String name = infosUser.getString("name");
+                        String email = infosUser.getString("email");
+                        String password = infosUser.getString("password");
+                        String phone = infosUser.getString("phone_number");
+                        String cpf = infosUser.getString("cpf");
+                        if(socialNameFilled){
+                            createUserRequest = new CreateUserRequest(cpf, date,
+                                    inputPronoun, inputSocialName,
+                                    name, password, email, phone
+                            );
+                        }
+                        else {
+                            createUserRequest = new CreateUserRequest(cpf, date,
+                                    inputPronoun, null,
+                                    name, password, email, phone
+                            );
+                        }
+                        callApiRetrofitRegister(createUserRequest, new UsuarioCallback() {
+                            @Override
+                            public void onSuccess(JsonObject response) {
+                                Intent intent = new Intent(RegisterUser2.this, JobsOfInterest.class);
+                                startActivity(intent);
+                            }
+
+                            @Override
+                            public void onFailure(Throwable throwable) {
+                                Toast.makeText(RegisterUser2.this, "erro", Toast.LENGTH_LONG).show();
+                                Log.e("EU",throwable.getMessage());
+
+                            }
+                        });
+                    }
+
                 }
         );
 
@@ -114,5 +211,43 @@ public class RegisterUser2 extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, states);
         binding.laborSituationAutoCompleteTextView.setAdapter(adapter);
         binding.laborSituationAutoCompleteTextView.setDropDownHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+    }
+
+    private void callApiRetrofitRegister(CreateUserRequest user, UsuarioCallback callback) {
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(60, TimeUnit.SECONDS)
+                .build();
+
+        String urlApi = "https://incluses-api.onrender.com/";
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl(urlApi)
+                .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        UsuarioApi api = retrofit.create(UsuarioApi.class);
+        Call<JsonObject> call = api.register(user);
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    JsonObject responseBody = response.body();
+                    callback.onSuccess(responseBody); // Sucesso
+                } else if (response.code() == 401) {
+                }
+                else {
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable throwable) {
+                Log.e("ERRO", throwable.getMessage());
+                callback.onFailure(throwable); // Falha por erro de requisição
+            }
+        });
     }
 }
