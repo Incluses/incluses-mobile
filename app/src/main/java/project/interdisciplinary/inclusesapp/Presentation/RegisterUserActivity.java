@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -35,6 +36,60 @@ public class RegisterUserActivity extends AppCompatActivity {
 
         // Botão Continuar - Verificação CPF ou CNPJ e Telefone
         binding.continueButtonRegister.setOnClickListener(v -> {
+            boolean phoneFilled, numRegisterFilled, nameFilled, emailFilled, passwordFilled;
+            // Verificar se o nome foi digitado
+            String nameInput = binding.nameEditText.getText().toString();
+            if (!nameInput.isEmpty()){
+                nameFilled = true;
+                binding.phoneNumberInputLayout.setEndIconMode(TextInputLayout.END_ICON_CUSTOM); // Restaura o ícone de telefone
+                binding.phoneNumberInputLayout.setErrorIconDrawable(null); // Remove o ícone de erro
+            }
+            else {
+                nameFilled = false;
+                binding.nameEditText.setError("Digite um nome");
+            }
+            // Verificar se o email foi digitado
+            String emailInput = binding.emailEditText.getText().toString();
+            if (!emailInput.isEmpty()){
+                if (emailInput.contains("@")){
+                    emailFilled = true;
+                    binding.phoneNumberInputLayout.setEndIconMode(TextInputLayout.END_ICON_CUSTOM); // Restaura o ícone de telefone
+                    binding.phoneNumberInputLayout.setErrorIconDrawable(null); // Remove o ícone de erro
+                }
+                else {
+                    emailFilled = false;
+                    binding.emailEditText.setError("Um email deve conter arroba",getResources().getDrawable(R.drawable.ic_email));
+
+                }
+            }
+            else {
+                emailFilled = false;
+                binding.emailEditText.setError("Preencha o email",getResources().getDrawable(R.drawable.ic_email));
+            }
+            // senha
+            String passwordInput = binding.passwordEditText.getText().toString();
+            String passwordConfirmedInput = binding.passwordConfirmedEditText.getText().toString();
+            if (!passwordInput.isEmpty() || !passwordConfirmedInput.isEmpty()){
+                if (passwordInput.equals(passwordConfirmedInput)){
+                    passwordFilled = true;
+                    binding.phoneNumberInputLayout.setEndIconMode(TextInputLayout.END_ICON_CUSTOM); // Restaura o ícone de telefone
+                    binding.phoneNumberInputLayout.setErrorIconDrawable(null); // Remove o ícone de erro
+                }
+                else {
+                    passwordFilled = false;
+                    binding.passwordEditText.setError("A senha confirmada e a senha devem ser iguais", getResources().getDrawable(R.drawable.eye_block));
+                    binding.passwordConfirmedEditText.setError("A senha confirmada e a senha devem ser iguais", getResources().getDrawable(R.drawable.eye_block));
+                }
+            }
+            else{
+                passwordFilled = false;
+                if(passwordInput.isEmpty()){
+                    binding.passwordEditText.setError("A senha não pode ser vazia", getResources().getDrawable(R.drawable.eye_block));
+                }
+                else if(passwordConfirmedInput.isEmpty()){
+                    binding.passwordConfirmedEditText.setError("A senha confirmada não pode ser vazia",getResources().getDrawable(R.drawable.eye_block) );
+                }
+            }
             // Verificar se o telefone foi digitado
             String phoneInput = binding.phoneEditText.getText().toString();
             String cleanPhoneInput = phoneInput.replaceAll("[^\\d]", ""); // Remove caracteres não numéricos
@@ -42,31 +97,52 @@ public class RegisterUserActivity extends AppCompatActivity {
             if (cleanPhoneInput.isEmpty() || cleanPhoneInput.length() < 10) {
                 // Exibe uma mensagem de erro se o telefone for inválido
                 binding.phoneEditText.setError("Número de telefone inválido", getResources().getDrawable(R.drawable.ic_phone));
+                phoneFilled = false;
                 return;
             } else {
                 binding.phoneNumberInputLayout.setEndIconMode(TextInputLayout.END_ICON_CUSTOM); // Restaura o ícone de telefone
                 binding.phoneNumberInputLayout.setErrorIconDrawable(null); // Remove o ícone de erro
+                phoneFilled = true;
             }
 
             // Verificar CPF/CNPJ
-            String input = binding.numRegisterEditText.getText().toString();
-            String cleanInput = input.replaceAll("[^\\d]", ""); // Remove caracteres não numéricos
+            String inputNumRegister = binding.numRegisterEditText.getText().toString();
+            String cleanInputNumRegister = inputNumRegister.replaceAll("[^\\d]", ""); // Remove caracteres não numéricos
 
-            if (cleanInput.length() <= 11) {
-                // CPF - Direciona para tela de Registro de Usuário (User2)
-                Intent intent = new Intent(RegisterUserActivity.this, IntroVerifyNumber.class);
-                intent.putExtra("phone_number", cleanPhoneInput); // Passa o número de telefone
-                intent.putExtra("user_type", "user");
-                startActivity(intent);
-            } else if (cleanInput.length() == 14) {
-                // CNPJ - Direciona para tela de Registro de Empresa (RegisterEnterprise)
-                Intent intent = new Intent(RegisterUserActivity.this, IntroVerifyNumber.class);
-                intent.putExtra("phone_number", cleanPhoneInput); // Passa o número de telefone
-                intent.putExtra("user_type", "enterprise");
-                startActivity(intent);
-            } else {
+            if (!inputNumRegister.isEmpty()) {
+                numRegisterFilled = true;
+                binding.phoneNumberInputLayout.setEndIconMode(TextInputLayout.END_ICON_CUSTOM); // Restaura o ícone de telefone
+                binding.phoneNumberInputLayout.setErrorIconDrawable(null); // Remove o ícone de erro
+            }
+            else {
                 // Exibe uma mensagem de erro se o documento for inválido
-                binding.numRegisterEditText.setError("CPF ou CNPJ inválido");
+                numRegisterFilled = false;
+                binding.numRegisterEditText.setError("CPF ou CNPJ inválido",getResources().getDrawable(R.drawable.ic_doc));
+            }
+
+            if(nameFilled && emailFilled && passwordFilled && phoneFilled && numRegisterFilled){
+                Bundle infosUser = new Bundle();
+                infosUser.putString("name", nameInput);
+                infosUser.putString("email", emailInput);
+                infosUser.putString("password", passwordInput);
+                infosUser.putString("phone_number", cleanPhoneInput);
+                if(cleanInputNumRegister.length() == 11){
+                    Intent intent = new Intent(RegisterUserActivity.this, RegisterUser2.class);//todo: Mudar para o endereco certo dps de realizar o teste
+                    infosUser.putString("user_type", "user");
+                    infosUser.putString("cpf", cleanInputNumRegister);
+                    intent.putExtras(infosUser);
+                    startActivity(intent);
+                }
+                else if (cleanInputNumRegister.length() == 14){
+                    Intent intent = new Intent(RegisterUserActivity.this, RegisterEnterprise.class);//todo: Mudar para o endereco certo dps de realizar o teste
+                    infosUser.putString("user_type", "enterprise");
+                    infosUser.putString("cnpj", cleanInputNumRegister);
+                    intent.putExtras(infosUser);
+                    startActivity(intent);
+                }
+                else {
+                    binding.numRegisterEditText.setError("CPF ou CNPJ inválido", getResources().getDrawable(R.drawable.ic_doc));
+                }
             }
         });
 
