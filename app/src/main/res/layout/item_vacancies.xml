@@ -74,17 +74,18 @@
         app:layout_constraintTop_toBottomOf="@id/modeVacancieTextView" />
 
     <Button
-        android:id="@+id/subscribeVacancieButton"
+        android:id="@+id/viewVacancieButton"
         android:layout_width="wrap_content"
         style="@style/style_primary_button"
-        android:paddingStart="@dimen/spacing_17"
+        android:paddingStart="@dimen/spacing_09"
         android:paddingTop="@dimen/spacing_02"
         android:paddingBottom="@dimen/spacing_02"
-        android:paddingEnd="@dimen/spacing_17"
+        android:paddingEnd="@dimen/spacing_09"
         android:layout_height="wrap_content"
         android:layout_marginEnd="36dp"
         android:layout_marginTop="@dimen/spacing_02"
-        android:text="Inscrever-se"
+        android:layout_marginBottom="@dimen/spacing_06"
+        android:text="Visualizar"
         app:layout_constraintTop_toTopOf="@id/modeVacancieTextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

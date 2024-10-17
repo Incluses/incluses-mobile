@@ -16,6 +16,21 @@ public class Perfil implements Serializable {
     private TipoPerfil tipoPerfil;
     private Arquivo fotoPerfil;
 
+    @Override
+    public String toString() {
+        return "Perfil{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", senha='" + senha + '\'' +
+                ", email='" + email + '\'' +
+                ", biografia='" + biografia + '\'' +
+                ", fkTipoPerfilId=" + fkTipoPerfilId +
+                ", fkFtPerfilId=" + fkFtPerfilId +
+                ", tipoPerfil=" + tipoPerfil +
+                ", fotoPerfil=" + fotoPerfil +
+                '}';
+    }
+
     // Construtores
     public Perfil() {
     }

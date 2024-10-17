@@ -18,11 +18,14 @@ import android.Manifest;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -42,12 +45,16 @@ import project.interdisciplinary.inclusesapp.Presentation.Fragments.FeedFragment
 import project.interdisciplinary.inclusesapp.Presentation.Fragments.ProfileSearchFragment;
 import project.interdisciplinary.inclusesapp.Presentation.Fragments.VacanciesFragment;
 import project.interdisciplinary.inclusesapp.R;
+import project.interdisciplinary.inclusesapp.data.ConvertersToObjects;
 import project.interdisciplinary.inclusesapp.databinding.ActivityHomeBinding;
 
 public class Home extends AppCompatActivity {
 
     private ActivityHomeBinding binding;
     private View rootView;
+
+    private String token;
+    private String perfil;
 
     private ActivityResultLauncher<String> notificationPermissionLauncher;
 
@@ -69,6 +76,13 @@ public class Home extends AppCompatActivity {
         setContentView(binding.getRoot());
         rootView = binding.getRoot();
 
+        //Pegando os dados do SharedPreferences
+        SharedPreferences preferences = getApplicationContext().getSharedPreferences("app_prefs", Context.MODE_PRIVATE);
+        token = preferences.getString("token", "");
+        perfil = preferences.getString("perfil", "");
+
+        ConvertersToObjects.convertStringToPerfil(perfil);
+
         // Inicializa o launcher para solicitar a permissão de notificação
         notificationPermissionLauncher = registerForActivityResult(
                 new ActivityResultContracts.RequestPermission(),
@@ -86,13 +100,13 @@ public class Home extends AppCompatActivity {
         // Solicitar permissão de notificação na inicialização
         requestNotificationPermission();
 
-
-//        setupKeyboardListener();
-
         binding.perfilImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Home.this, UserPerfil.class));
+                Intent intent = new Intent(Home.this, UserPerfil.class);
+                intent.putExtra("user_type", "user");
+                intent.putExtra("token", token);
+                startActivity(intent);
             }
         });
 
@@ -128,10 +142,12 @@ public class Home extends AppCompatActivity {
                 } else if (id == R.id.perfilMoreOptionsMenu) {
                     Intent intent = new Intent(Home.this, UserPerfil.class);
                     intent.putExtra("user_type", "user");
+                    intent.putExtra("token", token);
                     startActivity(intent);
                 } else if (id == R.id.configurationsMoreOptionsMenu) {
                     Intent intent = new Intent(Home.this, ScreenConfigurations.class);
                     intent.putExtra("user_type", "user");
+                    intent.putExtra("token", token);
                     startActivity(intent);
                 } else if (id == R.id.positionsAndSalariesMoreOptionsMenu) {
                     if (!(getCurrentFragment() instanceof VacanciesFragment)) {
@@ -239,6 +255,10 @@ public class Home extends AppCompatActivity {
     }
 
     private void replaceFragment(Fragment fragment) {
+        Bundle args = new Bundle();
+        args.putString("token", token);
+        fragment.setArguments(args);
+
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragmentContainerView, fragment);
@@ -260,27 +280,6 @@ public class Home extends AppCompatActivity {
             item.setChecked(true);
         }
     }
-
-
-//    private void setupKeyboardListener() {
-//        rootView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-//            @Override
-//            public void onGlobalLayout() {
-//                Rect r = new Rect();
-//                rootView.getWindowVisibleDisplayFrame(r);
-//                int screenHeight = rootView.getRootView().getHeight();
-//                int keypadHeight = screenHeight - r.bottom;
-//
-//                if (keypadHeight > screenHeight * 0.15) {
-//                    // Keyboard is opened
-//                } else {
-//                    // Keyboard is closed
-//                    binding.nameEditText.clearFocus(); // Clear focus
-//                    binding.searchInputLayout.clearFocus(); // Clear focus on TextInputLayout
-//                }
-//            }
-//        });
-//    }
 
     // Método para solicitar a permissão de notificação
     public void requestNotificationPermission() {

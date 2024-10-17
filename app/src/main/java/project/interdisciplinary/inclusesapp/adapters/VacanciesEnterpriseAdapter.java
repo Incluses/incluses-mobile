@@ -14,28 +14,26 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import project.interdisciplinary.inclusesapp.Presentation.Enterprise.HomeEnterprise;
 import project.interdisciplinary.inclusesapp.Presentation.ViewVacancie;
 import project.interdisciplinary.inclusesapp.R;
 import project.interdisciplinary.inclusesapp.data.models.Vaga;
-
-public class VacanciesAdapter extends RecyclerView.Adapter<VacanciesAdapter.ItemVacancieViewHolder> {
+public class VacanciesEnterpriseAdapter extends RecyclerView.Adapter<VacanciesEnterpriseAdapter.ItemVacancieViewHolder> {
     private List<Vaga> vagas = new ArrayList<>();
 
-    public VacanciesAdapter(List<Vaga> vagas) {
+    public VacanciesEnterpriseAdapter(List<Vaga> vagas) {
         this.vagas = vagas;
     }
 
     @NonNull
     @Override
-    public VacanciesAdapter.ItemVacancieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public VacanciesEnterpriseAdapter.ItemVacancieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // Inflar o layout do item
         View viewItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_vacancies, parent, false);
         return new ItemVacancieViewHolder(viewItem);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull VacanciesAdapter.ItemVacancieViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull VacanciesEnterpriseAdapter.ItemVacancieViewHolder holder, int position) {
         Vaga vaga = vagas.get(position);
 
         // setagem dos dados do item de curso
@@ -43,11 +41,13 @@ public class VacanciesAdapter extends RecyclerView.Adapter<VacanciesAdapter.Item
         holder.nameEnterprise.setText(vaga.getEmpresa().getPerfil().getNome());
         holder.typeWork.setText(vaga.getTipoVaga().getNome());
 
+        holder.btnView.setText("Analisar");
         holder.btnView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
                 bundle.putString("vaga", vaga.toString());
+                bundle.putString("type", "enterprise");
                 Intent intent = new Intent(v.getContext(), ViewVacancie.class);
                 intent.putExtras(bundle);
                 v.getContext().startActivity(intent);

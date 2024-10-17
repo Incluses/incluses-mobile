@@ -9,7 +9,7 @@ public class Usuario {
     private String cpf;
     private UUID fkPerfilId;
     private UUID fkCurriculoId;
-    private Date dtNascimento;
+    private String dtNascimento;
     private String pronomes;
     private String nomeSocial;
 
@@ -20,7 +20,7 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(UUID id, String cpf, UUID fkPerfilId, UUID fkCurriculoId, Date dtNascimento, String pronomes, String nomeSocial) {
+    public Usuario(UUID id, String cpf, UUID fkPerfilId, UUID fkCurriculoId, String dtNascimento, String pronomes, String nomeSocial) {
         this.id = id;
         this.cpf = cpf;
         this.fkPerfilId = fkPerfilId;
@@ -64,11 +64,11 @@ public class Usuario {
         this.fkCurriculoId = fkCurriculoId;
     }
 
-    public Date getDtNascimento() {
+    public String getDtNascimento() {
         return dtNascimento;
     }
 
-    public void setDtNascimento(Date dtNascimento) {
+    public void setDtNascimento(String dtNascimento) {
         this.dtNascimento = dtNascimento;
     }
 
