@@ -70,11 +70,13 @@
 
             <Button
                 android:id="@+id/btnAllJobs"
-                style="@style/style_primary_button"
+                style="@style/style_secondary_button"
                 android:paddingTop="@dimen/spacing_02"
                 android:paddingEnd="@dimen/spacing_05"
                 android:paddingStart="@dimen/spacing_05"
                 android:paddingBottom="@dimen/spacing_02"
+                android:backgroundTint="@color/dark_blue"
+                android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_03"
@@ -94,7 +96,7 @@
                 android:text="Recomendados" />
 
             <Button
-                android:id="@+id/btnFavorites"
+                android:id="@+id/btnPresencial"
                 style="@style/style_secondary_button"
                 android:paddingTop="@dimen/spacing_02"
                 android:paddingEnd="@dimen/spacing_05"
@@ -103,10 +105,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/spacing_03"
-                android:text="Favoritas"/>
+                android:text="Presenciais"/>
 
             <Button
-                android:id="@+id/btncloseLocation"
+                android:id="@+id/btnRemote"
                 style="@style/style_secondary_button"
                 android:paddingTop="@dimen/spacing_02"
                 android:paddingEnd="@dimen/spacing_05"
@@ -115,7 +117,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/spacing_03"
-                android:text="Perto de você"/>
+                android:text="Remotas"/>
+
+            <Button
+                android:id="@+id/btnHibrid"
+                style="@style/style_secondary_button"
+                android:paddingTop="@dimen/spacing_02"
+                android:paddingEnd="@dimen/spacing_05"
+                android:paddingStart="@dimen/spacing_05"
+                android:paddingBottom="@dimen/spacing_02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/spacing_03"
+                android:text="Hibrídas"/>
 
         </LinearLayout>
     </HorizontalScrollView>

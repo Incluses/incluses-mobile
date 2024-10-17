@@ -4,9 +4,20 @@ public class LoginResponse {
     private String token;
     private String type;
 
-    public LoginResponse(String token, String type) {
+    private Perfil perfil;;
+
+    public LoginResponse(String token, String type, Perfil perfil) {
         this.token = token;
         this.type = type;
+        this.perfil = perfil;
+    }
+
+    public Perfil getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(Perfil perfil) {
+        this.perfil = perfil;
     }
 
     public String getToken() {

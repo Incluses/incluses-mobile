@@ -4,7 +4,9 @@ import android.Manifest;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Rect;
 import android.os.Build;
@@ -42,6 +44,7 @@ import project.interdisciplinary.inclusesapp.Presentation.Home;
 import project.interdisciplinary.inclusesapp.Presentation.ScreenConfigurations;
 import project.interdisciplinary.inclusesapp.Presentation.UserPerfil;
 import project.interdisciplinary.inclusesapp.R;
+import project.interdisciplinary.inclusesapp.data.ConvertersToObjects;
 import project.interdisciplinary.inclusesapp.databinding.ActivityHomeEnterpriseBinding;
 import project.interdisciplinary.inclusesapp.Presentation.Fragments.*;
 
@@ -49,6 +52,9 @@ public class HomeEnterprise extends AppCompatActivity {
 
     private ActivityHomeEnterpriseBinding binding;
     private View rootView;
+
+    private String token;
+    private String perfil;
 
     private ActivityResultLauncher<String> notificationPermissionLauncher;
 
@@ -70,6 +76,13 @@ public class HomeEnterprise extends AppCompatActivity {
         binding = ActivityHomeEnterpriseBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         rootView = binding.getRoot();
+
+        //Pegando os dados do SharedPreferences
+        SharedPreferences preferences = getApplicationContext().getSharedPreferences("app_prefs", Context.MODE_PRIVATE);
+        token = preferences.getString("token", "");
+        perfil = preferences.getString("perfil", "");
+
+        ConvertersToObjects.convertStringToPerfil(perfil);
 
 
         // Inicializa o launcher para solicitar a permissão de notificação
@@ -264,27 +277,6 @@ public class HomeEnterprise extends AppCompatActivity {
             item.setChecked(true);
         }
     }
-
-//    private void setupKeyboardListener() {
-//        rootView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-//            @Override
-//            public void onGlobalLayout() {
-//                Rect r = new Rect();
-//                rootView.getWindowVisibleDisplayFrame(r);
-//                int screenHeight = rootView.getRootView().getHeight();
-//                int keypadHeight = screenHeight - r.bottom;
-//
-//                if (keypadHeight > screenHeight * 0.15) {
-//                    // Teclado aberto
-//                } else {
-//                    // Teclado fechado
-//                    binding.nameEditTextEnterprise.clearFocus(); // Limpar o foco
-//                    binding.nameInputLayoutEnterprise.clearFocus(); // Limpar foco no TextInputLayout
-//                }
-//            }
-//        });
-//    }
-
 
     // Método para solicitar a permissão de notificação
     public void requestNotificationPermission() {

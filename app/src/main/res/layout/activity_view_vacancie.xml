@@ -29,16 +29,18 @@
 
     <TextView
         android:id="@+id/titleViewVacancie"
-        android:layout_width="380dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Nome da Vaga"
         android:ellipsize="end"
-        android:maxLines="1"
+        android:maxLines="3"
+        android:textAlignment="center"
+        android:layout_margin="@dimen/spacing_05"
+        android:text="Nome da Vaga"
         android:textColor="@color/light_blue"
         android:textSize="@dimen/spacing_08"
-        android:layout_marginStart="@dimen/spacing_07"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewViewVacancieBack"/>
+        app:layout_constraintTop_toBottomOf="@id/textViewViewVacancieBack" />
 
     <TextView
         android:id="@+id/descriptionTitleViewVacancie"
@@ -59,11 +61,25 @@
         android:text="      Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur sapiente eum temporibus, et ipsam excepturi harum repellendus voluptate, laudantium dolor quas cum necessitatibus? Soluta consequatur quibusdam quaerat debitis officiis! Ducimus quam nostrum, assumenda labore dolores neque nesciunt nobis nulla non. Dolores, veritatis eveniet. Sit dolores quam sint blanditiis reprehenderit eligendi!"
         android:textColor="@color/light_blue"
         android:textSize="@dimen/spacing_05"
+        android:layout_marginEnd="@dimen/spacing_08"
+        android:layout_marginStart="@dimen/spacing_08"
         android:layout_marginTop="@dimen/spacing_08"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/descriptionTitleViewVacancie"/>
 
-
+<Button
+    android:id="@+id/btnSubscribeVacancie"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    style="@style/style_primary_button"
+    android:text="Inscrever-se"
+    android:textSize="@dimen/spacing_06"
+    android:paddingStart="@dimen/spacing_09"
+    android:paddingEnd="@dimen/spacing_09"
+    android:layout_marginTop="@dimen/spacing_09"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/descriptionViewVacancie"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

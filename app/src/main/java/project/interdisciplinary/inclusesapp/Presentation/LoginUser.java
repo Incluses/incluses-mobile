@@ -14,11 +14,16 @@ import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 import project.interdisciplinary.inclusesapp.Presentation.Enterprise.HomeEnterprise;
-import project.interdisciplinary.inclusesapp.Presentation.Enterprise.RegisterEnterprise;
+import project.interdisciplinary.inclusesapp.data.dbApi.EmpresaApi;
+import project.interdisciplinary.inclusesapp.data.dbApi.EmpresaCallback;
 import project.interdisciplinary.inclusesapp.data.dbApi.LoginApi;
 import project.interdisciplinary.inclusesapp.data.dbApi.LoginCallback;
+import project.interdisciplinary.inclusesapp.data.dbApi.PerfilApi;
+import project.interdisciplinary.inclusesapp.data.dbApi.PerfilCallback;
+import project.interdisciplinary.inclusesapp.data.models.CreateEnterpriseRequest;
 import project.interdisciplinary.inclusesapp.data.models.LoginRequest;
 import project.interdisciplinary.inclusesapp.data.models.LoginResponse;
+import project.interdisciplinary.inclusesapp.data.models.Perfil;
 import project.interdisciplinary.inclusesapp.databinding.ActivityLoginUserBinding;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -68,19 +73,31 @@ public class LoginUser extends AppCompatActivity {
                 Toast.makeText(LoginUser.this, "Por favor, insira um Email ou Senha.", Toast.LENGTH_SHORT).show();
             }else {
                 LoginRequest login = new LoginRequest(emailInput,passwordInput);
+
+                SharedPreferences preferences = getSharedPreferences("app_prefs", MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
                 callApiRetrofitLogin(login, new LoginCallback() {
                     @Override
                     public void onSuccess(LoginResponse loginResponse) {
                         // Aqui você pode usar os dados do loginResponse e atualizar a UI
                         String token = loginResponse.getToken();
+                        Perfil perfil = loginResponse.getPerfil();
+
+                        editor.putString("token", token);
+                        editor.putString("perfil", perfil.toString());
+                        editor.apply();
+
                         String type = loginResponse.getType();
                         // Faça o que precisar com o token e type
                         if(type.equals("ROLE_EMPRESA")){
-                            startActivity(new Intent(LoginUser.this, HomeEnterprise.class));
+
+                            Intent intent = new Intent(LoginUser.this, HomeEnterprise.class);
+                            startActivity(intent);
                             finish();
                         }
                         else if (type.equals("ROLE_USUARIO")){
-                            startActivity(new Intent(LoginUser.this, Home.class));
+                            Intent intent = new Intent(LoginUser.this, Home.class);
+                            startActivity(intent);
                             finish();
                         }
                         else {
@@ -143,4 +160,5 @@ public class LoginUser extends AppCompatActivity {
             }
         });
     }
+
 }

@@ -1,25 +1,48 @@
 package project.interdisciplinary.inclusesapp.Presentation.Enterprise.Fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Rect;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.Toast;
 
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.OkHttpClient;
 import project.interdisciplinary.inclusesapp.Presentation.CreateCourseActivity;
 import project.interdisciplinary.inclusesapp.Presentation.Enterprise.CreateVacancieEnterprise;
 import project.interdisciplinary.inclusesapp.Presentation.Fragments.CoursesFragment;
 import project.interdisciplinary.inclusesapp.R;
+import project.interdisciplinary.inclusesapp.adapters.VacanciesAdapter;
+import project.interdisciplinary.inclusesapp.adapters.VacanciesEnterpriseAdapter;
+import project.interdisciplinary.inclusesapp.data.dbApi.VacanciesApi;
+import project.interdisciplinary.inclusesapp.data.dbApi.VacanciesCallback;
+import project.interdisciplinary.inclusesapp.data.models.Vaga;
 import project.interdisciplinary.inclusesapp.databinding.FragmentCreateVacancieEnterpriseBinding;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CreateVacancieEnterpriseFragment extends Fragment {
 
     private View rootView;
+
+    private Retrofit retrofit;
+
+    private String token;
 
     private FragmentCreateVacancieEnterpriseBinding binding;
 
@@ -34,6 +57,10 @@ public class CreateVacancieEnterpriseFragment extends Fragment {
 
         setupKeyboardListener();
 
+        SharedPreferences preferences = getActivity().getSharedPreferences("app_prefs", Context.MODE_PRIVATE);
+        token = preferences.getString("token", "");
+
+
         binding.btnAllVacanciesEnterprise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -43,6 +70,10 @@ public class CreateVacancieEnterpriseFragment extends Fragment {
             }
         });
 
+        // Define o LayoutManager uma vez
+        binding.myVacanciesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        // Chama o setupAdapter para buscar as vagas
         binding.createVacanciesMyVacancieButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,8 +83,64 @@ public class CreateVacancieEnterpriseFragment extends Fragment {
             }
         });
 
+        setupAdapter(new VacanciesCallback() {
+            @Override
+            public void onSuccess(List<Vaga> vacanciesResponse) {
+                // Aqui você define o Adapter no RecyclerView
+                binding.myVacanciesRecyclerView.setAdapter(new VacanciesEnterpriseAdapter(vacanciesResponse));
+            }
+
+            @Override
+            public void onFailure(Throwable throwable) {
+                Log.e("Error", throwable.getMessage());
+                Toast.makeText(getContext(), throwable.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
         return view;
+    }
+
+    private void setupAdapter(VacanciesCallback callback) {
+
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(60, TimeUnit.SECONDS)
+                .build();
+
+        String urlApi = "https://incluses-api.onrender.com/";
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl(urlApi)
+                .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        VacanciesApi api = retrofit.create(VacanciesApi.class);
+        Call<List<Vaga>> call = api.getVacancies(token);
+        call.enqueue(new Callback<List<Vaga>>() {
+            @Override
+            public void onResponse(Call<List<Vaga>> call, Response<List<Vaga>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<Vaga> responseBody = response.body();
+                    callback.onSuccess(responseBody);
+                } else if (response.code() == 401) {
+                    // Token inválido ou expirado
+                    callback.onFailure(new Exception("Token expirado ou inválido!"));
+                } else {
+                    // Outro erro
+                    callback.onFailure(new Exception("Erro ao buscar vagas: " + response.code()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Vaga>> call, Throwable throwable) {
+                Toast.makeText(getContext(), "erro", Toast.LENGTH_LONG).show();
+                Log.e("ERRO", throwable.getMessage());
+                callback.onFailure(throwable); // Falha por erro de requisição
+            }
+        });
     }
 
     private void setupKeyboardListener() {
