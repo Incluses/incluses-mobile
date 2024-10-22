@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import java.util.List;
@@ -41,6 +42,8 @@ public class CreateVacancieEnterprise extends AppCompatActivity {
     private Retrofit retrofit;
     private String token;
 
+    private Empresa empresaObj;
+
     private ActivityCreateVacancieEnterpriseBinding binding;
 
     @Override
@@ -59,8 +62,17 @@ public class CreateVacancieEnterprise extends AppCompatActivity {
 
         SharedPreferences preferences = getApplicationContext().getSharedPreferences("app_prefs", Context.MODE_PRIVATE);
         token = preferences.getString("token", "");
+        String empresaJson = preferences.getString("empresa", "");
 
+        // Verifique se o JSON não é nulo ou vazio antes de tentar convertê-lo
+        if (!empresaJson.isEmpty()) {
+            Gson gson = new Gson();
+            empresaObj = gson.fromJson(empresaJson, Empresa.class);  // Converte o JSON de volta para o objeto Empresa
 
+            Log.e("Empresa", "ID: " + empresaObj.getId());
+        } else {
+            Log.e("Empresa", "Nenhuma empresa encontrada no SharedPreferences.");
+        }
         // Configurando o botão "Next" para criar a vaga
         binding.nextCreateVacancieButton.setOnClickListener(v -> {
             String nameVacancie = binding.nameCreateVacancieEditText.getText().toString();
@@ -72,8 +84,15 @@ public class CreateVacancieEnterprise extends AppCompatActivity {
                 CriarVagaDTO criarVagaDTO = new CriarVagaDTO();
                 criarVagaDTO.setNome(nameVacancie);
                 criarVagaDTO.setDescricao(descriptionVacancie);
-                criarVagaDTO.setEmpresaId(UUID.fromString("4b5e7937-6c1b-4394-aad5-846084e22c46"));
-                criarVagaDTO.setTipoVagaId(UUID.fromString("ae37a7e5-51b3-4a3a-b147-317844999139"));
+                criarVagaDTO.setEmpresaId(UUID.fromString(String.valueOf(empresaObj.getId())));
+
+                if (typeVacancie.equals("Presencial")) {
+                    criarVagaDTO.setTipoVagaId(UUID.fromString("8079ee46-7f04-493d-b16e-d1206091abca"));
+                } else if (typeVacancie.equals("Remoto")) {
+                    criarVagaDTO.setTipoVagaId(UUID.fromString("ee9cfa0b-fef2-44ed-b555-916507474224"));
+                } else {
+                    criarVagaDTO.setTipoVagaId(UUID.fromString("8984f2be-cbbe-49b8-961b-d17670ea38f8"));
+                }
 
                 // Chama o método para inserir a vaga no backend
                 insertVacancy(new VacanciesCallback() {

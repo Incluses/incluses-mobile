@@ -8,6 +8,8 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -68,14 +70,57 @@ public class VacanciesEnterpriseFragment extends Fragment {
             }
         });
 
+        // Adicionando o TextWatcher para buscar as vagas conforme o usuário digita
+        binding.searchVacancieEnterpriseByNameEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String nome = charSequence.toString().trim();
+                if (!nome.isEmpty()) {
+                    setupAdapterByNameVacancies(nome, new VacanciesCallback() {
+                        @Override
+                        public void onSuccess(List<Vaga> vacanciesResponse) {
+                            // Atualiza o Adapter no RecyclerView
+                            binding.vacanciesRecyclerViewEnterprise.setAdapter(new VacanciesEnterpriseAdapter(vacanciesResponse));
+                        }
+
+                        @Override
+                        public void onFailure(Throwable throwable) {
+                            Log.e("Error", throwable.getMessage());
+                            Toast.makeText(getContext(), throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } else {
+                    // Se o campo de busca estiver vazio, carrega todas as vagas
+                    setupAdapter(new VacanciesCallback() {
+                        @Override
+                        public void onSuccess(List<Vaga> vacanciesResponse) {
+                            binding.vacanciesRecyclerViewEnterprise.setAdapter(new VacanciesEnterpriseAdapter(vacanciesResponse));
+                        }
+
+                        @Override
+                        public void onFailure(Throwable throwable) {
+                            Log.e("Error", throwable.getMessage());
+                            Toast.makeText(getContext(), throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {}
+        });
+
         // Define o LayoutManager uma vez
         binding.vacanciesRecyclerViewEnterprise.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // Chama o setupAdapter para buscar as vagas
+        // Inicialmente, carrega todas as vagas
         setupAdapter(new VacanciesCallback() {
             @Override
             public void onSuccess(List<Vaga> vacanciesResponse) {
-                // Aqui você define o Adapter no RecyclerView
+                // Define o Adapter no RecyclerView
                 binding.vacanciesRecyclerViewEnterprise.setAdapter(new VacanciesEnterpriseAdapter(vacanciesResponse));
             }
 
@@ -150,5 +195,45 @@ public class VacanciesEnterpriseFragment extends Fragment {
             }
         });
     }
+    private void setupAdapterByNameVacancies(String nome,VacanciesCallback callback) {
 
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(60, TimeUnit.SECONDS)
+                .build();
+
+        String urlApi = "https://incluses-api.onrender.com/";
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl(urlApi)
+                .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        VacanciesApi api = retrofit.create(VacanciesApi.class);
+        Call<List<Vaga>> call = api.getVacanciesByName(token, nome);
+        call.enqueue(new Callback<List<Vaga>>() {
+            @Override
+            public void onResponse(Call<List<Vaga>> call, Response<List<Vaga>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<Vaga> responseBody = response.body();
+                    callback.onSuccess(responseBody);
+                } else if (response.code() == 401) {
+                    // Token inválido ou expirado
+                    callback.onFailure(new Exception("Token expirado ou inválido!"));
+                } else {
+                    // Outro erro
+                    callback.onFailure(new Exception("Erro ao buscar vagas: " + response.code()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Vaga>> call, Throwable throwable) {
+                Toast.makeText(getContext(), "erro", Toast.LENGTH_LONG).show();
+                Log.e("ERRO", throwable.getMessage());
+                callback.onFailure(throwable); // Falha por erro de requisição
+            }
+        });
+    }
 }

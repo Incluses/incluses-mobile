@@ -20,16 +20,17 @@ public class Vaga implements Serializable {
 
     @Override
     public String toString() {
-        return "Vaga{" +
-                "id=" + id +
-                ", descricao='" + descricao + '\'' +
-                ", nome='" + nome + '\'' +
-                ", fkEmpresaId=" + fkEmpresaId +
-                ", fkTipoVagaId=" + fkTipoVagaId +
-                ", empresa=" + empresa +
-                ", tipoVaga=" + tipoVaga +
-                '}';
+        return "{" +
+                "\"id\": \"" + id + "\"," +
+                "\"descricao\": \"" + descricao + "\"," +
+                "\"nome\": \"" + nome + "\"," +
+                "\"fkEmpresaId\": \"" + fkEmpresaId + "\"," +
+                "\"fkTipoVagaId\": \"" + fkTipoVagaId + "\"," +
+                "\"empresa\": " + (empresa != null ? empresa.toString() : "null") + "," +
+                "\"tipoVaga\": " + (tipoVaga != null ? tipoVaga.toString() : "null") +
+                "}";
     }
+
 
     public Vaga(UUID id, String descricao, String nome, UUID fkEmpresaId, UUID fkTipoVagaId) {
         this.id = id;

@@ -6,6 +6,11 @@ public class CriarInscricaoVagaDTO {
     private UUID usuarioId;
     private UUID vagaId;
 
+    public CriarInscricaoVagaDTO(UUID usuarioId, UUID vagaId) {
+        this.usuarioId = usuarioId;
+        this.vagaId = vagaId;
+    }
+
     // Getters e Setters
     public UUID getUsuarioId() {
         return usuarioId;

@@ -35,7 +35,12 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.gson.JsonObject;
 
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.OkHttpClient;
 import project.interdisciplinary.inclusesapp.Presentation.Enterprise.EnterpriseProfileActivity;
 import project.interdisciplinary.inclusesapp.Presentation.Enterprise.HomeEnterprise;
 import project.interdisciplinary.inclusesapp.Presentation.Fragments.ChatFragment;
@@ -47,12 +52,20 @@ import project.interdisciplinary.inclusesapp.Presentation.Fragments.VacanciesFra
 import project.interdisciplinary.inclusesapp.R;
 import project.interdisciplinary.inclusesapp.data.ConvertersToObjects;
 import project.interdisciplinary.inclusesapp.data.models.Perfil;
+import project.interdisciplinary.inclusesapp.data.dbApi.UsuarioApi;
+import project.interdisciplinary.inclusesapp.data.dbApi.UsuarioCallback;
 import project.interdisciplinary.inclusesapp.databinding.ActivityHomeBinding;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Home extends AppCompatActivity {
 
     private ActivityHomeBinding binding;
     private View rootView;
+    private Retrofit retrofit;
 
     private String token;
     private String perfil;
@@ -79,10 +92,24 @@ public class Home extends AppCompatActivity {
 
         //Pegando os dados do SharedPreferences
         SharedPreferences preferences = getApplicationContext().getSharedPreferences("app_prefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
         token = preferences.getString("token", "");
         perfil = preferences.getString("perfil", "");
 
         Perfil perfil1 = ConvertersToObjects.convertStringToPerfil(perfil);
+        findUser(String.valueOf(ConvertersToObjects.convertStringToPerfil(perfil).getId()), new UsuarioCallback() {
+            @Override
+            public void onSuccess(JsonObject jsonObject) {
+                editor.putString("usuario", jsonObject.toString());
+                editor.apply();
+            }
+
+            @Override
+            public void onFailure(Throwable throwable) {
+                Log.e("ERRO", throwable.getMessage());
+            }
+        });
+
         // Inicializa o launcher para solicitar a permissão de notificação
         notificationPermissionLauncher = registerForActivityResult(
                 new ActivityResultContracts.RequestPermission(),
@@ -105,7 +132,6 @@ public class Home extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Home.this, UserPerfil.class);
                 intent.putExtra("user_type", "user");
-                intent.putExtra("token", token);
                 startActivity(intent);
             }
         });
@@ -255,10 +281,6 @@ public class Home extends AppCompatActivity {
     }
 
     private void replaceFragment(Fragment fragment) {
-        Bundle args = new Bundle();
-        args.putString("token", token);
-        fragment.setArguments(args);
-
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragmentContainerView, fragment);
@@ -331,5 +353,47 @@ public class Home extends AppCompatActivity {
 
         // Mostrar a notificação
         notificationManagerCompat.notify(1, builder.build());
+    }
+
+    private void findUser(String fkPerfil, UsuarioCallback callback) {
+
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(60, TimeUnit.SECONDS)
+                .build();
+
+        String urlApi = "https://incluses-api.onrender.com/";
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl(urlApi)
+                .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        UsuarioApi api = retrofit.create(UsuarioApi.class);
+        Call<JsonObject> call = api.getUserByProfileFk(token, UUID.fromString(fkPerfil));
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    JsonObject responseBody = response.body();
+                    callback.onSuccess(responseBody);
+                } else if (response.code() == 401) {
+                    // Token inválido ou expirado
+                    callback.onFailure(new Exception("Token expirado ou inválido!"));
+                } else {
+                    // Outro erro
+                    callback.onFailure(new Exception("Erro ao buscar usuario: " + response.code()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable throwable) {
+                Toast.makeText(getApplicationContext(), "erro", Toast.LENGTH_LONG).show();
+                Log.e("ERRO", throwable.getMessage());
+                callback.onFailure(throwable); // Falha por erro de requisição
+            }
+        });
     }
 }

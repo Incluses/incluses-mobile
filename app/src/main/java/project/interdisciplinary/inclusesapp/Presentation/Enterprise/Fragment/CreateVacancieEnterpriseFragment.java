@@ -9,6 +9,8 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +18,11 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -28,6 +34,7 @@ import project.interdisciplinary.inclusesapp.adapters.VacanciesAdapter;
 import project.interdisciplinary.inclusesapp.adapters.VacanciesEnterpriseAdapter;
 import project.interdisciplinary.inclusesapp.data.dbApi.VacanciesApi;
 import project.interdisciplinary.inclusesapp.data.dbApi.VacanciesCallback;
+import project.interdisciplinary.inclusesapp.data.models.Empresa;
 import project.interdisciplinary.inclusesapp.data.models.Vaga;
 import project.interdisciplinary.inclusesapp.databinding.FragmentCreateVacancieEnterpriseBinding;
 import retrofit2.Call;
@@ -39,10 +46,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class CreateVacancieEnterpriseFragment extends Fragment {
 
     private View rootView;
-
     private Retrofit retrofit;
-
     private String token;
+    private Empresa empresa;
 
     private FragmentCreateVacancieEnterpriseBinding binding;
 
@@ -59,8 +65,17 @@ public class CreateVacancieEnterpriseFragment extends Fragment {
 
         SharedPreferences preferences = getActivity().getSharedPreferences("app_prefs", Context.MODE_PRIVATE);
         token = preferences.getString("token", "");
+        String empresaJson = preferences.getString("empresa", "");
 
+        // Verifique se o JSON não é nulo ou vazio antes de tentar convertê-lo
+        if (!empresaJson.isEmpty()) {
+            Gson gson = new Gson();
+            empresa = gson.fromJson(empresaJson, Empresa.class);  // Converte o JSON de volta para o objeto Empresa
 
+            Log.e("Empresa", "ID: " + empresa.getId());
+        } else {
+            Log.e("Empresa", "Nenhuma empresa encontrada no SharedPreferences.");
+        }
         binding.btnAllVacanciesEnterprise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,6 +83,55 @@ public class CreateVacancieEnterpriseFragment extends Fragment {
                 getFragmentManager().beginTransaction()
                         .replace(R.id.fragmentContainerViewEnterprise, vacanciesEnterpriseFragment).commit();
             }
+        });
+
+        // Adicionando o TextWatcher para buscar as vagas conforme o usuário digita
+        binding.searchVacanciesCreatedByNameEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String nome = charSequence.toString().trim();
+                if (!nome.isEmpty()) {
+                    setupAdapterYourVacancies(empresa.getId(), new VacanciesCallback() {
+                        @Override
+                        public void onSuccess(List<Vaga> vacanciesResponse) {
+                            List<Vaga> vacanciesSearcheds = new ArrayList<>();
+                            for (Vaga vaga : vacanciesResponse) {
+                                if(vaga.getNome().toLowerCase().contains(nome.toLowerCase())) {
+                                    vacanciesSearcheds.add(vaga);
+                                }
+                            }
+                            // Atualiza o Adapter no RecyclerView
+                            binding.myVacanciesRecyclerView.setAdapter(new VacanciesEnterpriseAdapter(vacanciesSearcheds));
+                        }
+
+                        @Override
+                        public void onFailure(Throwable throwable) {
+                            Log.e("Error", throwable.getMessage());
+                            Toast.makeText(getContext(), throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } else {
+                    // Se o campo de busca estiver vazio, carrega todas as vagas
+                    setupAdapterYourVacancies(empresa.getId(), new VacanciesCallback() {
+                        @Override
+                        public void onSuccess(List<Vaga> vacanciesResponse) {
+                            binding.myVacanciesRecyclerView.setAdapter(new VacanciesEnterpriseAdapter(vacanciesResponse));
+                        }
+
+                        @Override
+                        public void onFailure(Throwable throwable) {
+                            Log.e("Error", throwable.getMessage());
+                            Toast.makeText(getContext(), throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {}
         });
 
         // Define o LayoutManager uma vez
@@ -83,7 +147,7 @@ public class CreateVacancieEnterpriseFragment extends Fragment {
             }
         });
 
-        setupAdapter(new VacanciesCallback() {
+        setupAdapterYourVacancies(empresa.getId(), new VacanciesCallback() {
             @Override
             public void onSuccess(List<Vaga> vacanciesResponse) {
                 // Aqui você define o Adapter no RecyclerView
@@ -101,7 +165,7 @@ public class CreateVacancieEnterpriseFragment extends Fragment {
         return view;
     }
 
-    private void setupAdapter(VacanciesCallback callback) {
+    private void setupAdapterYourVacancies(UUID fkEmpresa, VacanciesCallback callback) {
 
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .connectTimeout(60, TimeUnit.SECONDS)
@@ -118,7 +182,7 @@ public class CreateVacancieEnterpriseFragment extends Fragment {
                 .build();
 
         VacanciesApi api = retrofit.create(VacanciesApi.class);
-        Call<List<Vaga>> call = api.getVacancies(token);
+        Call<List<Vaga>> call = api.getVacanciesByEnterprise(token, fkEmpresa);
         call.enqueue(new Callback<List<Vaga>>() {
             @Override
             public void onResponse(Call<List<Vaga>> call, Response<List<Vaga>> response) {
