@@ -84,7 +84,7 @@
                 android:text="Todas as vagas" />
 
             <Button
-                android:id="@+id/btnRecommended"
+                android:id="@+id/btnInscritas"
                 style="@style/style_secondary_button"
                 android:paddingTop="@dimen/spacing_02"
                 android:paddingEnd="@dimen/spacing_05"
@@ -93,7 +93,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/spacing_03"
-                android:text="Recomendados" />
+                android:text="Vagas Inscritas" />
 
             <Button
                 android:id="@+id/btnPresencial"
@@ -129,7 +129,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/spacing_03"
-                android:text="Hibrídas"/>
+                android:text="Híbridas"/>
 
         </LinearLayout>
     </HorizontalScrollView>

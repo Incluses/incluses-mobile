@@ -41,7 +41,12 @@ public class VacanciesAdapter extends RecyclerView.Adapter<VacanciesAdapter.Item
         // setagem dos dados do item de curso
         holder.nameVacancie.setText(vaga.getNome());
         holder.nameEnterprise.setText(vaga.getEmpresa().getPerfil().getNome());
-        holder.typeWork.setText(vaga.getTipoVaga().getNome());
+
+        if (vaga.getTipoVaga().getNome().equals("Hibrido")) {
+            holder.typeWork.setText("Híbrido");
+        }else {
+            holder.typeWork.setText(vaga.getTipoVaga().getNome());
+        }
 
         holder.btnView.setOnClickListener(new View.OnClickListener() {
             @Override

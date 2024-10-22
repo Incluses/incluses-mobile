@@ -63,7 +63,7 @@
 
     <string-array name="type_vacancie_array">
         <item>Presencial</item>
-        <item>Home Office</item>
+        <item>Remoto</item>
         <item>Híbrido</item>
     </string-array>
 

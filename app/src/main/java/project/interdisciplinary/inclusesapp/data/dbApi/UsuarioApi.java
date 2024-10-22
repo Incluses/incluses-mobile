@@ -17,6 +17,6 @@ public interface UsuarioApi {
     @POST("usuario/public/inserir")
     Call<JsonObject> register(@Body CreateUserRequest createUserRequest);
 
-    @GET("usuario/selecionar-fk-perfil/{id}")
-    Call<JsonObject> findByFkPerfil(@Header ("Authorization") String token ,@Path("id")UUID fkPerfil);
+    @GET("usuario/selecionar-fk-perfil/{fkPerfil}")
+    Call<JsonObject> getUserByProfileFk(@Header("Authorization") String token, @Path("fkPerfil") UUID fkPerfil);
 }

@@ -36,6 +36,7 @@ import project.interdisciplinary.inclusesapp.data.dbApi.UsuarioCallback;
 import project.interdisciplinary.inclusesapp.data.models.Cep;
 import project.interdisciplinary.inclusesapp.data.models.CreateEnterpriseRequest;
 import project.interdisciplinary.inclusesapp.data.models.CreateUserRequest;
+import project.interdisciplinary.inclusesapp.data.models.Empresa;
 import project.interdisciplinary.inclusesapp.databinding.ActivityRegisterEnterpriseBinding;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -153,8 +154,9 @@ public class RegisterEnterprise extends AppCompatActivity {
 
                                                 @Override
                                                 public void onFailure(Throwable throwable) {
-
+                                                    Log.e("ERRO", throwable.getMessage());
                                                 }
+
                                             });
                                         }
                                     }else {

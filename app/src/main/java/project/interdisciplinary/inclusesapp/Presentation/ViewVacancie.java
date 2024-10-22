@@ -3,10 +3,14 @@ package project.interdisciplinary.inclusesapp.Presentation;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
 
 import java.util.Date;
 import java.util.List;
@@ -20,6 +24,8 @@ import project.interdisciplinary.inclusesapp.data.dbApi.InscricaoVacancie;
 import project.interdisciplinary.inclusesapp.data.dbApi.InscricaoVacancieCallback;
 import project.interdisciplinary.inclusesapp.data.dbApi.VacanciesApi;
 import project.interdisciplinary.inclusesapp.data.dbApi.VacanciesCallback;
+import project.interdisciplinary.inclusesapp.data.models.CriarInscricaoVagaDTO;
+import project.interdisciplinary.inclusesapp.data.models.Empresa;
 import project.interdisciplinary.inclusesapp.data.models.InscricaoVaga;
 import project.interdisciplinary.inclusesapp.data.models.Usuario;
 import project.interdisciplinary.inclusesapp.data.models.Vaga;
@@ -36,7 +42,12 @@ public class ViewVacancie extends AppCompatActivity {
 
     private Retrofit retrofit;
 
-    private String token = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2FvQGV4YW1wbGUuY29tIiwicm9sZSI6IlJPTEVfRU1QUkVTQSIsImV4cCI6MTcyOTAyMDc0OH0.aBpWGuDQUEvXisme2cL59do3M_qixLYUdh5LNuSjR7agEEhpkuKacowzRmgQx85-Y-Z23akV6z_srQuc8lW2TQ";
+    private String token;
+
+    private String perfil;
+    private Usuario userObj;
+
+    private boolean inscrito = false;
 
     private UUID idVaga;
     private UUID idCurrentUser;
@@ -55,40 +66,62 @@ public class ViewVacancie extends AppCompatActivity {
         binding.imageViewViewVacancieBackButton.setOnClickListener(v -> finish());
         binding.textViewViewVacancieBack.setOnClickListener(v -> finish());
 
+        SharedPreferences preferences = getApplicationContext().getSharedPreferences("app_prefs", Context.MODE_PRIVATE);
+        token = preferences.getString("token", "");
+        perfil = preferences.getString("perfil", "");
+        String usuarioJson = preferences.getString("usuario", "");
+
+        // Verifique se o JSON não é nulo ou vazio antes de tentar convertê-lo
+        if (!usuarioJson.isEmpty()) {
+            Gson gson = new Gson();
+            userObj = gson.fromJson(usuarioJson, Usuario.class);  // Converte o JSON de volta para o objeto Usuario
+
+            Log.e("Usuario", "ID: " + userObj.getId());
+        } else {
+            Log.e("Usuario", "Nenhuma empresa encontrada no SharedPreferences.");
+        }
+
         // Pegar dados vindos do bundle como String
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             String vagaString = bundle.getString("vaga");
+//            if (bundle.getString("type", "user").equals("enterprise")) {
+//                binding.btnSubscribeVacancie.setVisibility(View.GONE);
+//            }
             if (vagaString != null) {
                 // Método para converter a String de volta em um objeto Vaga ou extrair os campos
                 Vaga vaga = ConvertersToObjects.convertStringToVaga(vagaString);
+
 
                 if (vaga != null) {
                     // Exibir os dados na UI
                     binding.titleViewVacancie.setText(vaga.getNome());
                     binding.descriptionViewVacancie.setText(vaga.getDescricao());
-
-                    if (bundle.getString("type", "user").equals("enterprise")) {
+                    idVaga = vaga.getId();
+                    if (bundle.getString("type", "user").equals("enterprise") || inscrito) {
                         binding.btnSubscribeVacancie.setVisibility(View.GONE);
                     } else {
                         binding.btnSubscribeVacancie.setOnClickListener(v -> {
 
-                            // TODO: Adicionar funcionalidade de inscrição
+                            Usuario currentUser = new Usuario(userObj.getId(),userObj.getCpf(),
+                                    userObj.getFkPerfilId(),
+                                    userObj.getFkCurriculoId(), userObj.getDtNascimento(),
+                                    userObj.getPronomes(), userObj.getNomeSocial());
 
-                            Usuario currentUser = new Usuario(UUID.fromString("555da7cc-80c9-4967-870c-1d0b37765af2"),"12345678901",
-                                    UUID.fromString("54d087dd-6356-4462-bdac-2c8cf5ef0494"),
-                                    UUID.fromString("a11fefb6-06f4-4384-a0a9-649a1970cbab"), "1990-01-01T00:00:00.000+00:00",
-                                    "teste", "teste");
-                            idVaga = vaga.getId();
-                            idCurrentUser = new Usuario().getId();
-                            UUID idInscricaoVaga = UUID.randomUUID();
-                            InscricaoVaga inscricaoVaga = new InscricaoVaga(idInscricaoVaga, UUID.fromString("555da7cc-80c9-4967-870c-1d0b37765af2") , idVaga, currentUser, vaga);
+                            idCurrentUser = currentUser.getId();
+
+                            CriarInscricaoVagaDTO inscricaoVaga = new CriarInscricaoVagaDTO(idCurrentUser, idVaga);
 
                             insertSubscription(new InscricaoVacancieCallback() {
                                 @Override
                                 public void onSuccess(InscricaoVaga inscricaoVaga) {
                                     Toast.makeText(ViewVacancie.this, "Inscrito com sucesso!", Toast.LENGTH_SHORT).show();
                                     binding.btnSubscribeVacancie.setVisibility(View.GONE);
+                                }
+
+                                @Override
+                                public void onSuccessFind(List<InscricaoVaga> inscricaoVaga) {
+
                                 }
 
                                 @Override
@@ -110,7 +143,7 @@ public class ViewVacancie extends AppCompatActivity {
         }
     }
 
-    private void insertSubscription(InscricaoVacancieCallback callback, InscricaoVaga inscricaoVaga) {
+    private void insertSubscription(InscricaoVacancieCallback callback, CriarInscricaoVagaDTO inscricaoVaga) {
 
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .connectTimeout(60, TimeUnit.SECONDS)
@@ -137,7 +170,14 @@ public class ViewVacancie extends AppCompatActivity {
                 } else if (response.code() == 401) {
                     // Token inválido ou expirado
                     callback.onFailure(new Exception("Token expirado ou inválido!"));
-                } else {
+                } else if (response.code() == 400) {
+                    Toast.makeText(ViewVacancie.this, "Você já está inscrito!", Toast.LENGTH_SHORT).show();
+                    binding.btnSubscribeVacancie.setVisibility(View.GONE);
+                    callback.onFailure(new Exception("Registro ja existe!"));
+                }
+
+
+                else {
                     // Outro erro
                     callback.onFailure(new Exception("Erro ao fazer a inscrição: " + response.code()));
                 }
