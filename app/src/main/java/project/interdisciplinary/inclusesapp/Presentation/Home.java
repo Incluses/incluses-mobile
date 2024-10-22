@@ -37,6 +37,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.JsonObject;
 
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -371,7 +372,7 @@ public class Home extends AppCompatActivity {
                 .build();
 
         UsuarioApi api = retrofit.create(UsuarioApi.class);
-        Call<JsonObject> call = api.getUserByProfileFk(token, fkPerfil);
+        Call<JsonObject> call = api.getUserByProfileFk(token, UUID.fromString(fkPerfil));
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
