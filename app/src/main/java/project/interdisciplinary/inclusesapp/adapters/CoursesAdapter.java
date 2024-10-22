@@ -210,7 +210,7 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ItemCour
                 .build();
 
         UsuarioApi api = retrofit.create(UsuarioApi.class);
-        Call<JsonObject> call = api.findByFkPerfil(token,userId);
+        Call<JsonObject> call = api.getUserByProfileFk(token,userId);
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
