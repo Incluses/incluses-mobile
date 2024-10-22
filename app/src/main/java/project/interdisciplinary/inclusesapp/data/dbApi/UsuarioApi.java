@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import java.util.UUID;
 
 import project.interdisciplinary.inclusesapp.data.models.CreateUserRequest;
+import project.interdisciplinary.inclusesapp.data.models.Usuario;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -18,5 +19,4 @@ public interface UsuarioApi {
 
     @GET("usuario/selecionar-fk-perfil/{fkPerfil}")
     Call<JsonObject> getUserByProfileFk(@Header("Authorization") String token, @Path("fkPerfil") UUID fkPerfil);
-
 }

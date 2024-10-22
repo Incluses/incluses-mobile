@@ -84,4 +84,17 @@ public class MaterialCurso  implements Serializable {
     public void setArquivo(Arquivo arquivo) {
         this.arquivo = arquivo;
     }
+
+    @Override
+    public String toString() {
+        return "MaterialCurso{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", fkCursoId=" + fkCursoId +
+                ", fkArquivoId=" + fkArquivoId +
+                ", descricao='" + descricao + '\'' +
+                ", curso=" + curso +
+                ", arquivo=" + arquivo +
+                '}';
+    }
 }
