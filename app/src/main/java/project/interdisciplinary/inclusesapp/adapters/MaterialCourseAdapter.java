@@ -1,5 +1,7 @@
 package project.interdisciplinary.inclusesapp.adapters;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,15 +13,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import project.interdisciplinary.inclusesapp.Presentation.EditMaterialCourse;
 import project.interdisciplinary.inclusesapp.R;
 import project.interdisciplinary.inclusesapp.data.models.Arquivo;
 import project.interdisciplinary.inclusesapp.data.models.MaterialCurso;
 
 public class MaterialCourseAdapter extends RecyclerView.Adapter<MaterialCourseAdapter.ItemMaterialCourseViewHolder> {
     private List<MaterialCurso> listaMaterialCursos = new ArrayList<>();
+    private boolean isEmpresa;
 
-    public MaterialCourseAdapter(List<MaterialCurso> listaMaterialCursos) {
+
+    public MaterialCourseAdapter(List<MaterialCurso> listaMaterialCursos, boolean isEmpresa) {
         this.listaMaterialCursos = listaMaterialCursos;
+        this.isEmpresa = isEmpresa;
     }
 
     @NonNull
@@ -41,8 +47,12 @@ public class MaterialCourseAdapter extends RecyclerView.Adapter<MaterialCourseAd
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 //todo: Lógica para abrir o material
+                Bundle extras = new Bundle();
+                Intent intent = new Intent(v.getContext(), EditMaterialCourse.class);
+                extras.putString("materialCurso", material.toString());
+                intent.putExtras(extras);
+                v.getContext().startActivity(intent);
             }
         });
     }

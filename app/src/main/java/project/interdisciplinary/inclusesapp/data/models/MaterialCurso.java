@@ -87,14 +87,14 @@ public class MaterialCurso  implements Serializable {
 
     @Override
     public String toString() {
-        return "MaterialCurso{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", fkCursoId=" + fkCursoId +
-                ", fkArquivoId=" + fkArquivoId +
-                ", descricao='" + descricao + '\'' +
-                ", curso=" + curso +
-                ", arquivo=" + arquivo +
-                '}';
+        return "{" +
+                "\"id\": \"" + id + "\"," +
+                "\"nome\": \"" + nome + "\"," +
+                "\"fkCursoId\": \"" + fkCursoId + "\"," +
+                "\"fkArquivoId\": \"" + fkArquivoId + "\"," +
+                "\"descricao\": \"" + descricao + "\"," +
+                "\"curso\": " + (curso != null ? curso.toString() : "null") + "," +
+                "\"arquivo\": " + (arquivo != null ? arquivo.toString() : "null") +
+                "}";
     }
 }

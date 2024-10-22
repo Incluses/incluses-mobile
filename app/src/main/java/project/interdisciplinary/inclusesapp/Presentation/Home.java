@@ -51,8 +51,7 @@ import project.interdisciplinary.inclusesapp.Presentation.Fragments.ProfileSearc
 import project.interdisciplinary.inclusesapp.Presentation.Fragments.VacanciesFragment;
 import project.interdisciplinary.inclusesapp.R;
 import project.interdisciplinary.inclusesapp.data.ConvertersToObjects;
-import project.interdisciplinary.inclusesapp.data.dbApi.EmpresaApi;
-import project.interdisciplinary.inclusesapp.data.dbApi.EmpresaCallback;
+import project.interdisciplinary.inclusesapp.data.models.Perfil;
 import project.interdisciplinary.inclusesapp.data.dbApi.UsuarioApi;
 import project.interdisciplinary.inclusesapp.data.dbApi.UsuarioCallback;
 import project.interdisciplinary.inclusesapp.databinding.ActivityHomeBinding;
@@ -97,6 +96,7 @@ public class Home extends AppCompatActivity {
         token = preferences.getString("token", "");
         perfil = preferences.getString("perfil", "");
 
+        Perfil perfil1 = ConvertersToObjects.convertStringToPerfil(perfil);
         findUser(String.valueOf(ConvertersToObjects.convertStringToPerfil(perfil).getId()), new UsuarioCallback() {
             @Override
             public void onSuccess(JsonObject jsonObject) {

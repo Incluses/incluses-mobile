@@ -1,5 +1,7 @@
 package project.interdisciplinary.inclusesapp.Presentation.Fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Rect;
 import android.os.Bundle;
 
@@ -34,7 +36,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CoursesFragment extends Fragment {
-    private String token = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2FvQGV4YW1wbGUuY29tIiwicm9sZSI6IlJPTEVfRU1QUkVTQSIsImV4cCI6MTcyOTI1MjYwN30.MCJAqA8lPJSawRDehgT8bKthkRAVOFZQ27XELA0KjZHFd8ZlQrdFEZfOzYSVv2HTA6UTCmZetEAwTiu25lrJkA";
+    private String token;
     private Retrofit retrofit;
     private View rootView;
     private FragmentCoursesBinding binding;
@@ -48,6 +50,8 @@ public class CoursesFragment extends Fragment {
         View view = binding.getRoot();
         rootView = binding.getRoot();
 
+        SharedPreferences preferences = getActivity().getSharedPreferences("app_prefs", Context.MODE_PRIVATE);
+        token = preferences.getString("token", "");
         setupKeyboardListener();
 
         binding.btnCreate.setOnClickListener(new View.OnClickListener() {

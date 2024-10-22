@@ -32,4 +32,13 @@ public class TipoPerfil {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "\"id\": \"" + id + "\"," +
+                "\"nome\": \"" + nome + "\"" +
+                "}";
+    }
+
 }

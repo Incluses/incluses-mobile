@@ -22,6 +22,7 @@ public class Curso {
         this.perfil = perfil;
     }
 
+
     // Getters e Setters
     public UUID getId() {
         return id;
@@ -62,4 +63,16 @@ public class Curso {
     public void setPerfil(Perfil perfil) {
         this.perfil = perfil;
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "\"id\": \"" + id + "\"," +
+                "\"descricao\": \"" + descricao + "\"," +
+                "\"fkPerfilId\": \"" + fkPerfilId + "\"," +
+                "\"nome\": \"" + nome + "\"," +
+                "\"perfil\": " + (perfil != null ? perfil.toString() : "null") +
+                "}";
+    }
+
 }

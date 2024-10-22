@@ -99,15 +99,16 @@
             android:layout_marginStart="@dimen/spacing_08"/>
 
         <TextView
+            android:id="@+id/attachamentNameCourseClass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nome do Material"
+            android:layout_marginStart="@dimen/spacing_04"
             android:ellipsize="end"
             android:maxLines="1"
+            android:text="Nome do Material"
             android:textSize="@dimen/spacing_07"
             app:layout_constraintStart_toEndOf="@id/icPlayCourse"
-            app:layout_constraintTop_toTopOf="@id/icPlayCourse"
-            android:layout_marginStart="@dimen/spacing_04"/>
+            app:layout_constraintTop_toTopOf="@id/icPlayCourse" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

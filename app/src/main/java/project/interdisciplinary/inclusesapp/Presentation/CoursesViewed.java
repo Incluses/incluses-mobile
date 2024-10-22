@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -19,6 +21,7 @@ import java.util.concurrent.TimeUnit;
 import okhttp3.OkHttpClient;
 import project.interdisciplinary.inclusesapp.R;
 import project.interdisciplinary.inclusesapp.adapters.CoursesAdapter;
+import project.interdisciplinary.inclusesapp.data.ConvertersToObjects;
 import project.interdisciplinary.inclusesapp.data.dbApi.CursoApi;
 import project.interdisciplinary.inclusesapp.data.dbApi.CursoCallback;
 import project.interdisciplinary.inclusesapp.data.dbApi.InscricaoCursoApi;
@@ -39,10 +42,10 @@ public class CoursesViewed extends AppCompatActivity {
 
     private ActivityCoursesViewedBinding binding;
 
-    private String token = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2FvQGV4YW1wbGUuY29tIiwicm9sZSI6IlJPTEVfRU1QUkVTQSIsImV4cCI6MTcyOTI1MjYwN30.MCJAqA8lPJSawRDehgT8bKthkRAVOFZQ27XELA0KjZHFd8ZlQrdFEZfOzYSVv2HTA6UTCmZetEAwTiu25lrJkA";
+    private String token;
     private Retrofit retrofit;
 
-    private String idPerfil = "54d087dd-6356-4462-bdac-2c8cf5ef0494";
+    private String idPerfil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +59,10 @@ public class CoursesViewed extends AppCompatActivity {
         binding = ActivityCoursesViewedBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        SharedPreferences preferences = getApplication().getSharedPreferences("app_prefs", Context.MODE_PRIVATE);
+        token = preferences.getString("token", "");
+        String perfil = preferences.getString("perfil", "");
+        idPerfil = ConvertersToObjects.convertStringToPerfil(perfil).getId().toString();
         binding.imageViewScreenViewedBackButton.setOnClickListener(v -> {
             finish();
         });

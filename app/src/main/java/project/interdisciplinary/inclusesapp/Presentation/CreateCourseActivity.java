@@ -18,7 +18,7 @@ public class CreateCourseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         // Forçar o modo claro
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-
+        boolean nameFilled = false, descriptionFilled = false;
 
         binding = ActivityCreateCourseBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -26,6 +26,9 @@ public class CreateCourseActivity extends AppCompatActivity {
         binding.nextCreateMyCourseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (nameFilled && descriptionFilled){
+
+                }
 
                 startActivity(new Intent(CreateCourseActivity.this, CreateCourseStep2.class));
             }
