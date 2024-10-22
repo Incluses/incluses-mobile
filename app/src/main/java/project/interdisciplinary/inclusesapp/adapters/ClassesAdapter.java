@@ -1,5 +1,6 @@
 package project.interdisciplinary.inclusesapp.adapters;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import project.interdisciplinary.inclusesapp.Presentation.CourseClass;
 import project.interdisciplinary.inclusesapp.R;
 import project.interdisciplinary.inclusesapp.data.models.Arquivo;
 import project.interdisciplinary.inclusesapp.data.models.MaterialCurso;
@@ -38,8 +40,16 @@ public class ClassesAdapter extends RecyclerView.Adapter<ClassesAdapter.ItemClas
         // setagem dos dados do item de classe
         holder.nameClasse.setText(materialCurso.getNome());
         Bundle bundle = new Bundle();
+        bundle.putString("materialCurso", materialCurso.toString());
         // Adicionar o listener de click para executar o metodo para baixar o conteudo no hardware
-        //holder.itemView.setOnClickListener();
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), CourseClass.class);
+                intent.putExtras(bundle);
+                v.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override

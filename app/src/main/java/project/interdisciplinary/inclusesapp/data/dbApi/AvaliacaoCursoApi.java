@@ -19,6 +19,9 @@ public interface AvaliacaoCursoApi {
     @GET("avaliacao-curso/selecionar-fk-usuario/{id}")
     Call<List<AvaliacaoCurso>> findByFkUser(@Header ("Authorization") String token ,@Path("id") UUID fkUser);
 
+    @GET("avaliacao-curso/selecionar-fk-curso/{id}")
+    Call<List<AvaliacaoCurso>> findByFkCurso(@Header ("Authorization") String token ,@Path("id") UUID fkCurso);
+
     @PATCH("avaliacao-curso/atualizarParcial/{id}")
     Call<JsonObject> updateAvaliacao(@Header("Authorization") String token, @Path("id") UUID fkAvaliacao, @Body Map<String,Double> body);
 

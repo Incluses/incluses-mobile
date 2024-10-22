@@ -2,11 +2,10 @@ package project.interdisciplinary.inclusesapp.data.models;
 
 import java.util.UUID;
 
-public class CriarMaterialCursoDTO {
+public class CreateCursoRequest {
     private String descricao;
     private String nome;
-    private UUID cursoId;
-    private UUID arquivoId;
+    private UUID perfilId;
 
     // Getters e Setters
     public String getDescricao() {
@@ -25,19 +24,12 @@ public class CriarMaterialCursoDTO {
         this.nome = nome;
     }
 
-    public UUID getCursoId() {
-        return cursoId;
+    public UUID getPerfilId() {
+        return perfilId;
     }
 
-    public void setCursoId(UUID cursoId) {
-        this.cursoId = cursoId;
-    }
-
-    public UUID getArquivoId() {
-        return arquivoId;
-    }
-
-    public void setArquivoId(UUID arquivoId) {
-        this.arquivoId = arquivoId;
+    public void setPerfilId(UUID perfilId) {
+        this.perfilId = perfilId;
     }
 }
+

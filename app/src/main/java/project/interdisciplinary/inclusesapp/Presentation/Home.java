@@ -46,6 +46,7 @@ import project.interdisciplinary.inclusesapp.Presentation.Fragments.ProfileSearc
 import project.interdisciplinary.inclusesapp.Presentation.Fragments.VacanciesFragment;
 import project.interdisciplinary.inclusesapp.R;
 import project.interdisciplinary.inclusesapp.data.ConvertersToObjects;
+import project.interdisciplinary.inclusesapp.data.models.Perfil;
 import project.interdisciplinary.inclusesapp.databinding.ActivityHomeBinding;
 
 public class Home extends AppCompatActivity {
@@ -81,8 +82,7 @@ public class Home extends AppCompatActivity {
         token = preferences.getString("token", "");
         perfil = preferences.getString("perfil", "");
 
-        ConvertersToObjects.convertStringToPerfil(perfil);
-
+        Perfil perfil1 = ConvertersToObjects.convertStringToPerfil(perfil);
         // Inicializa o launcher para solicitar a permissão de notificação
         notificationPermissionLauncher = registerForActivityResult(
                 new ActivityResultContracts.RequestPermission(),

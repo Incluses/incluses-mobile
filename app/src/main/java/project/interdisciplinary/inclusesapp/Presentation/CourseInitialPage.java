@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -33,7 +35,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CourseInitialPage extends AppCompatActivity {
 
-    private String token = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2FvQGV4YW1wbGUuY29tIiwicm9sZSI6IlJPTEVfRU1QUkVTQSIsImV4cCI6MTcyOTI1MjYwN30.MCJAqA8lPJSawRDehgT8bKthkRAVOFZQ27XELA0KjZHFd8ZlQrdFEZfOzYSVv2HTA6UTCmZetEAwTiu25lrJkA";
+    private String token;
     private Retrofit retrofit;
     private ActivityCourseInitialPageBinding binding;
 
@@ -42,6 +44,8 @@ public class CourseInitialPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_initial_page);
 
+        SharedPreferences preferences = getApplication().getSharedPreferences("app_prefs", Context.MODE_PRIVATE);
+        token = preferences.getString("token", "");
         //forçar o modo claro
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 

@@ -76,5 +76,19 @@ public class Arquivo implements Serializable {
     public void setTipoArquivo(TipoArquivo tipoArquivo) {
         this.tipoArquivo = tipoArquivo;
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "\"id\": \"" + (id != null ? id.toString() : "null") + "\"," +
+                "\"nome\": \"" + nome + "\"," +
+                "\"s3Url\": \"" + s3Url + "\"," +
+                "\"s3Key\": \"" + s3Key + "\"," +
+                "\"tamanho\": \"" + tamanho + "\"," +
+                "\"fkTipoArquivoId\": \"" + (fkTipoArquivoId != null ? fkTipoArquivoId.toString() : "null") + "\"," +
+                "\"tipoArquivo\": " + (tipoArquivo != null ? tipoArquivo.toString() : "null") +
+                "}";
+    }
+
 }
 

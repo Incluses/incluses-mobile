@@ -18,18 +18,20 @@ public class Perfil implements Serializable {
 
     @Override
     public String toString() {
-        return "Perfil{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", senha='" + senha + '\'' +
-                ", email='" + email + '\'' +
-                ", biografia='" + biografia + '\'' +
-                ", fkTipoPerfilId=" + fkTipoPerfilId +
-                ", fkFtPerfilId=" + fkFtPerfilId +
-                ", tipoPerfil=" + tipoPerfil +
-                ", fotoPerfil=" + fotoPerfil +
-                '}';
+        return "{" +
+                "\"id\": \"" + id + "\"," +
+                "\"nome\": \"" + nome + "\"," +
+                "\"senha\": \"" + senha + "\"," +
+                "\"email\": \"" + email + "\"," +
+                "\"biografia\": \"" + biografia + "\"," +
+                "\"fkTipoPerfilId\": \"" + fkTipoPerfilId + "\"," +
+                "\"fkFtPerfilId\": " + (fkFtPerfilId != null ? "\"" + fkFtPerfilId + "\"" : "null") + "," +
+                "\"tipoPerfil\": " + (tipoPerfil != null ? tipoPerfil.toString() : "null") + "," +
+                "\"fotoPerfil\": " + (fotoPerfil != null ? fotoPerfil.toString() : "null") +
+                "}";
     }
+
+
 
     // Construtores
     public Perfil() {

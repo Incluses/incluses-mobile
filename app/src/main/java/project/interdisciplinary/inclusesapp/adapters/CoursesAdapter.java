@@ -1,5 +1,7 @@
 package project.interdisciplinary.inclusesapp.adapters;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
@@ -27,8 +31,10 @@ import java.util.concurrent.TimeUnit;
 import okhttp3.OkHttpClient;
 import project.interdisciplinary.inclusesapp.Presentation.CourseInitialPage;
 import project.interdisciplinary.inclusesapp.Presentation.CoursesViewed;
+import project.interdisciplinary.inclusesapp.Presentation.Enterprise.Fragment.CoursesEnterpriseFragment;
 import project.interdisciplinary.inclusesapp.Presentation.Fragments.CoursesFragment;
 import project.interdisciplinary.inclusesapp.R;
+import project.interdisciplinary.inclusesapp.data.ConvertersToObjects;
 import project.interdisciplinary.inclusesapp.data.dbApi.AvaliacaoCursoApi;
 import project.interdisciplinary.inclusesapp.data.dbApi.AvaliacaoCursoCallback;
 import project.interdisciplinary.inclusesapp.data.dbApi.EmpresaApi;
@@ -55,8 +61,8 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ItemCour
     private List<Curso> listaCurso = new ArrayList<>();
 
     private Retrofit retrofit;
-    private String token = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2FvQGV4YW1wbGUuY29tIiwicm9sZSI6IlJPTEVfRU1QUkVTQSIsImV4cCI6MTcyOTI1MjYwN30.MCJAqA8lPJSawRDehgT8bKthkRAVOFZQ27XELA0KjZHFd8ZlQrdFEZfOzYSVv2HTA6UTCmZetEAwTiu25lrJkA";
-    private String idPerfil = "54d087dd-6356-4462-bdac-2c8cf5ef0494";
+    private String token;
+    private String idPerfil;
 
 
     public CoursesAdapter(List<Curso> listaCurso) {
@@ -79,6 +85,11 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ItemCour
         } else if (holder.itemView.getContext() instanceof CourseInitialPage) {
             holder.btnInit.setText("Iniciar");
         }
+        SharedPreferences preferences = holder.itemView.getContext().getSharedPreferences("app_prefs", Context.MODE_PRIVATE);
+        token = preferences.getString("token", "");
+
+        String perfil = preferences.getString("perfil", "");
+        idPerfil = ConvertersToObjects.convertStringToPerfil(perfil).getId().toString();
         callApiRetrofitFindUser(UUID.fromString(idPerfil), new UsuarioCallback() {
             @Override
             public void onSuccess(JsonObject jsonObject) {
@@ -120,22 +131,26 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ItemCour
                         }
                     }
                 });
-                callApiRetrofitFindAvalicao(apiResponse.getId(), new AvaliacaoCursoCallback() {
+                callApiRetrofitFindAvalicao(curso.getId(), new AvaliacaoCursoCallback() {
                     @Override
                     public void onSuccessFind(List<AvaliacaoCurso> list) {
-                        boolean set = false;
+                        boolean exists = false;
+                        double soma = 0;
                         for (int i = 0; i < list.size(); i++){
                             if(curso.getId().equals(list.get(i).getFkCursoId())){
-                                holder.avaliacaoCurso.setRating((float) list.get(i).getNota());
-                                holder.avaliacaoTextView.
-                                        setText(String.valueOf( list.get(i).getNota()));
-                                set = true;
+                                soma += list.get(i).getNota();
+                                exists = true;
                             }
                         }
                         holder.nameCourse.setText(curso.getNome());
-                        if (!set){
-                            holder.avaliacaoCurso.setRating(0);
-                            holder.avaliacaoTextView.setText(String.valueOf( 0));
+                        if (exists){
+                            holder.avaliacaoCurso.setRating((float) soma/list.size());
+                            holder.avaliacaoTextView.setText(String.valueOf(soma/list.size()));
+
+                        }
+                        else {
+                            holder.avaliacaoCurso.setRating((float) soma);
+                            holder.avaliacaoTextView.setText(String.valueOf(soma));
                         }
                     }
 
@@ -189,6 +204,14 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ItemCour
             avaliacaoTextView = itemView.findViewById(R.id.numberRatingTextViewItem);
             skillsTextView = itemView.findViewById(R.id.skillsTextView);
             youLearnTextView = itemView.findViewById(R.id.youLearnTextView);
+
+            if (itemView.getContext() instanceof AppCompatActivity) {
+                AppCompatActivity activity = (AppCompatActivity) itemView.getContext();
+                Fragment fragment = activity.getSupportFragmentManager().findFragmentById(R.id.fragmentContainerViewEnterprise);
+                if (fragment instanceof CoursesEnterpriseFragment) {
+                    btnInit.setVisibility(View.GONE);
+                }
+            }
 
             skillsTextView.setVisibility(View.GONE);
             youLearnTextView.setVisibility(View.GONE);
@@ -247,7 +270,7 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ItemCour
                 .build();
 
         AvaliacaoCursoApi api = retrofit.create(AvaliacaoCursoApi.class);
-        Call<List<AvaliacaoCurso>> call = api.findByFkUser(token,userId);
+        Call<List<AvaliacaoCurso>> call = api.findByFkCurso(token,userId);
         call.enqueue(new Callback<List<AvaliacaoCurso>>() {
             @Override
             public void onResponse(Call<List<AvaliacaoCurso>> call, Response<List<AvaliacaoCurso>> response) {
