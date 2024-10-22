@@ -26,9 +26,7 @@ public class Perfil implements Serializable {
                 ", biografia='" + biografia + '\'' +
                 ", fkTipoPerfilId=" + fkTipoPerfilId +
                 ", fkFtPerfilId=" + fkFtPerfilId +
-                ", tipoPerfil=" + tipoPerfil +
-                ", fotoPerfil=" + fotoPerfil +
-                '}';
+                ", tipoPerfil=" + tipoPerfil;
     }
 
     // Construtores

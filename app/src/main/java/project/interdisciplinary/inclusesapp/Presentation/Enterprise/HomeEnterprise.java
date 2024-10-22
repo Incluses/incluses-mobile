@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -34,7 +35,12 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.gson.JsonObject;
 
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.OkHttpClient;
 import project.interdisciplinary.inclusesapp.Presentation.EditAccount;
 import project.interdisciplinary.inclusesapp.Presentation.Enterprise.Fragment.CoursesEnterpriseFragment;
 import project.interdisciplinary.inclusesapp.Presentation.Enterprise.Fragment.CreateCourseEnterpriseFragment;
@@ -45,13 +51,26 @@ import project.interdisciplinary.inclusesapp.Presentation.ScreenConfigurations;
 import project.interdisciplinary.inclusesapp.Presentation.UserPerfil;
 import project.interdisciplinary.inclusesapp.R;
 import project.interdisciplinary.inclusesapp.data.ConvertersToObjects;
+import project.interdisciplinary.inclusesapp.data.dbApi.EmpresaApi;
+import project.interdisciplinary.inclusesapp.data.dbApi.EmpresaCallback;
+import project.interdisciplinary.inclusesapp.data.dbApi.VacanciesApi;
+import project.interdisciplinary.inclusesapp.data.dbApi.VacanciesCallback;
+import project.interdisciplinary.inclusesapp.data.models.Empresa;
+import project.interdisciplinary.inclusesapp.data.models.Vaga;
 import project.interdisciplinary.inclusesapp.databinding.ActivityHomeEnterpriseBinding;
 import project.interdisciplinary.inclusesapp.Presentation.Fragments.*;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HomeEnterprise extends AppCompatActivity {
 
     private ActivityHomeEnterpriseBinding binding;
     private View rootView;
+
+    private Retrofit retrofit;
 
     private String token;
     private String perfil;
@@ -79,10 +98,22 @@ public class HomeEnterprise extends AppCompatActivity {
 
         //Pegando os dados do SharedPreferences
         SharedPreferences preferences = getApplicationContext().getSharedPreferences("app_prefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
         token = preferences.getString("token", "");
         perfil = preferences.getString("perfil", "");
 
-        ConvertersToObjects.convertStringToPerfil(perfil);
+        findUserEmpresa(String.valueOf(ConvertersToObjects.convertStringToPerfil(perfil).getId()), new EmpresaCallback() {
+            @Override
+            public void onSuccess(JsonObject jsonObject) {
+                editor.putString("empresa", jsonObject.toString());
+                editor.apply();
+            }
+
+            @Override
+            public void onFailure(Throwable throwable) {
+                Log.e("ERRO", throwable.getMessage());
+            }
+        });
 
 
         // Inicializa o launcher para solicitar a permissão de notificação
@@ -328,5 +359,47 @@ public class HomeEnterprise extends AppCompatActivity {
 
         // Mostrar a notificação
         notificationManagerCompat.notify(1, builder.build());
+    }
+
+    private void findUserEmpresa(String fkPerfil, EmpresaCallback callback) {
+
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(60, TimeUnit.SECONDS)
+                .build();
+
+        String urlApi = "https://incluses-api.onrender.com/";
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl(urlApi)
+                .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        EmpresaApi api = retrofit.create(EmpresaApi.class);
+        Call<JsonObject> call = api.getEnterpriseByProfileFk(token, fkPerfil);
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    JsonObject responseBody = response.body();
+                    callback.onSuccess(responseBody);
+                } else if (response.code() == 401) {
+                    // Token inválido ou expirado
+                    callback.onFailure(new Exception("Token expirado ou inválido!"));
+                } else {
+                    // Outro erro
+                    callback.onFailure(new Exception("Erro ao buscar empresa: " + response.code()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable throwable) {
+                Toast.makeText(getApplicationContext(), "erro", Toast.LENGTH_LONG).show();
+                Log.e("ERRO", throwable.getMessage());
+                callback.onFailure(throwable); // Falha por erro de requisição
+            }
+        });
     }
 }
