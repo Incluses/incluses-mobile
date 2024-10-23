@@ -8,7 +8,15 @@ public class CreateMaterialCursoRequest {
     private UUID cursoId;
     private UUID arquivoId;
 
+    public CreateMaterialCursoRequest(String descricao, String nome, UUID cursoId, UUID arquivoId) {
+        this.descricao = descricao;
+        this.nome = nome;
+        this.cursoId = cursoId;
+        this.arquivoId = arquivoId;
+    }
+
     // Getters e Setters
+
     public String getDescricao() {
         return descricao;
     }

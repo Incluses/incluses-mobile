@@ -14,6 +14,18 @@ public class Endereco {
     // Construtores
     public Endereco() {
     }
+    @Override
+    public String toString() {
+        return "{" +
+                "\"id\": \"" + id + "\"," +
+                "\"rua\": \"" + rua + "\"," +
+                "\"estado\": \"" + estado + "\"," +
+                "\"cidade\": \"" + cidade + "\"," +
+                "\"cep\": \"" + cep + "\"," +
+                "\"numero\": " + numero +
+                "}";
+    }
+
 
     public Endereco(UUID id, String rua, String estado, String cidade, String cep, Integer numero) {
         this.id = id;
