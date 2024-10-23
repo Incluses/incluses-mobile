@@ -102,7 +102,6 @@ public class CourseInitialPage extends AppCompatActivity {
                 else {
                 }
             }
-
             @Override
             public void onFailure(Call<List<MaterialCurso>> call, Throwable throwable) {
                 Log.e("ERRO", throwable.getMessage());
@@ -110,4 +109,5 @@ public class CourseInitialPage extends AppCompatActivity {
             }
         });
     }
+
 }

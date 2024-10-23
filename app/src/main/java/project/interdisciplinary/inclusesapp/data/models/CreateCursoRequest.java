@@ -7,6 +7,13 @@ public class CreateCursoRequest {
     private String nome;
     private UUID perfilId;
 
+
+    public CreateCursoRequest(String descricao, String nome, UUID perfilId) {
+        this.descricao = descricao;
+        this.nome = nome;
+        this.perfilId = perfilId;
+    }
+
     // Getters e Setters
     public String getDescricao() {
         return descricao;

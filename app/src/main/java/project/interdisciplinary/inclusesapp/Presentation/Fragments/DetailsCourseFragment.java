@@ -6,14 +6,18 @@ import android.content.SharedPreferences;
 import android.graphics.Rect;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 
@@ -70,26 +74,14 @@ public class DetailsCourseFragment extends Fragment {
         binding.numberPontuationDetailsCourse.setText(String.valueOf(avaliation));
         binding.courseDetailsRatingBar.setRating((float) avaliation);
         binding.listMaterialsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        setUpAdapter(curso.getId(),new MaterialCursoCallback() {
-            @Override
-            public void onSuccessFind(List<MaterialCurso> list) {
-                binding.listMaterialsRecyclerView.setAdapter(new MaterialCourseAdapter(list,getArguments().getBoolean("isEmpresa")));
-            }
 
-            @Override
-            public void onFailure(Throwable throwable) {
-
-            }
-
-            @Override
-            public void onSuccess(JsonObject jsonObject) {
-
-            }
-        });
         binding.addMaterialDetailsCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bundle extras = new Bundle();
                 Intent intent = new Intent(getActivity(), AddMaterialCourse.class);
+                extras.putString("idCurso", curso.getId().toString());
+                intent.putExtras(extras);
                 startActivity(intent);
             }
         });
@@ -163,4 +155,24 @@ public class DetailsCourseFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        setUpAdapter(curso.getId(),new MaterialCursoCallback() {
+            @Override
+            public void onSuccessFind(List<MaterialCurso> list) {
+                binding.listMaterialsRecyclerView.setAdapter(new MaterialCourseAdapter(list,getArguments().getBoolean("isEmpresa")));
+            }
+
+            @Override
+            public void onFailure(Throwable throwable) {
+
+            }
+
+            @Override
+            public void onSuccess(JsonObject jsonObject) {
+
+            }
+        });
+    }
 }

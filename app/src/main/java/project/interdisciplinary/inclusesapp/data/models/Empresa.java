@@ -112,4 +112,20 @@ public class Empresa {
     public void setSetor(Setor setor) {
         this.setor = setor;
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "\"id\": \"" + id + "\"," +
+                "\"cnpj\": \"" + cnpj + "\"," +
+                "\"razaoSocial\": \"" + razaoSocial + "\"," +
+                "\"fkPerfilId\": \"" + fkPerfilId + "\"," +
+                "\"website\": \"" + website + "\"," +
+                "\"fkEnderecoId\": \"" + fkEnderecoId + "\"," +
+                "\"fkSetorId\": \"" + fkSetorId + "\"," +
+                "\"perfil\": " + (perfil != null ? perfil.toString() : "null") + "," +
+                "\"endereco\": " + (endereco != null ? endereco.toString() : "null") + "," +
+                "\"setor\": " + (setor != null ? setor.toString() : "null") +
+                "}";
+    }
 }

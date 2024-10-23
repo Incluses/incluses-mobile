@@ -16,6 +16,15 @@ public class Setor {
         this.nome = nome;
     }
 
+    @Override
+    public String toString() {
+        return "{" +
+                "\"id\": \"" + id + "\"," +
+                "\"nome\": \"" + nome + "\"" +
+                "}";
+    }
+
+
     // Getters e Setters
     public UUID getId() {
         return id;
