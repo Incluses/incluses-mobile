@@ -82,22 +82,7 @@ public class CreateCourseFragment extends Fragment {
         });
 
         binding.mycoursesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        setUpAdapter(idPerfil, new CursoCallback() {
-            @Override
-            public void onSuccessFind(List<Curso> list) {
-                binding.mycoursesRecyclerView.setAdapter(new MyCoursesAdapter((AppCompatActivity) requireActivity(),list,false));
-            }
 
-            @Override
-            public void onFailure(Throwable throwable) {
-
-            }
-
-            @Override
-            public void onSuccess(JsonObject jsonObject) {
-
-            }
-        });
         return view;
     }
 
@@ -120,6 +105,28 @@ public class CreateCourseFragment extends Fragment {
             }
         });
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setUpAdapter(idPerfil, new CursoCallback() {
+            @Override
+            public void onSuccessFind(List<Curso> list) {
+                binding.mycoursesRecyclerView.setAdapter(new MyCoursesAdapter((AppCompatActivity) requireActivity(),list,false));
+            }
+
+            @Override
+            public void onFailure(Throwable throwable) {
+
+            }
+
+            @Override
+            public void onSuccess(JsonObject jsonObject) {
+
+            }
+        });
+    }
+
     private void setUpAdapter(UUID idPerfil, CursoCallback callback) {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .connectTimeout(60, TimeUnit.SECONDS)
@@ -159,4 +166,5 @@ public class CreateCourseFragment extends Fragment {
             }
         });
     }
+
 }

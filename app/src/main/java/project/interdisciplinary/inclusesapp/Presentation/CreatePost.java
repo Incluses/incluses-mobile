@@ -22,7 +22,7 @@ public class CreatePost extends AppCompatActivity {
         binding = ActivityCreatePostBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.cancelEditMaterialCourseButton.setOnClickListener(v -> { finish(); });
+        binding.cancelAddMaterialCourseButton.setOnClickListener(v -> { finish(); });
 
     }
 }

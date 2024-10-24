@@ -87,12 +87,17 @@ public class CreateCourseActivity extends AppCompatActivity {
 
                         @Override
                         public void onSuccess(JsonObject jsonObject) {
-                            UUID idCurso = UUID.fromString("a");
+                            String idCurso = jsonObject.get("id").getAsString();
+                            Bundle extra = new Bundle();
+                            extra.putString("idCurso", idCurso);
+                            Intent intent = new Intent(CreateCourseActivity.this, CreateCourseStep2.class);
+                            intent.putExtras(extra);
+                            startActivity(intent);
+                            finish();
                         }
                     });
                 }
 
-                startActivity(new Intent(CreateCourseActivity.this, CreateCourseStep2.class));
             }
         });
 

@@ -69,11 +69,13 @@ public class DetailsCourseFragment extends Fragment {
         curso = ConvertersToObjects.convertStringToCurso(getArguments().getString("curso"));
 
         Log.e("curso", getArguments().getString("curso"));
+        int acesses = getArguments().getInt("acesses");
         Log.e("curso", curso.toString());
         binding.titleCourseDetailsCourse.setText(curso.getNome());
         binding.numberPontuationDetailsCourse.setText(String.valueOf(avaliation));
         binding.courseDetailsRatingBar.setRating((float) avaliation);
         binding.listMaterialsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.numberAccessDetailsCourse.setText(String.valueOf(acesses));
 
         binding.addMaterialDetailsCourse.setOnClickListener(new View.OnClickListener() {
             @Override

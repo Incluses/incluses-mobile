@@ -52,12 +52,12 @@ public class AddMaterialCourse extends AppCompatActivity {
         Bundle extras = extrasIntent.getExtras();
 
         idCurso = UUID.fromString(extras.getString("idCurso"));
-        binding.nextEditMaterialCourseButton.setOnClickListener(new View.OnClickListener() {
+        binding.nextAddMaterialCourseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 boolean descriptionFilled = false, titleFilled = false;
-                String descriptionInput = binding.descripitionEditMaterialCourseEditText.getText().toString();
-                String titleInput = binding.titleEditMaterialCourseEditText.getText().toString();
+                String descriptionInput = binding.descripitionAddMaterialCourseEditText.getText().toString();
+                String titleInput = binding.titleAddMaterialCourseEditText.getText().toString();
                 if (!descriptionInput.isEmpty()){
                     descriptionFilled = true;
                 }
