@@ -20,9 +20,12 @@ public interface MaterialCursoApi {
 
     @POST("material-curso/inserir")
     Call<JsonObject> insertMaterialCurso(@Header("Authorization") String token, @Body CreateMaterialCursoRequest createMaterialCursoRequest);
-    @GET("material-curso/selecionar-fk-curso/{fkUsuario}")
-    Call<List<MaterialCurso>> findMaterialCursoByCurso(@Header("Authorization") String token, @Path("fkUsuario") UUID fkUsuario);
+    @GET("material-curso/selecionar-fk-curso/{fkCurso}")
+    Call<List<MaterialCurso>> findMaterialCursoByCurso(@Header("Authorization") String token, @Path("fkCurso") UUID fkUsuario);
 
     @PATCH("material-curso/atualizarParcial/{id}")
     Call<JsonObject> updateMaterialCurso(@Header("Authorization") String token, @Path("id") UUID fkAvaliacao, @Body Map<String,Object> body);
+
+    @GET("material-curso/selecionar-nome/{nome}/{fkCurso}")
+    Call<List<MaterialCurso>> findMaterialCursoByNome(@Header("Authorization") String token, @Path("fkCurso") UUID fkUsuario, @Path("nome") String nome);
 }

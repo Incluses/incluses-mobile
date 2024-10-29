@@ -105,11 +105,13 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/archiveAddMaterialCourse"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
                     android:background="@drawable/style_box_inputs">
 
                     <TextView
+                        android:id="@+id/textArchiveAddMaterialCourse"
                         android:layout_width="285dp"
                         android:layout_height="34dp"
                         android:text="+ Adicionar material em anexo"

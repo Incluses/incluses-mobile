@@ -78,10 +78,11 @@
         app:layout_constraintTop_toBottomOf="@id/descriptionCourseClass"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/attachmentCourseClass"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_marginTop="@dimen/spacing_03"
         android:layout_marginStart="@dimen/spacing_04"
+        android:layout_marginTop="@dimen/spacing_03"
         android:layout_marginEnd="@dimen/spacing_04"
         android:background="@drawable/style_box_inputs"
         app:layout_constraintEnd_toEndOf="parent"
@@ -92,11 +93,11 @@
             android:id="@+id/icPlayCourse"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_08"
+            android:layout_marginTop="@dimen/spacing_08"
             android:background="@drawable/ic_play"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="@dimen/spacing_08"
-            android:layout_marginStart="@dimen/spacing_08"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/attachamentNameCourseClass"

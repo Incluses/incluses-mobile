@@ -11,6 +11,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -29,6 +31,7 @@ import okhttp3.OkHttpClient;
 import project.interdisciplinary.inclusesapp.Presentation.AddMaterialCourse;
 import project.interdisciplinary.inclusesapp.R;
 import project.interdisciplinary.inclusesapp.adapters.ClassesAdapter;
+import project.interdisciplinary.inclusesapp.adapters.CoursesAdapter;
 import project.interdisciplinary.inclusesapp.adapters.MaterialCourseAdapter;
 import project.interdisciplinary.inclusesapp.adapters.MyCoursesAdapter;
 import project.interdisciplinary.inclusesapp.data.ConvertersToObjects;
@@ -86,6 +89,54 @@ public class DetailsCourseFragment extends Fragment {
                 intent.putExtras(extras);
                 startActivity(intent);
             }
+        });
+        binding.searchMaterialCourseByNameEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String name = charSequence.toString().trim();
+                if (!name.isEmpty()) {
+                    setUpAdapterName(curso.getId(), name, new MaterialCursoCallback() {
+                        @Override
+                        public void onSuccessFind(List<MaterialCurso> list) {
+                            binding.listMaterialsRecyclerView.setAdapter(new MaterialCourseAdapter(list,getArguments().getBoolean("isEmpresa")));
+                        }
+
+                        @Override
+                        public void onFailure(Throwable throwable) {
+
+                        }
+
+                        @Override
+                        public void onSuccess(JsonObject jsonObject) {
+
+                        }
+                    });
+                } else {
+                    // Se o campo de busca estiver vazio, carrega todas as vagas
+                    setUpAdapter(curso.getId(),new MaterialCursoCallback() {
+                        @Override
+                        public void onSuccessFind(List<MaterialCurso> list) {
+                            binding.listMaterialsRecyclerView.setAdapter(new MaterialCourseAdapter(list,getArguments().getBoolean("isEmpresa")));
+                        }
+
+                        @Override
+                        public void onFailure(Throwable throwable) {
+
+                        }
+
+                        @Override
+                        public void onSuccess(JsonObject jsonObject) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {}
         });
         binding.discardButtonDetailsCourse.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -157,6 +208,43 @@ public class DetailsCourseFragment extends Fragment {
         });
     }
 
+    private void setUpAdapterName(UUID cursoId,String name, MaterialCursoCallback callback) {
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(60, TimeUnit.SECONDS)
+                .build();
+
+        String urlApi = "https://incluses-api.onrender.com/";
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl(urlApi)
+                .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        MaterialCursoApi api = retrofit.create(MaterialCursoApi.class);
+        Call<List<MaterialCurso>> call = api.findMaterialCursoByNome(token, cursoId, name);
+        call.enqueue(new Callback<List<MaterialCurso>>() {
+            @Override
+            public void onResponse(Call<List<MaterialCurso>> call, Response<List<MaterialCurso>> response) {
+                Log.e("retorno", String.valueOf(response.code()));
+                if (response.isSuccessful() && response.body() != null) {
+                    List<MaterialCurso> responseBody = response.body();
+                    callback.onSuccessFind(responseBody); // Sucesso
+                } else if (response.code() == 401) {
+                }
+                else {
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<MaterialCurso>> call, Throwable throwable) {
+                Log.e("ERRO", throwable.getMessage());
+                callback.onFailure(throwable); // Falha por erro de requisição
+            }
+        });
+    }
     @Override
     public void onResume() {
         super.onResume();
