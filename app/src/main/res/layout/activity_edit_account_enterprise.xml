@@ -105,6 +105,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/spacing_03"
                 android:hint="@string/email"
+                android:visibility="gone"
                 app:boxStrokeErrorColor="@color/red_error"
                 app:boxStrokeWidth="@dimen/spacing_01"
                 app:endIconDrawable="@drawable/ic_email"
@@ -172,6 +173,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/spacing_03"
                 android:hint="@string/password"
+                android:visibility="gone"
                 app:boxStrokeErrorColor="@color/red_error"
                 app:boxStrokeWidth="@dimen/spacing_01"
                 app:endIconMode="password_toggle"
@@ -193,6 +195,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/spacing_05"
                 android:hint="CEP"
+                android:visibility="gone"
                 app:boxStrokeErrorColor="@color/red_error"
                 app:boxStrokeWidth="@dimen/spacing_01"
                 app:counterEnabled="true"
@@ -217,6 +220,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/spacing_05"
                 android:hint="Número"
+                android:visibility="gone"
                 app:boxStrokeErrorColor="@color/red_error"
                 app:boxStrokeWidth="@dimen/spacing_01"
                 app:endIconMode="clear_text"
@@ -241,6 +245,7 @@
                 android:background="@drawable/style_box_inputs">
 
                 <TextView
+                    android:id="@+id/textAddPhotoEditAccountEnterprise"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="+ Adicionar foto"
@@ -250,6 +255,18 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/photoImageEditAccountEnterprise"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

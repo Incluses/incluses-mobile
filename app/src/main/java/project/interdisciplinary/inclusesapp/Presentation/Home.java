@@ -35,6 +35,7 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import java.util.UUID;
@@ -54,6 +55,7 @@ import project.interdisciplinary.inclusesapp.data.ConvertersToObjects;
 import project.interdisciplinary.inclusesapp.data.models.Perfil;
 import project.interdisciplinary.inclusesapp.data.dbApi.UsuarioApi;
 import project.interdisciplinary.inclusesapp.data.dbApi.UsuarioCallback;
+import project.interdisciplinary.inclusesapp.data.models.Usuario;
 import project.interdisciplinary.inclusesapp.databinding.ActivityHomeBinding;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -68,6 +70,7 @@ public class Home extends AppCompatActivity {
     private Retrofit retrofit;
 
     private String token;
+    private Usuario usuario;
     private String perfil;
 
     private ActivityResultLauncher<String> notificationPermissionLauncher;
@@ -96,10 +99,11 @@ public class Home extends AppCompatActivity {
         token = preferences.getString("token", "");
         perfil = preferences.getString("perfil", "");
 
-        Perfil perfil1 = ConvertersToObjects.convertStringToPerfil(perfil);
         findUser(String.valueOf(ConvertersToObjects.convertStringToPerfil(perfil).getId()), new UsuarioCallback() {
             @Override
             public void onSuccess(JsonObject jsonObject) {
+                Gson gson = new Gson();
+                usuario = gson.fromJson(jsonObject, Usuario.class);
                 editor.putString("usuario", jsonObject.toString());
                 editor.apply();
             }
@@ -116,7 +120,9 @@ public class Home extends AppCompatActivity {
                 isGranted -> {
                     if (isGranted) {
                         // Se a permissão foi concedida, enviar a notificação
-                        toNotify();
+                        if (usuario.getNomeSocial() == null && usuario.getPerfil().getBiografia() == null && usuario.getPerfil().getFotoPerfil() == null) {
+                            toNotify();
+                        }
                     } else {
                         // Se a permissão foi negada, mostrar uma mensagem
                         Toast.makeText(Home.this, "Permissão de notificação negada", Toast.LENGTH_SHORT).show();

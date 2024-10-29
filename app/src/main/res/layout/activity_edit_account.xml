@@ -104,6 +104,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/spacing_03"
+                android:visibility="gone"
                 android:hint="@string/email"
                 app:boxStrokeErrorColor="@color/red_error"
                 app:boxStrokeWidth="@dimen/spacing_01"
@@ -168,6 +169,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/passwordEditAccountInputLayout"
                 style="@style/style_input"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/spacing_03"
@@ -195,6 +197,7 @@
                 android:background="@drawable/style_box_inputs">
 
                 <TextView
+                    android:id="@+id/textAddPhotoEditAccount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="+ Adicionar foto"
@@ -204,6 +207,18 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/photoImageEditAccount"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -2,146 +2,159 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="@dimen/spacing_02"
+    android:layout_marginEnd="@dimen/spacing_02"
+    android:layout_marginStart="@dimen/spacing_02"
+    android:layout_marginTop="@dimen/spacing_01"
+    android:layout_marginBottom="@dimen/spacing_03"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
-        android:id="@+id/perfilImageView"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="@dimen/spacing_05"
-        android:background="@drawable/ic_perfil"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.120"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/namePerfilPostTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_05"
-        android:layout_marginStart="@dimen/spacing_04"
-        android:text="Nome"
-        android:textSize="@dimen/spacing_05"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toEndOf="@id/perfilImageView"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <TextView
-        android:id="@+id/descriptionPerfilPostTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_01"
-        android:layout_marginStart="@dimen/spacing_04"
-        android:text="Descrição."
-        android:maxLines="1"
-        android:maxWidth="70dp"
-        android:textSize="@dimen/spacing_04"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@id/perfilImageView"
-        app:layout_constraintTop_toBottomOf="@id/namePerfilPostTextView"/>
-
-    <TextView
-        android:id="@+id/dataPerfilPostTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_01"
-        android:layout_marginStart="@dimen/spacing_04"
-        android:layout_marginBottom="@dimen/spacing_02"
-        android:text="11/09/2024"
-        android:textSize="@dimen/spacing_04"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@id/descriptionPerfilPostTextView"
-        app:layout_constraintTop_toBottomOf="@id/namePerfilPostTextView"/>
-
-    <View
-        android:id="@+id/itemDividerPostView"
+    <!-- Container to wrap all components -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/containerPost"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/spacing_01"
-        android:background="@color/gray"
-        android:layout_marginTop="@dimen/spacing_02"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dataPerfilPostTextView" />
-
-    <ImageView
-        android:id="@+id/imagePostImageView"
-        android:layout_width="match_parent"
-        android:layout_height="170dp"
-        android:background="@drawable/figure1"
-        android:layout_marginTop="@dimen/spacing_03"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/itemDividerPostView" />
-
-    <TextView
-        android:id="@+id/legendPostTextView"
-        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_05"
-        android:layout_marginEnd="@dimen/spacing_05"
-        android:ellipsize="end"
-        android:maxLines="3"
-        android:text="Legenda"
-        android:textSize="@dimen/spacing_05"
+        style="@style/ConstraintLayoutWithShadow"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imagePostImageView"/>
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <View
-        android:id="@+id/itemDividerPostView2"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/spacing_01"
-        android:background="@color/gray"
-        android:layout_marginTop="@dimen/spacing_04"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/legendPostTextView" />
+        <ImageView
+            android:id="@+id/perfilImageView"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:scaleType="centerCrop"
+            android:layout_marginTop="@dimen/spacing_05"
+            android:background="@drawable/ic_perfil"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.120"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/namePerfilPostTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_05"
+            android:layout_marginStart="@dimen/spacing_04"
+            android:text="Nome"
+            android:textSize="@dimen/spacing_05"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@id/perfilImageView"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/descriptionPerfilPostTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_01"
+            android:layout_marginStart="@dimen/spacing_04"
+            android:visibility="gone"
+            android:text="Descrição."
+            android:maxLines="1"
+            android:maxWidth="70dp"
+            android:textSize="@dimen/spacing_04"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/perfilImageView"
+            app:layout_constraintTop_toBottomOf="@id/namePerfilPostTextView"/>
+
+        <TextView
+            android:id="@+id/dataPerfilPostTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_01"
+            android:layout_marginStart="@dimen/spacing_04"
+            android:layout_marginBottom="@dimen/spacing_02"
+            android:visibility="gone"
+            android:text="11/09/2024"
+            android:textSize="@dimen/spacing_04"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/descriptionPerfilPostTextView"
+            app:layout_constraintTop_toBottomOf="@id/namePerfilPostTextView"/>
+
+        <View
+            android:id="@+id/itemDividerPostView"
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="@android:color/darker_gray"
+            android:layout_marginTop="@dimen/spacing_02"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/perfilImageView" />
+
+        <ImageView
+            android:id="@+id/imagePostImageView"
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:background="@drawable/figure1"
+            android:scaleType="centerCrop"
+            android:layout_marginTop="@dimen/spacing_03"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/itemDividerPostView" />
+
+        <TextView
+            android:id="@+id/legendPostTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_05"
+            android:layout_marginEnd="@dimen/spacing_05"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:text="Legenda"
+            android:textSize="@dimen/spacing_05"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imagePostImageView"/>
+
+        <View
+            android:id="@+id/itemDividerPostView2"
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="@android:color/darker_gray"
+            android:layout_marginTop="@dimen/spacing_04"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/legendPostTextView" />
+
+        <ImageButton
+            android:id="@+id/likePostImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="@dimen/spacing_03"
+            android:background="@drawable/like"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/itemDividerPostView2" />
+
+        <ImageButton
+            android:id="@+id/comentPostImageButton"
+            android:layout_width="28dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_05"
+            android:background="@drawable/ic_coment"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/itemDividerPostView2" />
+
+        <ImageButton
+            android:id="@+id/sendPostImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_05"
+            android:background="@drawable/ic_send"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.8"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/itemDividerPostView2" />
 
 
-    <ImageButton
-        android:id="@+id/likePostImageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/like"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/itemDividerPostView2" />
-
-    <ImageButton
-        android:id="@+id/comentPostImageButton"
-        android:layout_width="28dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_05"
-        android:background="@drawable/ic_coment"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/itemDividerPostView2" />
-
-    <ImageButton
-        android:id="@+id/sendPostImageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_05"
-        android:background="@drawable/ic_send"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.8"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/itemDividerPostView2" />
-
-    <View
-        android:id="@+id/itemDividerPostView3"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/spacing_01"
-        android:background="@color/gray"
-        android:layout_marginTop="@dimen/spacing_04"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/likePostImageButton" />
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

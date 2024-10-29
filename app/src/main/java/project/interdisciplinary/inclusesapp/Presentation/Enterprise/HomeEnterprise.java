@@ -35,6 +35,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import java.util.List;
@@ -74,6 +75,7 @@ public class HomeEnterprise extends AppCompatActivity {
 
     private String token;
     private String perfil;
+    private Empresa empresa;
 
     private ActivityResultLauncher<String> notificationPermissionLauncher;
 
@@ -105,6 +107,8 @@ public class HomeEnterprise extends AppCompatActivity {
         findUserEmpresa(String.valueOf(ConvertersToObjects.convertStringToPerfil(perfil).getId()), new EmpresaCallback() {
             @Override
             public void onSuccess(JsonObject jsonObject) {
+                Gson gson = new Gson();
+                empresa = gson.fromJson(jsonObject, Empresa.class);
                 editor.putString("empresa", jsonObject.toString());
                 editor.apply();
             }
@@ -122,7 +126,9 @@ public class HomeEnterprise extends AppCompatActivity {
                 isGranted -> {
                     if (isGranted) {
                         // Se a permissão foi concedida, enviar a notificação
-                        toNotify();
+                        if (empresa.getPerfil().getBiografia() == null && empresa.getPerfil().getFotoPerfil() == null) {
+                            toNotify();
+                        }
                     } else {
                         // Se a permissão foi negada, mostrar uma mensagem
                         Toast.makeText(HomeEnterprise.this, "Permissão de notificação negada", Toast.LENGTH_SHORT).show();

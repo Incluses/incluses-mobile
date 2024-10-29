@@ -29,6 +29,18 @@ public class ScreenConfigurations extends AppCompatActivity {
         binding.textViewConfigBack.setOnClickListener(v -> finish());
         binding.icBackConfig.setOnClickListener(v -> finish());
 
+        binding.exitAccountConfig.setOnClickListener(v -> {
+            Intent intent = new Intent(ScreenConfigurations.this, Login.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+        });
+
+        binding.addAccountConfig.setOnClickListener(v -> {
+            Intent intent = new Intent(ScreenConfigurations.this, Login.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+        });
+
         binding.accountAndPasswordConfig.setOnClickListener(v -> {
             if (userType.equals("user")) { //user
                 Intent intent = new Intent(ScreenConfigurations.this, EditAccount.class);
