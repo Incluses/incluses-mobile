@@ -91,7 +91,7 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/nextEditMaterialCourseButton"
+                android:id="@+id/createPostButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/style_primary_button"

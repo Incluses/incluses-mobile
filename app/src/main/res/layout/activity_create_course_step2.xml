@@ -11,53 +11,53 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:id="@+id/stepsbuttonsCreateMyCourse"
-            android:layout_width="match_parent"
+
+        <Button
+            android:id="@+id/stepOneCreateMyCourse"
+            style="@style/style_step_alternative"
+            android:layout_width="55dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="@dimen/spacing_03"
+            android:text="1"
+            android:textSize="@dimen/spacing_06"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_bias="0.30" />
 
-            <Button
-                android:id="@+id/stepOneCreateMyCourse2"
-                style="@style/style_step_alternative"
-                android:layout_width="55dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="100dp"
-                android:text="1"
-                android:textSize="@dimen/spacing_06" />
+        <View
+            android:id="@+id/itemDivider"
+            android:layout_width="70dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="@dimen/spacing_08"
+            android:background="@color/gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_bias="0.5" />
 
-            <View
-                android:layout_width="70dp"
-                android:layout_height="2dp"
-                android:layout_marginStart="@dimen/spacing_03"
-                android:layout_marginTop="@dimen/spacing_08"
-                android:background="@color/gray" />
-
-            <Button
-                android:id="@+id/stepsTwoCreateMyCourse2"
-                style="@style/style_step"
-                android:layout_width="55dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_03"
-                android:layout_marginEnd="100dp"
-                android:text="2"
-                android:textSize="@dimen/spacing_06" />
-        </LinearLayout>
+        <Button
+            android:id="@+id/stepsTwoCreateMyCourse"
+            style="@style/style_step"
+            android:layout_width="55dp"
+            android:layout_height="wrap_content"
+            android:text="2"
+            android:textSize="@dimen/spacing_06"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_bias="0.70" />
 
         <TextView
             android:id="@+id/informationsCreateMyCourse2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_08"
+            android:layout_marginTop="@dimen/spacing_09"
             android:text="Dê seu primeiro passo!"
             android:textColor="@color/dark_blue"
             android:textSize="@dimen/spacing_06"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/stepsbuttonsCreateMyCourse" />
+            app:layout_constraintTop_toBottomOf="@id/itemDivider" />
 
         <TextView
             android:id="@+id/descriptionInformationsCreateMyCourse2"

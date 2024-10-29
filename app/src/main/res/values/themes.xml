@@ -83,5 +83,11 @@
         <item name="strokeWidth">@dimen/spacing_01</item>
     </style>
 
+    <style name="ConstraintLayoutWithShadow">
+        <item name="android:elevation">@dimen/spacing_03</item>
+        <item name="android:background">@android:color/white</item>
+        <item name="android:layout_margin">@dimen/spacing_03</item>
+    </style>
+
     <style name="Theme.InclusesApp" parent="Base.Theme.InclusesApp" />
 </resources>
