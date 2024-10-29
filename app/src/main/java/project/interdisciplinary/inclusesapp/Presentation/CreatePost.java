@@ -54,7 +54,7 @@ public class CreatePost extends AppCompatActivity {
         binding.cancelEditMaterialCourseButton.setOnClickListener(v -> {
             finish();
         });
-
+      
         SharedPreferences preferences = getApplicationContext().getSharedPreferences("app_prefs", Context.MODE_PRIVATE);
         token = preferences.getString("token", "");
         String perfilJson = preferences.getString("perfil", "");

@@ -32,8 +32,12 @@ import project.interdisciplinary.inclusesapp.R;
 import project.interdisciplinary.inclusesapp.data.ConvertersToObjects;
 import project.interdisciplinary.inclusesapp.data.dbApi.AvaliacaoCursoApi;
 import project.interdisciplinary.inclusesapp.data.dbApi.AvaliacaoCursoCallback;
+import project.interdisciplinary.inclusesapp.data.dbApi.InscricaoCursoApi;
+import project.interdisciplinary.inclusesapp.data.dbApi.InscricaoCursoCallback;
+import project.interdisciplinary.inclusesapp.data.dbApi.MaterialCursoCallback;
 import project.interdisciplinary.inclusesapp.data.models.AvaliacaoCurso;
 import project.interdisciplinary.inclusesapp.data.models.Curso;
+import project.interdisciplinary.inclusesapp.data.models.InscricaoCurso;
 import project.interdisciplinary.inclusesapp.data.models.Perfil;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -105,6 +109,24 @@ public class MyCoursesAdapter extends RecyclerView.Adapter<MyCoursesAdapter.Item
             }
             @Override
             public void onSuccess(JsonObject jsonObject) {
+            }
+        });
+        callApiRetrofitFindAcesses(curso.getId(), new InscricaoCursoCallback() {
+            @Override
+            public void onSuccess(JsonObject jsonObject) {
+                int acesses = jsonObject.get("number").getAsInt();
+                holder.acessMyCourseTextView.setText("Acessos: " + acesses);
+                extras.putInt("acesses", acesses);
+            }
+
+            @Override
+            public void onFailure(Throwable throwable) {
+
+            }
+
+            @Override
+            public void onSuccessFind(List<InscricaoCurso> list) {
+
             }
         });
 
@@ -194,6 +216,43 @@ public class MyCoursesAdapter extends RecyclerView.Adapter<MyCoursesAdapter.Item
 
             @Override
             public void onFailure(Call<List<AvaliacaoCurso>> call, Throwable throwable) {
+                Log.e("ERRO", throwable.getMessage());
+                callback.onFailure(throwable); // Falha por erro de requisição
+            }
+        });
+    }
+    private void callApiRetrofitFindAcesses(UUID cursoId , InscricaoCursoCallback callback) {
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(60, TimeUnit.SECONDS)
+                .build();
+
+        String urlApi = "https://incluses-api.onrender.com/";
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl(urlApi)
+                .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        InscricaoCursoApi api = retrofit.create(InscricaoCursoApi.class);
+        Call<JsonObject> call = api.findAcesses(token,cursoId);
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                Log.e("retorno", String.valueOf(response.code()));
+                if (response.isSuccessful() && response.body() != null) {
+                    JsonObject responseBody = response.body();
+                    callback.onSuccess(responseBody); // Sucesso
+                } else if (response.code() == 401) {
+                }
+                else {
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable throwable) {
                 Log.e("ERRO", throwable.getMessage());
                 callback.onFailure(throwable); // Falha por erro de requisição
             }

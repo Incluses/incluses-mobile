@@ -19,6 +19,14 @@ public class Arquivo implements Serializable {
 
     private TipoArquivo tipoArquivo;
 
+    public Arquivo(String nome, String tamanho, UUID fkTipoArquivoId) {
+        this.nome = nome;
+        this.s3Url = "a";
+        this.s3Key = "a";
+        this.tamanho = tamanho;
+        this.fkTipoArquivoId = fkTipoArquivoId;
+    }
+
     // Getters and Setters
 
     public String getNome() {
