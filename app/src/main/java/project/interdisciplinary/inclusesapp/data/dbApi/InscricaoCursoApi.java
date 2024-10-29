@@ -20,4 +20,7 @@ public interface InscricaoCursoApi {
 
     @GET("inscricao-curso/selecionar-fk-usuario/{fkUsuario}")
     Call<List<InscricaoCurso>> findInscricaoCurso(@Header("Authorization") String token, @Path("fkUsuario")UUID fkUsuario);
+
+    @GET("inscricao-curso/selecionar-acessos/{fkCurso}")
+    Call<JsonObject> findAcesses(@Header("Authorization") String token, @Path("fkCurso")UUID fkCurso);
 }

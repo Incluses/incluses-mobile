@@ -20,6 +20,10 @@ public class ConvertersToObjects {
         return gson.fromJson(vagaString, Vaga.class);
     }
 
+    public static Arquivo convertStringToArquivo(String arquivoString) {
+        Gson gson = new Gson();
+        return gson.fromJson(arquivoString, Arquivo.class);
+    }
     public static Perfil convertStringToPerfil(String perfilString) {
         Gson gson = new Gson();
         return gson.fromJson(perfilString, Perfil.class);

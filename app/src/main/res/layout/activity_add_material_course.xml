@@ -48,7 +48,7 @@
             android:layout_margin="@dimen/spacing_03">
 
             <LinearLayout
-                android:id="@+id/inputsEditMaterialCourse"
+                android:id="@+id/inputsAddMaterialCourse"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -56,7 +56,7 @@
                 android:background="@drawable/style_box_inputs">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/titleEditMaterialCourseInputLayout"
+                    android:id="@+id/titleAddMaterialCourseInputLayout"
                     style="@style/style_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -69,7 +69,7 @@
                     app:endIconMode="clear_text">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/titleEditMaterialCourseEditText"
+                        android:id="@+id/titleAddMaterialCourseEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="text"
@@ -78,7 +78,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/descriptionEditMaterialCourseInputLayout"
+                    android:id="@+id/descriptionAddMaterialCourseInputLayout"
                     style="@style/style_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -93,7 +93,7 @@
                     app:hintTextColor="@color/gray">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/descripitionEditMaterialCourseEditText"
+                        android:id="@+id/descripitionAddMaterialCourseEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingBottom="@dimen/spacing_07"
@@ -105,11 +105,13 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/archiveAddMaterialCourse"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
                     android:background="@drawable/style_box_inputs">
 
                     <TextView
+                        android:id="@+id/textArchiveAddMaterialCourse"
                         android:layout_width="285dp"
                         android:layout_height="34dp"
                         android:text="+ Adicionar material em anexo"
@@ -128,7 +130,7 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/nextEditMaterialCourseButton"
+                android:id="@+id/nextAddMaterialCourseButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/style_primary_button"
@@ -140,7 +142,7 @@
                 android:paddingEnd="@dimen/spacing_16"/>
 
             <Button
-                android:id="@+id/cancelEditMaterialCourseButton"
+                android:id="@+id/cancelAddMaterialCourseButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/style_secondary_button"
