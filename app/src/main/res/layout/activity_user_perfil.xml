@@ -130,8 +130,6 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -197,6 +195,48 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@android:drawable/ic_delete" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:background="#FFFFFF"
+                android:backgroundTint="#FFFFFF">
+
+                <View
+                    android:id="@+id/itemDividerPerfilUserView"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/spacing_01"
+                    android:background="@color/light_gray"
+                    android:layout_marginTop="@dimen/spacing_03"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:id="@+id/textViewPosts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="32dp"
+                    android:fontFamily="sans-serif-black"
+                    android:text="Publicações"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/spacing_08"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/myPostsProfileRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:listitem="@layout/item_feed"
+                    android:layout_marginTop="@dimen/spacing_05"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textViewPosts"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
