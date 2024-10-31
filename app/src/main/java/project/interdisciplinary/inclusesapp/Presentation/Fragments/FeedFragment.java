@@ -103,7 +103,6 @@ public class FeedFragment extends Fragment {
 
             @Override
             public void onSuccess(List<JsonObject> postagens) {
-
                 // Define o Adapter no RecyclerView
                 binding.feedPostsRecyclerView.setAdapter(new PostagensAdapter(postagens, getContext()));
             }

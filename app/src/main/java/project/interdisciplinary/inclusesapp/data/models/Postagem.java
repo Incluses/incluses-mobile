@@ -75,12 +75,12 @@ public class Postagem {
 
 
     public static class Like {
-        private Integer perfilId;
+        private UUID perfilId;
         private Date dataLike;
 
         // Getters e Setters
 
-        public Integer getPerfilId() {
+        public UUID getPerfilId() {
             return perfilId;
         }
 
@@ -92,13 +92,13 @@ public class Postagem {
             this.dataLike = dataLike;
         }
 
-        public void setPerfilId(Integer perfilId) {
+        public void setPerfilId(UUID perfilId) {
             this.perfilId = perfilId;
         }
     }
 
     public static class Comentario {
-        private Integer perfilId;
+        private UUID perfilId;
         private String comentario;
 
         // Getters e Setters
@@ -107,11 +107,11 @@ public class Postagem {
             this.comentario = comentario;
         }
 
-        public void setPerfilId(Integer perfilId) {
+        public void setPerfilId(UUID perfilId) {
             this.perfilId = perfilId;
         }
 
-        public Integer getPerfilId() {
+        public UUID getPerfilId() {
             return perfilId;
         }
 

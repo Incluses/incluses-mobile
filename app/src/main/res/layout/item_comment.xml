@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/spacing_02"
+    android:layout_marginEnd="@dimen/spacing_02"
+    android:layout_marginStart="@dimen/spacing_02"
+    android:layout_marginTop="@dimen/spacing_01"
+    android:layout_marginBottom="@dimen/spacing_03">
+
+    <!-- Container to wrap all components -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/containerPost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/ConstraintLayoutWithShadow"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:id="@+id/perfilImageView"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:scaleType="centerCrop"
+            android:layout_marginTop="@dimen/spacing_05"
+            android:background="@drawable/ic_perfil"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.120"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/namePerfilCommentTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_05"
+            android:layout_marginStart="@dimen/spacing_04"
+            android:text="Nome"
+            android:textSize="@dimen/spacing_05"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@id/perfilImageView"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <View
+            android:id="@+id/itemDividerPostView"
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="@android:color/darker_gray"
+            android:layout_marginTop="@dimen/spacing_02"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/perfilImageView" />
+
+        <TextView
+            android:id="@+id/commentTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_05"
+            android:layout_marginEnd="@dimen/spacing_05"
+            android:layout_marginTop="@dimen/spacing_04"
+            android:layout_marginBottom="@dimen/spacing_04"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:text="Comentário"
+            android:textSize="@dimen/spacing_05"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/itemDividerPostView"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

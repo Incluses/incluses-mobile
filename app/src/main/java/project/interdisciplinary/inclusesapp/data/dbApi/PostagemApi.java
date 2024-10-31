@@ -20,4 +20,16 @@ public interface PostagemApi {
 
     @POST("postagem/inserir")
     Call<JsonObject> insertPostagem(@Body Postagem postagem);
+
+    @POST("/postagem/comentar")
+    Call<JsonObject> addComment(
+            @Query("id_user") UUID idUser,
+            @Query("id_postagem") UUID idPostagem,
+            @Query("comentario") String comentario
+    );
+    @POST("postagem/like")
+    Call<JsonObject> like(@Query("id_user") String idUser, @Query("postagem_id") String postagemId);
+
+    @POST("postagem/removerlike")
+    Call<JsonObject> removeLike(@Query("id_user") String idUser, @Query("postagem_id") String postagemId);
 }
