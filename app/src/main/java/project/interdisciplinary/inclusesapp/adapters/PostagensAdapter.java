@@ -16,6 +16,9 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.Target;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
@@ -47,9 +50,13 @@ public class PostagensAdapter extends RecyclerView.Adapter<PostagensAdapter.Item
     private DatabaseFirebase firebase = new DatabaseFirebase();
     private Perfil perfilObj;
     private Retrofit retrofit;
+    private DatabaseFirebase firebase;
+
 
     public PostagensAdapter(List<JsonObject> listaPostagens, Context context) {
         this.listaPostagens = listaPostagens;
+        firebase = new DatabaseFirebase(); // Or retrieve the instance if it’s a singleton
+
 
         SharedPreferences preferences = context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE);
         token = preferences.getString("token", "");
@@ -63,7 +70,6 @@ public class PostagensAdapter extends RecyclerView.Adapter<PostagensAdapter.Item
         } else {
             Log.e("Perfil", "Nenhum perfil encontrado no SharedPreferences.");
         }
-
     }
 
     @NonNull
@@ -81,8 +87,26 @@ public class PostagensAdapter extends RecyclerView.Adapter<PostagensAdapter.Item
 
         findPerfil(jsonObject.get("perfilId").getAsString(), new PerfilCallback() {
             @Override
+            public void onSucesssObject(JsonObject jsonObject) {
+
+            }
+
+            @Override
             public void onSuccess(Perfil perfil) {
                 holder.namePerfil.setText(perfil.getNome());
+                if (perfil.getFkFtPerfilId() != null){
+                    firebase.getFileUriFromFirebase(perfil.getFkFtPerfilId().toString(),
+                            uri -> {
+                                Glide.with(holder.itemView.getContext())
+                                        .load(uri.toString())  // Convertendo a URI em String se necessário
+                                        .apply(RequestOptions.circleCropTransform())  // Aplica a transformação circular
+                                        .into(holder.perfilImg);
+                            },
+                            e -> {
+                                Log.e("Firebase", "Erro ao obter URL de download", e);
+                            }
+                    );
+                }
             }
 
             @Override
@@ -95,8 +119,22 @@ public class PostagensAdapter extends RecyclerView.Adapter<PostagensAdapter.Item
         // Exemplo de como setar a imagem, se você tiver a URL ou o recurso da imagem
         // holder.imgPost.setImageURI(); // Configurar imagem aqui
         holder.legendPost.setText(jsonObject.get("legenda").getAsString());
-
         holder.imgPost.setVisibility(View.GONE);
+        if (!jsonObject.get("arquivoId").isJsonNull()){
+            String arquivoId = jsonObject.get("arquivoId").getAsString();
+            firebase.getFileUriFromFirebase(arquivoId,
+                    uri -> {
+                        Glide.with(holder.itemView.getContext())
+                                .load(uri.toString())
+                                .into(holder.imgPost);
+                        holder.imgPost.setVisibility(View.VISIBLE);
+                    },
+                    e -> {
+                        Log.e("Firebase", "Erro ao obter URL de download", e);
+                    }
+            );
+
+        }
 
 
         // Controle do like
@@ -213,6 +251,7 @@ public class PostagensAdapter extends RecyclerView.Adapter<PostagensAdapter.Item
         private ImageButton likePost;
         private ImageButton commentPost;
         private ImageButton sendPost;
+        private ImageView perfilImg;
         public boolean isLiked = false; // Adiciona o controle de estado para o like
 
         public ItemPostagensViewHolder(@NonNull View itemView) {
@@ -224,6 +263,7 @@ public class PostagensAdapter extends RecyclerView.Adapter<PostagensAdapter.Item
             likePost = itemView.findViewById(R.id.likePostImageButton);
             commentPost = itemView.findViewById(R.id.comentPostImageButton);
             sendPost = itemView.findViewById(R.id.sendPostImageButton);
+            perfilImg = itemView.findViewById(R.id.perfilImageView);
         }
     }
 

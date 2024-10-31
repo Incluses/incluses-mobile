@@ -30,6 +30,7 @@ import project.interdisciplinary.inclusesapp.adapters.PostagensAdapter;
 import project.interdisciplinary.inclusesapp.data.dbApi.PostagemApi;
 import project.interdisciplinary.inclusesapp.data.dbApi.PostagemCallback;
 import project.interdisciplinary.inclusesapp.data.models.Perfil;
+import project.interdisciplinary.inclusesapp.data.models.Postagem;
 import project.interdisciplinary.inclusesapp.databinding.FragmentFeedEnterpriseBinding;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -72,6 +73,12 @@ public class FeedEnterpriseFragment extends Fragment {
         // Configurando RecyclerView para exibir postagens
         binding.feedPostsEnterpriseRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         setupAdapter(new PostagemCallback() {
+
+            @Override
+            public void onSucessFind(List<Postagem> list) {
+
+            }
+
             @Override
             public void onSuccess(List<JsonObject> postagens) {
                 binding.feedPostsEnterpriseRecyclerView.setAdapter(new PostagensAdapter(postagens, getContext()));

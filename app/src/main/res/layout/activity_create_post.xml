@@ -72,11 +72,13 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/inputArchive"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
                     android:background="@drawable/style_box_inputs">
 
                     <TextView
+                        android:id="@+id/inputArchiveText"
                         android:layout_width="285dp"
                         android:layout_height="wrap_content"
                         android:text="+ Adicionar imagem (opcional)"
