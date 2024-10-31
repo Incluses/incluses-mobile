@@ -84,7 +84,7 @@ public class AddMaterialCourse extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 SharedPreferences preferences2 = getSharedPreferences("app_prefs", Context.MODE_PRIVATE);
-
+                SharedPreferences.Editor editor = preferences2.edit();
                 boolean descriptionFilled = false, titleFilled = false;
                 boolean archiveFilled = preferences2.getBoolean("archiveFilled", false);
                 String descriptionInput = binding.descripitionAddMaterialCourseEditText.getText().toString();
@@ -120,6 +120,7 @@ public class AddMaterialCourse extends AppCompatActivity {
                             finish();
                         }
                     });
+                    editor.putBoolean("archiveFilled", false);
                 }
             }
         });

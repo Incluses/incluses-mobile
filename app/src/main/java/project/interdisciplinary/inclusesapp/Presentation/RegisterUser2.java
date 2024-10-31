@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -21,10 +22,16 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
+import project.interdisciplinary.inclusesapp.Presentation.Enterprise.HomeEnterprise;
 import project.interdisciplinary.inclusesapp.R;
+import project.interdisciplinary.inclusesapp.data.dbApi.LoginApi;
+import project.interdisciplinary.inclusesapp.data.dbApi.LoginCallback;
 import project.interdisciplinary.inclusesapp.data.dbApi.UsuarioCallback;
 import project.interdisciplinary.inclusesapp.data.dbApi.UsuarioApi;
 import project.interdisciplinary.inclusesapp.data.models.CreateUserRequest;
+import project.interdisciplinary.inclusesapp.data.models.LoginRequest;
+import project.interdisciplinary.inclusesapp.data.models.LoginResponse;
+import project.interdisciplinary.inclusesapp.data.models.Perfil;
 import project.interdisciplinary.inclusesapp.databinding.ActivityRegisterUser2Binding;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -169,8 +176,37 @@ public class RegisterUser2 extends AppCompatActivity {
                         callApiRetrofitRegister(createUserRequest, new UsuarioCallback() {
                             @Override
                             public void onSuccess(JsonObject response) {
-                                Intent intent = new Intent(RegisterUser2.this, JobsOfInterest.class);
-                                startActivity(intent);
+                                LoginRequest login = new LoginRequest(email, password);
+                                SharedPreferences preferences = getSharedPreferences("app_prefs", MODE_PRIVATE);
+                                SharedPreferences.Editor editor = preferences.edit();
+                                callApiRetrofitLogin(login, new LoginCallback() {
+                                    @Override
+                                    public void onSuccess(LoginResponse loginResponse) {
+                                        String token = loginResponse.getToken();
+                                        Perfil perfil = loginResponse.getPerfil();
+
+                                        editor.putString("token", token);
+                                        editor.putString("perfil", perfil.toString());
+                                        editor.apply();
+
+                                        String type = loginResponse.getType();
+                                        Intent intent = new Intent(RegisterUser2.this, Home.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+
+                                    @Override
+                                    public void onSuccessAdmin(JsonObject loginResponse) {
+                                        // Não utilizado aqui
+                                    }
+
+                                    @Override
+                                    public void onFailure(Throwable throwable) {
+                                        Log.e("LoginError", throwable.getMessage());
+                                        Toast.makeText(RegisterUser2.this, "Erro no login", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+
                             }
 
                             @Override
@@ -233,6 +269,7 @@ public class RegisterUser2 extends AppCompatActivity {
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                Log.e("retorno registro", String.valueOf(response.code()));
                 if (response.isSuccessful() && response.body() != null) {
                     JsonObject responseBody = response.body();
                     callback.onSuccess(responseBody); // Sucesso
@@ -247,6 +284,41 @@ public class RegisterUser2 extends AppCompatActivity {
             public void onFailure(Call<JsonObject> call, Throwable throwable) {
                 Log.e("ERRO", throwable.getMessage());
                 callback.onFailure(throwable); // Falha por erro de requisição
+            }
+        });
+    }
+    private void callApiRetrofitLogin(LoginRequest login, LoginCallback callback) {
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(60, TimeUnit.SECONDS)
+                .build();
+
+        String urlApi = "https://incluses-api.onrender.com/";
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl(urlApi)
+                .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        LoginApi api = retrofit.create(LoginApi.class);
+        Call<LoginResponse> call = api.login(login);
+        call.enqueue(new Callback<LoginResponse>() {
+            @Override
+            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                Log.e("retorno login", String.valueOf(response.code()));
+
+                if (response.isSuccessful() && response.body() != null) {
+                    callback.onSuccess(response.body());
+                } else {
+                    callback.onFailure(new Exception("Login ou senha inválidos!"));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LoginResponse> call, Throwable throwable) {
+                callback.onFailure(throwable);
             }
         });
     }

@@ -33,6 +33,7 @@ import project.interdisciplinary.inclusesapp.data.dbApi.PostagemCallback;
 import project.interdisciplinary.inclusesapp.data.dbApi.VacanciesApi;
 import project.interdisciplinary.inclusesapp.data.dbApi.VacanciesCallback;
 import project.interdisciplinary.inclusesapp.data.models.Perfil;
+import project.interdisciplinary.inclusesapp.data.models.Postagem;
 import project.interdisciplinary.inclusesapp.data.models.Usuario;
 import project.interdisciplinary.inclusesapp.data.models.Vaga;
 import project.interdisciplinary.inclusesapp.databinding.FragmentChatBinding;
@@ -78,7 +79,28 @@ public class FeedFragment extends Fragment {
 
         // Define o LayoutManager uma vez
         binding.feedPostsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+
+        binding.createPostPostsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CreatePost createPost = new CreatePost();
+                startActivity(new Intent(getActivity(), createPost.getClass()));
+            }
+        });
+
+        return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         setupAdapter(new PostagemCallback() {
+            @Override
+            public void onSucessFind(List<Postagem> list) {
+
+            }
+
             @Override
             public void onSuccess(List<JsonObject> postagens) {
 
@@ -96,16 +118,6 @@ public class FeedFragment extends Fragment {
                 Log.e("Erro", throwable.getMessage());
             }
         });
-
-        binding.createPostPostsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CreatePost createPost = new CreatePost();
-                startActivity(new Intent(getActivity(), createPost.getClass()));
-            }
-        });
-
-        return view;
     }
 
     private void setupAdapter(PostagemCallback callback) {
