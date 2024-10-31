@@ -116,6 +116,11 @@ public class CommentScreen extends AppCompatActivity {
                     }
 
                     @Override
+                    public void onSucessFind(List<Postagem> list) {
+
+                    }
+
+                    @Override
                     public void onSuccessInsert(JsonObject jsonObject) {}
 
                     @Override

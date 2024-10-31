@@ -142,6 +142,11 @@ public class EnterpriseProfileActivity extends AppCompatActivity {
             }
 
             @Override
+            public void onSuccessVerifyLike(Boolean booleanResponse) {
+
+            }
+
+            @Override
             public void onSucessFind(List<Postagem> list) {
             }
 
