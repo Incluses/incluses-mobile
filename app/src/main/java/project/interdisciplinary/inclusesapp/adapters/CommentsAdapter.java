@@ -93,6 +93,11 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Coment
             }
 
             @Override
+            public void onSucesssObject(JsonObject jsonObject) {
+
+            }
+
+            @Override
             public void onFailure(Throwable throwable) {
                 firebase.saveError(new Error("Erro ao carregar o perfil: " + throwable.getMessage()));
                 Log.e("Erro", throwable.getMessage());

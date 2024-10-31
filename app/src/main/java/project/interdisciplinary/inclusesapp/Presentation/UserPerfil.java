@@ -212,6 +212,11 @@ public class UserPerfil extends AppCompatActivity {
             }
 
             @Override
+            public void onSuccessVerifyLike(Boolean booleanResponse) {
+
+            }
+
+            @Override
             public void onSuccessInsert(JsonObject jsonObject) {
 
             }

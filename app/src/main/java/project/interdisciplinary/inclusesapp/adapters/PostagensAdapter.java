@@ -50,7 +50,6 @@ public class PostagensAdapter extends RecyclerView.Adapter<PostagensAdapter.Item
     private DatabaseFirebase firebase = new DatabaseFirebase();
     private Perfil perfilObj;
     private Retrofit retrofit;
-    private DatabaseFirebase firebase;
 
 
     public PostagensAdapter(List<JsonObject> listaPostagens, Context context) {
@@ -157,6 +156,11 @@ public class PostagensAdapter extends RecyclerView.Adapter<PostagensAdapter.Item
             }
 
             @Override
+            public void onSucessFind(List<Postagem> list) {
+
+            }
+
+            @Override
             public void onFailure(Throwable throwable) {
                 Log.e("Erro", throwable.getMessage());
             }
@@ -185,6 +189,11 @@ public class PostagensAdapter extends RecyclerView.Adapter<PostagensAdapter.Item
                     }
 
                     @Override
+                    public void onSucessFind(List<Postagem> list) {
+
+                    }
+
+                    @Override
                     public void onSuccessInsert(JsonObject jsonObject) {
 
                     }
@@ -207,6 +216,11 @@ public class PostagensAdapter extends RecyclerView.Adapter<PostagensAdapter.Item
 
                     @Override
                     public void onSuccessVerifyLike(Boolean booleanResponse) {
+
+                    }
+
+                    @Override
+                    public void onSucessFind(List<Postagem> list) {
 
                     }
 
