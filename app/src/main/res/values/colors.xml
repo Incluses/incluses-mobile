@@ -10,5 +10,6 @@
     <color name="light_purple">#FFAF2AD1</color>
     <color name="gray">#FF777777</color>
     <color name="light_gray">#CCCCCC</color>
+    <color name="light_gray_for_post">#EAEAEA</color>
     <color name="red_error">#FD0202</color>
 </resources>

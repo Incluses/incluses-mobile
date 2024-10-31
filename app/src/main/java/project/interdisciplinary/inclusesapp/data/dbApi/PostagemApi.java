@@ -15,6 +15,8 @@ import retrofit2.http.Query;
 public interface PostagemApi {
     @GET("postagem/listar")
     Call<List<JsonObject>> getPostagens();
+    @GET("postagem/listarPostagemByIdUser")
+    Call<List<JsonObject>> findPostagemByIdUser(@Query("id_user")String idPerfil);
 
     @POST("postagem/inserir")
     Call<JsonObject> insertPostagem(@Body Postagem postagem);
