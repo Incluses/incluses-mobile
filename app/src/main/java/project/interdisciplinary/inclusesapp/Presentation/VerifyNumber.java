@@ -51,6 +51,8 @@ public class VerifyNumber extends AppCompatActivity {
         phoneNumber = getIntent().getStringExtra("phone_number");
         userType = getIntent().getStringExtra("user_type");
 
+        Bundle infos = getIntent().getExtras();
+
         // Verificar permissão de SMS antes de enviar
         if (checkSmsPermission()) {
             sendSms(phoneNumber);
@@ -81,10 +83,14 @@ public class VerifyNumber extends AppCompatActivity {
                 Toast.makeText(this, "Código verificado com sucesso!", Toast.LENGTH_SHORT).show();
                 if (userType.equals("user")) {
                     Intent intent = new Intent(this, RegisterUser2.class);
+                    intent.putExtras(infos);
                     startActivity(intent);
+                    finish();
                 }else {
                     Intent intent = new Intent(this, RegisterEnterprise.class);
+                    intent.putExtras(infos);
                     startActivity(intent);
+                    finish();
                 }
 
             }else {

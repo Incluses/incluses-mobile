@@ -28,18 +28,16 @@ public class IntroVerifyNumber extends AppCompatActivity {
         binding = ActivityIntroVerifyNumberBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // Recuperar número de telefone do Bundle
-        String phoneNumber = getIntent().getStringExtra("phone_number");
-        String userType = getIntent().getStringExtra("user_type");
-
+        // Configurar o botão de voltar
         binding.imageViewIntroVerifyNumberBackButton.setOnClickListener(v -> finish());
         binding.textViewIntroVerifyNumberBack.setOnClickListener(v -> finish());
 
+        // Continuar para a próxima tela
         binding.continueButtonIntroVerifyNumber.setOnClickListener(v -> {
             Intent intent = new Intent(IntroVerifyNumber.this, VerifyNumber.class);
-            intent.putExtra("phone_number", phoneNumber);
-            intent.putExtra("user_type", userType);
+            intent.putExtras(getIntent().getExtras());
             startActivity(intent);
+            finish();
         });
     }
 

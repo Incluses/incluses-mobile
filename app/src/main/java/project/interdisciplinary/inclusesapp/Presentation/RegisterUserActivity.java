@@ -127,14 +127,14 @@ public class RegisterUserActivity extends AppCompatActivity {
                 infosUser.putString("password", passwordInput);
                 infosUser.putString("phone_number", cleanPhoneInput);
                 if(cleanInputNumRegister.length() == 11){
-                    Intent intent = new Intent(RegisterUserActivity.this, RegisterUser2.class);//todo: Mudar para o endereco certo dps de realizar o teste
+                    Intent intent = new Intent(RegisterUserActivity.this, IntroVerifyNumber.class);//todo: Mudar para o endereco certo dps de realizar o teste
                     infosUser.putString("user_type", "user");
                     infosUser.putString("cpf", cleanInputNumRegister);
                     intent.putExtras(infosUser);
                     startActivity(intent);
                 }
                 else if (cleanInputNumRegister.length() == 14){
-                    Intent intent = new Intent(RegisterUserActivity.this, RegisterEnterprise.class);//todo: Mudar para o endereco certo dps de realizar o teste
+                    Intent intent = new Intent(RegisterUserActivity.this, IntroVerifyNumber.class);//todo: Mudar para o endereco certo dps de realizar o teste
                     infosUser.putString("user_type", "enterprise");
                     infosUser.putString("cnpj", cleanInputNumRegister);
                     intent.putExtras(infosUser);
