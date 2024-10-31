@@ -108,6 +108,11 @@ public class FeedFragment extends Fragment {
             }
 
             @Override
+            public void onSuccessVerifyLike(Boolean booleanResponse) {
+
+            }
+
+            @Override
             public void onSuccessInsert(JsonObject jsonObject) {
 
             }

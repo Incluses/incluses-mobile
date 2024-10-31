@@ -85,6 +85,11 @@ public class FeedEnterpriseFragment extends Fragment {
             }
 
             @Override
+            public void onSuccessVerifyLike(Boolean booleanResponse) {
+
+            }
+
+            @Override
             public void onSuccessInsert(JsonObject jsonObject) {
                 // Implementar se necessário
             }

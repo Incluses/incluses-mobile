@@ -137,16 +137,51 @@ public class PostagensAdapter extends RecyclerView.Adapter<PostagensAdapter.Item
         }
 
 
+        // Controle do like
+
+        verifyLike(UUID.fromString(jsonObject.get("id").getAsString()), perfilObj.getId(), new PostagemCallback() {
+            @Override
+            public void onSuccessVerifyLike(Boolean booleanResponse) {
+                if (!booleanResponse) {
+                    holder.likePost.setBackground(ContextCompat.getDrawable(holder.likePost.getContext(), R.drawable.like));
+                    holder.isLiked = false;
+                } else {
+                    holder.likePost.setBackground(ContextCompat.getDrawable(holder.likePost.getContext(), R.drawable.ic_liked));
+                    holder.isLiked = true;
+                }
+            }
+
+            @Override
+            public void onSuccess(List<JsonObject> listJsonObject) {
+
+            }
+
+            @Override
+            public void onFailure(Throwable throwable) {
+                Log.e("Erro", throwable.getMessage());
+            }
+
+            @Override
+            public void onSuccessInsert(JsonObject jsonObject) {
+
+            }
+        });
+
         // Controle do estado do like
         holder.likePost.setOnClickListener(v -> {
             if (holder.isLiked) {
                 holder.likePost.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.ic_liked));
                 holder.isLiked = false;
 
-                removeLike(UUID.fromString(jsonObject.get("id").getAsString()), perfilObj.getId(), new PostagemCallback() {
+                addLike(UUID.fromString(jsonObject.get("id").getAsString()), perfilObj.getId(), new PostagemCallback() {
                     @Override
                     public void onSuccess(List<JsonObject> postagem) {
                         Toast.makeText(v.getContext(), "Foi!", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onSuccessVerifyLike(Boolean booleanResponse) {
+
                     }
 
                     @Override
@@ -164,10 +199,15 @@ public class PostagensAdapter extends RecyclerView.Adapter<PostagensAdapter.Item
             } else {
                 holder.likePost.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.like));
                 holder.isLiked = true;
-                addLike(UUID.fromString(jsonObject.get("id").getAsString()), perfilObj.getId(), new PostagemCallback() {
+                removeLike(UUID.fromString(jsonObject.get("id").getAsString()), perfilObj.getId(), new PostagemCallback() {
                     @Override
                     public void onSuccess(List<JsonObject> postagem) {
                         Toast.makeText(v.getContext(), "Foi!", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onSuccessVerifyLike(Boolean booleanResponse) {
+
                     }
 
                     @Override
@@ -188,7 +228,7 @@ public class PostagensAdapter extends RecyclerView.Adapter<PostagensAdapter.Item
         holder.commentPost.setOnClickListener(v -> {
             Intent intent = new Intent(holder.itemView.getContext(), CommentScreen.class);
             intent.putExtra("comments", jsonObject.get("comentarios").getAsJsonArray().toString());
-            intent.putExtra("idPost", jsonObject.get("id").getAsString());
+            intent.putExtra("Idpost", jsonObject.get("id").getAsString());
             holder.itemView.getContext().startActivity(intent);
         });
 
@@ -271,6 +311,45 @@ public class PostagensAdapter extends RecyclerView.Adapter<PostagensAdapter.Item
             }
         });
 
+    }
+
+    private void verifyLike( UUID idCurrentUser, UUID idPostagem, PostagemCallback callback) {
+
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(60, TimeUnit.SECONDS)
+                .build();
+
+        String urlApi = "https://api-mongo-incluses.onrender.com/";
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl(urlApi)
+                .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        PostagemApi api = retrofit.create(PostagemApi.class);
+        Call<Boolean> call = api.verifyLike(idPostagem, idCurrentUser);
+        call.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    // Chama o callback com a lista
+                    callback.onSuccessVerifyLike(response.body());
+                } else {
+                    // Outro erro
+                    callback.onFailure(new Exception("Erro ao adicionar like: " + response.code()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable throwable) {
+                firebase.saveError(new Error("Erro ao adicionar like: " + throwable.getMessage()));
+                Log.e("ERRO", throwable.getMessage());
+                callback.onFailure(throwable); // Falha por erro de requisição
+            }
+        });
     }
 
     private void addLike(UUID idPostagem, UUID idCurrentUser, PostagemCallback callback) {

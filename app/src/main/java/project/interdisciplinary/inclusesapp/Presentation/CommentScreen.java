@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -82,7 +83,7 @@ public class CommentScreen extends AppCompatActivity {
 
         if (getIntent().hasExtra("comments")) {
             String jsonComments = getIntent().getStringExtra("comments");
-            String postId = getIntent().getStringExtra("Idpost");
+            postId = getIntent().getStringExtra("Idpost");
 
             // Converte o JSON string para List<Comentario>
             List<Comentario> comentariosList = jsonToComentarioList(jsonComments);
@@ -94,16 +95,31 @@ public class CommentScreen extends AppCompatActivity {
         binding.sendCommentButton.setOnClickListener(v -> {
             String comment = binding.fieldMessageEditText.getText().toString();
             if (!comment.isEmpty()) {
-                comment(perfilObj.getId(), UUID.fromString(postId) , comment, new PostagemCallback() {
+                comment(perfilObj.getId(), UUID.fromString(postId), comment, new PostagemCallback() {
                     @Override
                     public void onSuccess(List<JsonObject> listJsonObject) {
                         Toast.makeText(CommentScreen.this, "Comentário enviado!", Toast.LENGTH_SHORT).show();
+
+                        // Limpa o campo de entrada
+                        binding.fieldMessageEditText.setText("");
+
+                        // Remove o foco do campo de entrada
+                        binding.fieldMessageEditText.clearFocus();
+
+                        // Oculta o teclado
+                        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                        if (imm != null) {
+                            imm.hideSoftInputFromWindow(binding.fieldMessageEditText.getWindowToken(), 0);
+                        }
+
+                        Toast.makeText(CommentScreen.this, "Enviado! Atualize o feed!", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
-                    public void onSuccessInsert(JsonObject jsonObject) {
+                    public void onSuccessInsert(JsonObject jsonObject) {}
 
-                    }
+                    @Override
+                    public void onSuccessVerifyLike(Boolean booleanResponse) {}
 
                     @Override
                     public void onFailure(Throwable throwable) {
@@ -111,7 +127,7 @@ public class CommentScreen extends AppCompatActivity {
                         Log.e("Erro", throwable.getMessage());
                     }
                 });
-            }else {
+            } else {
                 Toast.makeText(CommentScreen.this, "Preencha algo para comentar!", Toast.LENGTH_SHORT).show();
             }
         });

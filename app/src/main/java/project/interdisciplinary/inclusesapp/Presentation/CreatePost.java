@@ -68,7 +68,7 @@ public class CreatePost extends AppCompatActivity {
         binding.cancelAddMaterialCourseButton.setOnClickListener(v -> {
             finish();
         });
-      
+
         SharedPreferences preferences = getApplicationContext().getSharedPreferences("app_prefs", Context.MODE_PRIVATE);
         token = preferences.getString("token", "");
         String perfilJson = preferences.getString("perfil", "");
@@ -109,6 +109,11 @@ public class CreatePost extends AppCompatActivity {
                         inserirPost(postagem, new PostagemCallback() {
                                     @Override
                                     public void onSuccess(List<JsonObject> listJsonObject) {
+                                    }
+
+                                    @Override
+                                    public void onSuccessVerifyLike(Boolean booleanResponse) {
+
                                     }
 
                                     @Override

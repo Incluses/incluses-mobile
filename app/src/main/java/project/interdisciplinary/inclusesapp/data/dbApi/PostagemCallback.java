@@ -8,7 +8,7 @@ import project.interdisciplinary.inclusesapp.data.models.Postagem;
 
 public interface PostagemCallback {
     void onSuccess(List<JsonObject> listJsonObject);
-
+    void onSuccessVerifyLike(Boolean booleanResponse);
     void onSucessFind(List<Postagem> list);
     void onSuccessInsert(JsonObject jsonObject);
     void onFailure(Throwable throwable);
