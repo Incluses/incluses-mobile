@@ -1,6 +1,7 @@
 package project.interdisciplinary.inclusesapp.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,10 +25,16 @@ import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
+import project.interdisciplinary.inclusesapp.Presentation.CommentScreen;
 import project.interdisciplinary.inclusesapp.R;
 import project.interdisciplinary.inclusesapp.data.dbApi.PerfilApi;
 import project.interdisciplinary.inclusesapp.data.dbApi.PerfilCallback;
+import project.interdisciplinary.inclusesapp.data.dbApi.PostagemApi;
+import project.interdisciplinary.inclusesapp.data.dbApi.PostagemCallback;
+import project.interdisciplinary.inclusesapp.data.firebase.DatabaseFirebase;
+import project.interdisciplinary.inclusesapp.data.models.Error;
 import project.interdisciplinary.inclusesapp.data.models.Perfil;
+import project.interdisciplinary.inclusesapp.data.models.Postagem;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -37,6 +44,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class PostagensAdapter extends RecyclerView.Adapter<PostagensAdapter.ItemPostagensViewHolder> {
     private List<JsonObject> listaPostagens = new ArrayList<>();
     private String token;
+    private DatabaseFirebase firebase = new DatabaseFirebase();
     private Perfil perfilObj;
     private Retrofit retrofit;
 
@@ -69,6 +77,8 @@ public class PostagensAdapter extends RecyclerView.Adapter<PostagensAdapter.Item
     public void onBindViewHolder(@NonNull PostagensAdapter.ItemPostagensViewHolder holder, int position) {
         JsonObject jsonObject = listaPostagens.get(position);
 
+        Postagem postagem = new Gson().fromJson(jsonObject, Postagem.class);
+
         findPerfil(jsonObject.get("perfilId").getAsString(), new PerfilCallback() {
             @Override
             public void onSuccess(Perfil perfil) {
@@ -92,19 +102,56 @@ public class PostagensAdapter extends RecyclerView.Adapter<PostagensAdapter.Item
         // Controle do estado do like
         holder.likePost.setOnClickListener(v -> {
             if (holder.isLiked) {
-                holder.likePost.setBackgroundTintList(null);
+                holder.likePost.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.ic_liked));
                 holder.isLiked = false;
-                //removeLike();
+
+                removeLike(UUID.fromString(jsonObject.get("id").getAsString()), perfilObj.getId(), new PostagemCallback() {
+                    @Override
+                    public void onSuccess(List<JsonObject> postagem) {
+                        Toast.makeText(v.getContext(), "Foi!", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onSuccessInsert(JsonObject jsonObject) {
+
+                    }
+
+                    @Override
+                    public void onFailure(Throwable throwable) {
+                        firebase.saveError(new Error("Erro ao descurtir: " + throwable.getMessage()));
+                        Log.e("Erro", throwable.getMessage());
+                    }
+                });
+
             } else {
-                holder.likePost.setBackgroundTintList(ContextCompat.getColorStateList(holder.itemView.getContext(), R.color.light_blue));
+                holder.likePost.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.like));
                 holder.isLiked = true;
-                //addLike();
+                addLike(UUID.fromString(jsonObject.get("id").getAsString()), perfilObj.getId(), new PostagemCallback() {
+                    @Override
+                    public void onSuccess(List<JsonObject> postagem) {
+                        Toast.makeText(v.getContext(), "Foi!", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onSuccessInsert(JsonObject jsonObject) {
+
+                    }
+
+                    @Override
+                    public void onFailure(Throwable throwable) {
+                        firebase.saveError(new Error("Erro ao curtir: " + throwable.getMessage()));
+                        Log.e("Erro", throwable.getMessage());
+                    }
+                });
             }
         });
 
         // Ação de comentário
         holder.commentPost.setOnClickListener(v -> {
-            // Implementar a lógica de adicionar comentário
+            Intent intent = new Intent(holder.itemView.getContext(), CommentScreen.class);
+            intent.putExtra("comments", jsonObject.get("comentarios").getAsJsonArray().toString());
+            intent.putExtra("idPost", jsonObject.get("id").getAsString());
+            holder.itemView.getContext().startActivity(intent);
         });
 
         // Ação de compartilhar/enviar
@@ -178,10 +225,96 @@ public class PostagensAdapter extends RecyclerView.Adapter<PostagensAdapter.Item
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable throwable) {
+                firebase.saveError(new Error("Erro ao buscar perfil: " + throwable.getMessage()));
                 Log.e("ERRO", throwable.getMessage());
                 callback.onFailure(throwable); // Falha por erro de requisição
             }
         });
 
+    }
+
+    private void addLike(UUID idPostagem, UUID idCurrentUser, PostagemCallback callback) {
+
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(60, TimeUnit.SECONDS)
+                .build();
+
+        String urlApi = "https://api-mongo-incluses.onrender.com/";
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl(urlApi)
+                .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        PostagemApi api = retrofit.create(PostagemApi.class);
+        Call<JsonObject> call = api.like(idCurrentUser.toString(), idPostagem.toString());
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    // Processar a resposta para extrair a lista de postagens, se for o caso
+                    List<JsonObject> listResponseBody = new ArrayList<>();
+                    JsonObject responseBody = response.body();
+                    listResponseBody.add(responseBody); // Adiciona o item na lista
+                    // Chama o callback com a lista
+                    callback.onSuccess(listResponseBody);
+                } else {
+                    // Outro erro
+                    callback.onFailure(new Exception("Erro ao adicionar like: " + response.code()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable throwable) {
+                firebase.saveError(new Error("Erro ao adicionar like: " + throwable.getMessage()));
+                Log.e("ERRO", throwable.getMessage());
+                callback.onFailure(throwable); // Falha por erro de requisição
+            }
+        });
+    }
+    private void removeLike(UUID idPostagem, UUID idCurrentUser, PostagemCallback callback) {
+
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(60, TimeUnit.SECONDS)
+                .build();
+
+        String urlApi = "https://api-mongo-incluses.onrender.com/";
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl(urlApi)
+                .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        PostagemApi api = retrofit.create(PostagemApi.class);
+        Call<JsonObject> call = api.removeLike(idCurrentUser.toString(), idPostagem.toString());
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    // Processar a resposta para extrair a lista de postagens, se for o caso
+                    List<JsonObject> listResponseBody = new ArrayList<>();
+                    JsonObject responseBody = response.body();
+                    listResponseBody.add(responseBody); // Adiciona o item na lista
+                    // Chama o callback com a lista
+                    callback.onSuccess(listResponseBody);
+                } else {
+                    // Outro erro
+                    callback.onFailure(new Exception("Erro ao remover like: " + response.code()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable throwable) {
+                firebase.saveError(new Error("Erro ao remover like: " + throwable.getMessage()));
+                Log.e("ERRO", throwable.getMessage());
+                callback.onFailure(throwable); // Falha por erro de requisição
+            }
+        });
     }
 }

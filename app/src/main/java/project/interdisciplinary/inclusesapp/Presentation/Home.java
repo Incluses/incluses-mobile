@@ -52,6 +52,8 @@ import project.interdisciplinary.inclusesapp.Presentation.Fragments.ProfileSearc
 import project.interdisciplinary.inclusesapp.Presentation.Fragments.VacanciesFragment;
 import project.interdisciplinary.inclusesapp.R;
 import project.interdisciplinary.inclusesapp.data.ConvertersToObjects;
+import project.interdisciplinary.inclusesapp.data.firebase.DatabaseFirebase;
+import project.interdisciplinary.inclusesapp.data.models.Error;
 import project.interdisciplinary.inclusesapp.data.models.Perfil;
 import project.interdisciplinary.inclusesapp.data.dbApi.UsuarioApi;
 import project.interdisciplinary.inclusesapp.data.dbApi.UsuarioCallback;
@@ -72,6 +74,7 @@ public class Home extends AppCompatActivity {
     private String token;
     private Usuario usuario;
     private String perfil;
+    private DatabaseFirebase firebase = new DatabaseFirebase();
 
     private ActivityResultLauncher<String> notificationPermissionLauncher;
 
