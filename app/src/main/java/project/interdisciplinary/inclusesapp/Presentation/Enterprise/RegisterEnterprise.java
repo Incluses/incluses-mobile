@@ -74,16 +74,12 @@ public class RegisterEnterprise extends AppCompatActivity {
         //button back
         binding.imageViewLoginEnterpriseBackButton.setOnClickListener(
                 v -> {
-                    Intent intent = new Intent(RegisterEnterprise.this, RegisterUserActivity.class);
-                    startActivity(intent);
                     finish();
                 }
         );
 
         binding.textViewLoginEnterpriseBack.setOnClickListener(
                 v -> {
-                    Intent intent = new Intent(RegisterEnterprise.this, RegisterUserActivity.class);
-                    startActivity(intent);
                     finish();
                 }
         );
