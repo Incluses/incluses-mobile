@@ -120,12 +120,10 @@ public class UserPerfil extends AppCompatActivity {
             binding.namePerfiltextView.setText(perfilObj.getNome());
         }
         binding.pronounUserProfile.setText(userObj.getPronomes());
+        binding.addBiographyProfile.setVisibility(View.GONE);
         if (perfilObj.getBiografia()!= null) {
             binding.addBiographyProfile.setText(perfilObj.getBiografia());
             binding.addBiographyProfile.setVisibility(View.VISIBLE);
-        }
-        else {
-            binding.addBiographyProfile.setVisibility(View.GONE);
         }
         if (userObj.getFkCurriculoId() != null) {
             binding.curriculamAddText.setText("Currículo Atual");
@@ -394,7 +392,7 @@ public class UserPerfil extends AppCompatActivity {
                             editor.putBoolean("archiveFilled", true);
                             editor.putString("archive", apiResponse2.toString());
                             editor.apply();
-                            if (userObj.getCurriculo().getId() != null){
+                            if (userObj.getFkCurriculoId() != null){
                                 Log.e("arquivo update", apiResponse2.getId().toString());
                                 editor.apply();
                                 updateCurriculum(userObj.getId(), apiResponse2.getId(), new UsuarioCallback() {
@@ -409,7 +407,6 @@ public class UserPerfil extends AppCompatActivity {
                                     }
                                 });
                             }
-                            Log.e("id curriculo", userObj.getCurriculo().getId().toString());
                         }
                     });
                 }
