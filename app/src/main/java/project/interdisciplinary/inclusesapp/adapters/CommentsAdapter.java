@@ -76,9 +76,8 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Coment
             @Override
             public void onSuccess(Perfil perfil) {
                 holder.textViewPerfilName.setText(perfil.getNome());
-
                 if (perfil.getFkFtPerfilId()!=null){
-                    firebase.getFileUriFromFirebase(perfilObj.getFkFtPerfilId().toString(),
+                    firebase.getFileUriFromFirebase(perfil.getFkFtPerfilId().toString(),
                             uri -> {
                                 Glide.with(holder.itemView)
                                         .load(uri.toString())  // Convertendo a URI em String se necessário

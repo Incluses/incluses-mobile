@@ -79,10 +79,11 @@
 
                     <TextView
                         android:id="@+id/inputArchiveText"
-                        android:layout_width="285dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="+ Adicionar imagem (opcional)"
                         android:textSize="@dimen/spacing_06"
+                        android:gravity="center"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"

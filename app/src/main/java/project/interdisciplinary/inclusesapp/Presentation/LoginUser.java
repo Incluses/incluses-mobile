@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.gson.JsonObject;
@@ -46,12 +47,10 @@ public class LoginUser extends AppCompatActivity {
 
         // Botão de voltar
         binding.imageViewLoginUserBackButton.setOnClickListener(v -> {
-            startActivity(new Intent(LoginUser.this, Login.class));
             finish();
         });
 
         binding.textViewLoginUserBack.setOnClickListener(v -> {
-            startActivity(new Intent(LoginUser.this, Login.class));
             finish();
         });
 
@@ -59,6 +58,15 @@ public class LoginUser extends AppCompatActivity {
         binding.registerTextView.setOnClickListener(v -> {
             startActivity(new Intent(LoginUser.this, RegisterUserActivity.class));
             finish();
+        });
+        binding.googleLoginButton.setOnClickListener(v -> {
+            Toast.makeText(LoginUser.this, "Disponível na próxima versão!", Toast.LENGTH_SHORT).show();
+        });
+        binding.facebookLoginButton.setOnClickListener(v -> {
+            Toast.makeText(LoginUser.this, "Disponível na próxima versão!", Toast.LENGTH_SHORT).show();
+        });
+        binding.forgotPasswordTextView.setOnClickListener(v -> {
+            Toast.makeText(LoginUser.this, "Disponível na próxima versão!", Toast.LENGTH_SHORT).show();
         });
 
         // Botão para continuar
@@ -71,6 +79,9 @@ public class LoginUser extends AppCompatActivity {
                 return;
             }
 
+            // Exibe o ProgressBar
+            binding.progressBar.setVisibility(View.VISIBLE);
+
             // Chama a API de admin primeiro
             callApiRetrofitLoginAdm(emailInput, new LoginCallback() {
                 @Override
@@ -80,6 +91,9 @@ public class LoginUser extends AppCompatActivity {
 
                 @Override
                 public void onSuccessAdmin(JsonObject loginResponse) {
+                    // Oculta o ProgressBar após o sucesso
+                    binding.progressBar.setVisibility(View.GONE);
+
                     adminEmail = loginResponse.get("email").getAsString();
                     passwordAdmin = loginResponse.get("password").getAsString();
 
@@ -97,6 +111,9 @@ public class LoginUser extends AppCompatActivity {
                         callApiRetrofitLogin(login, new LoginCallback() {
                             @Override
                             public void onSuccess(LoginResponse loginResponse) {
+                                // Oculta o ProgressBar após o sucesso
+                                binding.progressBar.setVisibility(View.GONE);
+                                
                                 String token = loginResponse.getToken();
                                 Perfil perfil = loginResponse.getPerfil();
 

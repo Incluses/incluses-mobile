@@ -32,6 +32,12 @@ public class VerifyNumber extends AppCompatActivity {
 
     private String phoneNumber;
     private String userType;
+    private String name;
+    private String email;
+    private String password;
+    private String phone;
+    private String cpf;
+    private String cnpj;
 
     private String verificationCode;
 
@@ -50,8 +56,20 @@ public class VerifyNumber extends AppCompatActivity {
         // Recuperar número de telefone do Bundle
         phoneNumber = getIntent().getStringExtra("phone_number");
         userType = getIntent().getStringExtra("user_type");
+        name = getIntent().getStringExtra("name");
+        email = getIntent().getStringExtra("email");
+        password = getIntent().getStringExtra("password");
+        phone = getIntent().getStringExtra("phone_number");
+        cpf = getIntent().getStringExtra("cpf");
+        cnpj = getIntent().getStringExtra("cnpj");
 
-        Bundle infos = getIntent().getExtras();
+        Bundle infos = new Bundle();
+        infos.putString("name", name);
+        infos.putString("email", email);
+        infos.putString("password", password);
+        infos.putString("phone_number", phone);
+        infos.putString("cpf", cpf);
+        infos.putString("cnpj", cnpj);
 
         // Verificar permissão de SMS antes de enviar
         if (checkSmsPermission()) {

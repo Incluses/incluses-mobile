@@ -61,7 +61,13 @@ public class FeedFragment extends Fragment {
         View view = binding.getRoot();
         rootView = binding.getRoot();
 
-        setupKeyboardListener();
+        binding.searchPostsProfileByNameEditText.setEnabled(false);
+        binding.searchPostsProfileByNameEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Função disponível na próxima versão", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         SharedPreferences preferences = getActivity().getSharedPreferences("app_prefs", Context.MODE_PRIVATE);
         token = preferences.getString("token", "");

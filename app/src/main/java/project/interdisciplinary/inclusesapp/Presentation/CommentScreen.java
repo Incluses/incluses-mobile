@@ -30,7 +30,6 @@ import project.interdisciplinary.inclusesapp.data.firebase.DatabaseFirebase;
 import project.interdisciplinary.inclusesapp.data.models.Error;
 import project.interdisciplinary.inclusesapp.data.models.Perfil;
 import project.interdisciplinary.inclusesapp.data.models.Postagem.Comentario;
-import project.interdisciplinary.inclusesapp.R;
 import project.interdisciplinary.inclusesapp.data.models.Postagem;
 import project.interdisciplinary.inclusesapp.databinding.ActivityCommentScreenBinding;
 import retrofit2.Call;
@@ -95,23 +94,20 @@ public class CommentScreen extends AppCompatActivity {
         binding.sendCommentButton.setOnClickListener(v -> {
             String comment = binding.fieldMessageEditText.getText().toString();
             if (!comment.isEmpty()) {
+
+                // Limpa o campo de entrada
+                binding.fieldMessageEditText.setText("");
+
+                // Remove o foco do campo de entrada
+                binding.fieldMessageEditText.clearFocus();
+
+                // Esconde o teclado
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(binding.fieldMessageEditText.getWindowToken(), 0);
+
                 comment(perfilObj.getId(), UUID.fromString(postId), comment, new PostagemCallback() {
                     @Override
                     public void onSuccess(List<JsonObject> listJsonObject) {
-                        Toast.makeText(CommentScreen.this, "Comentário enviado!", Toast.LENGTH_SHORT).show();
-
-                        // Limpa o campo de entrada
-                        binding.fieldMessageEditText.setText("");
-
-                        // Remove o foco do campo de entrada
-                        binding.fieldMessageEditText.clearFocus();
-
-                        // Oculta o teclado
-                        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                        if (imm != null) {
-                            imm.hideSoftInputFromWindow(binding.fieldMessageEditText.getWindowToken(), 0);
-                        }
-
                         Toast.makeText(CommentScreen.this, "Enviado! Atualize o feed!", Toast.LENGTH_SHORT).show();
                     }
 
@@ -132,6 +128,8 @@ public class CommentScreen extends AppCompatActivity {
                         Log.e("Erro", throwable.getMessage());
                     }
                 });
+                Toast.makeText(CommentScreen.this, "Enviado! Atualize o feed!", Toast.LENGTH_SHORT).show();
+                finish();
             } else {
                 Toast.makeText(CommentScreen.this, "Preencha algo para comentar!", Toast.LENGTH_SHORT).show();
             }

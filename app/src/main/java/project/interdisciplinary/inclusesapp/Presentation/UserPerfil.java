@@ -122,8 +122,11 @@ public class UserPerfil extends AppCompatActivity {
         binding.pronounUserProfile.setText(userObj.getPronomes());
         binding.addBiographyProfile.setVisibility(View.GONE);
         if (perfilObj.getBiografia()!= null) {
+            binding.addBiographyProfile.setTextColor(getColor(R.color.gray));
             binding.addBiographyProfile.setText(perfilObj.getBiografia());
             binding.addBiographyProfile.setVisibility(View.VISIBLE);
+        }else {
+            binding.addBiographyProfile.setVisibility(View.GONE);
         }
         if (userObj.getFkCurriculoId() != null) {
             binding.curriculamAddText.setText("Currículo Atual");

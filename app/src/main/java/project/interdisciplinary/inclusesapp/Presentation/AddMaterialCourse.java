@@ -68,6 +68,10 @@ public class AddMaterialCourse extends AppCompatActivity {
         binding = ActivityAddMaterialCourseBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        binding.cancelAddMaterialCourseButton.setOnClickListener(v -> {
+            finish();
+        });
+
         SharedPreferences preferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE);
         token = preferences.getString("token", "");
         Intent extrasIntent = getIntent();

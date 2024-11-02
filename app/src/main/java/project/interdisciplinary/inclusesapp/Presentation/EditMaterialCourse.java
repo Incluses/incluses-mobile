@@ -74,6 +74,10 @@ public class EditMaterialCourse extends AppCompatActivity {
         binding.titleEditTextEditMaterial.setText(materialCurso.getNome());
         binding.textArchiveEditMaterialCourse.setText(materialCurso.getArquivo().getNome());
 
+        binding.cancelButtonEditMaterial.setOnClickListener(v -> {
+            finish();
+        });
+
         binding.archiveEditMaterialCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -9,13 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import android.widget.VideoView;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
@@ -81,7 +81,6 @@ public class PostagensAdapter extends RecyclerView.Adapter<PostagensAdapter.Item
     @Override
     public void onBindViewHolder(@NonNull PostagensAdapter.ItemPostagensViewHolder holder, int position) {
         JsonObject jsonObject = listaPostagens.get(position);
-
         Postagem postagem = new Gson().fromJson(jsonObject, Postagem.class);
 
         findPerfil(jsonObject.get("perfilId").getAsString(), new PerfilCallback() {
@@ -117,22 +116,44 @@ public class PostagensAdapter extends RecyclerView.Adapter<PostagensAdapter.Item
 
         // Exemplo de como setar a imagem, se você tiver a URL ou o recurso da imagem
         // holder.imgPost.setImageURI(); // Configurar imagem aqui
+        // Configure a legenda
         holder.legendPost.setText(jsonObject.get("legenda").getAsString());
+
+        // Inicialmente, esconda ambos os views
         holder.imgPost.setVisibility(View.GONE);
-        if (!jsonObject.get("arquivoId").isJsonNull()){
+        holder.videoPostImageView.setVisibility(View.GONE);
+
+        if (!jsonObject.get("arquivoId").isJsonNull()) {
             String arquivoId = jsonObject.get("arquivoId").getAsString();
+
             firebase.getFileUriFromFirebase(arquivoId,
                     uri -> {
-                        Glide.with(holder.itemView.getContext())
-                                .load(uri.toString())
-                                .into(holder.imgPost);
-                        holder.imgPost.setVisibility(View.VISIBLE);
+                        String fileExtension = getFileExtension(uri.toString());
+                        if (fileExtension.equals("mp4")) {
+                            holder.videoPostImageView.setVisibility(View.VISIBLE);
+                            holder.imgPost.setVisibility(View.GONE);
+
+                            // Carregue o vídeo no VideoView
+                            MediaController mediaController = new MediaController(holder.itemView.getContext());
+                            mediaController.setMediaPlayer(holder.videoPostImageView);
+                            holder.videoPostImageView.setMediaController(mediaController);
+                            Log.e("video", uri.toString());
+                            holder.videoPostImageView.setVideoURI(uri);
+                            holder.videoPostImageView.start();
+                        } else {
+                            holder.imgPost.setVisibility(View.VISIBLE);
+                            holder.videoPostImageView.setVisibility(View.GONE);
+
+                            // Carregue a imagem
+                            Glide.with(holder.itemView.getContext())
+                                    .load(uri.toString())
+                                    .into(holder.imgPost);
+                        }
                     },
                     e -> {
                         Log.e("Firebase", "Erro ao obter URL de download", e);
                     }
             );
-
         }
 
 
@@ -172,7 +193,7 @@ public class PostagensAdapter extends RecyclerView.Adapter<PostagensAdapter.Item
         });
 
         // Controle do estado do like
-        holder.likePost.setOnClickListener(v -> {
+         holder.likePost.setOnClickListener(v -> {
             if (holder.isLiked) {
                 holder.likePost.setBackground(ContextCompat.getDrawable(v.getContext(), R.drawable.ic_liked));
                 holder.isLiked = false;
@@ -260,6 +281,7 @@ public class PostagensAdapter extends RecyclerView.Adapter<PostagensAdapter.Item
     public class ItemPostagensViewHolder extends RecyclerView.ViewHolder {
         private TextView namePerfil;
         private TextView descPerfil;
+        private VideoView videoPostImageView;
         private ImageView imgPost;
         private TextView legendPost;
         private ImageButton likePost;
@@ -273,6 +295,7 @@ public class PostagensAdapter extends RecyclerView.Adapter<PostagensAdapter.Item
             namePerfil = itemView.findViewById(R.id.namePerfilPostTextView);
             descPerfil = itemView.findViewById(R.id.descriptionPerfilPostTextView);
             imgPost = itemView.findViewById(R.id.imagePostImageView);
+            videoPostImageView = itemView.findViewById(R.id.videoPostImageView);
             legendPost = itemView.findViewById(R.id.legendPostTextView);
             likePost = itemView.findViewById(R.id.likePostImageButton);
             commentPost = itemView.findViewById(R.id.comentPostImageButton);
@@ -449,5 +472,11 @@ public class PostagensAdapter extends RecyclerView.Adapter<PostagensAdapter.Item
                 callback.onFailure(throwable); // Falha por erro de requisição
             }
         });
+    }
+
+    // Método para obter a extensão do arquivo
+    private String getFileExtension(String uri) {
+        String[] parts = uri.split("\\.");
+        return parts.length > 1 ? parts[parts.length - 1].toLowerCase() : "";
     }
 }

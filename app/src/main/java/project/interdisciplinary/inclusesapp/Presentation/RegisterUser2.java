@@ -52,8 +52,10 @@ public class RegisterUser2 extends AppCompatActivity {
         // Force Theme to Light Mode
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-        Intent actualIntent = getIntent();
-        Bundle infosUser = actualIntent.getExtras();
+        Bundle infosUser = getIntent().getExtras();
+
+        Log.i("RegisterUser2", "onCreate: " + infosUser.getString("name"));
+        Log.i("RegisterUser2", "onCreate: " + infosUser);
 
         binding = ActivityRegisterUser2Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -96,7 +98,7 @@ public class RegisterUser2 extends AppCompatActivity {
 
                                 int age = calculateAge(dob);
 
-                                if (age < 18) {
+                                if (age < 14) {
                                     binding.dateBornInputLayout.setError(getString(R.string.error_underage));
                                 } else {
                                     binding.dateBornInputLayout.setError(null);

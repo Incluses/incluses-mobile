@@ -7,6 +7,7 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.SmsManager;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.util.Random;
@@ -35,7 +36,9 @@ public class IntroVerifyNumber extends AppCompatActivity {
         // Continuar para a próxima tela
         binding.continueButtonIntroVerifyNumber.setOnClickListener(v -> {
             Intent intent = new Intent(IntroVerifyNumber.this, VerifyNumber.class);
-            intent.putExtras(getIntent().getExtras());
+            Bundle extras = getIntent().getExtras();
+            Log.e("IntroVerifyNumber", "onCreate: " + extras);
+            intent.putExtras(extras);
             startActivity(intent);
             finish();
         });

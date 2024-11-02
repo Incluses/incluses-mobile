@@ -117,13 +117,16 @@ public class Home extends AppCompatActivity {
             }
         });
 
+        // Solicitar permissão de notificação na inicialização
+        requestNotificationPermission();
+
         // Inicializa o launcher para solicitar a permissão de notificação
         notificationPermissionLauncher = registerForActivityResult(
                 new ActivityResultContracts.RequestPermission(),
                 isGranted -> {
                     if (isGranted) {
                         // Se a permissão foi concedida, enviar a notificação
-                        if (usuario.getNomeSocial() == null && usuario.getPerfil().getBiografia() == null && usuario.getPerfil().getFotoPerfil() == null) {
+                        if (usuario != null && (usuario.getNomeSocial() == null || usuario.getPerfil().getBiografia() == null || usuario.getPerfil().getFotoPerfil() == null)) {
                             toNotify();
                         }
                     } else {
@@ -132,9 +135,6 @@ public class Home extends AppCompatActivity {
                     }
                 }
         );
-
-        // Solicitar permissão de notificação na inicialização
-        requestNotificationPermission();
 
         binding.perfilImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -320,12 +320,16 @@ public class Home extends AppCompatActivity {
                 // Pedir permissão
                 notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS);
             } else {
-                // Se já tiver permissão, enviar a notificação
-                toNotify();
+                // Verificar a condição dos campos antes de enviar a notificação
+                if (usuario != null && (usuario.getNomeSocial() == null || usuario.getPerfil().getBiografia() == null || usuario.getPerfil().getFotoPerfil() == null)) {
+                    toNotify();
+                }
             }
         } else {
-            // Para versões anteriores ao Android 13, não é necessário pedir permissão
-            toNotify();
+            // Para versões anteriores ao Android 13, fazer a verificação antes de enviar a notificação
+            if (usuario != null && (usuario.getNomeSocial() == null || usuario.getPerfil().getBiografia() == null || usuario.getPerfil().getFotoPerfil() == null)) {
+                toNotify();
+            }
         }
     }
 

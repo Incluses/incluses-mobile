@@ -87,11 +87,7 @@ public class EnterpriseProfileActivity extends AppCompatActivity {
     {
         finish(); //finish() to go back to the previous screen
     });
-
-//        Glide.with(this).load(R.drawable.fotorenato).circleCrop().into(binding.ImageViewPerfilUser);
-
-        binding.icConfigEnterpriseProfileImageView.setOnClickListener(new View.OnClickListener()
-    {
+        binding.icConfigEnterpriseProfileImageView.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick (View v){
         Intent intent = new Intent(EnterpriseProfileActivity.this, ScreenConfigurations.class);

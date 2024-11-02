@@ -141,13 +141,26 @@ public class DetailsCourseFragment extends Fragment {
         binding.discardButtonDetailsCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                CreateCourseFragment createCourseFragment = new CreateCourseFragment();
+
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.fragmentContainerView, createCourseFragment).commit();
             }
         });
         binding.concludeButtonDetailsCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(getContext(), "Atualização Feita!", Toast.LENGTH_SHORT).show();
+
+                CreateCourseFragment createCourseFragment = new CreateCourseFragment();
+
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.fragmentContainerView, createCourseFragment).commit();
+
             }
         });
+
+
         return view;}
 
     private void setupKeyboardListener() {
