@@ -28,7 +28,9 @@ import project.interdisciplinary.inclusesapp.data.dbApi.LoginApi;
 import project.interdisciplinary.inclusesapp.data.dbApi.LoginCallback;
 import project.interdisciplinary.inclusesapp.data.dbApi.UsuarioCallback;
 import project.interdisciplinary.inclusesapp.data.dbApi.UsuarioApi;
+import project.interdisciplinary.inclusesapp.data.firebase.DatabaseFirebase;
 import project.interdisciplinary.inclusesapp.data.models.CreateUserRequest;
+import project.interdisciplinary.inclusesapp.data.models.Error;
 import project.interdisciplinary.inclusesapp.data.models.LoginRequest;
 import project.interdisciplinary.inclusesapp.data.models.LoginResponse;
 import project.interdisciplinary.inclusesapp.data.models.Perfil;
@@ -42,6 +44,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RegisterUser2 extends AppCompatActivity {
 
     Date date = null;
+
+    private DatabaseFirebase firebase = new DatabaseFirebase();
 
     private Retrofit retrofit;
     private ActivityRegisterUser2Binding binding;
@@ -204,6 +208,7 @@ public class RegisterUser2 extends AppCompatActivity {
 
                                     @Override
                                     public void onFailure(Throwable throwable) {
+                                        firebase.saveError(new Error("Erro ao carregar o token: " + throwable.getMessage()));
                                         Log.e("LoginError", throwable.getMessage());
                                         Toast.makeText(RegisterUser2.this, "Erro no login", Toast.LENGTH_SHORT).show();
                                     }

@@ -33,6 +33,7 @@ import project.interdisciplinary.inclusesapp.data.dbApi.PostagemCallback;
 import project.interdisciplinary.inclusesapp.data.dbApi.TipoArquivoApi;
 import project.interdisciplinary.inclusesapp.data.firebase.DatabaseFirebase;
 import project.interdisciplinary.inclusesapp.data.models.Arquivo;
+import project.interdisciplinary.inclusesapp.data.models.Error;
 import project.interdisciplinary.inclusesapp.data.models.MaterialCurso;
 import project.interdisciplinary.inclusesapp.data.models.Perfil;
 import project.interdisciplinary.inclusesapp.data.models.Postagem;
@@ -49,6 +50,7 @@ public class CreatePost extends AppCompatActivity {
     private Retrofit retrofit;
 
     private String token;
+    private DatabaseFirebase firebase = new DatabaseFirebase();
 
     private Perfil perfilObj;
 
@@ -124,6 +126,7 @@ public class CreatePost extends AppCompatActivity {
 
                                     @Override
                                     public void onFailure(Throwable throwable) {
+                                        firebase.saveError(new Error("Erro ao criar post: " + throwable.getMessage()));
                                         Log.e("Erro", throwable.getMessage());
                                     }
 

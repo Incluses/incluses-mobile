@@ -36,6 +36,7 @@ import project.interdisciplinary.inclusesapp.data.models.Arquivo;
 import project.interdisciplinary.inclusesapp.data.models.Cep;
 import project.interdisciplinary.inclusesapp.data.models.CreateMaterialCursoRequest;
 import project.interdisciplinary.inclusesapp.data.models.Curso;
+import project.interdisciplinary.inclusesapp.data.models.Error;
 import project.interdisciplinary.inclusesapp.data.models.MaterialCurso;
 import project.interdisciplinary.inclusesapp.data.models.TipoArquivo;
 import project.interdisciplinary.inclusesapp.databinding.ActivityAddMaterialCourseBinding;
@@ -48,6 +49,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class AddMaterialCourse extends AppCompatActivity {
 
     private ActivityAddMaterialCourseBinding binding;
+    private DatabaseFirebase firebase = new DatabaseFirebase();
     private UUID idCurso;
     private Retrofit retrofit;
     private String token;
@@ -116,7 +118,8 @@ public class AddMaterialCourse extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Throwable throwable) {
-
+                            firebase.saveError(new Error("Erro ao inserir material: " + throwable.getMessage()));
+                            Log.e("ERRO", throwable.getMessage());
                         }
 
                         @Override

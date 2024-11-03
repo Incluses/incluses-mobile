@@ -29,6 +29,8 @@ import project.interdisciplinary.inclusesapp.R;
 import project.interdisciplinary.inclusesapp.adapters.PostagensAdapter;
 import project.interdisciplinary.inclusesapp.data.dbApi.PostagemApi;
 import project.interdisciplinary.inclusesapp.data.dbApi.PostagemCallback;
+import project.interdisciplinary.inclusesapp.data.firebase.DatabaseFirebase;
+import project.interdisciplinary.inclusesapp.data.models.Error;
 import project.interdisciplinary.inclusesapp.data.models.Perfil;
 import project.interdisciplinary.inclusesapp.data.models.Postagem;
 import project.interdisciplinary.inclusesapp.databinding.FragmentFeedEnterpriseBinding;
@@ -42,6 +44,7 @@ public class FeedEnterpriseFragment extends Fragment {
 
     private View rootView;
     private Retrofit retrofit;
+    private DatabaseFirebase firebase = new DatabaseFirebase();
 
     private String token;
 
@@ -103,6 +106,7 @@ public class FeedEnterpriseFragment extends Fragment {
 
             @Override
             public void onFailure(Throwable throwable) {
+                firebase.saveError(new Error("Erro ao carregar as postagens: " + throwable.getMessage()));
                 Log.e("Erro", throwable.getMessage());
             }
         });

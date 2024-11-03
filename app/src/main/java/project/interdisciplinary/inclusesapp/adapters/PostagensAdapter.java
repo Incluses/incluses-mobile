@@ -109,6 +109,7 @@ public class PostagensAdapter extends RecyclerView.Adapter<PostagensAdapter.Item
 
             @Override
             public void onFailure(Throwable throwable) {
+                firebase.saveError(new Error("Erro ao buscar perfil: " + throwable.getMessage()));
                 Log.e("Erro", throwable.getMessage());
             }
         });
@@ -183,6 +184,7 @@ public class PostagensAdapter extends RecyclerView.Adapter<PostagensAdapter.Item
 
             @Override
             public void onFailure(Throwable throwable) {
+                firebase.saveError(new Error("Erro ao curtir: " + throwable.getMessage()));
                 Log.e("Erro", throwable.getMessage());
             }
 

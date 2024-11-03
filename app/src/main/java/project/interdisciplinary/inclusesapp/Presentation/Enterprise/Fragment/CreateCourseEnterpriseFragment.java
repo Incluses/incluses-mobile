@@ -33,7 +33,9 @@ import project.interdisciplinary.inclusesapp.adapters.MyCoursesAdapter;
 import project.interdisciplinary.inclusesapp.data.ConvertersToObjects;
 import project.interdisciplinary.inclusesapp.data.dbApi.CursoApi;
 import project.interdisciplinary.inclusesapp.data.dbApi.CursoCallback;
+import project.interdisciplinary.inclusesapp.data.firebase.DatabaseFirebase;
 import project.interdisciplinary.inclusesapp.data.models.Curso;
+import project.interdisciplinary.inclusesapp.data.models.Error;
 import project.interdisciplinary.inclusesapp.databinding.FragmentCreateCourseEnterpriseBinding;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -45,6 +47,7 @@ public class CreateCourseEnterpriseFragment extends Fragment {
 
     private View rootView;
     private Retrofit retrofit;
+    private DatabaseFirebase firebase = new DatabaseFirebase();
     private String token;
 
     private UUID idPerfil;
@@ -103,7 +106,8 @@ public class CreateCourseEnterpriseFragment extends Fragment {
 
                         @Override
                         public void onFailure(Throwable throwable) {
-
+                            firebase.saveError(new Error("Erro ao buscar curso por nome: " + throwable.getMessage()));
+                            Log.e("Context", throwable.getMessage());
                         }
 
                         @Override
@@ -121,7 +125,8 @@ public class CreateCourseEnterpriseFragment extends Fragment {
 
                         @Override
                         public void onFailure(Throwable throwable) {
-
+                            firebase.saveError(new Error("Erro ao buscar cursos: " + throwable.getMessage()));
+                            Log.e("Context", throwable.getMessage());
                         }
 
                         @Override
@@ -170,7 +175,8 @@ public class CreateCourseEnterpriseFragment extends Fragment {
 
             @Override
             public void onFailure(Throwable throwable) {
-
+                firebase.saveError(new Error("Erro ao carregar cursos: " + throwable.getMessage()));
+                Log.e("Erro", throwable.getMessage());
             }
 
             @Override

@@ -32,6 +32,8 @@ import project.interdisciplinary.inclusesapp.data.dbApi.PostagemApi;
 import project.interdisciplinary.inclusesapp.data.dbApi.PostagemCallback;
 import project.interdisciplinary.inclusesapp.data.dbApi.VacanciesApi;
 import project.interdisciplinary.inclusesapp.data.dbApi.VacanciesCallback;
+import project.interdisciplinary.inclusesapp.data.firebase.DatabaseFirebase;
+import project.interdisciplinary.inclusesapp.data.models.Error;
 import project.interdisciplinary.inclusesapp.data.models.Perfil;
 import project.interdisciplinary.inclusesapp.data.models.Postagem;
 import project.interdisciplinary.inclusesapp.data.models.Usuario;
@@ -48,6 +50,7 @@ public class FeedFragment extends Fragment {
 
     private View rootView;
     private Retrofit retrofit;
+    private DatabaseFirebase firebase = new DatabaseFirebase();
 
     private String token;
 
@@ -125,6 +128,7 @@ public class FeedFragment extends Fragment {
 
             @Override
             public void onFailure(Throwable throwable) {
+                firebase.saveError(new Error("Erro ao buscar postagens: " + throwable.getMessage()));
                 Log.e("Erro", throwable.getMessage());
             }
         });
@@ -163,6 +167,7 @@ public class FeedFragment extends Fragment {
             @Override
             public void onFailure(Call<List<JsonObject>> call, Throwable throwable) {
                 Toast.makeText(getContext(), "erro", Toast.LENGTH_LONG).show();
+                firebase.saveError(new Error("Erro ao buscar postagens: " + throwable.getMessage()));
                 Log.e("ERRO", throwable.getMessage());
                 callback.onFailure(throwable); // Falha por erro de requisição
             }

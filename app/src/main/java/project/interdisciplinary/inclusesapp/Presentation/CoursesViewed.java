@@ -28,7 +28,9 @@ import project.interdisciplinary.inclusesapp.data.dbApi.InscricaoCursoApi;
 import project.interdisciplinary.inclusesapp.data.dbApi.InscricaoCursoCallback;
 import project.interdisciplinary.inclusesapp.data.dbApi.UsuarioApi;
 import project.interdisciplinary.inclusesapp.data.dbApi.UsuarioCallback;
+import project.interdisciplinary.inclusesapp.data.firebase.DatabaseFirebase;
 import project.interdisciplinary.inclusesapp.data.models.Curso;
+import project.interdisciplinary.inclusesapp.data.models.Error;
 import project.interdisciplinary.inclusesapp.data.models.InscricaoCurso;
 import project.interdisciplinary.inclusesapp.data.models.Usuario;
 import project.interdisciplinary.inclusesapp.databinding.ActivityCoursesViewedBinding;
@@ -41,6 +43,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class CoursesViewed extends AppCompatActivity {
 
     private ActivityCoursesViewedBinding binding;
+
+    private DatabaseFirebase firebase = new DatabaseFirebase();
 
     private String token;
     private Retrofit retrofit;
@@ -90,7 +94,8 @@ public class CoursesViewed extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Throwable throwable) {
-
+                        firebase.saveError(new Error("Erro ao inscrever-se no curso: " + throwable.getMessage()));
+                        Log.e("Erro", throwable.getMessage());
                     }
 
                     @Override
@@ -102,7 +107,8 @@ public class CoursesViewed extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable throwable) {
-
+                firebase.saveError(new Error("Erro ao buscar o perfil: " + throwable.getMessage()));
+                Log.e("Erro", throwable.getMessage());
             }
         });
 

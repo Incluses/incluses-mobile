@@ -46,6 +46,7 @@ import project.interdisciplinary.inclusesapp.data.dbApi.UsuarioApi;
 import project.interdisciplinary.inclusesapp.data.dbApi.UsuarioCallback;
 import project.interdisciplinary.inclusesapp.data.firebase.DatabaseFirebase;
 import project.interdisciplinary.inclusesapp.data.models.Arquivo;
+import project.interdisciplinary.inclusesapp.data.models.Error;
 import project.interdisciplinary.inclusesapp.data.models.MaterialCurso;
 import project.interdisciplinary.inclusesapp.data.models.Perfil;
 import project.interdisciplinary.inclusesapp.data.models.Postagem;
@@ -224,7 +225,8 @@ public class UserPerfil extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable throwable) {
-
+                firebase.saveError(new Error("Erro ao carregar postagens: " + throwable.getMessage()));
+                Log.e("ERRO", throwable.getMessage());
             }
         });
     }

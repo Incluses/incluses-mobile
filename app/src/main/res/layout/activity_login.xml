@@ -10,7 +10,7 @@
         android:id="@+id/imageViewLoginUserLogo"
         android:layout_width="250dp"
         android:layout_height="255dp"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="60dp"
         android:src="@drawable/logo"
         app:layout_constraintBottom_toTopOf="@+id/imageViewLoginNameIncluses"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,18 +30,18 @@
 
     <Button
         android:id="@+id/buttonLoginUser"
+        style="@style/style_primary_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_10"
-        style="@style/style_primary_button"
-        android:text="@string/login"
-        android:textColor="@color/white"
+        android:layout_marginTop="@dimen/spacing_05"
         android:paddingStart="@dimen/spacing_16"
         android:paddingEnd="@dimen/spacing_16"
+        android:text="@string/login"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/buttonRegisterLogin"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewLoginNameIncluses"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewLoginNameIncluses" />
 
     <Button
         android:id="@+id/buttonRegisterLogin"
@@ -54,10 +54,24 @@
         android:paddingEnd="@dimen/spacing_11"
         android:text="@string/register"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/textViewTermsOfUseLogin"
+        app:layout_constraintBottom_toTopOf="@+id/answerSurvey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonLoginUser" />
+
+    <TextView
+        android:id="@+id/answerSurvey"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_03"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/light_blue"
+        android:text="Responder Pesquisa"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewTermsOfUseLogin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonRegisterLogin" />
 
     <TextView
         android:id="@+id/textViewTermsOfUseLogin"
@@ -68,7 +82,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonRegisterLogin" />
+        app:layout_constraintTop_toBottomOf="@+id/answerSurvey" />
 
     <TextView
         android:id="@+id/textViewTermsOfUseLoginII"

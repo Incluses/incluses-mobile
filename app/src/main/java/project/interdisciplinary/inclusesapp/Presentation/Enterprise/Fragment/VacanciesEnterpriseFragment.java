@@ -27,6 +27,8 @@ import project.interdisciplinary.inclusesapp.adapters.VacanciesAdapter;
 import project.interdisciplinary.inclusesapp.adapters.VacanciesEnterpriseAdapter;
 import project.interdisciplinary.inclusesapp.data.dbApi.VacanciesApi;
 import project.interdisciplinary.inclusesapp.data.dbApi.VacanciesCallback;
+import project.interdisciplinary.inclusesapp.data.firebase.DatabaseFirebase;
+import project.interdisciplinary.inclusesapp.data.models.Error;
 import project.interdisciplinary.inclusesapp.data.models.Vaga;
 import project.interdisciplinary.inclusesapp.databinding.FragmentVacanciesEnterpriseBinding;
 import retrofit2.Call;
@@ -39,6 +41,7 @@ public class VacanciesEnterpriseFragment extends Fragment {
 
     private View rootView;
 
+    private DatabaseFirebase firebase = new DatabaseFirebase();
     private Retrofit retrofit;
 
     private String token;
@@ -88,6 +91,7 @@ public class VacanciesEnterpriseFragment extends Fragment {
 
                         @Override
                         public void onFailure(Throwable throwable) {
+                            firebase.saveError(new Error("Erro ao buscar vagas: " + throwable.getMessage()));
                             Log.e("Error", throwable.getMessage());
                             Toast.makeText(getContext(), throwable.getMessage(), Toast.LENGTH_SHORT).show();
                         }
@@ -102,6 +106,7 @@ public class VacanciesEnterpriseFragment extends Fragment {
 
                         @Override
                         public void onFailure(Throwable throwable) {
+                            firebase.saveError(new Error("Erro ao buscar vagas: " + throwable.getMessage()));
                             Log.e("Error", throwable.getMessage());
                             Toast.makeText(getContext(), throwable.getMessage(), Toast.LENGTH_SHORT).show();
                         }

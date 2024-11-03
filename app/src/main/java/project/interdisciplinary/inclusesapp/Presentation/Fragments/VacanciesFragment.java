@@ -39,6 +39,8 @@ import project.interdisciplinary.inclusesapp.data.dbApi.LoginApi;
 import project.interdisciplinary.inclusesapp.data.dbApi.LoginCallback;
 import project.interdisciplinary.inclusesapp.data.dbApi.VacanciesApi;
 import project.interdisciplinary.inclusesapp.data.dbApi.VacanciesCallback;
+import project.interdisciplinary.inclusesapp.data.firebase.DatabaseFirebase;
+import project.interdisciplinary.inclusesapp.data.models.Error;
 import project.interdisciplinary.inclusesapp.data.models.InscricaoVaga;
 import project.interdisciplinary.inclusesapp.data.models.LoginRequest;
 import project.interdisciplinary.inclusesapp.data.models.LoginResponse;
@@ -55,6 +57,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class VacanciesFragment extends Fragment {
 
     private View rootView;
+    private DatabaseFirebase firebase = new DatabaseFirebase();
 
     private Retrofit retrofit;
 
@@ -105,6 +108,7 @@ public class VacanciesFragment extends Fragment {
 
                         @Override
                         public void onFailure(Throwable throwable) {
+                            firebase.saveError(new Error("Erro ao buscar vagas: " + throwable.getMessage()));
                             Log.e("Error", throwable.getMessage());
                             Toast.makeText(getContext(), throwable.getMessage(), Toast.LENGTH_SHORT).show();
                         }
@@ -119,6 +123,7 @@ public class VacanciesFragment extends Fragment {
 
                         @Override
                         public void onFailure(Throwable throwable) {
+                            firebase.saveError(new Error("Erro ao buscar vagas: " + throwable.getMessage()));
                             Log.e("Error", throwable.getMessage());
                             Toast.makeText(getContext(), throwable.getMessage(), Toast.LENGTH_SHORT).show();
                         }
@@ -143,6 +148,7 @@ public class VacanciesFragment extends Fragment {
 
             @Override
             public void onFailure(Throwable throwable) {
+                firebase.saveError(new Error("Erro ao buscar vagas: " + throwable.getMessage()));
                 Log.e("Error", throwable.getMessage());
                 Toast.makeText(getContext(), throwable.getMessage(), Toast.LENGTH_SHORT).show();
             }
