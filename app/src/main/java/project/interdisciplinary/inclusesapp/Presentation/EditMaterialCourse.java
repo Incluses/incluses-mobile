@@ -125,7 +125,8 @@ public class EditMaterialCourse extends AppCompatActivity {
                             finish();
                         }
                     });
-                    editor.putBoolean("archiveFilled", false);
+                    editor.putBoolean("archiveEdited", false);
+                    editor.apply();
                 }
             }
         });

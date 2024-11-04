@@ -100,9 +100,13 @@ public class CreatePost extends AppCompatActivity {
                         SharedPreferences preferences2 = getApplicationContext().getSharedPreferences("app_prefs", Context.MODE_PRIVATE);
                         boolean archiveFilled = preferences2.getBoolean("archiveFilled", false);
                         Postagem postagem = new Postagem();
+                        SharedPreferences.Editor editor = preferences2.edit();
                         if (archiveFilled){
                             Arquivo arquivo = ConvertersToObjects.convertStringToArquivo(preferences2.getString("archive",""));
                             postagem.setArquivoId(arquivo.getId());
+                            editor.putBoolean("archiveFilled", false);
+                            editor.putString("archive", "");
+                            editor.apply();
                         }
 
                         postagem.setLegenda(binding.legendCreatePostEditText.getText().toString());

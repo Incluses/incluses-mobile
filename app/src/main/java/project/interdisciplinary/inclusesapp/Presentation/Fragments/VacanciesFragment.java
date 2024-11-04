@@ -25,6 +25,7 @@ import com.google.gson.Gson;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
@@ -142,6 +143,7 @@ public class VacanciesFragment extends Fragment {
         setupAdapter(new VacanciesCallback() {
             @Override
             public void onSuccess(List<Vaga> vacanciesResponse) {
+                Collections.reverse(vacanciesResponse);
                 // Define o Adapter no RecyclerView
                 binding.vacanciesRecyclerView.setAdapter(new VacanciesAdapter(vacanciesResponse));
             }

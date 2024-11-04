@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -112,6 +113,7 @@ public class FeedFragment extends Fragment {
 
             @Override
             public void onSuccess(List<JsonObject> postagens) {
+                Collections.reverse(postagens);
                 // Define o Adapter no RecyclerView
                 binding.feedPostsRecyclerView.setAdapter(new PostagensAdapter(postagens, getContext()));
             }

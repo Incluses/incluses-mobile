@@ -119,7 +119,7 @@ public class CreateCourseStep2 extends AppCompatActivity {
                     });
                     SharedPreferences.Editor editor = preferences2.edit();
                     editor.putBoolean("archiveFilled", false);
-
+                    editor.apply();
                 }
             }
         });

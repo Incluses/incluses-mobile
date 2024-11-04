@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
@@ -103,6 +104,7 @@ public class CoursesFragment extends Fragment {
                     setUpAdapter(new CursoCallback() {
                         @Override
                         public void onSuccessFind(List<Curso> list) {
+                            Collections.reverse(list);
                             binding.coursesRecyclerView.setAdapter(new CoursesAdapter(list));
                         }
 

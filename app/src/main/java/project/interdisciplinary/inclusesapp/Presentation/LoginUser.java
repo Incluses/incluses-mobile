@@ -189,6 +189,7 @@ public class LoginUser extends AppCompatActivity {
 
                             @Override
                             public void onFailure(Throwable throwable) {
+                                binding.progressBar.setVisibility(View.GONE);
                                 firebase.saveError(new Error("Erro ao logar: " + throwable.getMessage()));
                                 Log.e("LoginError", throwable.getMessage());
                                 Toast.makeText(LoginUser.this, "Erro no login", Toast.LENGTH_SHORT).show();
