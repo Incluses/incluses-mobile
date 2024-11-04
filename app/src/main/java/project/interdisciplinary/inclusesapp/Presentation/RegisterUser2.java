@@ -193,6 +193,8 @@ public class RegisterUser2 extends AppCompatActivity {
 
                                         editor.putString("token", token);
                                         editor.putString("perfil", perfil.toString());
+                                        editor.putBoolean("isLogged", true);
+                                        editor.putBoolean("isEnterprise", false);
                                         editor.apply();
 
                                         String type = loginResponse.getType();

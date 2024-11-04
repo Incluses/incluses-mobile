@@ -165,6 +165,8 @@ public class RegisterEnterprise extends AppCompatActivity {
 
                                                             editor.putString("token", token);
                                                             editor.putString("perfil", perfil.toString());
+                                                            editor.putBoolean("isLogged", true);
+                                                            editor.putBoolean("isEnterprise", true);
                                                             editor.apply();
 
                                                             String type = loginResponse.getType();

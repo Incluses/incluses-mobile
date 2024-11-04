@@ -119,12 +119,12 @@ public class LoginUser extends AppCompatActivity {
                                 
                                 String token = loginResponse.getToken();
                                 Perfil perfil = loginResponse.getPerfil();
+                                String type = loginResponse.getType();
 
                                 editor.putString("token", token);
                                 editor.putString("perfil", perfil.toString());
-                                editor.apply();
 
-                                String type = loginResponse.getType();
+
                                 if (type.equals("ROLE_EMPRESA")) {
                                     Intent intent = new Intent(LoginUser.this, HomeEnterprise.class);
                                     startActivity(intent);
@@ -168,9 +168,19 @@ public class LoginUser extends AppCompatActivity {
 
                                 editor.putString("token", token);
                                 editor.putString("perfil", perfil.toString());
+                                editor.putBoolean("isLogged", true);
+                                String type = loginResponse.getType();
+                                boolean isEnterprise;
+                                if (type.equals("ROLE_EMPRESA")){
+                                    isEnterprise = true;
+                                }
+                                else {
+                                    isEnterprise = false;
+                                }
+                                editor.putBoolean("isEnterprise", isEnterprise);
+                                editor.apply();
                                 editor.apply();
 
-                                String type = loginResponse.getType();
                                 if (type.equals("ROLE_EMPRESA")) {
                                     Intent intent = new Intent(LoginUser.this, HomeEnterprise.class);
                                     startActivity(intent);
