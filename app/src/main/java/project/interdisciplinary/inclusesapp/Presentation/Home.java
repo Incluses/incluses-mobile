@@ -102,6 +102,8 @@ public class Home extends AppCompatActivity {
         SharedPreferences.Editor editor = preferences.edit();
         token = preferences.getString("token", "");
         perfil = preferences.getString("perfil", "");
+        //Verificar se o user existe
+        usuario = new Gson().fromJson(preferences.getString("usuario", ""), Usuario.class);
 
         findUser(String.valueOf(ConvertersToObjects.convertStringToPerfil(perfil).getId()), new UsuarioCallback() {
             @Override
@@ -126,6 +128,7 @@ public class Home extends AppCompatActivity {
                 new ActivityResultContracts.RequestPermission(),
                 isGranted -> {
                     if (isGranted) {
+                        Log.e("ERRO", usuario.toString());
                         // Se a permissão foi concedida, enviar a notificação
                         if (usuario != null && (usuario.getNomeSocial() == null || usuario.getPerfil().getBiografia() == null || usuario.getPerfil().getFotoPerfil() == null)) {
                             toNotify();
