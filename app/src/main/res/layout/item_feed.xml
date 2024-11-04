@@ -97,6 +97,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/itemDividerPostView" />
 
+        <VideoView
+            android:id="@+id/videoPostImageView"
+            android:layout_width="match_parent"
+            android:layout_height="380dp"
+            android:minHeight="300dp"
+            android:visibility="gone"
+            android:adjustViewBounds="true"
+            android:background="@color/light_gray_for_post"
+            android:scaleType="centerInside"
+            android:layout_marginTop="@dimen/spacing_03"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/itemDividerPostView" />
+
 
         <TextView
             android:id="@+id/legendPostTextView"
@@ -107,7 +121,7 @@
             android:ellipsize="end"
             android:maxLines="3"
             android:text="Legenda"
-            android:textSize="@dimen/spacing_05"
+            android:textSize="@dimen/spacing_06"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/imagePostImageView"/>
@@ -124,10 +138,10 @@
 
         <ImageButton
             android:id="@+id/likePostImageButton"
-            android:layout_width="wrap_content"
-            android:layout_height="22dp"
+            android:layout_width="26dp"
+            android:layout_height="28dp"
             android:layout_marginTop="12dp"
-            android:layout_marginBottom="@dimen/spacing_03"
+            android:layout_marginBottom="@dimen/spacing_04"
             android:background="@drawable/like"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -137,8 +151,8 @@
 
         <ImageButton
             android:id="@+id/comentPostImageButton"
-            android:layout_width="28dp"
-            android:layout_height="wrap_content"
+            android:layout_width="26dp"
+            android:layout_height="28dp"
             android:layout_marginTop="@dimen/spacing_05"
             android:background="@drawable/ic_coment"
             app:layout_constraintEnd_toEndOf="parent"
@@ -148,8 +162,8 @@
 
         <ImageButton
             android:id="@+id/sendPostImageButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="26dp"
+            android:layout_height="28dp"
             android:layout_marginTop="@dimen/spacing_05"
             android:background="@drawable/ic_send"
             app:layout_constraintEnd_toEndOf="parent"

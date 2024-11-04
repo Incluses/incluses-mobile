@@ -39,6 +39,7 @@ import project.interdisciplinary.inclusesapp.data.dbApi.PostagemApi;
 import project.interdisciplinary.inclusesapp.data.dbApi.PostagemCallback;
 import project.interdisciplinary.inclusesapp.data.firebase.DatabaseFirebase;
 import project.interdisciplinary.inclusesapp.data.models.Empresa;
+import project.interdisciplinary.inclusesapp.data.models.Error;
 import project.interdisciplinary.inclusesapp.data.models.Perfil;
 import project.interdisciplinary.inclusesapp.data.models.Postagem;
 import project.interdisciplinary.inclusesapp.databinding.ActivityEnterpriseProfileBinding;
@@ -87,11 +88,7 @@ public class EnterpriseProfileActivity extends AppCompatActivity {
     {
         finish(); //finish() to go back to the previous screen
     });
-
-//        Glide.with(this).load(R.drawable.fotorenato).circleCrop().into(binding.ImageViewPerfilUser);
-
-        binding.icConfigEnterpriseProfileImageView.setOnClickListener(new View.OnClickListener()
-    {
+        binding.icConfigEnterpriseProfileImageView.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick (View v){
         Intent intent = new Intent(EnterpriseProfileActivity.this, ScreenConfigurations.class);
@@ -157,7 +154,8 @@ public class EnterpriseProfileActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable throwable) {
-
+                firebase.saveError(new Error("Erro ao carregar as postagens: " + throwable.getMessage()));
+                Log.e("ERRO", throwable.getMessage());
             }
         });
     }

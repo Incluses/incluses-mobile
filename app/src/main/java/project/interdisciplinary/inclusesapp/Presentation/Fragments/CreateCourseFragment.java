@@ -32,7 +32,9 @@ import project.interdisciplinary.inclusesapp.adapters.MyCoursesAdapter;
 import project.interdisciplinary.inclusesapp.data.ConvertersToObjects;
 import project.interdisciplinary.inclusesapp.data.dbApi.CursoApi;
 import project.interdisciplinary.inclusesapp.data.dbApi.CursoCallback;
+import project.interdisciplinary.inclusesapp.data.firebase.DatabaseFirebase;
 import project.interdisciplinary.inclusesapp.data.models.Curso;
+import project.interdisciplinary.inclusesapp.data.models.Error;
 import project.interdisciplinary.inclusesapp.databinding.FragmentCoursesBinding;
 import project.interdisciplinary.inclusesapp.databinding.FragmentCreateCourseBinding;
 import retrofit2.Call;
@@ -44,6 +46,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class CreateCourseFragment extends Fragment {
 
     private View rootView;
+
+    private DatabaseFirebase firebase = new DatabaseFirebase();
 
     private Retrofit retrofit;
     private String token;
@@ -102,7 +106,8 @@ public class CreateCourseFragment extends Fragment {
 
                         @Override
                         public void onFailure(Throwable throwable) {
-
+                            firebase.saveError(new Error("Erro ao buscar cursos: " + throwable.getMessage()));
+                            Log.e("ERRO", throwable.getMessage());
                         }
 
                         @Override
@@ -120,7 +125,8 @@ public class CreateCourseFragment extends Fragment {
 
                         @Override
                         public void onFailure(Throwable throwable) {
-
+                            firebase.saveError(new Error("Erro ao buscar cursos: " + throwable.getMessage()));
+                            Log.e("ERRO", throwable.getMessage());
                         }
 
                         @Override
@@ -168,7 +174,8 @@ public class CreateCourseFragment extends Fragment {
 
             @Override
             public void onFailure(Throwable throwable) {
-
+                firebase.saveError(new Error("Erro ao buscar cursos: " + throwable.getMessage()));
+                Log.e("ERRO", throwable.getMessage());
             }
 
             @Override

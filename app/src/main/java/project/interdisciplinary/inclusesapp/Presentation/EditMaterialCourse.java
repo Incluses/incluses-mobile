@@ -32,6 +32,7 @@ import project.interdisciplinary.inclusesapp.data.dbApi.MaterialCursoCallback;
 import project.interdisciplinary.inclusesapp.data.dbApi.TipoArquivoApi;
 import project.interdisciplinary.inclusesapp.data.firebase.DatabaseFirebase;
 import project.interdisciplinary.inclusesapp.data.models.Arquivo;
+import project.interdisciplinary.inclusesapp.data.models.Error;
 import project.interdisciplinary.inclusesapp.data.models.MaterialCurso;
 import project.interdisciplinary.inclusesapp.data.models.TipoArquivo;
 import project.interdisciplinary.inclusesapp.databinding.ActivityEditMaterialCourseBinding;
@@ -44,6 +45,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class EditMaterialCourse extends AppCompatActivity {
 
     private Retrofit retrofit;
+    private DatabaseFirebase firebase = new DatabaseFirebase();
 
     private FileChoose fileChoose = new FileChoose();
 
@@ -73,6 +75,10 @@ public class EditMaterialCourse extends AppCompatActivity {
         binding.descriptionEditTextEditMaterial.setText(materialCurso.getDescricao());
         binding.titleEditTextEditMaterial.setText(materialCurso.getNome());
         binding.textArchiveEditMaterialCourse.setText(materialCurso.getArquivo().getNome());
+
+        binding.cancelButtonEditMaterial.setOnClickListener(v -> {
+            finish();
+        });
 
         binding.archiveEditMaterialCourse.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,7 +116,8 @@ public class EditMaterialCourse extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Throwable throwable) {
-
+                            firebase.saveError(new Error("Erro ao alterar material: " + throwable.getMessage()));
+                            Log.e("ERRO", throwable.getMessage());
                         }
 
                         @Override
@@ -118,7 +125,8 @@ public class EditMaterialCourse extends AppCompatActivity {
                             finish();
                         }
                     });
-                    editor.putBoolean("archiveFilled", false);
+                    editor.putBoolean("archiveEdited", false);
+                    editor.apply();
                 }
             }
         });

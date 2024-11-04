@@ -69,6 +69,8 @@ public class CreateCourseStep2 extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE);
         token = preferences.getString("token", "");
 
+        binding.cancelCreateMyCourse2Button.setOnClickListener(v -> {finish();});
+
         binding.archiveCreateCourseStep2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,7 +119,7 @@ public class CreateCourseStep2 extends AppCompatActivity {
                     });
                     SharedPreferences.Editor editor = preferences2.edit();
                     editor.putBoolean("archiveFilled", false);
-
+                    editor.apply();
                 }
             }
         });

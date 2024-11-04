@@ -33,6 +33,7 @@ import project.interdisciplinary.inclusesapp.data.dbApi.PostagemCallback;
 import project.interdisciplinary.inclusesapp.data.dbApi.TipoArquivoApi;
 import project.interdisciplinary.inclusesapp.data.firebase.DatabaseFirebase;
 import project.interdisciplinary.inclusesapp.data.models.Arquivo;
+import project.interdisciplinary.inclusesapp.data.models.Error;
 import project.interdisciplinary.inclusesapp.data.models.MaterialCurso;
 import project.interdisciplinary.inclusesapp.data.models.Perfil;
 import project.interdisciplinary.inclusesapp.data.models.Postagem;
@@ -49,6 +50,7 @@ public class CreatePost extends AppCompatActivity {
     private Retrofit retrofit;
 
     private String token;
+    private DatabaseFirebase firebase = new DatabaseFirebase();
 
     private Perfil perfilObj;
 
@@ -98,9 +100,13 @@ public class CreatePost extends AppCompatActivity {
                         SharedPreferences preferences2 = getApplicationContext().getSharedPreferences("app_prefs", Context.MODE_PRIVATE);
                         boolean archiveFilled = preferences2.getBoolean("archiveFilled", false);
                         Postagem postagem = new Postagem();
+                        SharedPreferences.Editor editor = preferences2.edit();
                         if (archiveFilled){
                             Arquivo arquivo = ConvertersToObjects.convertStringToArquivo(preferences2.getString("archive",""));
                             postagem.setArquivoId(arquivo.getId());
+                            editor.putBoolean("archiveFilled", false);
+                            editor.putString("archive", "");
+                            editor.apply();
                         }
 
                         postagem.setLegenda(binding.legendCreatePostEditText.getText().toString());
@@ -124,6 +130,7 @@ public class CreatePost extends AppCompatActivity {
 
                                     @Override
                                     public void onFailure(Throwable throwable) {
+                                        firebase.saveError(new Error("Erro ao criar post: " + throwable.getMessage()));
                                         Log.e("Erro", throwable.getMessage());
                                     }
 
@@ -188,34 +195,35 @@ public class CreatePost extends AppCompatActivity {
             fileDetails = fileChoose.getFileDetails(fileUri, this);
             final List<String> fileDetailsFinal = fileDetails;
 
-            if (fileDetailsFinal.get(2).equals("jpg") || fileDetailsFinal.get(2).equals("png") || fileDetailsFinal.get(2).equals("jpeg")){
+            // Adicione 'mp4' à verificação de tipos de arquivo
+            if (fileDetailsFinal.get(2).equals("jpg") ||
+                    fileDetailsFinal.get(2).equals("png") ||
+                    fileDetailsFinal.get(2).equals("jpeg") ||
+                    fileDetailsFinal.get(2).equals("mp4")) {
+
                 findTipo(fileDetails.get(2), new MaterialCursoCallback() {
                     @Override
                     public void onSuccessFind(List<MaterialCurso> list) {
-
                     }
 
                     @Override
                     public void onFailure(Throwable throwable) {
-
                     }
 
                     @Override
                     public void onSuccess(JsonObject jsonObject) {
                         Gson gson = new Gson();
                         TipoArquivo apiResponse = gson.fromJson(jsonObject, TipoArquivo.class);
-                        Arquivo arquivo = new Arquivo(fileDetailsFinal.get(1),fileDetailsFinal.get(0),
+                        Arquivo arquivo = new Arquivo(fileDetailsFinal.get(1), fileDetailsFinal.get(0),
                                 apiResponse.getId());
                         Log.e("arquivo", arquivo.toString());
                         insertArquivo(arquivo, new ArquivoCallback() {
                             @Override
                             public void onSuccessFind(List<Arquivo> list) {
-
                             }
 
                             @Override
                             public void onFailure(Throwable throwable) {
-
                             }
 
                             @Override
@@ -233,12 +241,12 @@ public class CreatePost extends AppCompatActivity {
                         });
                     }
                 });
-            }
-            else {
-                Toast.makeText(CreatePost.this, "A foto deve ser um jpg/jpeg/png", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(CreatePost.this, "O arquivo deve ser um jpg/jpeg/png/mp4", Toast.LENGTH_LONG).show();
             }
         }
     }
+
 
     private void findTipo(String nome, MaterialCursoCallback callback) {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()

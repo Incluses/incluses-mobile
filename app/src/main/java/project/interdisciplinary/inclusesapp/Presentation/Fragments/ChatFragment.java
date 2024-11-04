@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.Toast;
 
 import project.interdisciplinary.inclusesapp.R;
 import project.interdisciplinary.inclusesapp.databinding.FragmentChatBinding;
@@ -28,7 +29,13 @@ public class ChatFragment extends Fragment {
         View view = binding.getRoot();
         rootView = binding.getRoot();
 
-        setupKeyboardListener();
+        binding.searchProfileByNameEditText.setEnabled(false);
+        binding.searchProfileByNameEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Função disponível na próxima versão", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return view;
     }

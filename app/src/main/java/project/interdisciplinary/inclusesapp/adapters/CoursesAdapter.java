@@ -33,6 +33,7 @@ import project.interdisciplinary.inclusesapp.Presentation.CourseInitialPage;
 import project.interdisciplinary.inclusesapp.Presentation.CoursesViewed;
 import project.interdisciplinary.inclusesapp.Presentation.Enterprise.Fragment.CoursesEnterpriseFragment;
 import project.interdisciplinary.inclusesapp.Presentation.Fragments.CoursesFragment;
+import project.interdisciplinary.inclusesapp.Presentation.Home;
 import project.interdisciplinary.inclusesapp.R;
 import project.interdisciplinary.inclusesapp.data.ConvertersToObjects;
 import project.interdisciplinary.inclusesapp.data.dbApi.AvaliacaoCursoApi;
@@ -104,6 +105,11 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ItemCour
                         Bundle bundle = new Bundle();
                         bundle.putString("idCurso", curso.getId().toString());
                         if (holder.itemView.getContext() instanceof CoursesViewed) {
+                            Intent intent = new Intent(v.getContext(), CourseInitialPage.class);
+                            intent.putExtras(bundle);
+                            v.getContext().startActivity(intent);
+                        }
+                        else if (holder.itemView.getContext() instanceof Home) {
                             Intent intent = new Intent(v.getContext(), CourseInitialPage.class);
                             intent.putExtras(bundle);
                             v.getContext().startActivity(intent);

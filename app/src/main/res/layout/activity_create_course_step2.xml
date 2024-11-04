@@ -116,7 +116,7 @@
                 app:counterMaxLength="300"
                 app:boxStrokeErrorColor="@color/red_error"
                 app:boxStrokeWidth="@dimen/spacing_01"
-                app:helperText="Descreva o curso com detalhes!"
+                app:helperText="Descreva o material com detalhes!"
                 app:endIconMode="clear_text"
                 app:hintTextColor="@color/gray">
 
@@ -161,6 +161,7 @@
         <TextView
             android:id="@+id/textAuxiliarCreateMyCourse2"
             android:layout_width="300dp"
+            android:textAlignment="center"
             android:layout_height="wrap_content"
             android:text="Se você criar o curso sem nenhuma informação, essa etapa será pulada."
             app:layout_constraintStart_toStartOf="parent"

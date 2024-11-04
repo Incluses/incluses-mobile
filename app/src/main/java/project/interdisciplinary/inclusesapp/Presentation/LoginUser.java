@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.gson.JsonObject;
@@ -17,6 +18,8 @@ import okhttp3.OkHttpClient;
 import project.interdisciplinary.inclusesapp.Presentation.Enterprise.HomeEnterprise;
 import project.interdisciplinary.inclusesapp.data.dbApi.LoginApi;
 import project.interdisciplinary.inclusesapp.data.dbApi.LoginCallback;
+import project.interdisciplinary.inclusesapp.data.firebase.DatabaseFirebase;
+import project.interdisciplinary.inclusesapp.data.models.Error;
 import project.interdisciplinary.inclusesapp.data.models.LoginRequest;
 import project.interdisciplinary.inclusesapp.data.models.LoginResponse;
 import project.interdisciplinary.inclusesapp.data.models.Perfil;
@@ -30,6 +33,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class LoginUser extends AppCompatActivity {
 
     private ActivityLoginUserBinding binding;
+    private DatabaseFirebase firebase = new DatabaseFirebase();
     private Retrofit retrofit;
     private String adminEmail;
     private String passwordAdmin;
@@ -46,12 +50,10 @@ public class LoginUser extends AppCompatActivity {
 
         // Botão de voltar
         binding.imageViewLoginUserBackButton.setOnClickListener(v -> {
-            startActivity(new Intent(LoginUser.this, Login.class));
             finish();
         });
 
         binding.textViewLoginUserBack.setOnClickListener(v -> {
-            startActivity(new Intent(LoginUser.this, Login.class));
             finish();
         });
 
@@ -59,6 +61,15 @@ public class LoginUser extends AppCompatActivity {
         binding.registerTextView.setOnClickListener(v -> {
             startActivity(new Intent(LoginUser.this, RegisterUserActivity.class));
             finish();
+        });
+        binding.googleLoginButton.setOnClickListener(v -> {
+            Toast.makeText(LoginUser.this, "Disponível na próxima versão!", Toast.LENGTH_SHORT).show();
+        });
+        binding.facebookLoginButton.setOnClickListener(v -> {
+            Toast.makeText(LoginUser.this, "Disponível na próxima versão!", Toast.LENGTH_SHORT).show();
+        });
+        binding.forgotPasswordTextView.setOnClickListener(v -> {
+            Toast.makeText(LoginUser.this, "Disponível na próxima versão!", Toast.LENGTH_SHORT).show();
         });
 
         // Botão para continuar
@@ -71,6 +82,9 @@ public class LoginUser extends AppCompatActivity {
                 return;
             }
 
+            // Exibe o ProgressBar
+            binding.progressBar.setVisibility(View.VISIBLE);
+
             // Chama a API de admin primeiro
             callApiRetrofitLoginAdm(emailInput, new LoginCallback() {
                 @Override
@@ -80,6 +94,9 @@ public class LoginUser extends AppCompatActivity {
 
                 @Override
                 public void onSuccessAdmin(JsonObject loginResponse) {
+                    // Oculta o ProgressBar após o sucesso
+                    binding.progressBar.setVisibility(View.GONE);
+
                     adminEmail = loginResponse.get("email").getAsString();
                     passwordAdmin = loginResponse.get("password").getAsString();
 
@@ -97,14 +114,17 @@ public class LoginUser extends AppCompatActivity {
                         callApiRetrofitLogin(login, new LoginCallback() {
                             @Override
                             public void onSuccess(LoginResponse loginResponse) {
+                                // Oculta o ProgressBar após o sucesso
+                                binding.progressBar.setVisibility(View.GONE);
+                                
                                 String token = loginResponse.getToken();
                                 Perfil perfil = loginResponse.getPerfil();
+                                String type = loginResponse.getType();
 
                                 editor.putString("token", token);
                                 editor.putString("perfil", perfil.toString());
-                                editor.apply();
 
-                                String type = loginResponse.getType();
+
                                 if (type.equals("ROLE_EMPRESA")) {
                                     Intent intent = new Intent(LoginUser.this, HomeEnterprise.class);
                                     startActivity(intent);
@@ -123,6 +143,7 @@ public class LoginUser extends AppCompatActivity {
 
                             @Override
                             public void onFailure(Throwable throwable) {
+                                firebase.saveError(new Error("Erro ao logar: " + throwable.getMessage()));
                                 Log.e("LoginError", throwable.getMessage());
                                 Toast.makeText(LoginUser.this, "Erro no login", Toast.LENGTH_SHORT).show();
                             }
@@ -147,9 +168,19 @@ public class LoginUser extends AppCompatActivity {
 
                                 editor.putString("token", token);
                                 editor.putString("perfil", perfil.toString());
+                                editor.putBoolean("isLogged", true);
+                                String type = loginResponse.getType();
+                                boolean isEnterprise;
+                                if (type.equals("ROLE_EMPRESA")){
+                                    isEnterprise = true;
+                                }
+                                else {
+                                    isEnterprise = false;
+                                }
+                                editor.putBoolean("isEnterprise", isEnterprise);
+                                editor.apply();
                                 editor.apply();
 
-                                String type = loginResponse.getType();
                                 if (type.equals("ROLE_EMPRESA")) {
                                     Intent intent = new Intent(LoginUser.this, HomeEnterprise.class);
                                     startActivity(intent);
@@ -168,6 +199,8 @@ public class LoginUser extends AppCompatActivity {
 
                             @Override
                             public void onFailure(Throwable throwable) {
+                                binding.progressBar.setVisibility(View.GONE);
+                                firebase.saveError(new Error("Erro ao logar: " + throwable.getMessage()));
                                 Log.e("LoginError", throwable.getMessage());
                                 Toast.makeText(LoginUser.this, "Erro no login", Toast.LENGTH_SHORT).show();
                             }

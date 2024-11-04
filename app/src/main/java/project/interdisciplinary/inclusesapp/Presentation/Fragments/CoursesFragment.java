@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
@@ -32,7 +33,9 @@ import project.interdisciplinary.inclusesapp.data.dbApi.CursoCallback;
 import project.interdisciplinary.inclusesapp.data.dbApi.UsuarioApi;
 import project.interdisciplinary.inclusesapp.data.dbApi.UsuarioCallback;
 import project.interdisciplinary.inclusesapp.data.dbApi.VacanciesCallback;
+import project.interdisciplinary.inclusesapp.data.firebase.DatabaseFirebase;
 import project.interdisciplinary.inclusesapp.data.models.Curso;
+import project.interdisciplinary.inclusesapp.data.models.Error;
 import project.interdisciplinary.inclusesapp.data.models.Vaga;
 import project.interdisciplinary.inclusesapp.databinding.FragmentCoursesBinding;
 import retrofit2.Call;
@@ -43,6 +46,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CoursesFragment extends Fragment {
     private String token;
+    private DatabaseFirebase firebase = new DatabaseFirebase();
     private Retrofit retrofit;
     private View rootView;
     private FragmentCoursesBinding binding;
@@ -86,7 +90,8 @@ public class CoursesFragment extends Fragment {
 
                         @Override
                         public void onFailure(Throwable throwable) {
-
+                            firebase.saveError(new Error("Erro ao buscar cursos: " + throwable.getMessage()));
+                            Log.e("ERRO", throwable.getMessage());
                         }
 
                         @Override
@@ -99,12 +104,14 @@ public class CoursesFragment extends Fragment {
                     setUpAdapter(new CursoCallback() {
                         @Override
                         public void onSuccessFind(List<Curso> list) {
+                            Collections.reverse(list);
                             binding.coursesRecyclerView.setAdapter(new CoursesAdapter(list));
                         }
 
                         @Override
                         public void onFailure(Throwable throwable) {
-
+                            firebase.saveError(new Error("Erro ao buscar cursos: " + throwable.getMessage()));
+                            Log.e("ERRO", throwable.getMessage());
                         }
 
                         @Override
@@ -126,7 +133,8 @@ public class CoursesFragment extends Fragment {
 
             @Override
             public void onFailure(Throwable throwable) {
-
+                firebase.saveError(new Error("Erro ao buscar cursos: " + throwable.getMessage()));
+                Log.e("ERRO", throwable.getMessage());
             }
 
             @Override

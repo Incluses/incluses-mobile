@@ -58,25 +58,16 @@
                 android:background="#FFFFFF"
                 android:backgroundTint="#FFFFFF">
 
-                <View
-                    android:id="@+id/imageViewBackgroundImagePerfil"
-                    android:layout_width="0dp"
-                    android:layout_height="190dp"
-                    android:background="@color/light_purple"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
+                <!-- Centralizar a ImageView dentro da View -->
                 <ImageView
                     android:id="@+id/ImageViewPerfilUser"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_marginStart="@dimen/spacing_08"
-                    android:layout_marginTop="160dp"
+                    android:layout_marginTop="40dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:srcCompat="@tools:sample/avatars" />
+                    android:background="@drawable/ic_perfil" />
 
                 <TextView
                     android:id="@+id/namePerfiltextView"
@@ -182,11 +173,11 @@
                     android:id="@+id/itemDividerPerfilUserView"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/spacing_01"
-                    android:background="@color/light_gray"
                     android:layout_marginTop="@dimen/spacing_03"
+                    android:background="@color/light_gray"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/textViewPosts"
@@ -205,11 +196,11 @@
                     android:id="@+id/myPostsProfileRecyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:listitem="@layout/item_feed"
                     android:layout_marginTop="@dimen/spacing_05"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textViewPosts"/>
+                    app:layout_constraintTop_toBottomOf="@id/textViewPosts"
+                    tools:listitem="@layout/item_feed" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

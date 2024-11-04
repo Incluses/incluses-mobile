@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="@dimen/spacing_04"
-    android:layout_margin="@dimen/spacing_05"
-    app:cardCornerRadius="@dimen/spacing_16">
+    android:layout_margin="@dimen/spacing_04"
+    app:cardUseCompatPadding="false"
+    app:cardElevation="8dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,27 +18,29 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Descartar as Alterações?"
+            android:text="Deseja fazer isso mesmo?"
             android:textColor="@color/black"
             android:layout_marginBottom="@dimen/spacing_07"
             android:textSize="@dimen/spacing_06"/>
 
         <Button
+            android:id="@+id/yesBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/style_primary_button"
-            android:text="Concluir"
+            android:text="Sim"
             android:layout_marginBottom="@dimen/spacing_04"
-            android:paddingEnd="90dp"
-            android:paddingStart="90dp"/>
+            android:paddingEnd="60dp"
+            android:paddingStart="60dp"/>
 
         <Button
+            android:id="@+id/noBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/style_secondary_button"
-            android:text="Descartar Alterações"
-            android:paddingEnd="@dimen/spacing_14"
-            android:paddingStart="@dimen/spacing_14"/>
+            android:text="Não"
+            android:paddingEnd="60dp"
+            android:paddingStart="60dp"/>
 
     </LinearLayout>
 

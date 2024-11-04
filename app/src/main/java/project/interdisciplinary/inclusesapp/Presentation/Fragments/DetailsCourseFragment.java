@@ -38,7 +38,9 @@ import project.interdisciplinary.inclusesapp.data.ConvertersToObjects;
 import project.interdisciplinary.inclusesapp.data.dbApi.CursoCallback;
 import project.interdisciplinary.inclusesapp.data.dbApi.MaterialCursoApi;
 import project.interdisciplinary.inclusesapp.data.dbApi.MaterialCursoCallback;
+import project.interdisciplinary.inclusesapp.data.firebase.DatabaseFirebase;
 import project.interdisciplinary.inclusesapp.data.models.Curso;
+import project.interdisciplinary.inclusesapp.data.models.Error;
 import project.interdisciplinary.inclusesapp.data.models.MaterialCurso;
 import project.interdisciplinary.inclusesapp.databinding.FragmentDetailsCourseBinding;
 import retrofit2.Call;
@@ -54,6 +56,7 @@ public class DetailsCourseFragment extends Fragment {
     private View rootView;
     private Curso curso;
     private FragmentDetailsCourseBinding binding;
+    private DatabaseFirebase firebase = new DatabaseFirebase();
 
     private double avaliation;
 
@@ -106,7 +109,8 @@ public class DetailsCourseFragment extends Fragment {
 
                         @Override
                         public void onFailure(Throwable throwable) {
-
+                            firebase.saveError(new Error("Erro ao buscar material: " + throwable.getMessage()));
+                            Log.e("ERRO", throwable.getMessage());
                         }
 
                         @Override
@@ -115,7 +119,7 @@ public class DetailsCourseFragment extends Fragment {
                         }
                     });
                 } else {
-                    // Se o campo de busca estiver vazio, carrega todas as vagas
+                    // Se o campo de busca estiver vazio, carrega tudo
                     setUpAdapter(curso.getId(),new MaterialCursoCallback() {
                         @Override
                         public void onSuccessFind(List<MaterialCurso> list) {
@@ -124,7 +128,8 @@ public class DetailsCourseFragment extends Fragment {
 
                         @Override
                         public void onFailure(Throwable throwable) {
-
+                            firebase.saveError(new Error("Erro ao buscar material: " + throwable.getMessage()));
+                            Log.e("ERRO", throwable.getMessage());
                         }
 
                         @Override
@@ -141,13 +146,26 @@ public class DetailsCourseFragment extends Fragment {
         binding.discardButtonDetailsCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                CreateCourseFragment createCourseFragment = new CreateCourseFragment();
+
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.fragmentContainerView, createCourseFragment).commit();
             }
         });
         binding.concludeButtonDetailsCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(getContext(), "Atualização Feita!", Toast.LENGTH_SHORT).show();
+
+                CreateCourseFragment createCourseFragment = new CreateCourseFragment();
+
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.fragmentContainerView, createCourseFragment).commit();
+
             }
         });
+
+
         return view;}
 
     private void setupKeyboardListener() {
@@ -256,7 +274,8 @@ public class DetailsCourseFragment extends Fragment {
 
             @Override
             public void onFailure(Throwable throwable) {
-
+                firebase.saveError(new Error("Erro ao buscar material: " + throwable.getMessage()));
+                Log.e("ERRO", throwable.getMessage());
             }
 
             @Override

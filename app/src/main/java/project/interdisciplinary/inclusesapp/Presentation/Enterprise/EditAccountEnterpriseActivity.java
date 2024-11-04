@@ -39,6 +39,7 @@ import project.interdisciplinary.inclusesapp.data.dbApi.UsuarioCallback;
 import project.interdisciplinary.inclusesapp.data.firebase.DatabaseFirebase;
 import project.interdisciplinary.inclusesapp.data.models.Arquivo;
 import project.interdisciplinary.inclusesapp.data.models.Empresa;
+import project.interdisciplinary.inclusesapp.data.models.Error;
 import project.interdisciplinary.inclusesapp.data.models.MaterialCurso;
 import project.interdisciplinary.inclusesapp.data.models.Perfil;
 import project.interdisciplinary.inclusesapp.data.models.TipoArquivo;
@@ -55,6 +56,7 @@ public class EditAccountEnterpriseActivity extends AppCompatActivity {
     private ActivityEditAccountEnterpriseBinding binding;
 
     private String token;
+    private DatabaseFirebase firebase = new DatabaseFirebase();
 
     private Retrofit retrofit;
 
@@ -178,7 +180,8 @@ public class EditAccountEnterpriseActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Throwable throwable) {
-
+                            firebase.saveError(new Error("Erro ao atualizar perfil: " + throwable.getMessage()));
+                            Log.e("ERRO", throwable.getMessage());
                         }
                     });
                 }
@@ -192,7 +195,8 @@ public class EditAccountEnterpriseActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Throwable throwable) {
-
+                            firebase.saveError(new Error("Erro ao atualizar empresa: " + throwable.getMessage()));
+                            Log.e("ERRO", throwable.getMessage());
                         }
                     });
                 }

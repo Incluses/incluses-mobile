@@ -23,6 +23,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Rect;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -117,13 +118,16 @@ public class Home extends AppCompatActivity {
             }
         });
 
+        // Solicitar permissão de notificação na inicialização
+        requestNotificationPermission();
+
         // Inicializa o launcher para solicitar a permissão de notificação
         notificationPermissionLauncher = registerForActivityResult(
                 new ActivityResultContracts.RequestPermission(),
                 isGranted -> {
                     if (isGranted) {
                         // Se a permissão foi concedida, enviar a notificação
-                        if (usuario.getNomeSocial() == null && usuario.getPerfil().getBiografia() == null && usuario.getPerfil().getFotoPerfil() == null) {
+                        if (usuario != null && (usuario.getNomeSocial() == null || usuario.getPerfil().getBiografia() == null || usuario.getPerfil().getFotoPerfil() == null)) {
                             toNotify();
                         }
                     } else {
@@ -132,9 +136,6 @@ public class Home extends AppCompatActivity {
                     }
                 }
         );
-
-        // Solicitar permissão de notificação na inicialização
-        requestNotificationPermission();
 
         binding.perfilImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -174,6 +175,9 @@ public class Home extends AppCompatActivity {
                         Toast.makeText(Home.this, "Você já está no Feed", Toast.LENGTH_SHORT).show();
                     }
 
+                } else if (id == R.id.termsAndPrivacyPolicyMoreOptionsMenu) {
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://siteincluses.onrender.com/termosdeprivacidade"));
+                    startActivity(browserIntent);
                 } else if (id == R.id.perfilMoreOptionsMenu) {
                     Intent intent = new Intent(Home.this, UserPerfil.class);
                     intent.putExtra("user_type", "user");
@@ -224,18 +228,6 @@ public class Home extends AppCompatActivity {
                 return true;
             }
         });
-
-
-//        binding.nameEditText.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-//                    replaceFragment(new ProfileSearchFragment());
-//                }
-//                return false;
-//            }
-//        });
-
 
         // Set up the BottomNavigationView to switch fragments
         binding.bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -320,12 +312,16 @@ public class Home extends AppCompatActivity {
                 // Pedir permissão
                 notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS);
             } else {
-                // Se já tiver permissão, enviar a notificação
-                toNotify();
+                // Verificar a condição dos campos antes de enviar a notificação
+                if (usuario != null && (usuario.getNomeSocial() == null || usuario.getPerfil().getBiografia() == null || usuario.getPerfil().getFotoPerfil() == null)) {
+                    toNotify();
+                }
             }
         } else {
-            // Para versões anteriores ao Android 13, não é necessário pedir permissão
-            toNotify();
+            // Para versões anteriores ao Android 13, fazer a verificação antes de enviar a notificação
+            if (usuario != null && (usuario.getNomeSocial() == null || usuario.getPerfil().getBiografia() == null || usuario.getPerfil().getFotoPerfil() == null)) {
+                toNotify();
+            }
         }
     }
 
@@ -400,6 +396,7 @@ public class Home extends AppCompatActivity {
             @Override
             public void onFailure(Call<JsonObject> call, Throwable throwable) {
                 Toast.makeText(getApplicationContext(), "erro", Toast.LENGTH_LONG).show();
+                firebase.saveError(new Error("Erro ao buscar usuario: " + throwable.getMessage()));
                 Log.e("ERRO", throwable.getMessage());
                 callback.onFailure(throwable); // Falha por erro de requisição
             }

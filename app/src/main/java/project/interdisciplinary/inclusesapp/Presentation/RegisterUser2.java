@@ -28,7 +28,9 @@ import project.interdisciplinary.inclusesapp.data.dbApi.LoginApi;
 import project.interdisciplinary.inclusesapp.data.dbApi.LoginCallback;
 import project.interdisciplinary.inclusesapp.data.dbApi.UsuarioCallback;
 import project.interdisciplinary.inclusesapp.data.dbApi.UsuarioApi;
+import project.interdisciplinary.inclusesapp.data.firebase.DatabaseFirebase;
 import project.interdisciplinary.inclusesapp.data.models.CreateUserRequest;
+import project.interdisciplinary.inclusesapp.data.models.Error;
 import project.interdisciplinary.inclusesapp.data.models.LoginRequest;
 import project.interdisciplinary.inclusesapp.data.models.LoginResponse;
 import project.interdisciplinary.inclusesapp.data.models.Perfil;
@@ -43,6 +45,8 @@ public class RegisterUser2 extends AppCompatActivity {
 
     Date date = null;
 
+    private DatabaseFirebase firebase = new DatabaseFirebase();
+
     private Retrofit retrofit;
     private ActivityRegisterUser2Binding binding;
 
@@ -52,8 +56,10 @@ public class RegisterUser2 extends AppCompatActivity {
         // Force Theme to Light Mode
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-        Intent actualIntent = getIntent();
-        Bundle infosUser = actualIntent.getExtras();
+        Bundle infosUser = getIntent().getExtras();
+
+        Log.i("RegisterUser2", "onCreate: " + infosUser.getString("name"));
+        Log.i("RegisterUser2", "onCreate: " + infosUser);
 
         binding = ActivityRegisterUser2Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -96,7 +102,7 @@ public class RegisterUser2 extends AppCompatActivity {
 
                                 int age = calculateAge(dob);
 
-                                if (age < 18) {
+                                if (age < 14) {
                                     binding.dateBornInputLayout.setError(getString(R.string.error_underage));
                                 } else {
                                     binding.dateBornInputLayout.setError(null);
@@ -187,6 +193,8 @@ public class RegisterUser2 extends AppCompatActivity {
 
                                         editor.putString("token", token);
                                         editor.putString("perfil", perfil.toString());
+                                        editor.putBoolean("isLogged", true);
+                                        editor.putBoolean("isEnterprise", false);
                                         editor.apply();
 
                                         String type = loginResponse.getType();
@@ -202,6 +210,7 @@ public class RegisterUser2 extends AppCompatActivity {
 
                                     @Override
                                     public void onFailure(Throwable throwable) {
+                                        firebase.saveError(new Error("Erro ao carregar o token: " + throwable.getMessage()));
                                         Log.e("LoginError", throwable.getMessage());
                                         Toast.makeText(RegisterUser2.this, "Erro no login", Toast.LENGTH_SHORT).show();
                                     }

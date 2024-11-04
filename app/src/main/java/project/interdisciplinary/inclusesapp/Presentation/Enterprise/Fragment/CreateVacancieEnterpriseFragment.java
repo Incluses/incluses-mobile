@@ -34,7 +34,9 @@ import project.interdisciplinary.inclusesapp.adapters.VacanciesAdapter;
 import project.interdisciplinary.inclusesapp.adapters.VacanciesEnterpriseAdapter;
 import project.interdisciplinary.inclusesapp.data.dbApi.VacanciesApi;
 import project.interdisciplinary.inclusesapp.data.dbApi.VacanciesCallback;
+import project.interdisciplinary.inclusesapp.data.firebase.DatabaseFirebase;
 import project.interdisciplinary.inclusesapp.data.models.Empresa;
+import project.interdisciplinary.inclusesapp.data.models.Error;
 import project.interdisciplinary.inclusesapp.data.models.Vaga;
 import project.interdisciplinary.inclusesapp.databinding.FragmentCreateVacancieEnterpriseBinding;
 import retrofit2.Call;
@@ -46,6 +48,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class CreateVacancieEnterpriseFragment extends Fragment {
 
     private View rootView;
+    private DatabaseFirebase firebase = new DatabaseFirebase();
     private Retrofit retrofit;
     private String token;
     private Empresa empresa;
@@ -109,6 +112,7 @@ public class CreateVacancieEnterpriseFragment extends Fragment {
 
                         @Override
                         public void onFailure(Throwable throwable) {
+                            firebase.saveError(new Error("Erro ao buscar vagas: " + throwable.getMessage()));
                             Log.e("Error", throwable.getMessage());
                             Toast.makeText(getContext(), throwable.getMessage(), Toast.LENGTH_SHORT).show();
                         }
@@ -123,6 +127,7 @@ public class CreateVacancieEnterpriseFragment extends Fragment {
 
                         @Override
                         public void onFailure(Throwable throwable) {
+                            firebase.saveError(new Error("Erro ao buscar vagas: " + throwable.getMessage()));
                             Log.e("Error", throwable.getMessage());
                             Toast.makeText(getContext(), throwable.getMessage(), Toast.LENGTH_SHORT).show();
                         }
@@ -156,6 +161,7 @@ public class CreateVacancieEnterpriseFragment extends Fragment {
 
             @Override
             public void onFailure(Throwable throwable) {
+                firebase.saveError(new Error("Erro ao buscar vagas: " + throwable.getMessage()));
                 Log.e("Error", throwable.getMessage());
                 Toast.makeText(getContext(), throwable.getMessage(), Toast.LENGTH_SHORT).show();
             }

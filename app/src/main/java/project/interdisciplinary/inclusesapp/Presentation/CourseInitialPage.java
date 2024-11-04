@@ -52,6 +52,13 @@ public class CourseInitialPage extends AppCompatActivity {
         binding = ActivityCourseInitialPageBinding.inflate(getLayoutInflater());
         binding.classesDownloadsRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
+        binding.textViewLoginUserBack.setOnClickListener(v -> {
+            finish();
+        });
+        binding.imageViewLoginUserBackButton.setOnClickListener(v -> {
+            finish();
+        });
+
         setContentView(binding.getRoot());
         Intent extrasIntent = getIntent();
         Bundle bundle = extrasIntent.getExtras();

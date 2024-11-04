@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Rect;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -140,7 +141,6 @@ public class HomeEnterprise extends AppCompatActivity {
         requestNotificationPermission();
 
 
-
 //        setupKeyboardListener();
 
         // Configuração do clique na imagem de perfil
@@ -186,6 +186,9 @@ public class HomeEnterprise extends AppCompatActivity {
                     Intent intent = new Intent(HomeEnterprise.this, EnterpriseProfileActivity.class);
                     intent.putExtra("user_type", "enterprise");
                     startActivity(intent);
+                } else if (id == R.id.termsAndPrivacyPolicyMoreOptionsMenuEnterprise) {
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://siteincluses.onrender.com/termosdeprivacidade"));
+                    startActivity(browserIntent);
                 } else if (id == R.id.configurationsMoreOptionsMenuEnterprise) {
                     Intent intent = new Intent(HomeEnterprise.this, ScreenConfigurations.class);
                     intent.putExtra("user_type", "enterprise");

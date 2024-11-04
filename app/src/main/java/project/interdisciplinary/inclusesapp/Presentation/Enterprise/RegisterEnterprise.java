@@ -37,10 +37,12 @@ import project.interdisciplinary.inclusesapp.data.dbApi.LoginApi;
 import project.interdisciplinary.inclusesapp.data.dbApi.LoginCallback;
 import project.interdisciplinary.inclusesapp.data.dbApi.UsuarioApi;
 import project.interdisciplinary.inclusesapp.data.dbApi.UsuarioCallback;
+import project.interdisciplinary.inclusesapp.data.firebase.DatabaseFirebase;
 import project.interdisciplinary.inclusesapp.data.models.Cep;
 import project.interdisciplinary.inclusesapp.data.models.CreateEnterpriseRequest;
 import project.interdisciplinary.inclusesapp.data.models.CreateUserRequest;
 import project.interdisciplinary.inclusesapp.data.models.Empresa;
+import project.interdisciplinary.inclusesapp.data.models.Error;
 import project.interdisciplinary.inclusesapp.data.models.LoginRequest;
 import project.interdisciplinary.inclusesapp.data.models.LoginResponse;
 import project.interdisciplinary.inclusesapp.data.models.Perfil;
@@ -54,6 +56,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RegisterEnterprise extends AppCompatActivity {
 
     private ActivityRegisterEnterpriseBinding binding;
+
+    private DatabaseFirebase firebase = new DatabaseFirebase();
 
     private Retrofit retrofit;
 
@@ -161,6 +165,8 @@ public class RegisterEnterprise extends AppCompatActivity {
 
                                                             editor.putString("token", token);
                                                             editor.putString("perfil", perfil.toString());
+                                                            editor.putBoolean("isLogged", true);
+                                                            editor.putBoolean("isEnterprise", true);
                                                             editor.apply();
 
                                                             String type = loginResponse.getType();
@@ -176,6 +182,7 @@ public class RegisterEnterprise extends AppCompatActivity {
 
                                                         @Override
                                                         public void onFailure(Throwable throwable) {
+                                                            firebase.saveError(new Error("Erro ao logar: " + throwable.getMessage()));
                                                             Log.e("LoginError", throwable.getMessage());
                                                             Toast.makeText(RegisterEnterprise.this, "Erro no login", Toast.LENGTH_SHORT).show();
                                                         }
@@ -184,6 +191,7 @@ public class RegisterEnterprise extends AppCompatActivity {
 
                                                 @Override
                                                 public void onFailure(Throwable throwable) {
+                                                    firebase.saveError(new Error("Erro ao carregar o perfil: " + throwable.getMessage()));
                                                     Log.e("ERRO", throwable.getMessage());
                                                 }
 

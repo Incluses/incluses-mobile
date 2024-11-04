@@ -36,6 +36,7 @@ import project.interdisciplinary.inclusesapp.data.dbApi.UsuarioApi;
 import project.interdisciplinary.inclusesapp.data.dbApi.UsuarioCallback;
 import project.interdisciplinary.inclusesapp.data.firebase.DatabaseFirebase;
 import project.interdisciplinary.inclusesapp.data.models.Arquivo;
+import project.interdisciplinary.inclusesapp.data.models.Error;
 import project.interdisciplinary.inclusesapp.data.models.MaterialCurso;
 import project.interdisciplinary.inclusesapp.data.models.Perfil;
 import project.interdisciplinary.inclusesapp.data.models.TipoArquivo;
@@ -54,7 +55,7 @@ public class EditAccount extends AppCompatActivity {
     private Perfil perfilObj;
     private Retrofit retrofit;
     private ActivityEditAccountBinding binding;
-    private DatabaseFirebase firebase;
+    private DatabaseFirebase firebase = new DatabaseFirebase();
     private static final int PICK_FILE_REQUEST = 1;
 
     private FileChoose fileChoose = new FileChoose();
@@ -160,7 +161,8 @@ public class EditAccount extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Throwable throwable) {
-
+                        firebase.saveError(new Error("Erro ao atualizar perfil: " + throwable.getMessage()));
+                        Log.e("ERRO", throwable.getMessage());
                     }
                 });
             }
@@ -174,7 +176,8 @@ public class EditAccount extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Throwable throwable) {
-
+                        firebase.saveError(new Error("Erro ao atualizar user: " + throwable.getMessage()));
+                        Log.e("ERRO", throwable.getMessage());
                     }
                 });
             }

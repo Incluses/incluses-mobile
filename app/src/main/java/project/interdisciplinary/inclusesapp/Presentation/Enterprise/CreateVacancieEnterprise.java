@@ -22,9 +22,11 @@ import okhttp3.OkHttpClient;
 import project.interdisciplinary.inclusesapp.R;
 import project.interdisciplinary.inclusesapp.data.dbApi.VacanciesApi;
 import project.interdisciplinary.inclusesapp.data.dbApi.VacanciesCallback;
+import project.interdisciplinary.inclusesapp.data.firebase.DatabaseFirebase;
 import project.interdisciplinary.inclusesapp.data.models.CriarVagaDTO;
 import project.interdisciplinary.inclusesapp.data.models.Empresa;
 import project.interdisciplinary.inclusesapp.data.models.Endereco;
+import project.interdisciplinary.inclusesapp.data.models.Error;
 import project.interdisciplinary.inclusesapp.data.models.Perfil;
 import project.interdisciplinary.inclusesapp.data.models.Setor;
 import project.interdisciplinary.inclusesapp.data.models.TipoPerfil;
@@ -40,6 +42,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class CreateVacancieEnterprise extends AppCompatActivity {
 
     private Retrofit retrofit;
+    private DatabaseFirebase firebase = new DatabaseFirebase();
     private String token;
 
     private Empresa empresaObj;
@@ -104,6 +107,8 @@ public class CreateVacancieEnterprise extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Throwable throwable) {
+                        firebase.saveError(new Error("Erro ao criar vaga: " + throwable.getMessage()));
+                        Log.e("ERRO", throwable.getMessage());
                         Toast.makeText(CreateVacancieEnterprise.this, "Erro ao criar vaga!", Toast.LENGTH_LONG).show();
                     }
                 }, criarVagaDTO);

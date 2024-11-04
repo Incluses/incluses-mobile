@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -32,6 +33,8 @@ import project.interdisciplinary.inclusesapp.data.dbApi.PostagemApi;
 import project.interdisciplinary.inclusesapp.data.dbApi.PostagemCallback;
 import project.interdisciplinary.inclusesapp.data.dbApi.VacanciesApi;
 import project.interdisciplinary.inclusesapp.data.dbApi.VacanciesCallback;
+import project.interdisciplinary.inclusesapp.data.firebase.DatabaseFirebase;
+import project.interdisciplinary.inclusesapp.data.models.Error;
 import project.interdisciplinary.inclusesapp.data.models.Perfil;
 import project.interdisciplinary.inclusesapp.data.models.Postagem;
 import project.interdisciplinary.inclusesapp.data.models.Usuario;
@@ -48,6 +51,7 @@ public class FeedFragment extends Fragment {
 
     private View rootView;
     private Retrofit retrofit;
+    private DatabaseFirebase firebase = new DatabaseFirebase();
 
     private String token;
 
@@ -61,7 +65,13 @@ public class FeedFragment extends Fragment {
         View view = binding.getRoot();
         rootView = binding.getRoot();
 
-        setupKeyboardListener();
+        binding.searchPostsProfileByNameEditText.setEnabled(false);
+        binding.searchPostsProfileByNameEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Função disponível na próxima versão", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         SharedPreferences preferences = getActivity().getSharedPreferences("app_prefs", Context.MODE_PRIVATE);
         token = preferences.getString("token", "");
@@ -103,6 +113,7 @@ public class FeedFragment extends Fragment {
 
             @Override
             public void onSuccess(List<JsonObject> postagens) {
+                Collections.reverse(postagens);
                 // Define o Adapter no RecyclerView
                 binding.feedPostsRecyclerView.setAdapter(new PostagensAdapter(postagens, getContext()));
             }
@@ -119,6 +130,7 @@ public class FeedFragment extends Fragment {
 
             @Override
             public void onFailure(Throwable throwable) {
+                firebase.saveError(new Error("Erro ao buscar postagens: " + throwable.getMessage()));
                 Log.e("Erro", throwable.getMessage());
             }
         });
@@ -157,6 +169,7 @@ public class FeedFragment extends Fragment {
             @Override
             public void onFailure(Call<List<JsonObject>> call, Throwable throwable) {
                 Toast.makeText(getContext(), "erro", Toast.LENGTH_LONG).show();
+                firebase.saveError(new Error("Erro ao buscar postagens: " + throwable.getMessage()));
                 Log.e("ERRO", throwable.getMessage());
                 callback.onFailure(throwable); // Falha por erro de requisição
             }

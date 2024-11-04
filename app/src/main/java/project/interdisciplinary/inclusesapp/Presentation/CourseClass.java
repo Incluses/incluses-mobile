@@ -32,6 +32,10 @@ public class CourseClass extends AppCompatActivity {
         binding = ActivityCourseClassBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        // Configurar o botão de voltar
+        binding.imageViewLoginUserBackButton.setOnClickListener(v -> finish());
+        binding.textViewLoginUserBack.setOnClickListener(v -> finish());
+
         Intent extrasIntent = getIntent();
         Bundle bundle = extrasIntent.getExtras();
         MaterialCurso materialCurso = ConvertersToObjects.convertStringToMaterialCurso(bundle.getString("materialCurso"));
