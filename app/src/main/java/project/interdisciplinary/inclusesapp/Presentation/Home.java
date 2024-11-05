@@ -120,8 +120,7 @@ public class Home extends AppCompatActivity {
             }
         });
 
-        // Solicitar permissão de notificação na inicialização
-        requestNotificationPermission();
+
 
         // Inicializa o launcher para solicitar a permissão de notificação
         notificationPermissionLauncher = registerForActivityResult(
@@ -139,6 +138,9 @@ public class Home extends AppCompatActivity {
                     }
                 }
         );
+
+        // Solicitar permissão de notificação na inicialização
+        requestNotificationPermission();
 
         binding.perfilImageView.setOnClickListener(new View.OnClickListener() {
             @Override

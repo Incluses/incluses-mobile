@@ -159,8 +159,7 @@ public class PostagensAdapter extends RecyclerView.Adapter<PostagensAdapter.Item
                                 Arquivo arquivo = new Gson().fromJson(jsonObject,Arquivo.class);
                                 String fileExtension = arquivo.getNome().split("\\.")[arquivo.getNome().split("\\.").length - 1];
                                 if (fileExtension.equals("mp4")) {
-                                    holder.videoPostImageView.setVisibility(View.VISIBLE);
-                                    holder.imgPost.setVisibility(View.GONE);
+                                    holder.imgPost.setVisibility(View.VISIBLE);
 
                                     // Use Glide para carregar uma miniatura do vídeo
                                     Glide.with(holder.itemView.getContext())
@@ -190,7 +189,6 @@ public class PostagensAdapter extends RecyclerView.Adapter<PostagensAdapter.Item
                     );
                 }
             });
-
         }
 
 
