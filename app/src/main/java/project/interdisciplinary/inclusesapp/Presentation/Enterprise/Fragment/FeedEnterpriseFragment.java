@@ -124,6 +124,40 @@ public class FeedEnterpriseFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        setupAdapter(new PostagemCallback() {
+            @Override
+            public void onSucessFind(List<Postagem> list) {
+
+            }
+
+            @Override
+            public void onSuccess(List<JsonObject> postagens) {
+                Collections.reverse(postagens);
+                // Define o Adapter no RecyclerView
+                binding.feedPostsEnterpriseRecyclerView.setAdapter(new PostagensAdapter(postagens, getContext()));
+            }
+
+            @Override
+            public void onSuccessVerifyLike(Boolean booleanResponse) {
+
+            }
+
+            @Override
+            public void onSuccessInsert(JsonObject jsonObject) {
+
+            }
+
+            @Override
+            public void onFailure(Throwable throwable) {
+                firebase.saveError(new Error("Erro ao buscar postagens: " + throwable.getMessage()));
+                Log.e("Erro", throwable.getMessage());
+            }
+        });
+    }
+
     private void setupAdapter(PostagemCallback callback) {
 
         OkHttpClient okHttpClient = new OkHttpClient.Builder()

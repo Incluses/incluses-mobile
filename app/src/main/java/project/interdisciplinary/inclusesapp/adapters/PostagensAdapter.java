@@ -1,8 +1,14 @@
 package project.interdisciplinary.inclusesapp.adapters;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.media.MediaPlayer;
+import android.net.Uri;
+import android.provider.OpenableColumns;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +28,9 @@ import com.bumptech.glide.request.target.Target;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import java.io.File;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -29,12 +38,19 @@ import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 import project.interdisciplinary.inclusesapp.Presentation.CommentScreen;
+import project.interdisciplinary.inclusesapp.Presentation.OtherUserPerfil;
+import project.interdisciplinary.inclusesapp.Presentation.VideoPlayerActivity;
 import project.interdisciplinary.inclusesapp.R;
+import project.interdisciplinary.inclusesapp.archive.FileChoose;
+import project.interdisciplinary.inclusesapp.data.ConvertersToObjects;
+import project.interdisciplinary.inclusesapp.data.dbApi.ArquivoApi;
+import project.interdisciplinary.inclusesapp.data.dbApi.ArquivoCallback;
 import project.interdisciplinary.inclusesapp.data.dbApi.PerfilApi;
 import project.interdisciplinary.inclusesapp.data.dbApi.PerfilCallback;
 import project.interdisciplinary.inclusesapp.data.dbApi.PostagemApi;
 import project.interdisciplinary.inclusesapp.data.dbApi.PostagemCallback;
 import project.interdisciplinary.inclusesapp.data.firebase.DatabaseFirebase;
+import project.interdisciplinary.inclusesapp.data.models.Arquivo;
 import project.interdisciplinary.inclusesapp.data.models.Error;
 import project.interdisciplinary.inclusesapp.data.models.Perfil;
 import project.interdisciplinary.inclusesapp.data.models.Postagem;
@@ -65,7 +81,6 @@ public class PostagensAdapter extends RecyclerView.Adapter<PostagensAdapter.Item
         if (!perfilJson.isEmpty()) {
             Gson gson = new Gson();
             perfilObj = gson.fromJson(perfilJson, Perfil.class);  // Converte o JSON de volta para o objeto Perfil
-            Log.e("Perfil", "ID: " + perfilObj.getId());
         } else {
             Log.e("Perfil", "Nenhum perfil encontrado no SharedPreferences.");
         }
@@ -81,7 +96,6 @@ public class PostagensAdapter extends RecyclerView.Adapter<PostagensAdapter.Item
     @Override
     public void onBindViewHolder(@NonNull PostagensAdapter.ItemPostagensViewHolder holder, int position) {
         JsonObject jsonObject = listaPostagens.get(position);
-        Postagem postagem = new Gson().fromJson(jsonObject, Postagem.class);
 
         findPerfil(jsonObject.get("perfilId").getAsString(), new PerfilCallback() {
             @Override
@@ -91,6 +105,7 @@ public class PostagensAdapter extends RecyclerView.Adapter<PostagensAdapter.Item
 
             @Override
             public void onSuccess(Perfil perfil) {
+                holder.perfilPost = perfil;  // Define o perfil específico do holder
                 holder.namePerfil.setText(perfil.getNome());
                 if (perfil.getFkFtPerfilId() != null){
                     firebase.getFileUriFromFirebase(perfil.getFkFtPerfilId().toString(),
@@ -126,35 +141,54 @@ public class PostagensAdapter extends RecyclerView.Adapter<PostagensAdapter.Item
 
         if (!jsonObject.get("arquivoId").isJsonNull()) {
             String arquivoId = jsonObject.get("arquivoId").getAsString();
+            findArquivo(UUID.fromString(arquivoId), new ArquivoCallback() {
+                @Override
+                public void onSuccessFind(List<Arquivo> list) {
 
-            firebase.getFileUriFromFirebase(arquivoId,
-                    uri -> {
-                        String fileExtension = getFileExtension(uri.toString());
-                        if (fileExtension.equals("mp4")) {
-                            holder.videoPostImageView.setVisibility(View.VISIBLE);
-                            holder.imgPost.setVisibility(View.GONE);
+                }
 
-                            // Carregue o vídeo no VideoView
-                            MediaController mediaController = new MediaController(holder.itemView.getContext());
-                            mediaController.setMediaPlayer(holder.videoPostImageView);
-                            holder.videoPostImageView.setMediaController(mediaController);
-                            Log.e("video", uri.toString());
-                            holder.videoPostImageView.setVideoURI(uri);
-                            holder.videoPostImageView.start();
-                        } else {
-                            holder.imgPost.setVisibility(View.VISIBLE);
-                            holder.videoPostImageView.setVisibility(View.GONE);
+                @Override
+                public void onFailure(Throwable throwable) {
 
-                            // Carregue a imagem
-                            Glide.with(holder.itemView.getContext())
-                                    .load(uri.toString())
-                                    .into(holder.imgPost);
-                        }
-                    },
-                    e -> {
-                        Log.e("Firebase", "Erro ao obter URL de download", e);
-                    }
-            );
+                }
+
+                @Override
+                public void onSuccess(JsonObject jsonObject) {
+                    firebase.getFileUriFromFirebase(arquivoId,
+                            uri -> {
+                                Arquivo arquivo = new Gson().fromJson(jsonObject,Arquivo.class);
+                                String fileExtension = arquivo.getNome().split("\\.")[arquivo.getNome().split("\\.").length - 1];
+                                if (fileExtension.equals("mp4")) {
+                                    holder.imgPost.setVisibility(View.VISIBLE);
+
+                                    // Use Glide para carregar uma miniatura do vídeo
+                                    Glide.with(holder.itemView.getContext())
+                                            .load(uri) // A URI do vídeo para obter a miniatura
+                                            .into(holder.imgPost); // Supondo que você tenha um ImageView para a miniatura
+
+                                    // Configurar um listener para iniciar a reprodução ao clicar na miniatura
+                                    holder.imgPost.setOnClickListener(v -> {
+                                        Intent intent = new Intent(holder.itemView.getContext(), VideoPlayerActivity.class);
+                                        intent.putExtra("videoUri", uri.toString());
+                                        holder.itemView.getContext().startActivity(intent);
+                                    });
+
+                                } else {
+                                    holder.imgPost.setVisibility(View.VISIBLE);
+                                    holder.videoPostImageView.setVisibility(View.GONE);
+
+                                    // Carregue a imagem
+                                    Glide.with(holder.itemView.getContext())
+                                            .load(uri.toString())
+                                            .into(holder.imgPost);
+                                }
+                            },
+                            e -> {
+                                Log.e("Firebase", "Erro ao obter URL de download", e);
+                            }
+                    );
+                }
+            });
         }
 
 
@@ -273,6 +307,22 @@ public class PostagensAdapter extends RecyclerView.Adapter<PostagensAdapter.Item
         holder.sendPost.setOnClickListener(v -> {
             Toast.makeText(holder.itemView.getContext(), "Esta função será implementada na próxima versão!", Toast.LENGTH_SHORT).show();
         });
+
+        holder.perfilImg.setOnClickListener(v -> {
+            if (holder.perfilPost != null) {  // Verifique se o perfil foi carregado
+                Intent intent = new Intent(holder.itemView.getContext(), OtherUserPerfil.class);
+                intent.putExtra("idPerfil", holder.perfilPost.getId());
+                holder.itemView.getContext().startActivity(intent);
+            }
+        });
+
+        holder.namePerfil.setOnClickListener(v -> {
+            if (holder.perfilPost != null) {
+                Intent intent = new Intent(holder.itemView.getContext(), OtherUserPerfil.class);
+                intent.putExtra("idPerfil", holder.perfilPost.getId().toString());
+                holder.itemView.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -281,6 +331,7 @@ public class PostagensAdapter extends RecyclerView.Adapter<PostagensAdapter.Item
     }
 
     public class ItemPostagensViewHolder extends RecyclerView.ViewHolder {
+        Perfil perfilPost;
         private TextView namePerfil;
         private TextView descPerfil;
         private VideoView videoPostImageView;
@@ -475,10 +526,42 @@ public class PostagensAdapter extends RecyclerView.Adapter<PostagensAdapter.Item
             }
         });
     }
+    private void findArquivo(UUID idArquivo, ArquivoCallback callback) {
 
-    // Método para obter a extensão do arquivo
-    private String getFileExtension(String uri) {
-        String[] parts = uri.split("\\.");
-        return parts.length > 1 ? parts[parts.length - 1].toLowerCase() : "";
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(60, TimeUnit.SECONDS)
+                .build();
+
+        String urlApi = "https://incluses-api.onrender.com/";
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl(urlApi)
+                .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ArquivoApi api = retrofit.create(ArquivoApi.class);
+        Call<JsonObject> call = api.findArquivo(token,idArquivo);
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    JsonObject responseBody = response.body();
+                    callback.onSuccess(responseBody);
+                } else {
+                    // Outro erro
+                    callback.onFailure(new Exception("Erro ao remover like: " + response.code()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable throwable) {
+                firebase.saveError(new Error("Erro ao remover like: " + throwable.getMessage()));
+                Log.e("ERRO", throwable.getMessage());
+                callback.onFailure(throwable); // Falha por erro de requisição
+            }
+        });
     }
 }
