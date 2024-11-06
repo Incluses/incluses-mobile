@@ -81,7 +81,6 @@ public class PostagensAdapter extends RecyclerView.Adapter<PostagensAdapter.Item
         if (!perfilJson.isEmpty()) {
             Gson gson = new Gson();
             perfilObj = gson.fromJson(perfilJson, Perfil.class);  // Converte o JSON de volta para o objeto Perfil
-            Log.e("Perfil", "ID: " + perfilObj.getId());
         } else {
             Log.e("Perfil", "Nenhum perfil encontrado no SharedPreferences.");
         }
@@ -548,7 +547,6 @@ public class PostagensAdapter extends RecyclerView.Adapter<PostagensAdapter.Item
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                Log.e("RETORNO", String.valueOf(response.code()));
                 if (response.isSuccessful() && response.body() != null) {
                     JsonObject responseBody = response.body();
                     callback.onSuccess(responseBody);

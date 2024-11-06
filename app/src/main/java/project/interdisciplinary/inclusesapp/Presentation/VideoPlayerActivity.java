@@ -23,7 +23,6 @@ public class VideoPlayerActivity extends AppCompatActivity {
         videoView = findViewById(R.id.videoView);
         progressBar = findViewById(R.id.progressBar);
         String videoUri = getIntent().getStringExtra("videoUri");
-        Log.d("VideoPlayerActivity", "Video URI: " + videoUri);
 
         // Configure o MediaController
         MediaController mediaController = new MediaController(this);
