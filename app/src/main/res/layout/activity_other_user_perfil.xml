@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Presentation.OtherUserPerfil">
+
+    <!-- Fixed Header Elements -->
+    <ImageView
+        android:id="@+id/imageViewEnterpriseProfileBackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_05"
+        android:layout_marginTop="@dimen/spacing_06"
+        android:contentDescription="@string/back"
+        android:src="@drawable/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewEnterpriseProfileBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_05"
+        android:text="@string/back_strong"
+        android:textSize="@dimen/spacing_06"
+        app:layout_constraintStart_toEndOf="@id/imageViewEnterpriseProfileBackButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewEnterpriseProfileBack">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:background="#FFFFFF"
+                android:backgroundTint="#FFFFFF">
+
+                <ImageView
+                    android:id="@+id/ImageViewEnterpriseProfile"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:background="@drawable/ic_perfil"
+                    android:layout_marginStart="@dimen/spacing_08"
+                    android:layout_marginTop="40dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/nameEnterpriseProfiletextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_05"
+                    android:layout_marginTop="@dimen/spacing_07"
+                    android:text="Nome da Empresa"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:textColor="@color/black"
+                    android:textSize="30dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ImageViewEnterpriseProfile" />
+
+                <TextView
+                    android:id="@+id/decriptionEnterpriseProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_05"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:text="Breve Descrição"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/spacing_05"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/nameEnterpriseProfiletextView" />
+
+                <TextView
+                    android:id="@+id/addBiographyEnterpriseProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_05"
+                    android:text="+ Adicionar Biografia"
+                    android:textColor="@color/light_blue"
+                    android:textSize="@dimen/spacing_05"
+                    android:layout_marginBottom="@dimen/spacing_05"
+                    app:layout_constraintBottom_toTopOf="@id/itemDividerEnterpriseProfileView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/decriptionEnterpriseProfile" />
+
+                <View
+                    android:id="@+id/itemDividerEnterpriseProfileView"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/spacing_01"
+                    android:background="@color/light_gray"
+                    android:layout_marginTop="@dimen/spacing_03"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:background="#FFFFFF"
+                android:backgroundTint="#FFFFFF">
+
+                <TextView
+                    android:id="@+id/textViewPosts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="32dp"
+                    android:fontFamily="sans-serif-black"
+                    android:text="Publicações"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/spacing_08"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/myPostsEnterpriseProfileRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:listitem="@layout/item_feed"
+                    android:layout_marginTop="@dimen/spacing_05"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textViewPosts"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

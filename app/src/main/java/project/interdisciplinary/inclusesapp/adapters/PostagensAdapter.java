@@ -38,6 +38,7 @@ import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 import project.interdisciplinary.inclusesapp.Presentation.CommentScreen;
+import project.interdisciplinary.inclusesapp.Presentation.OtherUserPerfil;
 import project.interdisciplinary.inclusesapp.Presentation.VideoPlayerActivity;
 import project.interdisciplinary.inclusesapp.R;
 import project.interdisciplinary.inclusesapp.archive.FileChoose;
@@ -96,7 +97,6 @@ public class PostagensAdapter extends RecyclerView.Adapter<PostagensAdapter.Item
     @Override
     public void onBindViewHolder(@NonNull PostagensAdapter.ItemPostagensViewHolder holder, int position) {
         JsonObject jsonObject = listaPostagens.get(position);
-        Postagem postagem = new Gson().fromJson(jsonObject, Postagem.class);
 
         findPerfil(jsonObject.get("perfilId").getAsString(), new PerfilCallback() {
             @Override
@@ -106,6 +106,7 @@ public class PostagensAdapter extends RecyclerView.Adapter<PostagensAdapter.Item
 
             @Override
             public void onSuccess(Perfil perfil) {
+                holder.perfilPost = perfil;  // Define o perfil específico do holder
                 holder.namePerfil.setText(perfil.getNome());
                 if (perfil.getFkFtPerfilId() != null){
                     firebase.getFileUriFromFirebase(perfil.getFkFtPerfilId().toString(),
@@ -307,6 +308,22 @@ public class PostagensAdapter extends RecyclerView.Adapter<PostagensAdapter.Item
         holder.sendPost.setOnClickListener(v -> {
             Toast.makeText(holder.itemView.getContext(), "Esta função será implementada na próxima versão!", Toast.LENGTH_SHORT).show();
         });
+
+        holder.perfilImg.setOnClickListener(v -> {
+            if (holder.perfilPost != null) {  // Verifique se o perfil foi carregado
+                Intent intent = new Intent(holder.itemView.getContext(), OtherUserPerfil.class);
+                intent.putExtra("idPerfil", holder.perfilPost.getId());
+                holder.itemView.getContext().startActivity(intent);
+            }
+        });
+
+        holder.namePerfil.setOnClickListener(v -> {
+            if (holder.perfilPost != null) {
+                Intent intent = new Intent(holder.itemView.getContext(), OtherUserPerfil.class);
+                intent.putExtra("idPerfil", holder.perfilPost.getId().toString());
+                holder.itemView.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -315,6 +332,7 @@ public class PostagensAdapter extends RecyclerView.Adapter<PostagensAdapter.Item
     }
 
     public class ItemPostagensViewHolder extends RecyclerView.ViewHolder {
+        Perfil perfilPost;
         private TextView namePerfil;
         private TextView descPerfil;
         private VideoView videoPostImageView;
